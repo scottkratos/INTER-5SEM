@@ -12,8 +12,9 @@ public class LevelEditorPlayerMovement : MonoBehaviour
     private Vector2 InitPos;
     private Vector2 CurrentRot;
     private Vector3 CurrentPos;
+    private Vector3 CurrentChildPos;
     private const float rotRate = 100;
-    private const float MoveRate = 10;
+    private const float MoveRate = 5;
     private const float ZoomRate = 10;
 
     private enum MouseInstance
@@ -58,7 +59,7 @@ public class LevelEditorPlayerMovement : MonoBehaviour
             case MouseInstance.RightClick:
                 Vector3 zoom;
                 zoom = new Vector3(InitPos.x - Camera.main.ScreenToViewportPoint(Input.mousePosition).x, InitPos.y - Camera.main.ScreenToViewportPoint(Input.mousePosition).y, 0);
-                transform.position = CurrentPos + (transform.forward * ((zoom.x + zoom.y) * ZoomRate) * -1);
+                transform.GetChild(0).transform.position = CurrentChildPos + (transform.GetChild(0).transform.forward * ((zoom.x + zoom.y) * ZoomRate) * -1);
                 break;
             case MouseInstance.Scroll:
                 Vector3 position;
@@ -68,6 +69,7 @@ public class LevelEditorPlayerMovement : MonoBehaviour
             case MouseInstance.Nothing:
                 CurrentRot = new Vector2(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y);
                 CurrentPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                CurrentChildPos = new Vector3(transform.GetChild(0).transform.position.x, transform.GetChild(0).transform.position.y, transform.GetChild(0).transform.position.z);
                 break;
         }
     }

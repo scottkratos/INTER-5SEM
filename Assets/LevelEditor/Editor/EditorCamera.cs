@@ -23,6 +23,7 @@ public class EditorCamera : Editor
         if (GUILayout.Button("Resetar Movimentação"))
         {
             player.transform.position = new Vector3(0, 0, 0);
+            player.transform.GetChild(0).transform.position = new Vector3(0, 0, -10);
         }
 
         GUILayout.Space(10);
