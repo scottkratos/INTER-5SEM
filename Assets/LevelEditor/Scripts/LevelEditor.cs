@@ -1,20 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelEditor : MonoBehaviour
 {
+    [Header("Constantes:")]
+    [Space]
     [SerializeField]
     private GameObject CameraControl;
     [SerializeField]
-    private GameObject FollowMouse;
+    private GameObject Collision;
+    [SerializeField]
+    private GameObject HUD;
+    [SerializeField]
+    private GameObject Icon;
+    [Space]
+    [Header("Customiza aqui:")]
+    [Space]
     public Material[] materials;
-    public GameObject[] prefabs;
+    public LevelEditorObjects[] prefabs;
+    public int[] Points;
+    private GameObject Preview;
     public Light[] lights;
-    public GameObject[] props;
     public State PlayerState = State.GroundConstruct;
     public List<Vector3> GridPosition = new List<Vector3>();
     public List<GameObject> GridDict = new List<GameObject>();
+    public int SelectedIndex;
     private bool IsRMB;
     private bool IsLMB;
     public static bool IsEditing;
@@ -29,31 +41,116 @@ public class LevelEditor : MonoBehaviour
             GridPosition.Add(go.transform.position);
             GridDict.Add(go);
         }
+        Preview = Instantiate(prefabs[SelectedIndex].Preview, transform);
+        ConstructHUD();
     }
 
+    private void ConstructHUD()
+    {
+        for (int i = 0; i < HUD.transform.childCount; i++)
+        {
+            Destroy(HUD.transform.GetChild(i));
+        }
+
+        HUD.transform.parent.gameObject.SetActive(PlayerState != State.SelectConstruct);
+
+        switch (PlayerState)
+        {
+            case State.GroundConstruct:
+                for(int i = 0; i < Points[0]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                }
+                break;
+            case State.WallsConstruct:
+                for (int i = 0; i < Points[0]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                }
+                break;
+            case State.Painting:
+                for (int i = Points[0] + 1; i < Points[1]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                }
+                break;
+            case State.HotZone:
+                for (int i = Points[2] + 1; i < Points[3]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                }
+                break;
+            case State.Illumination:
+                for (int i = Points[1] + 1; i < Points[2]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                }
+                break;
+            case State.ColdZone:
+                for (int i = Points[3] + 1; i < Points[4]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                }
+                break;
+        }
+    }
+    public void ChangeSelected(int index)
+    {
+        SelectedIndex = index;
+        Destroy(Preview);
+        Preview = prefabs[SelectedIndex].Preview;
+        ConstructHUD();
+    }
     private void Update()
     {
-        FollowMouse.SetActive(!LevelEditorPlayerMovement.IsAlt);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (PlayerState != State.SelectConstruct)
         {
-            if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
+            Preview.SetActive(!LevelEditorPlayerMovement.IsAlt);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                gridlock = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y), Mathf.Round(hit.point.z));
-                FollowMouse.transform.position = gridlock;
+                if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
+                {
+                    gridlock = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y), Mathf.Round(hit.point.z));
+                    Preview.transform.position = gridlock;
+                }
+            }
+            if (!IsEditing)
+                if (LevelEditorPlayerMovement.IsAlt) return;
+            Buttons();
+            Action();
+        }
+        else
+        {
+            switch (PlayerState)
+            {
+                case State.GroundConstruct:
+                    break;
+                case State.WallsConstruct:
+                    break;
+                case State.Illumination:
+                    break;
+                case State.Painting:
+                    break;
+                case State.ColdZone:
+                    break;
+                case State.HotZone:
+                    break;
             }
         }
-        if (!IsEditing)
-            if (LevelEditorPlayerMovement.IsAlt) return;
-        Buttons();
-        Action();
     }
     //quicksave
     //autosave
     private void Action()
     {
-        if (IsLMB)
+        if (IsLMB || IsRMB)
         {
             ConstructEnd = gridlock;
         }
@@ -63,7 +160,7 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
-    private void Terminate()
+    private void Terminate(bool IsConstruct, bool IsWalls)
     {
         float x, y, z;
         Vector2 xi, yi, zi, xf, yf, zf;
@@ -76,17 +173,78 @@ public class LevelEditor : MonoBehaviour
         x = Vector2.Distance(xi, xf);
         y = Vector2.Distance(yi, yf);
         z = Vector2.Distance(zi, zf);
-        for (int i = 0; i < x; i++)
+
+        for (int i = 0; i < x + 1; i++)
         {
-            for (int r = 0; r < y; r++)
+            for (int r = 0; r < y + 1; r++)
             {
-                for (int j = 0; j < z; j++)
+                for (int j = 0; j < z + 1; j++)
                 {
-                    GameObject go = Instantiate(prefabs[0], transform);
-                    go.transform.position = new Vector3(ConstructInit.x + i, ConstructInit.y + r, ConstructInit.z + j);
+                    float xresult, yresult, zresult;
+                    xresult = ConstructInit.x > ConstructEnd.x ? ConstructEnd.x : ConstructInit.x;
+                    yresult = ConstructInit.y > ConstructEnd.y ? ConstructEnd.y : ConstructInit.y;
+                    zresult = ConstructInit.z > ConstructEnd.z ? ConstructEnd.z : ConstructInit.z;
+                    Vector3 grid = new Vector3(xresult + i, yresult + r, zresult + j);
+                    if (!IsWalls)
+                    {
+                        if (IsConstruct)
+                        {
+                            if (!GridPosition.Contains(grid))
+                            {
+                                if (SelectedIndex == -1) return;
+                                GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                go.transform.position = grid;
+                                GridPosition.Add(grid);
+                                GridDict.Add(go);
+                            }
+                        }
+                        else
+                        {
+                            if (GridPosition.Contains(grid))
+                            {
+                                int index;
+                                index = GridPosition.IndexOf(grid);
+                                Destroy(GridDict[index]);
+                                GridPosition.RemoveAt(index);
+                                GridDict.RemoveAt(index);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (IsConstruct)
+                        {
+                            if (!GridPosition.Contains(grid))
+                            {
+                                if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                {
+                                    if (SelectedIndex == -1) return;
+                                    GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                    go.transform.position = grid;
+                                    GridPosition.Add(grid);
+                                    GridDict.Add(go);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (GridPosition.Contains(grid))
+                            {
+                                if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                {
+                                    int index;
+                                    index = GridPosition.IndexOf(grid);
+                                    Destroy(GridDict[index]);
+                                    GridPosition.RemoveAt(index);
+                                    GridDict.RemoveAt(index);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
+        System.GC.Collect();
     }
     private void Buttons()
     {
@@ -101,14 +259,22 @@ public class LevelEditor : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && !IsRMB)
         {
             IsLMB = false;
-            Terminate();
+            Terminate(true, PlayerState == State.WallsConstruct);
         }
         if (Input.GetMouseButtonUp(1) && !IsLMB)
         {
             IsRMB = false;
-            Terminate();
+            Terminate(false, PlayerState == State.WallsConstruct);
         }
         IsEditing = IsLMB || IsRMB;
+        if (Input.mouseScrollDelta.y == 1)
+        {
+            Collision.transform.position = new Vector3(Collision.transform.position.x, Collision.transform.position.y + 1, Collision.transform.position.z);
+        }
+        else if (Input.mouseScrollDelta.y == -1)
+        {
+            Collision.transform.position = new Vector3(Collision.transform.position.x, Collision.transform.position.y + -1, Collision.transform.position.z);
+        }
     }
 
     public void ChangeTool(int newstate)
@@ -116,18 +282,29 @@ public class LevelEditor : MonoBehaviour
         switch (newstate)
         {
             case 0:
-                PlayerState = State.GroundConstruct;
+                PlayerState = State.SelectConstruct;
                 break;
             case 1:
-                PlayerState = State.Painting;
+                PlayerState = State.GroundConstruct;
                 break;
             case 2:
-                PlayerState = State.PlacingPrefabs;
+                PlayerState = State.WallsConstruct;
                 break;
             case 3:
-                PlayerState = State.PlacingProps;
+                PlayerState = State.Painting;
+                break;
+            case 4:
+                PlayerState = State.ColdZone;
+                break;
+            case 5:
+                PlayerState = State.HotZone;
+                break;
+            case 6:
+                PlayerState = State.Illumination;
                 break;
         }
+        ConstructHUD();
+        SelectedIndex = -1;
     }
 
     public void ResetCam(int newstate)
@@ -148,8 +325,18 @@ public class LevelEditor : MonoBehaviour
 
 public enum State
 {
+    SelectConstruct,
     GroundConstruct,
+    WallsConstruct,
     Painting,
-    PlacingPrefabs,
-    PlacingProps
+    ColdZone,
+    HotZone,
+    Illumination
+}
+[System.Serializable]
+public class LevelEditorObjects
+{
+    public GameObject Normal;
+    public GameObject Preview;
+    public Image Tool;
 }

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ToolShow : MonoBehaviour
 {
+    public int Index;
+    private LevelEditor ts;
     private Image image;
     private static ToolShow IsSelected;
     [SerializeField]
@@ -13,11 +15,13 @@ public class ToolShow : MonoBehaviour
     private void Start()
     {
         image = GetComponent<Image>();
+        ts = FindObjectOfType<LevelEditor>();
     }
 
     public void Select()
     {
         IsSelected = this;
+        ts.ChangeSelected(Index);
     }
 
     private void Update()
