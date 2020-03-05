@@ -26,6 +26,7 @@ public class LevelEditor : MonoBehaviour
     public State PlayerState = State.GroundConstruct;
     public List<Vector3> GridPosition = new List<Vector3>();
     public List<GameObject> GridDict = new List<GameObject>();
+    public List<GameObject> LastSelected = new List<GameObject>();
     public int SelectedIndex;
     private bool IsRMB;
     private bool IsLMB;
@@ -109,13 +110,21 @@ public class LevelEditor : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerState != State.SelectConstruct)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (PlayerState == State.SelectConstruct)
+        {
+            Preview.SetActive(false);
+        }
+        else
         {
             Preview.SetActive(!LevelEditorPlayerMovement.IsAlt);
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        }
+        if (PlayerState != State.SelectConstruct)
+        {
             if (Physics.Raycast(ray, out hit))
             {
+                print(hit.transform.gameObject.layer);
                 if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
                 {
                     gridlock = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y), Mathf.Round(hit.point.z));
@@ -148,11 +157,36 @@ public class LevelEditor : MonoBehaviour
     }
     //quicksave
     //autosave
+    private void AddSelectedObject(GameObject go)
+    {
+        GameObject localgo;
+        for (int i = 0; i < prefabs.Length; i++)
+        {
+            if (go.name.Contains(prefabs[i].Normal.name))
+            {
+                localgo = Instantiate(prefabs[i].Preview, transform);
+                localgo.transform.position = go.transform.position;
+                localgo.GetComponent<MeshRenderer>().material.SetColor("PlaceColor", new Color(1, 1, 0, 0.5f));
+                LastSelected.Add(localgo);
+                break;
+            }
+        }
+    }
+    private void RemoveSelectedObjects()
+    {
+        for(int i = 0; i < LastSelected.Count; i++)
+        {
+            Destroy(LastSelected[i]);
+        }
+        LastSelected.Clear();
+        System.GC.Collect();
+    }
     private void Action()
     {
         if (IsLMB || IsRMB)
         {
             ConstructEnd = gridlock;
+            RemoveSelectedObjects();
         }
         else
         {
@@ -162,6 +196,7 @@ public class LevelEditor : MonoBehaviour
 
     private void Terminate(bool IsConstruct, bool IsWalls)
     {
+
         float x, y, z;
         Vector2 xi, yi, zi, xf, yf, zf;
         xi = new Vector2(ConstructInit.x, 0);
@@ -196,6 +231,11 @@ public class LevelEditor : MonoBehaviour
                                 go.transform.position = grid;
                                 GridPosition.Add(grid);
                                 GridDict.Add(go);
+                                AddSelectedObject(go);
+                            }
+                            else
+                            {
+                                AddSelectedObject(GridDict[GridPosition.IndexOf(grid)]);
                             }
                         }
                         else
@@ -223,6 +263,7 @@ public class LevelEditor : MonoBehaviour
                                     go.transform.position = grid;
                                     GridPosition.Add(grid);
                                     GridDict.Add(go);
+                                    AddSelectedObject(go);
                                 }
                             }
                         }
@@ -339,4 +380,5 @@ public class LevelEditorObjects
     public GameObject Normal;
     public GameObject Preview;
     public Image Tool;
+    public Vector3 Size;
 }
