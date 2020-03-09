@@ -15,6 +15,9 @@ public class LevelEditor : MonoBehaviour
     private GameObject HUD;
     [SerializeField]
     private GameObject Icon;
+    [SerializeField]
+    private GameObject Axis;
+    private GameObject PreviewAxis;
     private List<GameObject> prepreviewPool = new List<GameObject>();
     [Space]
     [Header("Customiza aqui:")]
@@ -37,7 +40,8 @@ public class LevelEditor : MonoBehaviour
     private Vector3 ReconstructInit;
     private Vector3 ReconstructEnd;
     private Vector3 gridlock;
-    private bool IsVectorMoving;
+    public static CurrentAxis currentAxis;
+    public bool IsVectorMoving;
 
     private void Start()
     {
@@ -48,6 +52,8 @@ public class LevelEditor : MonoBehaviour
         }
         Preview = Instantiate(prefabs[SelectedIndex].Preview, transform);
         ConstructHUD();
+        PreviewAxis = Instantiate(Axis, transform);
+        PreviewAxis.SetActive(false);
     }
 
     private void ConstructHUD()
@@ -116,28 +122,39 @@ public class LevelEditor : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
+        if (!IsLMB && !IsRMB)
+        {
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.gameObject.tag == "Setas")
+                {
+                    IsVectorMoving = true;
+                    currentAxis = hit.transform.gameObject.GetComponent<AxisControl>().ChangeTo;
+                }
+                else
+                {
+                    IsVectorMoving = false;
+                    currentAxis = CurrentAxis.none;
+                }
+            }
+        }
         if (PlayerState == State.SelectConstruct)
         {
             Preview.SetActive(false);
         }
         else
         {
-            Preview.SetActive(!LevelEditorPlayerMovement.IsAlt);
+            Preview.SetActive(!LevelEditorPlayerMovement.IsAlt && !IsVectorMoving);
         }
         if (PlayerState != State.SelectConstruct)
         {
             if (Physics.Raycast(ray, out hit))
             {
                 gridlock = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y), Mathf.Round(hit.point.z));
-                if (hit.transform.gameObject.tag != "Setas")
-                {
-                    Preview.SetActive(false);
-                    if (!IsLMB && !IsRMB) IsVectorMoving = true;
-                }
-                else if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
+                
+                if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
                 {
                     Preview.transform.position = gridlock;
-                    if (!IsLMB && !IsRMB) IsVectorMoving = false;
                 }
             }
             if (!IsEditing)
@@ -177,6 +194,8 @@ public class LevelEditor : MonoBehaviour
                 localgo.transform.position = go.transform.position;
                 localgo.GetComponent<MeshRenderer>().material.SetColor("PlaceColor", new Color(1, 1, 0, 0.5f));
                 LastSelected.Add(localgo);
+                PreviewAxis.transform.position = go.transform.position;
+                PreviewAxis.SetActive(true);
                 break;
             }
         }
@@ -187,6 +206,7 @@ public class LevelEditor : MonoBehaviour
         {
             Destroy(LastSelected[i]);
         }
+        PreviewAxis.SetActive(false);
         LastSelected.Clear();
         System.GC.Collect();
     }
@@ -198,30 +218,31 @@ public class LevelEditor : MonoBehaviour
             {
                 ConstructEnd = gridlock;
                 RemoveSelectedObjects();
-                UpdatePool(true, false);
+                UpdatePool(true);
             }
             else
             {
-                UpdatePool(false, false);
                 ConstructInit = gridlock;
+                UpdatePool(false);
             }
         }
         else
         {
             if (IsLMB || IsRMB)
             {
-                UpdatePool(true, true);
+                RemoveSelectedObjects();
                 ReconstructEnd = gridlock;
+                UpdatePool(true);
             }
             else
             {
-                UpdatePool(false, true);
                 ReconstructInit = gridlock;
+                UpdatePool(false);
             }
         }
     }
 
-    private void UpdatePool(bool need, bool setas)
+    private void UpdatePool(bool need)
     {
         if (!need)
         {
@@ -234,7 +255,7 @@ public class LevelEditor : MonoBehaviour
         if (SelectedIndex == -1) return;
         float x, y, z;
         Vector2 xi, yi, zi, xf, yf, zf;
-        if (!setas)
+        if (!IsVectorMoving)
         {
             xi = new Vector2(ConstructInit.x, 0);
             yi = new Vector2(ConstructInit.y, 0);
@@ -245,16 +266,49 @@ public class LevelEditor : MonoBehaviour
         }
         else
         {
-            xi = new Vector2(ReconstructInit.x, 0);
-            yi = new Vector2(ReconstructInit.y, 0);
-            zi = new Vector2(ReconstructInit.z, 0);
-            xf = new Vector2(ReconstructEnd.x, 0);
-            yf = new Vector2(ReconstructEnd.y, 0);
-            zf = new Vector2(ReconstructEnd.z, 0);
+            switch (currentAxis)
+            {
+                case CurrentAxis.x:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructEnd.x, 0);
+                    yf = new Vector2(ReconstructInit.y, 0);
+                    zf = new Vector2(ReconstructInit.z, 0);
+                    break;
+                case CurrentAxis.y:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructInit.x, 0);
+                    yf = new Vector2(ReconstructEnd.y, 0);
+                    zf = new Vector2(ReconstructInit.z, 0);
+                    break;
+                case CurrentAxis.z:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructInit.x, 0);
+                    yf = new Vector2(ReconstructInit.y, 0);
+                    zf = new Vector2(ReconstructEnd.z, 0);
+                    break;
+                default:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructEnd.x, 0);
+                    yf = new Vector2(ReconstructEnd.y, 0);
+                    zf = new Vector2(ReconstructEnd.z, 0);
+                    break;
+            }
         }
         x = Vector2.Distance(xi, xf);
         y = Vector2.Distance(yi, yf);
         z = Vector2.Distance(zi, zf);
+        if (currentAxis == CurrentAxis.y)
+        {
+            Collision.transform.position = new Vector3(Collision.transform.position.x, x + z, Collision.transform.position.z);
+        }
         for (int i = 0; i < prepreviewPool.Count; i++)
         {
             prepreviewPool[i].SetActive(false);
@@ -267,7 +321,7 @@ public class LevelEditor : MonoBehaviour
                 for (int j = 0; j < z + 1; j++)
                 {
                     float xresult, yresult, zresult;
-                    if (!setas)
+                    if (!IsVectorMoving)
                     {
                         xresult = ConstructInit.x > ConstructEnd.x ? ConstructEnd.x : ConstructInit.x;
                         yresult = ConstructInit.y > ConstructEnd.y ? ConstructEnd.y : ConstructInit.y;
@@ -275,9 +329,29 @@ public class LevelEditor : MonoBehaviour
                     }
                     else
                     {
-                        xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
-                        yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
-                        zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                        switch (currentAxis)
+                        {
+                            case CurrentAxis.x:
+                                xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
+                                yresult = ReconstructInit.y;
+                                zresult = ReconstructInit.z;
+                                break;
+                            case CurrentAxis.y:
+                                xresult = ReconstructInit.x;
+                                yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
+                                zresult = ReconstructInit.z;
+                                break;
+                            case CurrentAxis.z:
+                                xresult = ReconstructInit.x;
+                                yresult = ReconstructInit.y;
+                                zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                                break;
+                            default:
+                                xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
+                                yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
+                                zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                                break;
+                        }
                     }
                     Vector3 grid = new Vector3(xresult + i, yresult + r, zresult + j);
                     if (prepreviewPool.Count < index + 1)
@@ -295,7 +369,7 @@ public class LevelEditor : MonoBehaviour
                     }
                     if (PlayerState == State.WallsConstruct)
                     {
-                        if (!setas)
+                        if (!IsVectorMoving)
                         {
                             if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
                             {
@@ -335,12 +409,41 @@ public class LevelEditor : MonoBehaviour
         }
         else
         {
-            xi = new Vector2(ReconstructInit.x, 0);
-            yi = new Vector2(ReconstructInit.y, 0);
-            zi = new Vector2(ReconstructInit.z, 0);
-            xf = new Vector2(ReconstructEnd.x, 0);
-            yf = new Vector2(ReconstructEnd.y, 0);
-            zf = new Vector2(ReconstructEnd.z, 0);
+            switch(currentAxis)
+            {
+                case CurrentAxis.x:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructEnd.x, 0);
+                    yf = new Vector2(ReconstructInit.y, 0);
+                    zf = new Vector2(ReconstructInit.z, 0);
+                    break;
+                case CurrentAxis.y:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructInit.x, 0);
+                    yf = new Vector2(ReconstructEnd.y, 0);
+                    zf = new Vector2(ReconstructInit.z, 0);
+                    break;
+                case CurrentAxis.z:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructInit.x, 0);
+                    yf = new Vector2(ReconstructInit.y, 0);
+                    zf = new Vector2(ReconstructEnd.z, 0);
+                    break;
+                default:
+                    xi = new Vector2(ReconstructInit.x, 0);
+                    yi = new Vector2(ReconstructInit.y, 0);
+                    zi = new Vector2(ReconstructInit.z, 0);
+                    xf = new Vector2(ReconstructEnd.x, 0);
+                    yf = new Vector2(ReconstructEnd.y, 0);
+                    zf = new Vector2(ReconstructEnd.z, 0);
+                    break;
+            }
         }
         x = Vector2.Distance(xi, xf);
         y = Vector2.Distance(yi, yf);
@@ -361,9 +464,29 @@ public class LevelEditor : MonoBehaviour
                     }
                     else
                     {
-                        xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
-                        yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
-                        zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                        switch (currentAxis)
+                        {
+                            case CurrentAxis.x:
+                                xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
+                                yresult = ReconstructInit.y;
+                                zresult = ReconstructInit.z;
+                                break;
+                            case CurrentAxis.y:
+                                xresult = ReconstructInit.x;
+                                yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
+                                zresult = ReconstructInit.z;
+                                break;
+                            case CurrentAxis.z:
+                                xresult = ReconstructInit.x;
+                                yresult = ReconstructInit.y;
+                                zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                                break;
+                            default:
+                                xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
+                                yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
+                                zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                                break;
+                        }
                     }
                     Vector3 grid = new Vector3(xresult + i, yresult + r, zresult + j);
                     if (!IsWalls)
@@ -583,4 +706,11 @@ public class LevelEditorObjects
     public GameObject Preview;
     public Image Tool;
     public Vector3 Size;
+}
+public enum CurrentAxis
+{
+    none,
+    x,
+    y,
+    z
 }

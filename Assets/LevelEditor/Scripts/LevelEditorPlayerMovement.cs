@@ -14,7 +14,7 @@ public class LevelEditorPlayerMovement : MonoBehaviour
     private Vector3 CurrentPos;
     private Vector3 CurrentChildPos;
     private const float rotRate = 100;
-    private const float MoveRate = 5;
+    private const float MoveRate = 20;
     private const float ZoomRate = 10;
 
     private enum MouseInstance
