@@ -15,6 +15,7 @@ public class LevelEditor : MonoBehaviour
     private GameObject HUD;
     [SerializeField]
     private GameObject Icon;
+    private List<GameObject> prepreviewPool = new List<GameObject>();
     [Space]
     [Header("Customiza aqui:")]
     [Space]
@@ -33,11 +34,14 @@ public class LevelEditor : MonoBehaviour
     public static bool IsEditing;
     private Vector3 ConstructInit;
     private Vector3 ConstructEnd;
+    private Vector3 ReconstructInit;
+    private Vector3 ReconstructEnd;
     private Vector3 gridlock;
+    private bool IsVectorMoving;
 
     private void Start()
     {
-        foreach(GameObject go in GameObject.FindGameObjectsWithTag("LEditor"))
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("LEditor"))
         {
             GridPosition.Add(go.transform.position);
             GridDict.Add(go);
@@ -58,7 +62,7 @@ public class LevelEditor : MonoBehaviour
         switch (PlayerState)
         {
             case State.GroundConstruct:
-                for(int i = 0; i < Points[0]; i++)
+                for (int i = 0; i < Points[0]; i++)
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
                     go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
@@ -124,11 +128,16 @@ public class LevelEditor : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit))
             {
-                print(hit.transform.gameObject.layer);
-                if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
+                gridlock = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y), Mathf.Round(hit.point.z));
+                if (hit.transform.gameObject.tag != "Setas")
                 {
-                    gridlock = new Vector3(Mathf.Round(hit.point.x), Mathf.Round(hit.point.y), Mathf.Round(hit.point.z));
+                    Preview.SetActive(false);
+                    if (!IsLMB && !IsRMB) IsVectorMoving = true;
+                }
+                else if (hit.transform.gameObject.tag != "LEditor" && hit.transform.gameObject.tag != "GhostEditor")
+                {
                     Preview.transform.position = gridlock;
+                    if (!IsLMB && !IsRMB) IsVectorMoving = false;
                 }
             }
             if (!IsEditing)
@@ -174,7 +183,7 @@ public class LevelEditor : MonoBehaviour
     }
     private void RemoveSelectedObjects()
     {
-        for(int i = 0; i < LastSelected.Count; i++)
+        for (int i = 0; i < LastSelected.Count; i++)
         {
             Destroy(LastSelected[i]);
         }
@@ -183,28 +192,156 @@ public class LevelEditor : MonoBehaviour
     }
     private void Action()
     {
-        if (IsLMB || IsRMB)
+        if (!IsVectorMoving)
         {
-            ConstructEnd = gridlock;
-            RemoveSelectedObjects();
+            if (IsLMB || IsRMB)
+            {
+                ConstructEnd = gridlock;
+                RemoveSelectedObjects();
+                UpdatePool(true, false);
+            }
+            else
+            {
+                UpdatePool(false, false);
+                ConstructInit = gridlock;
+            }
         }
         else
         {
-            ConstructInit = gridlock;
+            if (IsLMB || IsRMB)
+            {
+                UpdatePool(true, true);
+                ReconstructEnd = gridlock;
+            }
+            else
+            {
+                UpdatePool(false, true);
+                ReconstructInit = gridlock;
+            }
         }
     }
 
+    private void UpdatePool(bool need, bool setas)
+    {
+        if (!need)
+        {
+            for (int i = 0; i < prepreviewPool.Count; i++)
+            {
+                prepreviewPool[i].SetActive(false);
+            }
+            return;
+        }
+        if (SelectedIndex == -1) return;
+        float x, y, z;
+        Vector2 xi, yi, zi, xf, yf, zf;
+        if (!setas)
+        {
+            xi = new Vector2(ConstructInit.x, 0);
+            yi = new Vector2(ConstructInit.y, 0);
+            zi = new Vector2(ConstructInit.z, 0);
+            xf = new Vector2(ConstructEnd.x, 0);
+            yf = new Vector2(ConstructEnd.y, 0);
+            zf = new Vector2(ConstructEnd.z, 0);
+        }
+        else
+        {
+            xi = new Vector2(ReconstructInit.x, 0);
+            yi = new Vector2(ReconstructInit.y, 0);
+            zi = new Vector2(ReconstructInit.z, 0);
+            xf = new Vector2(ReconstructEnd.x, 0);
+            yf = new Vector2(ReconstructEnd.y, 0);
+            zf = new Vector2(ReconstructEnd.z, 0);
+        }
+        x = Vector2.Distance(xi, xf);
+        y = Vector2.Distance(yi, yf);
+        z = Vector2.Distance(zi, zf);
+        for (int i = 0; i < prepreviewPool.Count; i++)
+        {
+            prepreviewPool[i].SetActive(false);
+        }
+        int index = 0;
+        for (int i = 0; i < x + 1; i++)
+        {
+            for (int r = 0; r < y + 1; r++)
+            {
+                for (int j = 0; j < z + 1; j++)
+                {
+                    float xresult, yresult, zresult;
+                    if (!setas)
+                    {
+                        xresult = ConstructInit.x > ConstructEnd.x ? ConstructEnd.x : ConstructInit.x;
+                        yresult = ConstructInit.y > ConstructEnd.y ? ConstructEnd.y : ConstructInit.y;
+                        zresult = ConstructInit.z > ConstructEnd.z ? ConstructEnd.z : ConstructInit.z;
+                    }
+                    else
+                    {
+                        xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
+                        yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
+                        zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                    }
+                    Vector3 grid = new Vector3(xresult + i, yresult + r, zresult + j);
+                    if (prepreviewPool.Count < index + 1)
+                    {
+                        GameObject go;
+                        go = Instantiate(prefabs[SelectedIndex].Preview, transform);
+                        go.GetComponent<MeshRenderer>().material.SetColor("PlaceColor", new Color(0, 0.5f, 0, 0.5f));
+                        go.transform.position = grid;
+                        prepreviewPool.Add(go);
+                    }
+                    else
+                    {
+                        prepreviewPool[index].SetActive(true);
+                        prepreviewPool[index].transform.position = grid;
+                    }
+                    if (PlayerState == State.WallsConstruct)
+                    {
+                        if (!setas)
+                        {
+                            if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                            {
+                                index++;
+                            }
+                        }
+                        else
+                        {
+                            if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
+                            {
+                                index++;
+                            }
+                        }
+                    }
+                    else if (PlayerState == State.GroundConstruct)
+                    {
+                        index++;
+                    }
+                }
+            }
+        }
+
+    }
     private void Terminate(bool IsConstruct, bool IsWalls)
     {
 
         float x, y, z;
         Vector2 xi, yi, zi, xf, yf, zf;
-        xi = new Vector2(ConstructInit.x, 0);
-        yi = new Vector2(ConstructInit.y, 0);
-        zi = new Vector2(ConstructInit.z, 0);
-        xf = new Vector2(ConstructEnd.x, 0);
-        yf = new Vector2(ConstructEnd.y, 0);
-        zf = new Vector2(ConstructEnd.z, 0);
+        if (!IsVectorMoving)
+        {
+            xi = new Vector2(ConstructInit.x, 0);
+            yi = new Vector2(ConstructInit.y, 0);
+            zi = new Vector2(ConstructInit.z, 0);
+            xf = new Vector2(ConstructEnd.x, 0);
+            yf = new Vector2(ConstructEnd.y, 0);
+            zf = new Vector2(ConstructEnd.z, 0);
+        }
+        else
+        {
+            xi = new Vector2(ReconstructInit.x, 0);
+            yi = new Vector2(ReconstructInit.y, 0);
+            zi = new Vector2(ReconstructInit.z, 0);
+            xf = new Vector2(ReconstructEnd.x, 0);
+            yf = new Vector2(ReconstructEnd.y, 0);
+            zf = new Vector2(ReconstructEnd.z, 0);
+        }
         x = Vector2.Distance(xi, xf);
         y = Vector2.Distance(yi, yf);
         z = Vector2.Distance(zi, zf);
@@ -216,9 +353,18 @@ public class LevelEditor : MonoBehaviour
                 for (int j = 0; j < z + 1; j++)
                 {
                     float xresult, yresult, zresult;
-                    xresult = ConstructInit.x > ConstructEnd.x ? ConstructEnd.x : ConstructInit.x;
-                    yresult = ConstructInit.y > ConstructEnd.y ? ConstructEnd.y : ConstructInit.y;
-                    zresult = ConstructInit.z > ConstructEnd.z ? ConstructEnd.z : ConstructInit.z;
+                    if (!IsVectorMoving)
+                    {
+                        xresult = ConstructInit.x > ConstructEnd.x ? ConstructEnd.x : ConstructInit.x;
+                        yresult = ConstructInit.y > ConstructEnd.y ? ConstructEnd.y : ConstructInit.y;
+                        zresult = ConstructInit.z > ConstructEnd.z ? ConstructEnd.z : ConstructInit.z;
+                    }
+                    else
+                    {
+                        xresult = ReconstructInit.x > ReconstructEnd.x ? ReconstructEnd.x : ReconstructInit.x;
+                        yresult = ReconstructInit.y > ReconstructEnd.y ? ReconstructEnd.y : ReconstructInit.y;
+                        zresult = ReconstructInit.z > ReconstructEnd.z ? ReconstructEnd.z : ReconstructInit.z;
+                    }
                     Vector3 grid = new Vector3(xresult + i, yresult + r, zresult + j);
                     if (!IsWalls)
                     {
@@ -256,14 +402,29 @@ public class LevelEditor : MonoBehaviour
                         {
                             if (!GridPosition.Contains(grid))
                             {
-                                if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                if (!IsVectorMoving)
                                 {
-                                    if (SelectedIndex == -1) return;
-                                    GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
-                                    go.transform.position = grid;
-                                    GridPosition.Add(grid);
-                                    GridDict.Add(go);
-                                    AddSelectedObject(go);
+                                    if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                    {
+                                        if (SelectedIndex == -1) return;
+                                        GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                        go.transform.position = grid;
+                                        GridPosition.Add(grid);
+                                        GridDict.Add(go);
+                                        AddSelectedObject(go);
+                                    }
+                                }
+                                else
+                                {
+                                    if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
+                                    {
+                                        if (SelectedIndex == -1) return;
+                                        GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                        go.transform.position = grid;
+                                        GridPosition.Add(grid);
+                                        GridDict.Add(go);
+                                        AddSelectedObject(go);
+                                    }
                                 }
                             }
                         }
@@ -271,13 +432,27 @@ public class LevelEditor : MonoBehaviour
                         {
                             if (GridPosition.Contains(grid))
                             {
-                                if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                if (!IsVectorMoving)
                                 {
-                                    int index;
-                                    index = GridPosition.IndexOf(grid);
-                                    Destroy(GridDict[index]);
-                                    GridPosition.RemoveAt(index);
-                                    GridDict.RemoveAt(index);
+                                    if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                    {
+                                        int index;
+                                        index = GridPosition.IndexOf(grid);
+                                        Destroy(GridDict[index]);
+                                        GridPosition.RemoveAt(index);
+                                        GridDict.RemoveAt(index);
+                                    }
+                                }
+                                else
+                                {
+                                    if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
+                                    {
+                                        int index;
+                                        index = GridPosition.IndexOf(grid);
+                                        Destroy(GridDict[index]);
+                                        GridPosition.RemoveAt(index);
+                                        GridDict.RemoveAt(index);
+                                    }
                                 }
                             }
                         }
@@ -315,6 +490,33 @@ public class LevelEditor : MonoBehaviour
         else if (Input.mouseScrollDelta.y == -1)
         {
             Collision.transform.position = new Vector3(Collision.transform.position.x, Collision.transform.position.y + -1, Collision.transform.position.z);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (PlayerState == State.GroundConstruct)
+            {
+                PlayerState = State.WallsConstruct;
+            }
+            else if (PlayerState == State.WallsConstruct)
+            {
+                PlayerState = State.GroundConstruct;
+            }
+            else if (PlayerState == State.Painting)
+            {
+                PlayerState = State.Illumination;
+            }
+            else if (PlayerState == State.Illumination)
+            {
+                PlayerState = State.Painting;
+            }
+            else if (PlayerState == State.ColdZone)
+            {
+                PlayerState = State.HotZone;
+            }
+            else if (PlayerState == State.HotZone)
+            {
+                PlayerState = State.ColdZone;
+            }
         }
     }
 
