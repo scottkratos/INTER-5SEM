@@ -60,7 +60,7 @@ public class LevelEditor : MonoBehaviour
     {
         for (int i = 0; i < HUD.transform.childCount; i++)
         {
-            Destroy(HUD.transform.GetChild(i));
+            Destroy(HUD.transform.GetChild(i).gameObject);
         }
 
         HUD.transform.parent.gameObject.SetActive(PlayerState != State.SelectConstruct);
@@ -86,6 +86,7 @@ public class LevelEditor : MonoBehaviour
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
                     go.GetComponent<Image>().sprite = materials[i].Tool;
+                    go.GetComponent<ToolShow>().Index = i;
                 }
                 break;
             case State.HotZone:
@@ -115,7 +116,15 @@ public class LevelEditor : MonoBehaviour
     {
         SelectedIndex = index;
         Destroy(Preview);
-        Preview = prefabs[SelectedIndex].Preview;
+        if (PlayerState == State.Painting)
+        {
+            Preview = Instantiate(prefabs[prefabs.Length - 1].Preview, transform);
+        }
+        else
+        {
+            Preview = Instantiate(prefabs[SelectedIndex].Preview, transform);
+        }
+        
         ConstructHUD();
     }
     private void Update()
@@ -357,7 +366,14 @@ public class LevelEditor : MonoBehaviour
                     if (prepreviewPool.Count < index + 1)
                     {
                         GameObject go;
-                        go = Instantiate(prefabs[SelectedIndex].Preview, transform);
+                        if (PlayerState == State.Painting)
+                        {
+                            go = Instantiate(prefabs[prefabs.Length - 1].Preview, transform);
+                        }
+                        else
+                        {
+                            go = Instantiate(prefabs[SelectedIndex].Preview, transform);
+                        }
                         go.GetComponent<MeshRenderer>().material.SetColor("PlaceColor", new Color(0, 0.5f, 0, 0.5f));
                         go.transform.position = grid;
                         prepreviewPool.Add(go);
@@ -385,6 +401,10 @@ public class LevelEditor : MonoBehaviour
                         }
                     }
                     else if (PlayerState == State.GroundConstruct)
+                    {
+                        index++;
+                    }
+                    else if (PlayerState == State.Painting)
                     {
                         index++;
                     }
@@ -489,95 +509,108 @@ public class LevelEditor : MonoBehaviour
                         }
                     }
                     Vector3 grid = new Vector3(xresult + i, yresult + r, zresult + j);
-                    if (!IsWalls)
+                    if (PlayerState == State.GroundConstruct || PlayerState == State.WallsConstruct)
                     {
-                        if (IsConstruct)
+                        if (!IsWalls)
                         {
-                            if (!GridPosition.Contains(grid))
+                            if (IsConstruct)
                             {
-                                if (SelectedIndex == -1) return;
-                                GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
-                                go.transform.position = grid;
-                                GridPosition.Add(grid);
-                                GridDict.Add(go);
-                                AddSelectedObject(go);
+                                if (!GridPosition.Contains(grid))
+                                {
+                                    if (SelectedIndex == -1) return;
+                                    GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                    go.transform.position = grid;
+                                    GridPosition.Add(grid);
+                                    GridDict.Add(go);
+                                    AddSelectedObject(go);
+                                }
+                                else
+                                {
+                                    AddSelectedObject(GridDict[GridPosition.IndexOf(grid)]);
+                                }
                             }
                             else
                             {
-                                AddSelectedObject(GridDict[GridPosition.IndexOf(grid)]);
+                                if (GridPosition.Contains(grid))
+                                {
+                                    int index;
+                                    index = GridPosition.IndexOf(grid);
+                                    Destroy(GridDict[index]);
+                                    GridPosition.RemoveAt(index);
+                                    GridDict.RemoveAt(index);
+                                }
                             }
                         }
                         else
                         {
-                            if (GridPosition.Contains(grid))
+                            if (IsConstruct)
                             {
-                                int index;
-                                index = GridPosition.IndexOf(grid);
-                                Destroy(GridDict[index]);
-                                GridPosition.RemoveAt(index);
-                                GridDict.RemoveAt(index);
+                                if (!GridPosition.Contains(grid))
+                                {
+                                    if (!IsVectorMoving)
+                                    {
+                                        if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                        {
+                                            if (SelectedIndex == -1) return;
+                                            GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                            go.transform.position = grid;
+                                            GridPosition.Add(grid);
+                                            GridDict.Add(go);
+                                            AddSelectedObject(go);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
+                                        {
+                                            if (SelectedIndex == -1) return;
+                                            GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
+                                            go.transform.position = grid;
+                                            GridPosition.Add(grid);
+                                            GridDict.Add(go);
+                                            AddSelectedObject(go);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (GridPosition.Contains(grid))
+                                {
+                                    if (!IsVectorMoving)
+                                    {
+                                        if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
+                                        {
+                                            int index;
+                                            index = GridPosition.IndexOf(grid);
+                                            Destroy(GridDict[index]);
+                                            GridPosition.RemoveAt(index);
+                                            GridDict.RemoveAt(index);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
+                                        {
+                                            int index;
+                                            index = GridPosition.IndexOf(grid);
+                                            Destroy(GridDict[index]);
+                                            GridPosition.RemoveAt(index);
+                                            GridDict.RemoveAt(index);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                    else
+                    if (PlayerState == State.Painting)
                     {
-                        if (IsConstruct)
+                        if (GridPosition.Contains(grid))
                         {
-                            if (!GridPosition.Contains(grid))
-                            {
-                                if (!IsVectorMoving)
-                                {
-                                    if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
-                                    {
-                                        if (SelectedIndex == -1) return;
-                                        GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
-                                        go.transform.position = grid;
-                                        GridPosition.Add(grid);
-                                        GridDict.Add(go);
-                                        AddSelectedObject(go);
-                                    }
-                                }
-                                else
-                                {
-                                    if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
-                                    {
-                                        if (SelectedIndex == -1) return;
-                                        GameObject go = Instantiate(prefabs[SelectedIndex].Normal, transform);
-                                        go.transform.position = grid;
-                                        GridPosition.Add(grid);
-                                        GridDict.Add(go);
-                                        AddSelectedObject(go);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (GridPosition.Contains(grid))
-                            {
-                                if (!IsVectorMoving)
-                                {
-                                    if (grid.x == ConstructInit.x || grid.x == ConstructEnd.x || grid.z == ConstructInit.z || grid.z == ConstructEnd.z)
-                                    {
-                                        int index;
-                                        index = GridPosition.IndexOf(grid);
-                                        Destroy(GridDict[index]);
-                                        GridPosition.RemoveAt(index);
-                                        GridDict.RemoveAt(index);
-                                    }
-                                }
-                                else
-                                {
-                                    if (grid.x == ReconstructInit.x || grid.x == ReconstructEnd.x || grid.z == ReconstructInit.z || grid.z == ReconstructEnd.z)
-                                    {
-                                        int index;
-                                        index = GridPosition.IndexOf(grid);
-                                        Destroy(GridDict[index]);
-                                        GridPosition.RemoveAt(index);
-                                        GridDict.RemoveAt(index);
-                                    }
-                                }
-                            }
+                            if (SelectedIndex == -1) return;
+                            GridDict[GridPosition.IndexOf(grid)].gameObject.GetComponent<MeshRenderer>().material = materials[SelectedIndex].materials;
+                            print(materials[SelectedIndex].materials.name);
+                            print(SelectedIndex);
                         }
                     }
                 }
