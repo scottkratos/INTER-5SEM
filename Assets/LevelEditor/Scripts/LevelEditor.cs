@@ -22,7 +22,7 @@ public class LevelEditor : MonoBehaviour
     [Space]
     [Header("Customiza aqui:")]
     [Space]
-    public Material[] materials;
+    public LevelEditorMaterials[] materials;
     public LevelEditorObjects[] prefabs;
     public int[] Points;
     private GameObject Preview;
@@ -71,42 +71,42 @@ public class LevelEditor : MonoBehaviour
                 for (int i = 0; i < Points[0]; i++)
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
-                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool;
                 }
                 break;
             case State.WallsConstruct:
                 for (int i = 0; i < Points[0]; i++)
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
-                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool;
                 }
                 break;
             case State.Painting:
-                for (int i = Points[0] + 1; i < Points[1]; i++)
+                for (int i = 0; i < materials.Length; i++)
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
-                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                    go.GetComponent<Image>().sprite = materials[i].Tool;
                 }
                 break;
             case State.HotZone:
-                for (int i = Points[2] + 1; i < Points[3]; i++)
-                {
-                    GameObject go = Instantiate(Icon, HUD.transform);
-                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
-                }
-                break;
-            case State.Illumination:
                 for (int i = Points[1] + 1; i < Points[2]; i++)
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
-                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool;
+                }
+                break;
+            case State.Illumination:
+                for (int i = Points[0] + 1; i < Points[1]; i++)
+                {
+                    GameObject go = Instantiate(Icon, HUD.transform);
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool;
                 }
                 break;
             case State.ColdZone:
-                for (int i = Points[3] + 1; i < Points[4]; i++)
+                for (int i = Points[2] + 1; i < Points[3]; i++)
                 {
                     GameObject go = Instantiate(Icon, HUD.transform);
-                    go.GetComponent<Image>().sprite = prefabs[i].Tool.sprite;
+                    go.GetComponent<Image>().sprite = prefabs[i].Tool;
                 }
                 break;
         }
@@ -704,8 +704,14 @@ public class LevelEditorObjects
 {
     public GameObject Normal;
     public GameObject Preview;
-    public Image Tool;
+    public Sprite Tool;
     public Vector3 Size;
+}
+[System.Serializable]
+public class LevelEditorMaterials
+{
+    public Material materials;
+    public Sprite Tool;
 }
 public enum CurrentAxis
 {

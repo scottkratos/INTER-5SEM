@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 131.16855, g: 162.52502, b: 215.10977, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -894,13 +894,53 @@ MonoBehaviour:
   HUD: {fileID: 513647671}
   Icon: {fileID: 994996598783453459, guid: 3bd9f6bd81e7e004cb850cf902966f46, type: 3}
   Axis: {fileID: 6751349384144680201, guid: 223263c4c28cdb0458b610997fa11d1c, type: 3}
-  materials: []
+  materials:
+  - materials: {fileID: 2100000, guid: b3501ecfc67bbfe45aa9984dba31078e, type: 2}
+    Tool: {fileID: 21300000, guid: 34e7f80168a252943af4d7a1da962d79, type: 3}
+  - materials: {fileID: 2100000, guid: 0bb1d98511544374fb46305e316f744c, type: 2}
+    Tool: {fileID: 21300000, guid: 13ad742abb54ba844a9ef956380586bb, type: 3}
+  - materials: {fileID: 2100000, guid: cd25bf1c27d95654f8a9083bff5b3027, type: 2}
+    Tool: {fileID: 21300000, guid: f2c99d2974144914fba4528b12276e4e, type: 3}
+  - materials: {fileID: 2100000, guid: aca53110db40b2a408582b163bbef8ea, type: 2}
+    Tool: {fileID: 21300000, guid: a69118411cc4c184e8f2b72bace3ee21, type: 3}
+  - materials: {fileID: 2100000, guid: 3da0495b88b135d48a1249a47887c96c, type: 2}
+    Tool: {fileID: 21300000, guid: 412085629c1921e4fa20041fa0397d1e, type: 3}
+  - materials: {fileID: 2100000, guid: 61985a5279de12647bfae0cac865308a, type: 2}
+    Tool: {fileID: 21300000, guid: ed7c733da6c1f74409865b4c32951945, type: 3}
+  - materials: {fileID: 2100000, guid: 617efd11286c9424bbcea0ef3b5a3ad8, type: 2}
+    Tool: {fileID: 21300000, guid: 2818f75afaaf1004eb384695937f5c22, type: 3}
+  - materials: {fileID: 2100000, guid: cb29e6150d0132d4f958f7d58a375681, type: 2}
+    Tool: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - materials: {fileID: 2100000, guid: f117a32d12c0e9b4aa9d37dbeae0f196, type: 2}
+    Tool: {fileID: 21300000, guid: e59ce035350099649b10b1b8a09815aa, type: 3}
+  - materials: {fileID: 2100000, guid: 71048628113e8ec4bb2130fdf0d49be3, type: 2}
+    Tool: {fileID: 21300000, guid: 6bdfff690d86f0748bb21a3b57b4d198, type: 3}
+  - materials: {fileID: 2100000, guid: 02bc01fb5436bcf4a994c4ac06ee9649, type: 2}
+    Tool: {fileID: 21300000, guid: 6a34ef77e6dfdd04e9a4a05d56ff61bb, type: 3}
+  - materials: {fileID: 2100000, guid: a62cf0fdee971e54c9e460753e78b61f, type: 2}
+    Tool: {fileID: 21300000, guid: eadd32f9340f3964aa3f481aea343267, type: 3}
+  - materials: {fileID: 2100000, guid: c8fe6f271c93fdf43a9d23296f24d742, type: 2}
+    Tool: {fileID: 21300000, guid: 4603b23e237218b47b0a1ff8ccc72ca8, type: 3}
+  - materials: {fileID: 2100000, guid: 7179c2a996b7ab04286df78d8912157e, type: 2}
+    Tool: {fileID: 21300000, guid: 9a76c22f0bf97e3498543341ce5ccc0c, type: 3}
+  - materials: {fileID: 2100000, guid: a95370f05ed1c324ba2d6eff4808b96a, type: 2}
+    Tool: {fileID: 21300000, guid: c46ba932706d7b64bbcb5c86300a1c16, type: 3}
+  - materials: {fileID: 2100000, guid: ad7a79f5092112540922aaab5a175c01, type: 2}
+    Tool: {fileID: 21300000, guid: e259ded42e35fc24697880d9139c55a6, type: 3}
+  - materials: {fileID: 2100000, guid: 3a6b004380f5bd140a2e59d1f5847084, type: 2}
+    Tool: {fileID: 21300000, guid: ecb67c23e40e99240bc6c85257a90721, type: 3}
+  - materials: {fileID: 2100000, guid: 139c98a0d47a919408c776d12aa5dd34, type: 2}
+    Tool: {fileID: 21300000, guid: f78e6fcfb24ea17449ae1b1c96b487ef, type: 3}
+  - materials: {fileID: 2100000, guid: 3e3fd37c4d1d787469aa9206c3c33e15, type: 2}
+    Tool: {fileID: 21300000, guid: 32d73d6ff4e88ea40b38cbafd17e1c1d, type: 3}
+  - materials: {fileID: 2100000, guid: b28adeea2a343374cb54ef097553cffe, type: 2}
+    Tool: {fileID: 21300000, guid: 96322440aad2c0b4e9a466468acbdb5b, type: 3}
   prefabs:
   - Normal: {fileID: 343886531974968202, guid: 6f1650711d5e2774ca8933fe14f58385, type: 3}
     Preview: {fileID: 343886531974968202, guid: 34514f7bcaeed5b47866414d35cb5bd4,
       type: 3}
     Tool: {fileID: 0}
-    Size: {x: 0, y: 0, z: 0}
+    Size: {x: 1, y: 1, z: 1}
   Points: 0000000000000000000000000000000000000000
   lights: []
   PlayerState: 0
