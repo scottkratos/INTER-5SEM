@@ -12,7 +12,7 @@ public class teleport : MonoBehaviour
 
     private void Start()
     {
-        anglePortalZ = -0.6f;
+
     }
     void Update()
     {
@@ -27,8 +27,10 @@ public class teleport : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            FindObjectOfType<player>().CameraController.y = 0;
             FindObjectOfType<player>().CameraController.y += FindObjectOfType<player>().transform.rotation.y + RotationPortalX;
             playerIsOverLapping = true;
+
 
 
         }
@@ -44,21 +46,34 @@ public class teleport : MonoBehaviour
     // calculo dos angulos de teleporte 
     void AnglePortal()
     {
-        if (reciever.transform.rotation.y > 0)
+        if (reciever.transform.localRotation.eulerAngles.y == 280)
+        {
+            anglePortalX = -1.5f;
+            RotationPortalX = -90;
+
+        }
+        if (reciever.transform.localRotation.eulerAngles.y == 90)
         {
             anglePortalX = 1.2f;
-        }
-        if (reciever.transform.rotation.y < 0)
-        {
-            anglePortalX = -1.2f;
+            RotationPortalX = 90;
         }
 
-        if (reciever.transform.rotation.y == 0)
+        if (reciever.transform.localRotation.eulerAngles.y == 180)
+        {
+            anglePortalZ = -1.2f;
+            RotationPortalX = 180;
+        }
+        if (reciever.transform.localRotation.eulerAngles.y == 0)
         {
             anglePortalZ = 1.2f;
             RotationPortalX = 0;
         }
-        
+
+
+    }
+    void RotatiomTeleport()
+    {
+
 
     }
 

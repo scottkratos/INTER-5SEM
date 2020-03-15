@@ -9,7 +9,8 @@ public class player : MonoBehaviour
     LayerMask water, Puzzle, portal;
     public bool jumpBool, vision;
     public float vel;
-    float x, y, maxX, Jump, maxJump;
+    [HideInInspector]
+    public float x, y, maxX, Jump, maxJump;
     public Rigidbody rigidbodyPlayer;
     public Transform cameraTransform, hand;
     Animator setAnimacao;
@@ -39,7 +40,7 @@ public class player : MonoBehaviour
         portal = LayerMask.GetMask("Portal");
         Jump = 0;
         index = -1;
-        portalIndex = -1;
+        //portalIndex = -1;
 
 
     }
@@ -50,12 +51,12 @@ public class player : MonoBehaviour
         animacao();
         Config();
         interacao();
+        Debug.Log(transform.localRotation.eulerAngles.y);
 
 
 
 
-        // if (Physics.Raycast(vison, out hit))
-        //   Debug.DrawRay(vison.direction, hit.point, Color.red);
+
 
     }
     private void FixedUpdate()
@@ -171,33 +172,8 @@ public class player : MonoBehaviour
         if (Physics.Raycast(hand.position, hand.transform.forward, 5, portal))
         {
             Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
-            if (Input.GetMouseButtonDown(0))
-            {
-                portalIndex++;
-                if (portais[0] == true)
-                {
 
-                }
-                if (portais[1] == true)
-                {
-
-                }
-
-            }
-            switch (portalIndex)
-            {
-                case 1:
-                    portais[0].SetActive(true);
-                    break;
-
-
-                case 2:
-                    portais[1].SetActive(true);
-                    break;
-
-
-
-            }
+           
 
         }
         // Ativacao da orbis 
@@ -273,7 +249,41 @@ public class player : MonoBehaviour
 
             }
         }
+        if (Physics.Raycast(eyes, out hit) && hit.rigidbody.tag == "Portal" && Input.GetMouseButtonDown(0))
+        {
 
+            portalIndex++;
+            switch (portalIndex)
+            {
+                case 1:
+                    portais[0].SetActive(true);
+
+                    break;
+
+
+                case 2:
+                    portais[1].SetActive(true);
+
+                    break;
+
+
+
+            }
+
+            if (portalIndex == 1)
+            {
+
+                portais[0].transform.position = hit.rigidbody.position;
+                portais[0].transform.rotation = hit.rigidbody.rotation;
+            }
+            if (portalIndex == 2)
+            {
+
+                portais[1].transform.position = hit.rigidbody.position;
+                portais[1].transform.rotation = hit.rigidbody.rotation;
+            }
+
+        }
 
 
 
