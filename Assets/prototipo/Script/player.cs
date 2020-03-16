@@ -20,11 +20,15 @@ public class player : MonoBehaviour
     [HideInInspector]
     public Vector3 CameraController;
     [HideInInspector]
-    public int index, portalIndex;
+    public int index, portalIndex, ShotIndex;
     public GameObject[] portais;
+    public GameObject[] shotWater;
     CapsuleCollider CapsuleCollider;
-    public GameObject waterShot;
     Ray eyes;
+    RaycastHit hit;
+    bool inHand;
+    Rigidbody hitPortal;
+
 
 
 
@@ -35,12 +39,16 @@ public class player : MonoBehaviour
         rigidbodyPlayer = GetComponent<Rigidbody>();
         setAnimacao = GetComponent<Animator>();
         CapsuleCollider = GetComponent<CapsuleCollider>();
+        inHand = poder.GetComponent<Orbit>().InHand;
         water = LayerMask.GetMask("Water");
         Puzzle = LayerMask.GetMask("Puzzle");
         portal = LayerMask.GetMask("Portal");
         Jump = 0;
         index = -1;
-        //portalIndex = -1;
+        foreach (GameObject portais in GameObject.FindGameObjectsWithTag("Portal"))
+        {
+            hitPortal = portais.GetComponent<Rigidbody>();
+        }
 
 
     }
@@ -51,7 +59,8 @@ public class player : MonoBehaviour
         animacao();
         Config();
         interacao();
-        Debug.Log(transform.localRotation.eulerAngles.y);
+
+
 
 
 
@@ -119,28 +128,33 @@ public class player : MonoBehaviour
     //interacao com objetos 
     void interacao()
     {
-        RaycastHit hit;
+
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && vision == false && FindObjectOfType<Orbit>().InHand == true)
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(hand.position, hand.transform.forward, 5, water) == false &&
+            Physics.Raycast(hand.position, hand.transform.forward, 5, Puzzle) == false && poder.GetComponent<Orbit>().InHand == true)
         {
-            Instantiate(waterShot, hand.transform.position, Quaternion.identity);
+            ShotIndex++;
+            shotWater[ShotIndex].transform.position = hand.transform.position;
+            shotWater[ShotIndex].SetActive(true);
             index--;
+
+
+
+
         }
         //interacao com a agua
         if (Physics.Raycast(hand.position, hand.transform.forward, 5, water))
         {
             Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
-            vision = true;
             if (Input.GetMouseButtonDown(0))
             {
+                ShotIndex--;
                 poder.transform.position = transform.position * 2;
                 index++;
+
             }
 
-        }
-        else
-        {
-            vision = false;
+
         }
         //intercao com puzzle
         if (Physics.Raycast(hand.position, hand.transform.forward, 5, Puzzle))
@@ -172,9 +186,54 @@ public class player : MonoBehaviour
         if (Physics.Raycast(hand.position, hand.transform.forward, 5, portal))
         {
             Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
+            if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0))
+            {
 
-           
+                portalIndex++;
+                switch (portalIndex)
+                {
+                    case 1:
+                        portais[0].SetActive(true);
+                        break;
+                    case 2:
+                        portais[1].SetActive(true);
+                        break;
+                    case 3:
+                        portais[0].SetActive(true);
+                        portalIndex = 1;
+                        break;
+                }
+                if (portalIndex == 1)
+                {
+                    portais[0].transform.position = hit.rigidbody.position;
+                    portais[0].transform.rotation = hit.rigidbody.rotation;
+                }
+                if (portalIndex == 2)
+                {
+                    portais[1].transform.position = hit.rigidbody.position;
+                    portais[1].transform.rotation = hit.rigidbody.rotation;
+                }
+            }
+        }
+        //Ray para indentificar objetos que podem ser movidos
+        if (Physics.Raycast(eyes, out hit) && hit.rigidbody == GameObject.FindGameObjectWithTag("Vaso").GetComponent<Rigidbody>() && poder.GetComponent<Orbit>().InHand == true && Input.GetKeyDown(KeyCode.E))
+        {
 
+            GameObject objeto = GameObject.FindGameObjectWithTag("Vaso");
+            objeto.transform.parent = cameraTransform.transform;
+
+        }
+        //Ray para indentificar e movimentar gelo
+        if (Physics.Raycast(eyes, out hit) && hit.rigidbody == GameObject.FindGameObjectWithTag("Ice").GetComponent<Rigidbody>())
+        {
+            Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
+            if (Input.GetMouseButtonDown(0))
+            {
+                FindObjectOfType<IceArea>().Gelo.transform.position = hand.position;
+                FindObjectOfType<IceArea>().Gelo.GetComponent<Rigidbody>().isKinematic = true;
+                FindObjectOfType<IceArea>().inHand = true;
+
+            }
         }
         // Ativacao da orbis 
         switch (index)
@@ -230,65 +289,6 @@ public class player : MonoBehaviour
                 FindObjectOfType<Orbit>().Orbis[4].SetActive(true);
                 break;
         }
-        //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit) && hit.rigidbody.tag == "Vaso" && Input.GetKeyDown(KeyCode.E) && FindObjectOfType<Orbit>().InHand == false)
-        {
-
-            GameObject objeto = GameObject.FindGameObjectWithTag("Vaso");
-            objeto.transform.parent = cameraTransform.transform;
-
-        }
-        if (Physics.Raycast(eyes, out hit) && hit.rigidbody.tag == "Ice")
-        {
-            Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
-            if (Input.GetMouseButtonDown(0))
-            {
-                FindObjectOfType<IceArea>().Gelo.transform.position = hand.position;
-                FindObjectOfType<IceArea>().Gelo.GetComponent<Rigidbody>().isKinematic = true;
-                FindObjectOfType<IceArea>().inHand = true;
-
-            }
-        }
-        if (Physics.Raycast(eyes, out hit) && hit.rigidbody.tag == "Portal" && Input.GetMouseButtonDown(0))
-        {
-
-            portalIndex++;
-            switch (portalIndex)
-            {
-                case 1:
-                    portais[0].SetActive(true);
-
-                    break;
-
-
-                case 2:
-                    portais[1].SetActive(true);
-
-                    break;
-
-
-
-            }
-
-            if (portalIndex == 1)
-            {
-
-                portais[0].transform.position = hit.rigidbody.position;
-                portais[0].transform.rotation = hit.rigidbody.rotation;
-            }
-            if (portalIndex == 2)
-            {
-
-                portais[1].transform.position = hit.rigidbody.position;
-                portais[1].transform.rotation = hit.rigidbody.rotation;
-            }
-
-        }
-
-
-
-
-
     }
     // configuracao para Gameplayer
     void Config()
@@ -298,10 +298,19 @@ public class player : MonoBehaviour
         {
             index = 4;
         }
-        // numero minimo de bolhas d'agua
+        // numero minimo de disparos
         if (index <= -1)
         {
             index = -1;
+        }
+        if (ShotIndex >= 5)
+        {
+            ShotIndex = 5;
+        }
+        // numero minimo de dissparos
+        if (ShotIndex <= -1)
+        {
+            ShotIndex = -1;
         }
     }
     //Input de comando 
@@ -323,6 +332,32 @@ public class player : MonoBehaviour
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

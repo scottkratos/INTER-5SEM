@@ -40,15 +40,15 @@ public class DoorMoviment : MonoBehaviour
 
         }
 
-
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
+
 
    
 }

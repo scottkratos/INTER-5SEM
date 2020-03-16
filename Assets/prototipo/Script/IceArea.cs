@@ -44,6 +44,11 @@ public class IceArea : MonoBehaviour
         if (inHand == true)
         {
             Gelo.transform.parent = FindObjectOfType<player>().hand;
+            if (Gelo.transform.localScale.y > 1)
+            {
+                FindObjectOfType<IceTranform>().StopCoroutine("size");
+            }
+            
         }
         if (inHand == false)
         {
@@ -51,7 +56,7 @@ public class IceArea : MonoBehaviour
             Gelo.transform.parent = null;
 
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             inHand = false;
         }
@@ -67,7 +72,8 @@ public class IceArea : MonoBehaviour
             Gelo.GetComponent<Rigidbody>().isKinematic = true;
             index = FindObjectOfType<player>().index;
             FindObjectOfType<player>().index -= index + 1;
-            FindObjectOfType<IceTranform>().StartCoroutine("size"); 
+            FindObjectOfType<IceTranform>().StartCoroutine("size");
+            
         }
     }
 }

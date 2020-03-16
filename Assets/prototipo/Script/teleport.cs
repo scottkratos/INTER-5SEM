@@ -10,10 +10,7 @@ public class teleport : MonoBehaviour
     float RorationPortalZ, RotationPortalX;
     public bool playerIsOverLapping = false;
 
-    private void Start()
-    {
-
-    }
+  
     void Update()
     {
         AnglePortal();
@@ -46,7 +43,7 @@ public class teleport : MonoBehaviour
     // calculo dos angulos de teleporte 
     void AnglePortal()
     {
-        if (reciever.transform.localRotation.eulerAngles.y == 280)
+        if (reciever.transform.localRotation.eulerAngles.y == 270)
         {
             anglePortalX = -1.5f;
             RotationPortalX = -90;
@@ -71,11 +68,7 @@ public class teleport : MonoBehaviour
 
 
     }
-    void RotatiomTeleport()
-    {
-
-
-    }
+    
 
 
 

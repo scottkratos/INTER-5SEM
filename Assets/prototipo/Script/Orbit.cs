@@ -20,7 +20,7 @@ public class Orbit : MonoBehaviour
     void Start()
     {
         hand = GameObject.FindGameObjectWithTag("Mao");
-        InHand = true;
+        InHand = false;
         puzzle = LayerMask.GetMask("Puzzle");
         water = LayerMask.GetMask("water");
 
