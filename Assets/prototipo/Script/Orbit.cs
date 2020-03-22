@@ -9,7 +9,7 @@ public class Orbit : MonoBehaviour
     public GameObject center;
     LayerMask puzzle, water;
     float time;
-    public float speed, distancia;
+    public float speed, amplitudeX, amplitudeY, amplitudeZ;
     [HideInInspector]
     public bool InHand;
     int index, indexShot;
@@ -19,7 +19,7 @@ public class Orbit : MonoBehaviour
 
     void Start()
     {
-        hand = GameObject.FindGameObjectWithTag("Mao");
+        hand = GameObject.FindGameObjectWithTag("Hand");
         InHand = false;
         puzzle = LayerMask.GetMask("Puzzle");
         water = LayerMask.GetMask("water");
@@ -32,7 +32,25 @@ public class Orbit : MonoBehaviour
         center.transform.position = hand.transform.position;
         time += Time.deltaTime * speed;
         ConfigOrbitais();
+        if (InHand == true)
+        {
+            foreach (GameObject orbi in Orbis)
+            {
 
+                orbi.GetComponent<SphereCollider>().enabled = false;
+
+            }
+
+        }
+        else
+        {
+            foreach (GameObject orbi in Orbis)
+            {
+
+                orbi.GetComponent<SphereCollider>().enabled = true;
+
+            }
+        }
 
     }
     void rotation(GameObject planet, float amplitudeX, float amplitudeY, float amplitudeZ)
@@ -50,22 +68,22 @@ public class Orbit : MonoBehaviour
     {
         if (Orbis[1])
         {
-            rotation(Orbis[1], 0.1f, 0.1f, 0.1f);
+            rotation(Orbis[1], amplitudeX, amplitudeY, amplitudeZ);
             Orbis[1].transform.LookAt(center.transform);
         }
         if (Orbis[2])
         {
-            rotation(Orbis[2], -0.1f, -0.1f, 0.1f);
+            rotation(Orbis[2], -amplitudeX, -amplitudeY, amplitudeZ);
             Orbis[2].transform.LookAt(center.transform);
         }
         if (Orbis[3])
         {
-            rotation(Orbis[3], 0.1f, -0.1f, -0.1f);
+            rotation(Orbis[3], amplitudeX, -amplitudeY, -amplitudeZ);
             Orbis[3].transform.LookAt(center.transform);
         }
         if (Orbis[4])
         {
-            rotation(Orbis[4], 0.1f, 0.1f, -0.1f);
+            rotation(Orbis[4], amplitudeX, amplitudeY, -amplitudeZ);
             Orbis[4].transform.LookAt(center.transform);
         }
     }

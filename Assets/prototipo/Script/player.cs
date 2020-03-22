@@ -7,27 +7,36 @@ public class player : MonoBehaviour
 {
     Vector3 input;
     LayerMask water, Puzzle, portal;
+    [HideInInspector]
     public bool jumpBool, vision;
     public float vel;
     [HideInInspector]
     public float x, y, maxX, Jump, maxJump;
+    [HideInInspector]
     public Rigidbody rigidbodyPlayer;
-    public Transform cameraTransform, hand;
+    [HideInInspector]
+    public Transform hand, cameraTransform, checkGround;
     Animator setAnimacao;
     public LayerMask JumpLayerMask;
-    public GameObject portaA, portaB, poder;
-    public Texture2D curso, curso2;
+    public GameObject power;
+    [HideInInspector]
+    public GameObject Ice;
+    public Texture2D[] cursores;
     [HideInInspector]
     public Vector3 CameraController;
     [HideInInspector]
-    public int index, portalIndex, ShotIndex;
+    public int index, portalIndex, ShotIndex, animationIndex;
     public GameObject[] portais;
     public GameObject[] shotWater;
-    CapsuleCollider CapsuleCollider;
+    public GameObject[] vasos;
+    CharacterController characterController;
     Ray eyes;
     RaycastHit hit;
-    bool inHand;
+    bool inHand, take;
     Rigidbody hitPortal;
+
+
+
 
 
 
@@ -38,89 +47,50 @@ public class player : MonoBehaviour
     {
         rigidbodyPlayer = GetComponent<Rigidbody>();
         setAnimacao = GetComponent<Animator>();
-        CapsuleCollider = GetComponent<CapsuleCollider>();
-        inHand = poder.GetComponent<Orbit>().InHand;
+        characterController = GetComponent<CharacterController>();
+        inHand = power.GetComponent<Orbit>().InHand;
+        power = GameObject.FindGameObjectWithTag("Power");
+        Ice = GameObject.FindGameObjectWithTag("Ice");
+        checkGround = GameObject.FindGameObjectWithTag("CheckGraound").transform;
         water = LayerMask.GetMask("Water");
         Puzzle = LayerMask.GetMask("Puzzle");
         portal = LayerMask.GetMask("Portal");
+        hand = GameObject.FindGameObjectWithTag("Hand").transform;
+        cameraTransform = Camera.main.transform;
         Jump = 0;
         index = -1;
-        foreach (GameObject portais in GameObject.FindGameObjectsWithTag("Portal"))
-        {
-            hitPortal = portais.GetComponent<Rigidbody>();
-        }
-
+        animationIndex = -1;
+        take = false;
+        characterController.detectCollisions = false;
 
     }
     void Update()
     {
         MouseConfi();
         inputs();
-        animacao();
         Config();
         interacao();
-
-
-
-
-
-
-
-
-    }
-    private void FixedUpdate()
-    {
-        rigidbodyPlayer.transform.position += new Vector3(input.x, Jump, input.z);
-        rigidbodyPlayer.transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
-        cameraTransform.transform.rotation = Quaternion.Euler(-maxX, CameraController.y, 0);
-        if (isGrounded() && jumpBool)
-        {
-            rigidbodyPlayer.velocity = Vector3.zero;
-            rigidbodyPlayer.AddForce(Vector3.up * 10, ForceMode.Impulse);
-            maxJump = transform.position.y + 1;
-        }
-        if (isGrounded() == false && transform.position.y > maxJump)
-        {
-            rigidbodyPlayer.AddForce(Vector3.down * 1f, ForceMode.Impulse);
-        }
-
-
-
-
-
-
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (LayerMask.NameToLayer("Water") == 1)
-        {
-            rigidbodyPlayer.mass = 0.5f;
-
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-
+        Debug.Log(FindObjectOfType<WaterMoviment>().maxy);
 
     }
     //animacoes
-    void animacao()
-    {
-        if (input != Vector3.zero)
-        {
-            setAnimacao.SetFloat("walking", 1);
-        }
-        else
-        {
-            setAnimacao.SetFloat("walking", 0);
-        }
-
-    }
+    // void animacao()
+    // {
+    //     if (input != Vector3.zero)
+    //     {
+    //         setAnimacao.SetFloat("walking", 1);
+    //     }
+    //     else
+    //     {
+    //         setAnimacao.SetFloat("walking", 0);
+    //     }
+    //
+    // }
     //configuracao do mose
     void MouseConfi()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.SetCursor(curso, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursores[0], Vector2.zero, CursorMode.Auto);
         Cursor.visible = true;
 
 
@@ -130,8 +100,8 @@ public class player : MonoBehaviour
     {
 
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(hand.position, hand.transform.forward, 5, water) == false &&
-            Physics.Raycast(hand.position, hand.transform.forward, 5, Puzzle) == false && poder.GetComponent<Orbit>().InHand == true)
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false &&
+            Physics.Raycast(hand.position, hand.transform.forward, 5, Puzzle) == false && power.GetComponent<Orbit>().InHand == true)
         {
             ShotIndex++;
             shotWater[ShotIndex].transform.position = hand.transform.position;
@@ -143,13 +113,13 @@ public class player : MonoBehaviour
 
         }
         //interacao com a agua
-        if (Physics.Raycast(hand.position, hand.transform.forward, 5, water))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water))
         {
-            Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
             if (Input.GetMouseButtonDown(0))
             {
                 ShotIndex--;
-                poder.transform.position = transform.position * 2;
+                power.transform.position = transform.position * 2;
                 index++;
 
             }
@@ -157,36 +127,102 @@ public class player : MonoBehaviour
 
         }
         //intercao com puzzle
-        if (Physics.Raycast(hand.position, hand.transform.forward, 5, Puzzle))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, Puzzle))
         {
-            Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
 
             if (Input.GetMouseButtonDown(0) && FindObjectOfType<WaterMoviment>().maxy == false && FindObjectOfType<Orbit>().InHand == true)
             {
                 index--;
-                FindObjectOfType<WaterMoviment>().Y += 0.5f;
+                ShotIndex++;
+                animationIndex++;
+
+                for (int i = 0; i < vasos.Length; i++)
+                {
+                    if (hit.rigidbody == vasos[i].gameObject.GetComponent<Rigidbody>())
+                    {
+                        switch (animationIndex)
+                        {
+                            case 0:
+                                vasos[i].GetComponent<WaterMoviment>().anim.SetBool("WaterBool", true);
+
+                                break;
+                            case 1:
+                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
+
+                                break;
+
+                            case 2:
+                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
+
+                                break;
+
+                            case 3:
+                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
+
+                                break;
+
+                            case 4:
+                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
+
+                                break;
+
+
+
+
+                        }
+
+                    }
+
+
+                }
+
 
             }
             if (Input.GetMouseButtonDown(1) && FindObjectOfType<WaterMoviment>().maxy == false)
             {
-                if (index < 4)
+                index++;
+                ShotIndex--;
+                for (int i = 0; i < vasos.Length; i++)
                 {
-                    index++;
-                    FindObjectOfType<WaterMoviment>().Y -= 0.5f;
+                    if (hit.rigidbody == vasos[i].gameObject.GetComponent<Rigidbody>() && index < 4)
+                    {
+                        // vasos[i].GetComponent<WaterMoviment>().anim.Play();
+                    }
                 }
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
+
+
+
+
+
 
             }
+
+
+
+
 
 
         }
-        //intercao com os portais
-        if (Physics.Raycast(hand.position, hand.transform.forward, 5, portal))
+        //Ray para indentificar objetos que podem ser movidos
+        if (Physics.Raycast(eyes, out hit) && Input.GetKeyDown(KeyCode.E))
         {
-            Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
-            if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0))
+
+            GameObject objeto = hit.rigidbody.gameObject;
+            objeto.GetComponent<TakeObject>().take = true;
+
+
+
+
+
+
+        }
+
+        //intercao com os portais
+        if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
+        {
+            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
+            if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0) && FindObjectOfType<Orbit>().InHand == true)
             {
 
                 portalIndex++;
@@ -215,43 +251,42 @@ public class player : MonoBehaviour
                 }
             }
         }
-        //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit) && hit.rigidbody == GameObject.FindGameObjectWithTag("Vaso").GetComponent<Rigidbody>() && poder.GetComponent<Orbit>().InHand == true && Input.GetKeyDown(KeyCode.E))
-        {
-
-            GameObject objeto = GameObject.FindGameObjectWithTag("Vaso");
-            objeto.transform.parent = cameraTransform.transform;
-
-        }
         //Ray para indentificar e movimentar gelo
-        if (Physics.Raycast(eyes, out hit) && hit.rigidbody == GameObject.FindGameObjectWithTag("Ice").GetComponent<Rigidbody>())
+        if (Physics.Raycast(eyes, out hit) && hit.rigidbody == Ice.GetComponent<Rigidbody>())
         {
-            Cursor.SetCursor(curso2, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
             if (Input.GetMouseButtonDown(0))
             {
                 FindObjectOfType<IceArea>().Gelo.transform.position = hand.position;
                 FindObjectOfType<IceArea>().Gelo.GetComponent<Rigidbody>().isKinematic = true;
                 FindObjectOfType<IceArea>().inHand = true;
-
+                FindObjectOfType<IceArea>().transform.parent = hand.transform;
             }
+        }
+        if (Input.GetMouseButtonDown(1) && FindObjectOfType<IceArea>().inHand == true)
+        {
+            //FindObjectOfType<IceArea>().Gelo.transform.position = hand.position;
+            FindObjectOfType<IceArea>().Gelo.GetComponent<Rigidbody>().isKinematic = false;
+            FindObjectOfType<IceArea>().inHand = false;
+            FindObjectOfType<IceArea>().transform.parent = null;
         }
         // Ativacao da orbis 
         switch (index)
         {
             case -1:
-                poder.SetActive(true);
+                power.SetActive(true);
                 FindObjectOfType<Orbit>().Orbis[0].SetActive(false);
                 FindObjectOfType<Orbit>().Orbis[1].SetActive(false);
                 FindObjectOfType<Orbit>().Orbis[2].SetActive(false);
                 FindObjectOfType<Orbit>().Orbis[3].SetActive(false);
                 FindObjectOfType<Orbit>().Orbis[4].SetActive(false);
-                poder.GetComponent<Orbit>().InHand = false;
+                power.GetComponent<Orbit>().InHand = false;
                 break;
 
 
             case 0:
 
-                poder.GetComponent<Orbit>().InHand = true;
+                power.GetComponent<Orbit>().InHand = true;
                 FindObjectOfType<Orbit>().Orbis[0].SetActive(true);
                 FindObjectOfType<Orbit>().Orbis[1].SetActive(false);
                 FindObjectOfType<Orbit>().Orbis[2].SetActive(false);
@@ -289,6 +324,8 @@ public class player : MonoBehaviour
                 FindObjectOfType<Orbit>().Orbis[4].SetActive(true);
                 break;
         }
+
+
     }
     // configuracao para Gameplayer
     void Config()
@@ -303,9 +340,9 @@ public class player : MonoBehaviour
         {
             index = -1;
         }
-        if (ShotIndex >= 5)
+        if (ShotIndex >= 4)
         {
-            ShotIndex = 5;
+            ShotIndex = 4;
         }
         // numero minimo de dissparos
         if (ShotIndex <= -1)
@@ -318,30 +355,33 @@ public class player : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
-        jumpBool = Input.GetButton("Jump");
+        if (isGrounded() == true && Input.GetButtonDown("Jump"))
+        {
+            Jump = Mathf.Sqrt(1.5f * -2f * -10f);
+        }
+        else
+        {
+
+            Jump += -10 * Time.deltaTime;
+        }
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * 2, Input.GetAxis("Mouse X") * 2, 0);
         maxX = Mathf.Clamp(CameraController.x, -50, 50);
         input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
-
+        characterController.Move(new Vector3(input.x, Jump * Time.deltaTime, input.z));
+        cameraTransform.transform.rotation = Quaternion.Euler(-maxX, CameraController.y, 0);
+        transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
     {
-        return Physics.CheckCapsule(CapsuleCollider.bounds.center, new Vector3(CapsuleCollider.bounds.center.x, CapsuleCollider.bounds.min.y,
-            CapsuleCollider.bounds.center.z), CapsuleCollider.radius * .9f, JumpLayerMask);
+        return Physics.CheckSphere(checkGround.position, 0.7f, JumpLayerMask);
 
 
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
 
-
-
-
-
-
-
-
-
-
+    }
 
 
 
