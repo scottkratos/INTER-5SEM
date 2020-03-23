@@ -4,39 +4,133 @@ using UnityEngine;
 
 public class WaterShooter : MonoBehaviour
 {
-    Ray eyes;
+
     [HideInInspector]
     public RaycastHit hit;
-    [HideInInspector]
-    public Rigidbody HitRigidbody;
+    public GameObject[] ShotWater;
+    public Camera fpsCam;
 
 
 
 
     void Update()
     {
-        transform.position += new Vector3(0.1f, 0, 0) + FindObjectOfType<player>().cameraTransform.forward;
-        eyes.origin = transform.position;
-        eyes.direction = transform.right;
 
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-
-
-        for (int i = 0; i < FindObjectOfType<player>().vasos.Length; i++)
+        foreach (GameObject shot in ShotWater)
         {
 
-            if (collision.rigidbody == FindObjectOfType<player>().vasos[i].gameObject.GetComponent<Rigidbody>())
-            {
-                FindObjectOfType<player>().vasos[i].GetComponent<WaterMoviment>().Y += 0.5f;
-            }
-
+            shot.transform.position += Camera.main.transform.forward;
         }
 
 
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        {
+            Debug.Log(hit.transform.name);
+            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == true)
+            {
+               // FindObjectOfType<player>().index--;
+               // FindObjectOfType<player>().ShotIndex++;
+                FindObjectOfType<player>().animationIndex++;
 
+
+
+
+
+                switch (FindObjectOfType<player>().animationIndex)
+                {
+                    case 0:
+                        hit.transform.gameObject.GetComponent<WaterMoviment>().anim.SetBool("WaterBool", true);
+
+                        break;
+                    case 1:
+                        hit.transform.gameObject.GetComponent<WaterMoviment>().anim.speed = 1;
+
+                        break;
+
+                    case 2:
+                        hit.transform.gameObject.GetComponent<WaterMoviment>().anim.speed = 1;
+
+                        break;
+
+                    case 3:
+                        hit.transform.gameObject.GetComponent<WaterMoviment>().anim.speed = 1;
+
+                        break;
+
+                    case 4:
+                        hit.transform.gameObject.GetComponent<WaterMoviment>().anim.speed = 1;
+
+                        break;
+
+
+
+
+                }
+
+
+
+
+
+
+
+            }
+
+        }
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        {
+            Debug.Log(hit.transform.name);
+            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Gramofone" && FindObjectOfType<Orbit>().InHand == true)
+            {
+                // FindObjectOfType<player>().index--;
+                // FindObjectOfType<player>().ShotIndex++;
+                FindObjectOfType<player>().animationIndex++;
+
+
+
+
+
+                switch (FindObjectOfType<player>().animationIndex)
+                {
+                    case 0:
+                        hit.transform.gameObject.GetComponent<Gramofone>().anim.SetBool("GramofoneBool", true);
+
+                        break;
+                    case 1:
+                        hit.transform.gameObject.GetComponent<Gramofone>().anim.speed = 1;
+
+                        break;
+
+                    case 2:
+                        hit.transform.gameObject.GetComponent<Gramofone>().anim.speed = 1;
+
+                        break;
+
+                    case 3:
+                        hit.transform.gameObject.GetComponent<Gramofone>().anim.speed = 1;
+
+                        break;
+
+                    case 4:
+                        hit.transform.gameObject.GetComponent<Gramofone>().anim.speed = 1;
+
+                        break;
+
+
+
+
+                }
+
+
+
+
+
+
+
+            }
+
+        }
     }
+
 
 
 

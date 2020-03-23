@@ -32,7 +32,7 @@ public class player : MonoBehaviour
     CharacterController characterController;
     Ray eyes;
     RaycastHit hit;
-    bool inHand, take;
+    public bool inHand, take;
     Rigidbody hitPortal;
 
 
@@ -70,22 +70,10 @@ public class player : MonoBehaviour
         inputs();
         Config();
         interacao();
-        Debug.Log(FindObjectOfType<WaterMoviment>().maxy);
+
 
     }
-    //animacoes
-    // void animacao()
-    // {
-    //     if (input != Vector3.zero)
-    //     {
-    //         setAnimacao.SetFloat("walking", 1);
-    //     }
-    //     else
-    //     {
-    //         setAnimacao.SetFloat("walking", 0);
-    //     }
-    //
-    // }
+
     //configuracao do mose
     void MouseConfi()
     {
@@ -100,8 +88,7 @@ public class player : MonoBehaviour
     {
 
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false &&
-            Physics.Raycast(hand.position, hand.transform.forward, 5, Puzzle) == false && power.GetComponent<Orbit>().InHand == true)
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false)
         {
             ShotIndex++;
             shotWater[ShotIndex].transform.position = hand.transform.position;
@@ -126,98 +113,19 @@ public class player : MonoBehaviour
 
 
         }
-        //intercao com puzzle
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, Puzzle))
-        {
-            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
-
-            if (Input.GetMouseButtonDown(0) && FindObjectOfType<WaterMoviment>().maxy == false && FindObjectOfType<Orbit>().InHand == true)
-            {
-                index--;
-                ShotIndex++;
-                animationIndex++;
-
-                for (int i = 0; i < vasos.Length; i++)
-                {
-                    if (hit.rigidbody == vasos[i].gameObject.GetComponent<Rigidbody>())
-                    {
-                        switch (animationIndex)
-                        {
-                            case 0:
-                                vasos[i].GetComponent<WaterMoviment>().anim.SetBool("WaterBool", true);
-
-                                break;
-                            case 1:
-                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
-
-                                break;
-
-                            case 2:
-                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
-
-                                break;
-
-                            case 3:
-                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
-
-                                break;
-
-                            case 4:
-                                vasos[i].GetComponent<WaterMoviment>().anim.speed = 1;
-
-                                break;
-
-
-
-
-                        }
-
-                    }
-
-
-                }
-
-
-            }
-            if (Input.GetMouseButtonDown(1) && FindObjectOfType<WaterMoviment>().maxy == false)
-            {
-                index++;
-                ShotIndex--;
-                for (int i = 0; i < vasos.Length; i++)
-                {
-                    if (hit.rigidbody == vasos[i].gameObject.GetComponent<Rigidbody>() && index < 4)
-                    {
-                        // vasos[i].GetComponent<WaterMoviment>().anim.Play();
-                    }
-                }
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-        }
         //Ray para indentificar objetos que podem ser movidos
         if (Physics.Raycast(eyes, out hit) && Input.GetKeyDown(KeyCode.E))
         {
 
             GameObject objeto = hit.rigidbody.gameObject;
             objeto.GetComponent<TakeObject>().take = true;
-
+            take = true;
 
 
 
 
 
         }
-
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
         {
@@ -326,6 +234,8 @@ public class player : MonoBehaviour
         }
 
 
+
+
     }
     // configuracao para Gameplayer
     void Config()
@@ -349,6 +259,16 @@ public class player : MonoBehaviour
         {
             ShotIndex = -1;
         }
+        if (animationIndex > 4)
+        {
+            animationIndex = -1;
+        }
+        // numero minimo de dissparos
+        if (animationIndex < -1)
+        {
+            animationIndex = 4;
+        }
+
     }
     //Input de comando 
     void inputs()
@@ -378,10 +298,7 @@ public class player : MonoBehaviour
 
 
     }
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
 
-    }
 
 
 

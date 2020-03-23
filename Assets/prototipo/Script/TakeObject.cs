@@ -22,7 +22,7 @@ public class TakeObject : MonoBehaviour
             transform.transform.parent = FindObjectOfType<player>().hand.parent;
 
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && FindObjectOfType<player>().take == true)
         {
             transform.GetComponent<Rigidbody>().isKinematic = false;
             transform.transform.parent = null;

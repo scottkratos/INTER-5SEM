@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WaterMoviment : MonoBehaviour
 {
-    public float Y = 0f;
-    public GameObject Water;
-    public bool maxy = false;
 
+
+    public GameObject Water, Door;
     public Animator anim;
+
     private void Start()
     {
 
@@ -16,34 +16,46 @@ public class WaterMoviment : MonoBehaviour
     void Update()
     {
 
-        if (FindObjectOfType<player>().index <= 4 || FindObjectOfType<player>().index >= -1)
-        {
-            // Water.transform.localScale = new Vector3(transform.localScale.x, Y, transform.localScale.z);
 
-        }
-        if (maxy == true)
-        {
-
-
-
-
-        }
 
 
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Vaso")
-            maxy = true;
 
-    }
     void stopAnim()
     {
-        maxy = true;
-        anim.speed = 0;
+        if (FindObjectOfType<player>().animationIndex == 0)
+            anim.speed = 0;
 
 
     }
+    void stopAnim1()
+    {
+        if (FindObjectOfType<player>().animationIndex == 1)
+            anim.speed = 0;
+
+
+    }
+    void stopAnim2()
+    {
+        if (FindObjectOfType<player>().animationIndex == 2)
+            anim.speed = 0;
+
+
+    }
+    void stopAnim3()
+    {
+        if (FindObjectOfType<player>().animationIndex == 3)
+            anim.speed = 0;
+
+    }
+    void stopAnim4()
+    {
+
+
+
+
+    }
+
 
 
 
