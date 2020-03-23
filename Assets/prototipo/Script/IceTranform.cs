@@ -8,10 +8,12 @@ public class IceTranform : MonoBehaviour
     float yEvaporation;
     [HideInInspector]
     public float AmountWater;
+    //public GameObject Vapor;
+   // public ParticleSystem vapor;
     // Start is called before the first frame update
     void Start()
     {
-
+      //  vapor.Stop();
     }
 
     // Update is called once per frame
@@ -39,11 +41,16 @@ public class IceTranform : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
+           // vapor.Play();
             if (transform.localScale.y > 0.1f)
             {
                 y -= 0.1f;
                 transform.localScale = new Vector3(0.5f, y, 0.5f);
 
+            }
+            else
+            {
+               // vapor.Stop();
             }
         }
     }

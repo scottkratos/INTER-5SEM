@@ -20,21 +20,20 @@ public class IceArea : MonoBehaviour
         switch (index)
         {
             case 0:
-                FindObjectOfType<IceTranform>().AmountWater = 0.3f;
+                Gelo.GetComponent<IceTranform>().AmountWater = 0.3f;
                 break;
             case 1:
-                FindObjectOfType<IceTranform>().AmountWater = 0.6f;
+                Gelo.GetComponent<IceTranform>().AmountWater = 0.6f;
                 break;
             case 2:
-                FindObjectOfType<IceTranform>().AmountWater = 0.9f;
+                Gelo.GetComponent<IceTranform>().AmountWater = 0.9f;
                 break;
             case 3:
-                FindObjectOfType<IceTranform>().AmountWater = 1.2f;
+                Gelo.GetComponent<IceTranform>().AmountWater = 1.2f;
                 break;
             case 4:
-                FindObjectOfType<IceTranform>().AmountWater = 1.5f;
+                Gelo.GetComponent<IceTranform>().AmountWater = 1.5f;
                 break;
-
 
 
 
@@ -43,22 +42,22 @@ public class IceArea : MonoBehaviour
 
         if (inHand == true)
         {
-            Gelo.transform.parent = FindObjectOfType<player>().hand;
-            if (Gelo.transform.localScale.y > 1)
+           // Gelo.transform.parent = FindObjectOfType<player>().hand;
+            if (Gelo.transform.localScale.y > Gelo.GetComponent<IceTranform>().AmountWater)
             {
                 FindObjectOfType<IceTranform>().StopCoroutine("size");
             }
-            
+
         }
         if (inHand == false)
         {
-            Gelo.GetComponent<Rigidbody>().isKinematic = false;
-            Gelo.transform.parent = null;
+           // Gelo.GetComponent<Rigidbody>().isKinematic = false;
+           // Gelo.transform.parent = null;
 
         }
         if (Input.GetMouseButtonDown(1))
         {
-            inHand = false;
+           // inHand = false;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -73,7 +72,7 @@ public class IceArea : MonoBehaviour
             index = FindObjectOfType<player>().index;
             FindObjectOfType<player>().index -= index + 1;
             FindObjectOfType<IceTranform>().StartCoroutine("size");
-            
+
         }
     }
 }

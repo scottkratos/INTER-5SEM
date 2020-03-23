@@ -4,35 +4,43 @@ using UnityEngine;
 
 public class WaterShooter : MonoBehaviour
 {
+    Ray eyes;
+    [HideInInspector]
+    public RaycastHit hit;
+    [HideInInspector]
+    public Rigidbody HitRigidbody;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position += new Vector3(0.1f, 0, 0) + FindObjectOfType<player>().cameraTransform.forward;
+        eyes.origin = transform.position;
+        eyes.direction = transform.right;
 
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Vaso")
+
+
+        for (int i = 0; i < FindObjectOfType<player>().vasos.Length; i++)
         {
-            FindObjectOfType<WaterMoviment>().Y += 0.5f;
-        }
-        if (collision.gameObject.tag == "Portal")
-        {
-            //FindObjectOfType<player>().portalIndex++;
-            Debug.Log("portal");
+
+            if (collision.rigidbody == FindObjectOfType<player>().vasos[i].gameObject.GetComponent<Rigidbody>())
+            {
+                FindObjectOfType<player>().vasos[i].GetComponent<WaterMoviment>().Y += 0.5f;
+            }
+
         }
 
 
 
     }
+
+
+
+
 
 
 

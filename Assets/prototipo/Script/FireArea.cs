@@ -16,9 +16,10 @@ public class FireArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Gelo.transform.localScale.y < 0.2f)
+        if (Gelo.transform.localScale.y < 0f)
         {
             FindObjectOfType<IceTranform>().StopCoroutine("evaporation");
+            Gelo.SetActive(false);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -30,7 +31,7 @@ public class FireArea : MonoBehaviour
             inHand = true;
             index = FindObjectOfType<player>().index;
             FindObjectOfType<player>().index -= index + 1;
-            FindObjectOfType<IceTranform>().StartCoroutine("evaporation");
+            Gelo.GetComponent<IceTranform>().StartCoroutine("evaporation");
 
 
         }
