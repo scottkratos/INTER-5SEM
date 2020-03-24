@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1668186531697379998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668186531697379996}
+  - component: {fileID: 1668186531697379997}
+  m_Layer: 0
+  m_Name: Power
+  m_TagString: Power
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668186531697379996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668186531697379998}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5485806102120957735}
+  - {fileID: 5485806101717610235}
+  - {fileID: 5485806102827573897}
+  - {fileID: 5485806103328030961}
+  - {fileID: 8481859566628289938}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668186531697379997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668186531697379998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078f807a84140bc4497e600573542a32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  Orbis:
+  - {fileID: 2250499188130460704}
+  - {fileID: 2787588348626439829}
+  - {fileID: 2787588348225447753}
+  - {fileID: 2787588347315858235}
+  - {fileID: 2787588347688323395}
+  center: {fileID: 2250499188130460704}
+  speed: 5
+  amplitudeX: 0.3
+  amplitudeY: 0.3
+  amplitudeZ: 0.3
+  InHand: 0
+--- !u!1001 &1668186530013739196
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1668186531697379996}
+    m_Modifications:
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_Name
+      value: aguaOrbital (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4931798b38b49d849b7e6611a51cfcff, type: 3}
+--- !u!1 &2787588347315858235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186530013739196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5485806102827573897 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186530013739196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1668186530385222340
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1668186531697379996}
+    m_Modifications:
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_Name
+      value: aguaOrbital (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4931798b38b49d849b7e6611a51cfcff, type: 3}
+--- !u!1 &2787588347688323395 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186530385222340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5485806103328030961 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186530385222340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1668186531324321042
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1668186531697379996}
+    m_Modifications:
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_Name
+      value: aguaOrbital
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4931798b38b49d849b7e6611a51cfcff, type: 3}
+--- !u!1 &2787588348626439829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186531324321042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5485806102120957735 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186531324321042}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1668186531995989198
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1668186531697379996}
+    m_Modifications:
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_Name
+      value: aguaOrbital (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4931798b38b49d849b7e6611a51cfcff, type: 3}
+--- !u!1 &2787588348225447753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3569408483298694023, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186531995989198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5485806101717610235 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6559467956743068213, guid: 4931798b38b49d849b7e6611a51cfcff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186531995989198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1668186532062218324
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1668186531697379996}
+    m_Modifications:
+    - target: {fileID: 584896040113208436, guid: aacab73ec38ef1d49861f14e7d81c65c,
+        type: 3}
+      propertyPath: m_Name
+      value: agua
+      objectReference: {fileID: 0}
+    - target: {fileID: 584896040113208436, guid: aacab73ec38ef1d49861f14e7d81c65c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 584896040113208436, guid: aacab73ec38ef1d49861f14e7d81c65c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103030493620762054, guid: aacab73ec38ef1d49861f14e7d81c65c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aacab73ec38ef1d49861f14e7d81c65c, type: 3}
+--- !u!1 &2250499188130460704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 584896040113208436, guid: aacab73ec38ef1d49861f14e7d81c65c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186532062218324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8481859566628289938 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7103030493620762054, guid: aacab73ec38ef1d49861f14e7d81c65c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1668186532062218324}
+  m_PrefabAsset: {fileID: 0}
