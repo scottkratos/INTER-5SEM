@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
-    Vector3 input, Jump;
+    Vector3 input;
     LayerMask water, Puzzle, portal;
     [HideInInspector]
     public bool jumpBool, vision, take;
     public float vel;
     [HideInInspector]
-    public float x, y, maxX, maxJump;
+    public float x, y, maxX, Jump, maxJump;
     [HideInInspector]
     public Rigidbody rigidbodyPlayer;
     [HideInInspector]
@@ -58,7 +58,7 @@ public class player : MonoBehaviour
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         handTrue = GameObject.FindGameObjectWithTag("HandTrue");
         cameraTransform = Camera.main.transform;
-        //Jump = 0;
+        Jump = 0;
         index = -1;
         animationIndex = -1;
         ShotIndex = -1;
@@ -285,34 +285,28 @@ public class player : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
-        if (isGrounded() && Jump.y < 0)
+        if (isGrounded() == true && Input.GetButtonDown("Jump"))
         {
-            Jump.y = -5;
+            Jump = Mathf.Sqrt(0.5f * -0.5f * -10f);
         }
-        if (isGrounded() && Input.GetButtonDown("Jump"))
+        else
         {
-            Jump.y = Mathf.Sqrt(1f * -2f * -10f);
-        }
 
-        Jump.y += -10 * Time.deltaTime;
+            Jump -= 2 * Time.deltaTime;
+        }
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * 2, Input.GetAxis("Mouse X") * 2, 0);
-        maxX = Mathf.Clamp(CameraController.x, -45, 45);
+        maxX = Mathf.Clamp(CameraController.x, -50, 50);
         input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
-        characterController.Move(new Vector3(input.x, 0, input.z));
-        characterController.Move(Jump * Time.deltaTime);
+        characterController.Move(new Vector3(input.x, Jump * Time.deltaTime, input.z));
         cameraTransform.transform.rotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
+
+
     }
-
-
-
-
-
-
     // verifica se o personagem está no ar; 
     bool isGrounded()
     {
-        return Physics.CheckSphere(checkGround.position, 0.5f, JumpLayerMask);
+        return Physics.CheckSphere(checkGround.position, 0.7f, JumpLayerMask);
     }
 
     IEnumerator ShotInHand()

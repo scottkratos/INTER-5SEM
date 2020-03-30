@@ -10,21 +10,16 @@ public class TakeObject : MonoBehaviour
     public GameObject Hand;
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
-    public LayerMask Grade;
-    public GameObject colliderGrade;
 
+  
     private void Awake()
     {
         Hand = GameObject.FindGameObjectWithTag("HandTrue");
         vaseRigidbody = GetComponent<Rigidbody>();
         vasoCollider = GetComponent<BoxCollider>();
-        Grade = LayerMask.GetMask("Grade");
     }
 
-    private void Update()
-    {
 
-    }
 
 
     private void LateUpdate()
@@ -34,10 +29,6 @@ public class TakeObject : MonoBehaviour
             transform.position = Hand.transform.position;
             vaseRigidbody.isKinematic = true;
             vasoCollider.enabled = false;
-            if (isGrounded())
-            {
-                take = false;
-            }
 
         }
         else
@@ -48,10 +39,7 @@ public class TakeObject : MonoBehaviour
         }
 
     }
-    bool isGrounded()
-    {
-        return Physics.CheckSphere(transform.position, .5f, Grade);
-    }
+
 
 
 
