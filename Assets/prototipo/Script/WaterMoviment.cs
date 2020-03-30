@@ -8,6 +8,7 @@ public class WaterMoviment : MonoBehaviour
 
     public GameObject evetObject;
     public Animator anim;
+    public bool Grade, door, button;
 
     private void Awake()
     {
@@ -18,14 +19,23 @@ public class WaterMoviment : MonoBehaviour
     void EventGameplaye()
     {
 
-        if (gameObject.tag == "Gramofone")
+        if (door == true)
         {
             evetObject.GetComponent<Animator>().SetBool("DoorBool", true);
         }
-        else
+        if (Grade == true)
+        {
+            evetObject.SetActive(false);
+        }
+        if (button == true)
         {
             evetObject.GetComponent<Button>().AmoutWaterVase = true;
         }
+
+
+
+
+
     }
 
 

@@ -112,8 +112,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e466170b4c6ab17428aaa05d53c1d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
+  evetObject: {fileID: 0}
   anim: {fileID: 5796295509907660037}
+--- !u!1 &4287065392797329842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2907318396448920955}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2907318396448920955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287065392797329842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7329965249374079131}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4913568153607031794
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +177,7 @@ Transform:
   m_Children:
   - {fileID: 2968261013030074858}
   - {fileID: 7589250046323016236}
+  - {fileID: 2907318396448920955}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,13 +188,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4913568153607031794}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1660d2509d930b409ff37a1c192a399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   take: 0
   Hand: {fileID: 0}
+  Grade:
+    serializedVersion: 2
+    m_Bits: 512
+  colliderGrade: {fileID: 4287065392797329842}
 --- !u!65 &8106485682034361618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -173,7 +208,7 @@ BoxCollider:
   m_GameObject: {fileID: 4913568153607031794}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.7163384, y: 0.81251156, z: 0.7574044}
   m_Center: {x: -0.006990552, y: -0.11899263, z: -0.01736316}
@@ -189,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e466170b4c6ab17428aaa05d53c1d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
+  evetObject: {fileID: 0}
   anim: {fileID: 5796295509907660037}
 --- !u!54 &4611783662447533962
 Rigidbody:
