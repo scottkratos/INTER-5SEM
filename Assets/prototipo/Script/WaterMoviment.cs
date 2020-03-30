@@ -6,55 +6,52 @@ public class WaterMoviment : MonoBehaviour
 {
 
 
-    public GameObject Water, Door;
+    public GameObject evetObject;
     public Animator anim;
 
-    private void Start()
+    private void Awake()
     {
-
-    }
-    void Update()
-    {
-
-
-
-
+        anim.SetBool("WaterBool", false);
     }
 
-    void stopAnim()
-    {
-        if (FindObjectOfType<player>().animationIndex == 0)
-            anim.speed = 0;
 
-
-    }
-    void stopAnim1()
-    {
-        if (FindObjectOfType<player>().animationIndex == 1)
-            anim.speed = 0;
-
-
-    }
-    void stopAnim2()
-    {
-        if (FindObjectOfType<player>().animationIndex == 2)
-            anim.speed = 0;
-
-
-    }
-    void stopAnim3()
-    {
-        if (FindObjectOfType<player>().animationIndex == 3)
-            anim.speed = 0;
-
-    }
-    void stopAnim4()
+    void EventGameplaye()
     {
 
-
-
-
+        if (gameObject.tag == "Gramofone")
+        {
+            evetObject.GetComponent<Animator>().SetBool("DoorBool", true);
+        }
+        else
+        {
+            evetObject.GetComponent<Button>().AmoutWaterVase = true;
+        }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.001, y: -0.39, z: -0.01}
+        value: {x: 0.001, y: -0.38886, z: -0.004}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -30,8 +30,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.33333334
         value: {x: 0.001, y: -0.35, z: -0.01}
-        inSlope: {x: 0, y: 0.23999994, z: 0}
-        outSlope: {x: 0, y: 0.23999994, z: 0}
+        inSlope: {x: 0, y: 0.23315994, z: 0}
+        outSlope: {x: 0, y: 0.23315994, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -82,7 +82,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.36, y: 0.17586984, z: 0.36}
+        value: {x: 0.38191348, y: 0.12255146, z: 0.4562804}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -92,8 +92,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.33333334
         value: {x: 0.36, y: 0.28378358, z: 0.36}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        inSlope: {x: -0.12883902, y: 0, z: -0.23660937}
+        outSlope: {x: -0.12883902, y: 0, z: -0.23660937}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -243,7 +243,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.39
+        value: -0.38886
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -253,8 +253,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.33333334
         value: -0.35
-        inSlope: 0.23999994
-        outSlope: 0.23999994
+        inSlope: 0.23315994
+        outSlope: 0.23315994
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -307,7 +307,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.01
+        value: -0.004
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -371,7 +371,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.36
+        value: 0.38191348
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -381,8 +381,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.33333334
         value: 0.36
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.12883902
+        outSlope: -0.12883902
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -426,7 +426,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.17586984
+        value: 0.12255146
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -481,7 +481,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.36
+        value: 0.4562804
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -491,8 +491,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.33333334
         value: 0.36
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.23660937
+        outSlope: -0.23660937
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -535,36 +535,8 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.33333334
-    functionName: stopAnim
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.6666667
-    functionName: stopAnim1
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1
-    functionName: stopAnim2
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 1.3333334
-    functionName: stopAnim3
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 1.6666666
-    functionName: stopAnim4
+    functionName: EventGameplaye
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

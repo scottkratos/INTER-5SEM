@@ -8,7 +8,7 @@ public class player : MonoBehaviour
     Vector3 input;
     LayerMask water, Puzzle, portal;
     [HideInInspector]
-    public bool jumpBool, vision;
+    public bool jumpBool, vision, take;
     public float vel;
     [HideInInspector]
     public float x, y, maxX, Jump, maxJump;
@@ -18,22 +18,23 @@ public class player : MonoBehaviour
     public Transform hand, cameraTransform, checkGround;
     Animator setAnimacao;
     public LayerMask JumpLayerMask;
-    public GameObject power;
+    public GameObject power, handTrue;
     [HideInInspector]
     public GameObject Ice;
-    public Texture2D[] cursores;
     [HideInInspector]
     public Vector3 CameraController;
     [HideInInspector]
     public int index, portalIndex, ShotIndex, animationIndex;
     public GameObject[] portais;
     public GameObject[] shotWater;
-    public GameObject[] vasos;
     CharacterController characterController;
-    Ray eyes;
-    RaycastHit hit;
-    public bool inHand, take;
+    public Ray eyes;
+    public RaycastHit hit;
+    [HideInInspector]
+    public bool inHand;
     Rigidbody hitPortal;
+    public Image[] cursor;
+    GameObject objectsMove;
 
 
 
@@ -42,8 +43,7 @@ public class player : MonoBehaviour
 
 
 
-
-    void Start()
+    private void Awake()
     {
         rigidbodyPlayer = GetComponent<Rigidbody>();
         setAnimacao = GetComponent<Animator>();
@@ -56,14 +56,18 @@ public class player : MonoBehaviour
         Puzzle = LayerMask.GetMask("Puzzle");
         portal = LayerMask.GetMask("Portal");
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
+        handTrue = GameObject.FindGameObjectWithTag("HandTrue");
         cameraTransform = Camera.main.transform;
         Jump = 0;
         index = -1;
         animationIndex = -1;
-        take = false;
+        ShotIndex = -1;
         characterController.detectCollisions = false;
 
+
     }
+
+
     void Update()
     {
         MouseConfi();
@@ -71,65 +75,87 @@ public class player : MonoBehaviour
         Config();
         interacao();
 
-
     }
 
     //configuracao do mose
     void MouseConfi()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.SetCursor(cursores[0], Vector2.zero, CursorMode.Auto);
-        Cursor.visible = true;
+        cursor[0].enabled = true;
+        cursor[1].enabled = false;
+
 
 
     }
+
     //interacao com objetos 
     void interacao()
     {
-
+        //direcao da ray de visao
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false)
+
+        //atira 
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true)
         {
-            ShotIndex++;
-            shotWater[ShotIndex].transform.position = hand.transform.position;
-            shotWater[ShotIndex].SetActive(true);
-            index--;
+
+            ShotIndex = 4;
+            if (ShotIndex < 5)
+            {
+                shotWater[ShotIndex].transform.position = hand.transform.position;
+                shotWater[ShotIndex].SetActive(true);
+
+            }
+            index = -1;
 
 
 
 
         }
+
         //interacao com a agua
         if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water))
         {
-            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
-            if (Input.GetMouseButtonDown(0))
+            cursor[0].enabled = false;
+            cursor[1].enabled = true;
+
+            if (Input.GetMouseButtonDown(1))
             {
-                ShotIndex--;
+                ShotIndex = -1;
                 power.transform.position = transform.position * 2;
-                index++;
+                index = 4;
 
             }
 
 
         }
+
         //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit) && Input.GetKeyDown(KeyCode.E))
+        if (Physics.Raycast(eyes, out hit, 5) && hit.transform.GetComponent<TakeObject>() != null)
         {
 
-            GameObject objeto = hit.rigidbody.gameObject;
-            objeto.GetComponent<TakeObject>().take = true;
-            take = true;
-
+            cursor[0].enabled = false;
+            cursor[1].enabled = true;
+            if (take == false)
+                objectsMove = hit.transform.gameObject;
 
 
 
 
         }
+
+        //objetos que podem ser movidos
+        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(objectsMove.transform.position, transform.position) < 2.5f)
+        {
+
+            objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
+            take = !take;
+
+        }
+
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
         {
-            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
+
             if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0) && FindObjectOfType<Orbit>().InHand == true)
             {
 
@@ -159,84 +185,68 @@ public class player : MonoBehaviour
                 }
             }
         }
-        //Ray para indentificar e movimentar gelo
-        if (Physics.Raycast(eyes, out hit) && hit.rigidbody == Ice.GetComponent<Rigidbody>())
-        {
-            Cursor.SetCursor(cursores[1], Vector2.zero, CursorMode.Auto);
-            if (Input.GetMouseButtonDown(0))
-            {
-                FindObjectOfType<IceArea>().Gelo.transform.position = hand.position;
-                FindObjectOfType<IceArea>().Gelo.GetComponent<Rigidbody>().isKinematic = true;
-                FindObjectOfType<IceArea>().inHand = true;
-                FindObjectOfType<IceArea>().transform.parent = hand.transform;
-            }
-        }
-        if (Input.GetMouseButtonDown(1) && FindObjectOfType<IceArea>().inHand == true)
-        {
-            //FindObjectOfType<IceArea>().Gelo.transform.position = hand.position;
-            FindObjectOfType<IceArea>().Gelo.GetComponent<Rigidbody>().isKinematic = false;
-            FindObjectOfType<IceArea>().inHand = false;
-            FindObjectOfType<IceArea>().transform.parent = null;
-        }
+
         // Ativacao da orbis 
         switch (index)
         {
             case -1:
                 power.SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[0].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[1].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[2].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[3].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[4].SetActive(false);
-                power.GetComponent<Orbit>().InHand = false;
+                power.GetComponent<Orbit>().Orbis[0].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[1].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[2].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[3].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[4].SetActive(false);
+                StartCoroutine(ShotInHand());
                 break;
-
-
             case 0:
-
                 power.GetComponent<Orbit>().InHand = true;
-                FindObjectOfType<Orbit>().Orbis[0].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[1].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[2].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[3].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[4].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[0].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[1].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[2].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[3].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[4].SetActive(false);
                 break;
-
-
             case 1:
-                FindObjectOfType<Orbit>().Orbis[0].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[1].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[2].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[3].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[4].SetActive(false);
+                power.GetComponent<Orbit>().InHand = true;
+                power.GetComponent<Orbit>().Orbis[0].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[1].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[2].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[3].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[4].SetActive(false);
                 break;
             case 2:
-                FindObjectOfType<Orbit>().Orbis[0].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[1].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[2].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[3].SetActive(false);
-                FindObjectOfType<Orbit>().Orbis[4].SetActive(false);
+                power.GetComponent<Orbit>().InHand = true;
+                power.GetComponent<Orbit>().Orbis[0].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[1].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[2].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[3].SetActive(false);
+                power.GetComponent<Orbit>().Orbis[4].SetActive(false);
                 break;
             case 3:
-                FindObjectOfType<Orbit>().Orbis[0].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[1].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[2].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[3].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[4].SetActive(false);
+                power.GetComponent<Orbit>().InHand = true;
+                power.GetComponent<Orbit>().Orbis[0].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[1].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[2].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[3].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[4].SetActive(false);
                 break;
             case 4:
-                FindObjectOfType<Orbit>().Orbis[0].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[1].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[2].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[3].SetActive(true);
-                FindObjectOfType<Orbit>().Orbis[4].SetActive(true);
+                power.GetComponent<Orbit>().InHand = true;
+                power.GetComponent<Orbit>().Orbis[0].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[1].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[2].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[3].SetActive(true);
+                power.GetComponent<Orbit>().Orbis[4].SetActive(true);
                 break;
         }
 
-
-
-
     }
+
+
+
+
+
+
     // configuracao para Gameplayer
     void Config()
     {
@@ -250,39 +260,39 @@ public class player : MonoBehaviour
         {
             index = -1;
         }
-        if (ShotIndex >= 4)
+        if (ShotIndex >= 5)
         {
-            ShotIndex = 4;
+            ShotIndex = 5;
         }
         // numero minimo de dissparos
         if (ShotIndex <= -1)
         {
             ShotIndex = -1;
         }
-        if (animationIndex > 4)
+        if (animationIndex > 5)
         {
             animationIndex = -1;
         }
         // numero minimo de dissparos
         if (animationIndex < -1)
         {
-            animationIndex = 4;
+            animationIndex = 5;
         }
 
     }
-    //Input de comando 
+    //Inputs de comandos da Gameplay
     void inputs()
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
         if (isGrounded() == true && Input.GetButtonDown("Jump"))
         {
-            Jump = Mathf.Sqrt(1.5f * -2f * -10f);
+            Jump = Mathf.Sqrt(0.5f * -0.5f * -10f);
         }
         else
         {
 
-            Jump += -10 * Time.deltaTime;
+            Jump -= 2 * Time.deltaTime;
         }
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * 2, Input.GetAxis("Mouse X") * 2, 0);
         maxX = Mathf.Clamp(CameraController.x, -50, 50);
@@ -290,14 +300,23 @@ public class player : MonoBehaviour
         characterController.Move(new Vector3(input.x, Jump * Time.deltaTime, input.z));
         cameraTransform.transform.rotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
+
+
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
     {
         return Physics.CheckSphere(checkGround.position, 0.7f, JumpLayerMask);
-
-
     }
+
+    IEnumerator ShotInHand()
+    {
+        yield return new WaitForSeconds(0.5f);
+        power.GetComponent<Orbit>().InHand = false;
+    }
+
+
+
 
 
 

@@ -12,17 +12,20 @@ public class Orbit : MonoBehaviour
     public float speed, amplitudeX, amplitudeY, amplitudeZ;
     [HideInInspector]
     public bool InHand;
-    int index, indexShot;
 
 
-
-
-    void Start()
+    private void Awake()
     {
         hand = GameObject.FindGameObjectWithTag("Hand");
         InHand = false;
         puzzle = LayerMask.GetMask("Puzzle");
         water = LayerMask.GetMask("water");
+    }
+
+
+    void Start()
+    {
+
 
 
     }

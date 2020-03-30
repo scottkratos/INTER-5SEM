@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1777737564550292678}
   - component: {fileID: 7153825649230810242}
   - component: {fileID: 7263579191150734319}
-  - component: {fileID: 7691771118969023632}
+  - component: {fileID: 4218963262114494780}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7691771118969023632
+--- !u!114 &4218963262114494780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4625460819081883682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409b4fd0585acd1459749f1a38ca30a0, type: 3}
+  m_Script: {fileID: 11500000, guid: e466170b4c6ab17428aaa05d53c1d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Water: {fileID: 4625460819081883682}
@@ -138,8 +138,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8872433053623979731}
-  - component: {fileID: 2362642807323751496}
   - component: {fileID: 8847493636370014323}
+  - component: {fileID: 8708333172169547312}
   m_Layer: 0
   m_Name: Gramofone
   m_TagString: Gramofone
@@ -162,21 +162,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2362642807323751496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8872433053623979730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409b4fd0585acd1459749f1a38ca30a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Water: {fileID: 4625460819081883682}
-  Door: {fileID: 0}
-  anim: {fileID: 7263579191150734319}
 --- !u!65 &8847493636370014323
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190,6 +175,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8319048, y: 3.4257991, z: 1.3548636}
   m_Center: {x: 0.41595244, y: 1.6508602, z: 0.041152753}
+--- !u!114 &8708333172169547312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872433053623979730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e466170b4c6ab17428aaa05d53c1d51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Water: {fileID: 4625460819081883682}
+  Door: {fileID: 0}
+  anim: {fileID: 7263579191150734319}
 --- !u!1001 &7213456726844027858
 PrefabInstance:
   m_ObjectHideFlags: 0

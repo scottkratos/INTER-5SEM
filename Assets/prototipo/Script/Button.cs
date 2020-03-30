@@ -5,6 +5,8 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     public Animator anim, Door;
+    public Transform vase;
+    public bool AmoutWaterVase;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,21 +16,37 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        DistanceButton();
+       
     }
     void openDoor()
     {
         Door.SetBool("DoorBool", true);
-        anim.speed = 0;
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Vaso")
-        {
 
+    }
+    void ClosedDoor()
+    {
+        Door.SetBool("DoorBool", false);
+
+    }
+    void DistanceButton()
+    {
+
+        float distacia = Vector3.Distance(vase.transform.position, transform.position);
+        if (distacia < 1 && AmoutWaterVase == true)
+        {
             anim.SetBool("ButtonBool", true);
 
-
         }
+        else
+        {
+            anim.SetBool("ButtonBool", false);
+        }
+
+
+
     }
+
+
+
 }

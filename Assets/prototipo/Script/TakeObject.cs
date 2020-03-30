@@ -5,30 +5,43 @@ using UnityEngine;
 public class TakeObject : MonoBehaviour
 {
     [HideInInspector]
-    public bool take = false;
+    public bool take;
+    [HideInInspector]
+    public GameObject Hand;
+    Rigidbody vaseRigidbody;
+    BoxCollider vasoCollider;
 
-    // Start is called before the first frame update
-    void Start()
+  
+    private void Awake()
     {
-
+        Hand = GameObject.FindGameObjectWithTag("HandTrue");
+        vaseRigidbody = GetComponent<Rigidbody>();
+        vasoCollider = GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+
+    private void LateUpdate()
     {
         if (take == true)
         {
-            transform.GetComponent<Rigidbody>().isKinematic = true;
-            transform.transform.parent = FindObjectOfType<player>().hand.parent;
+            transform.position = Hand.transform.position;
+            vaseRigidbody.isKinematic = true;
+            vasoCollider.enabled = false;
 
         }
-        if (Input.GetMouseButtonDown(0) && FindObjectOfType<player>().take == true)
+        else
         {
-            transform.GetComponent<Rigidbody>().isKinematic = false;
-            transform.transform.parent = null;
-            take = false;
-        }
+            vaseRigidbody.isKinematic = false;
+            vasoCollider.enabled = true;
 
+        }
 
     }
+
+
+
+
+
 }
