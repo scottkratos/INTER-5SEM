@@ -667,6 +667,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1552302546}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &752920983 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8808637493115325857, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1669599271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &888266791 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
@@ -770,6 +776,11 @@ PrefabInstance:
       propertyPath: gramofone.Array.data[0]
       value: 
       objectReference: {fileID: 888266791}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: finalPuzzle
+      value: 
+      objectReference: {fileID: 752920983}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1007240852 stripped

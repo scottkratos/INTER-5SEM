@@ -355,6 +355,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134467533}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &154752617 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5920011492774987044, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1241673338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &300508804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1029,16 @@ PrefabInstance:
       propertyPath: OperDoor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: FinalPuzzle
+      value: 
+      objectReference: {fileID: 154752617}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: finalPuzzle
+      value: 
+      objectReference: {fileID: 1482700437}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &649122283 stripped
@@ -2096,6 +2112,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7329965249374079131, guid: b66db9ab777f86d44a5f77bd3be2f01e,
     type: 3}
   m_PrefabInstance: {fileID: 429594321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1482700437 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8808637493115325857, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1241673338}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1546502294
 PrefabInstance:

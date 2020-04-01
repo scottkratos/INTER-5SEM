@@ -622,6 +622,12 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1783004122}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &752920983 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8808637493115325857, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 838307163}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &838307163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2310,6 +2316,11 @@ PrefabInstance:
       propertyPath: OperDoor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: finalPuzzle
+      value: 
+      objectReference: {fileID: 752920983}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1858630067 stripped

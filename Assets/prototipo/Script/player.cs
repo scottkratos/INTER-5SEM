@@ -197,6 +197,7 @@ public class player : MonoBehaviour
                 power.GetComponent<Orbit>().Orbis[2].SetActive(true);
                 power.GetComponent<Orbit>().Orbis[3].SetActive(true);
                 power.GetComponent<Orbit>().Orbis[4].SetActive(true);
+                StopCoroutine(ShotInHand());
                 break;
         }
     }

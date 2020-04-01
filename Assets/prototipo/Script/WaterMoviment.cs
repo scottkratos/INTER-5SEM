@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class WaterMoviment : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WaterMoviment : MonoBehaviour
     public Animator anim;
     public bool Door, Grid, Button, FullWater;
     public int I;
+    public AudioSource finalPuzzle;
     private void Awake()
     {
 
@@ -38,7 +40,8 @@ public class WaterMoviment : MonoBehaviour
             foreach (var item in evetObject)
             {
                 item.GetComponent<Animator>().SetBool("DoorBool", true);
-
+                item.GetComponent<AudioSource>().Play();
+                finalPuzzle.Play();
             }
         }
         if (Button == true)

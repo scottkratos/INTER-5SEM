@@ -23,19 +23,19 @@ public class Grid : MonoBehaviour
 
         if (GridOrdem == true)
         {
-
-
-            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 7, posicao.z), .5f);
-
-
-
+            transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 8, posicao.z), .5f);
         }
         else
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z), .5f);
         }
-
-
-
     }
 }
+
+
+
+
+
+
+
+

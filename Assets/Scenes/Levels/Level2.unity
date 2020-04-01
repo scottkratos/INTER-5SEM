@@ -961,6 +961,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915071567}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &969109214 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8808637493115325857, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1832415630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1043332181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,6 +1263,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Gramofone
       objectReference: {fileID: 0}
+    - target: {fileID: 7008028785379675726, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: efdc46b778f824542a0d81d61606a9ac, type: 3}
     - target: {fileID: 7691771118969023632, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: Door
@@ -1292,6 +1303,11 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 739942734}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: finalPuzzle
+      value: 
+      objectReference: {fileID: 969109214}
     - target: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: m_Name
