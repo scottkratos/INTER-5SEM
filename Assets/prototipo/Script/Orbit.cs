@@ -23,12 +23,7 @@ public class Orbit : MonoBehaviour
     }
 
 
-    void Start()
-    {
-
-
-
-    }
+    
     void Update()
     {
 
@@ -39,22 +34,16 @@ public class Orbit : MonoBehaviour
         {
             foreach (GameObject orbi in Orbis)
             {
-
                 orbi.GetComponent<SphereCollider>().enabled = false;
-
             }
-
         }
         else
         {
             foreach (GameObject orbi in Orbis)
             {
-
                 orbi.GetComponent<SphereCollider>().enabled = true;
-
             }
         }
-
     }
     void rotation(GameObject planet, float amplitudeX, float amplitudeY, float amplitudeZ)
     {
@@ -63,9 +52,6 @@ public class Orbit : MonoBehaviour
         float Z = Mathf.Sin(time) * amplitudeZ;
         Vector3 pos = new Vector3(X, Y, Z);
         planet.transform.position = pos + center.transform.position;
-
-
-
     }
     void ConfigOrbitais()
     {
@@ -90,6 +76,15 @@ public class Orbit : MonoBehaviour
             Orbis[4].transform.LookAt(center.transform);
         }
     }
+
+
+
+
+
+
+
+
+
 }
 
 

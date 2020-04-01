@@ -862,6 +862,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 654799461}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &739942734 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1267417958436802978, guid: 940134926627aac4fb2c5a173e7301c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1192424421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &915071567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1210,17 +1216,37 @@ PrefabInstance:
         type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 1636331946}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218963262114494780, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4218963262114494780, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: Door
-      value: 
-      objectReference: {fileID: 1636331946}
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4218963262114494780, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: evetObject
       value: 
-      objectReference: {fileID: 1636331946}
+      objectReference: {fileID: 1599565182}
+    - target: {fileID: 4218963262114494780, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: door
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218963262114494780, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218963262114494780, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 1599565182}
     - target: {fileID: 4625460819081883682, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: m_IsActive
@@ -1235,17 +1261,37 @@ PrefabInstance:
         type: 3}
       propertyPath: Door
       value: 
-      objectReference: {fileID: 1636331946}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: Door
-      value: 
-      objectReference: {fileID: 1636331946}
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: evetObject
       value: 
-      objectReference: {fileID: 1636331946}
+      objectReference: {fileID: 1599565182}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: door
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 1599565182}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 739942734}
     - target: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: m_Name
@@ -1920,9 +1966,9 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503328004}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1636331946 stripped
+--- !u!1 &1599565182 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6860900602430608530, guid: f9e7b4bec1033104e945e55048b05262,
+  m_CorrespondingSourceObject: {fileID: 6516147612965628654, guid: f9e7b4bec1033104e945e55048b05262,
     type: 3}
   m_PrefabInstance: {fileID: 1832415630}
   m_PrefabAsset: {fileID: 0}

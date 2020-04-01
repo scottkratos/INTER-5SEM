@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 7589250046323016236}
   - component: {fileID: 5847464285825152194}
   - component: {fileID: 1421405326965689060}
-  - component: {fileID: 5796295509907660037}
-  - component: {fileID: 3493880193740501336}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -81,39 +79,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &5796295509907660037
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3677204274249972134}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5ca30dcd2ac8c2e44bad3503e35ebcdc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3493880193740501336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3677204274249972134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e466170b4c6ab17428aaa05d53c1d51a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Door: {fileID: 0}
-  anim: {fileID: 5796295509907660037}
 --- !u!1 &4913568153607031794
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +92,7 @@ GameObject:
   - component: {fileID: 8106485682034361618}
   - component: {fileID: 2903736458016452983}
   - component: {fileID: 4611783662447533962}
+  - component: {fileID: 9143886946103878247}
   m_Layer: 0
   m_Name: Vaso3
   m_TagString: Vaso
@@ -164,6 +130,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   take: 0
   Hand: {fileID: 0}
+  Grid:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &8106485682034361618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -189,8 +158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e466170b4c6ab17428aaa05d53c1d51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
-  anim: {fileID: 5796295509907660037}
+  evetObject: []
+  anim: {fileID: 0}
+  Door: 0
+  Grid: 0
+  Button: 0
+  FullWater: 0
 --- !u!54 &4611783662447533962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,6 +180,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!95 &9143886946103878247
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913568153607031794}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ca30dcd2ac8c2e44bad3503e35ebcdc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &7803565407840097008
 PrefabInstance:
   m_ObjectHideFlags: 0

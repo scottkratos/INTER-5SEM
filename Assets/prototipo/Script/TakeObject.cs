@@ -10,8 +10,8 @@ public class TakeObject : MonoBehaviour
     public GameObject Hand;
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
+    public LayerMask Grid;
 
-  
     private void Awake()
     {
         Hand = GameObject.FindGameObjectWithTag("HandTrue");
@@ -24,6 +24,12 @@ public class TakeObject : MonoBehaviour
 
     private void LateUpdate()
     {
+
+
+        if (isGrounded() && take == true)
+        {
+            take = false;
+        }
         if (take == true)
         {
             transform.position = Hand.transform.position;
@@ -40,7 +46,10 @@ public class TakeObject : MonoBehaviour
 
     }
 
-
+    bool isGrounded()
+    {
+        return Physics.CheckSphere(transform.position, .2f, Grid);
+    }
 
 
 
