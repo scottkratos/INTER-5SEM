@@ -78,7 +78,7 @@ public class player : MonoBehaviour
         //direcao da ray de visao
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
         //atira 
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true)
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true && FindObjectOfType<TakeObject>().take == false)
         {
             ShotIndex = 4;
             if (ShotIndex < 5)
