@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1635093565814780930}
   - component: {fileID: 371931099135287123}
   - component: {fileID: 3092270198374926503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Grade
-  m_TagString: Untagged
+  m_TagString: Grade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 868e75ef236f14446ab2fcceda35b5ab, type: 2}
+  - {fileID: 5604539269314155553, guid: a4595ec10959a57488339fd4a8072f94, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,10 +102,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2257218876973270484}
-  - component: {fileID: 8637702703952486410}
-  m_Layer: 0
+  - component: {fileID: 1587514397381500949}
+  m_Layer: 9
   m_Name: Grade
-  m_TagString: Untagged
+  m_TagString: Grade
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,22 +125,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8637702703952486410
-Animator:
-  serializedVersion: 3
+--- !u!114 &1587514397381500949
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8127166014533880317}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 30fb4fa3f616ad54ab304e28db823f6d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccb2f0598a527b42b22f6df63ab1731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridOrdem: 0

@@ -36,13 +36,6 @@ public class player : MonoBehaviour
     public Image[] cursor;
     GameObject objectsMove;
 
-
-
-
-
-
-
-
     private void Awake()
     {
         rigidbodyPlayer = GetComponent<Rigidbody>();
@@ -64,101 +57,68 @@ public class player : MonoBehaviour
         ShotIndex = -1;
         characterController.detectCollisions = false;
 
-
     }
-
-
     void Update()
     {
         MouseConfi();
         inputs();
         Config();
         interacao();
-
     }
-
     //configuracao do mose
     void MouseConfi()
     {
         Cursor.lockState = CursorLockMode.Locked;
         cursor[0].enabled = true;
         cursor[1].enabled = false;
-
-
-
     }
-
     //interacao com objetos 
     void interacao()
     {
         //direcao da ray de visao
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         //atira 
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true)
         {
-
             ShotIndex = 4;
             if (ShotIndex < 5)
             {
                 shotWater[ShotIndex].transform.position = hand.transform.position;
                 shotWater[ShotIndex].SetActive(true);
-
             }
             index = -1;
-
-
-
-
         }
-
         //interacao com a agua
         if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water))
         {
             cursor[0].enabled = false;
             cursor[1].enabled = true;
-
             if (Input.GetMouseButtonDown(1))
             {
-                ShotIndex = -1;
+                ShotIndex = 0;
                 power.transform.position = transform.position * 2;
                 index = 4;
-
             }
-
-
         }
-
         //Ray para indentificar objetos que podem ser movidos
         if (Physics.Raycast(eyes, out hit, 5) && hit.transform.GetComponent<TakeObject>() != null)
         {
-
             cursor[0].enabled = false;
             cursor[1].enabled = true;
             if (take == false)
                 objectsMove = hit.transform.gameObject;
-
-
-
-
         }
-
         //objetos que podem ser movidos
         if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(objectsMove.transform.position, transform.position) < 2.5f)
         {
-
             objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
             take = !take;
-
         }
-
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
         {
-
             if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0) && FindObjectOfType<Orbit>().InHand == true)
             {
-
                 portalIndex++;
                 switch (portalIndex)
                 {
@@ -184,8 +144,8 @@ public class player : MonoBehaviour
                     portais[1].transform.rotation = hit.rigidbody.rotation;
                 }
             }
-        }
 
+        }
         // Ativacao da orbis 
         switch (index)
         {
@@ -237,16 +197,10 @@ public class player : MonoBehaviour
                 power.GetComponent<Orbit>().Orbis[2].SetActive(true);
                 power.GetComponent<Orbit>().Orbis[3].SetActive(true);
                 power.GetComponent<Orbit>().Orbis[4].SetActive(true);
+                StopCoroutine(ShotInHand());
                 break;
         }
-
     }
-
-
-
-
-
-
     // configuracao para Gameplayer
     void Config()
     {
@@ -285,59 +239,112 @@ public class player : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
+        if (isGrounded() && Jump < 0)
+        {
+            Jump = -6;
+        }
         if (isGrounded() == true && Input.GetButtonDown("Jump"))
         {
-            Jump = Mathf.Sqrt(0.5f * -0.5f * -10f);
+            Jump = Mathf.Sqrt(2f * -2f * -10f);
         }
-        else
-        {
-
-            Jump -= 2 * Time.deltaTime;
-        }
+        Jump += -10 * Time.deltaTime;
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * 2, Input.GetAxis("Mouse X") * 2, 0);
         maxX = Mathf.Clamp(CameraController.x, -50, 50);
         input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
         characterController.Move(new Vector3(input.x, Jump * Time.deltaTime, input.z));
         cameraTransform.transform.rotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
-
-
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
     {
-        return Physics.CheckSphere(checkGround.position, 0.7f, JumpLayerMask);
+        return Physics.CheckSphere(checkGround.position, 0.5f, JumpLayerMask);
     }
-
     IEnumerator ShotInHand()
     {
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
