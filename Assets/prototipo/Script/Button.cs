@@ -53,22 +53,23 @@ public class Button : MonoBehaviour
 
         if (distacia < 1 && AmoutWaterVase == true && Door != null)
         {
-
             anim.SetBool("ButtonBool", true);
-
         }
         else
         {
-
             anim.SetBool("ButtonBool", false);
         }
-
     }
+
+
+
+
     void restard()
     {
         if (Restard == true)
         {
             vase.GetComponent<Animator>().SetBool("WaterBool", true);
+
             foreach (var item in gramofone)
             {
                 item.GetComponent<Animator>().SetBool("WaterBool", false);

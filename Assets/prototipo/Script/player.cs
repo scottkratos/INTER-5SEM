@@ -78,7 +78,7 @@ public class player : MonoBehaviour
         //direcao da ray de visao
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
         //atira 
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true && FindObjectOfType<TakeObject>().take == false)
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true)
         {
             ShotIndex = 4;
             if (ShotIndex < 5)
@@ -89,11 +89,11 @@ public class player : MonoBehaviour
             index = -1;
         }
         //interacao com a agua
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 1, water))
         {
             cursor[0].enabled = false;
             cursor[1].enabled = true;
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && take == false)
             {
                 ShotIndex = 0;
                 power.transform.position = transform.position * 2;
@@ -101,7 +101,7 @@ public class player : MonoBehaviour
             }
         }
         //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit, 5) && hit.transform.GetComponent<TakeObject>() != null)
+        if (Physics.Raycast(eyes, out hit, 2) && hit.transform.GetComponent<TakeObject>() != null)
         {
             cursor[0].enabled = false;
             cursor[1].enabled = true;
@@ -232,6 +232,14 @@ public class player : MonoBehaviour
         {
             animationIndex = 5;
         }
+        if (CameraController.x > 45)
+        {
+            CameraController.x = 45;
+        }
+        if (CameraController.x < -45)
+        {
+            CameraController.x = -45;
+        }
 
     }
     //Inputs de comandos da Gameplay
@@ -241,31 +249,45 @@ public class player : MonoBehaviour
         y = Input.GetAxis("Vertical");
         if (isGrounded() && Jump < 0)
         {
-            Jump = -6;
+            Jump = -5;
         }
-        if (isGrounded() == true && Input.GetButtonDown("Jump"))
+        if (isGrounded() && Input.GetButtonDown("Jump"))
         {
             Jump = Mathf.Sqrt(2f * -2f * -10f);
         }
         Jump += -10 * Time.deltaTime;
+
+
+        maxX = Mathf.Clamp(CameraController.x, -45, 45);
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * 2, Input.GetAxis("Mouse X") * 2, 0);
-        maxX = Mathf.Clamp(CameraController.x, -50, 50);
         input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
         characterController.Move(new Vector3(input.x, Jump * Time.deltaTime, input.z));
-        cameraTransform.transform.rotation = Quaternion.Euler(-maxX, CameraController.y, 0);
+        cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
     {
-        return Physics.CheckSphere(checkGround.position, 0.5f, JumpLayerMask);
+        return Physics.CheckSphere(checkGround.position, .2f, JumpLayerMask);
     }
     IEnumerator ShotInHand()
     {
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
