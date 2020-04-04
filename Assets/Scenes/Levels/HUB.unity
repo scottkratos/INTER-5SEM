@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 25.77474, g: 28.651989, b: 21.908466, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7423,6 +7423,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Porta (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6516147612965628654, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e7b4bec1033104e945e55048b05262, type: 3}
 --- !u!4 &1325816062 stripped
@@ -10261,7 +10266,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6196783197795982881, guid: 3cfc806ca923ca240a89b849b3f6a2b9, type: 3}
+  - {fileID: -2125774551491969924, guid: a061ee2d10a9c54428889cf25562616b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
