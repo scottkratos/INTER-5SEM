@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5604539269314155553, guid: a4595ec10959a57488339fd4a8072f94, type: 3}
+  - {fileID: 5604539269314155553, guid: 763c17ce87650e841aa6005233678042, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4611783662447533962}
   - component: {fileID: 9143886946103878247}
   - component: {fileID: 8579907564251201498}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Vaso3
   m_TagString: Vaso
   m_Icon: {fileID: 0}
@@ -133,7 +133,10 @@ MonoBehaviour:
   Hand: {fileID: 0}
   Grid:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  Ambiente:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!65 &8106485682034361618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -166,6 +169,7 @@ MonoBehaviour:
   Button: 0
   FullWater: 0
   I: 0
+  finalPuzzle: {fileID: 0}
 --- !u!54 &4611783662447533962
 Rigidbody:
   m_ObjectHideFlags: 0
