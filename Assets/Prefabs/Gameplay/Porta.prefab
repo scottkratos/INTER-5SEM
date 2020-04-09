@@ -75,6 +75,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4483031116882427707}
   - component: {fileID: 8808637493115325857}
+  - component: {fileID: 2452556726996311047}
+  - component: {fileID: 1740266424806468665}
   m_Layer: 0
   m_Name: Porta
   m_TagString: Untagged
@@ -194,6 +196,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2452556726996311047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938551178627172313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04bbac960b996484e8477f4415349345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: Level1
+  portao: {fileID: 6564795910546802869}
+  isOper: 0
+--- !u!65 &1740266424806468665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938551178627172313}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2165337, y: 2.9989338, z: 0.152874}
+  m_Center: {x: 0.048067093, y: 1.4816184, z: -0.99391174}
 --- !u!1 &6516147612965628654
 GameObject:
   m_ObjectHideFlags: 0

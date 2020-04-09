@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class player : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class player : MonoBehaviour
     Rigidbody hitPortal;
     public Image[] cursor;
     GameObject objectsMove;
-    public string level;
+    
+
 
     private void Awake()
     {
@@ -66,13 +68,8 @@ public class player : MonoBehaviour
         inputs();
         Config();
         interacao();
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-
-            SceneManager.UnloadSceneAsync(level);
-
-
-        }
+       
+       
     }
     //configuracao do mose
     void MouseConfi()

@@ -11,10 +11,10 @@ public class WaterShooter : MonoBehaviour
     public RaycastHit hit, hitGrade;
     public GameObject[] ShotWater;
     public Camera fpsCam;
-    public Image[] cursor;
     public LayerMask Grade;
     float distance;
     Transform Player;
+
 
     private void Awake()
     {
@@ -76,6 +76,7 @@ public class WaterShooter : MonoBehaviour
                         hit.transform.gameObject.GetComponent<WaterMoviment>().anim.SetBool("WaterBool", false);
                         Player.GetComponent<player>().ShotIndex = 0;
                         Player.GetComponent<player>().index = 4;
+                       
 
                     }
                 }

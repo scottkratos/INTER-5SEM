@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TakeObject : MonoBehaviour
 {
     [HideInInspector]
     public bool take;
     [HideInInspector]
-    public GameObject Hand;
+    public GameObject Hand, player;
+    public GameObject checkAmbiente;
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
     public LayerMask Grid, Ambiente;
@@ -15,6 +17,7 @@ public class TakeObject : MonoBehaviour
     private void Awake()
     {
         Hand = GameObject.FindGameObjectWithTag("HandTrue");
+        player = GameObject.FindGameObjectWithTag("Player");
         vaseRigidbody = GetComponent<Rigidbody>();
         vasoCollider = GetComponent<BoxCollider>();
     }
@@ -29,27 +32,28 @@ public class TakeObject : MonoBehaviour
         if (isGrounded() && take == true)
         {
             take = false;
+            player.GetComponent<player>().take = false;
         }
         if (NoAmbiente() && take == true)
         {
+
             take = false;
+            player.GetComponent<player>().take = false;
+
+
         }
         if (take == true)
         {
             transform.position = Hand.transform.position;
             vaseRigidbody.isKinematic = true;
             vasoCollider.enabled = false;
-
         }
         else
         {
             vaseRigidbody.isKinematic = false;
             vasoCollider.enabled = true;
-
         }
-
     }
-
     bool isGrounded()
     {
         return Physics.CheckSphere(transform.position, .2f, Grid);
@@ -57,8 +61,27 @@ public class TakeObject : MonoBehaviour
     }
     bool NoAmbiente()
     {
-        return Physics.CheckSphere(transform.position, .2f, Ambiente);
+        return Physics.CheckSphere(checkAmbiente.transform.position, .2f, Ambiente);
     }
 
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

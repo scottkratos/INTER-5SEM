@@ -84,15 +84,15 @@ public class Button : MonoBehaviour
         ButtonSong.Play();
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Carai");
             restard();
-
         }
-
-
-
-
     }
+
+
+
+
+
+
 
 
 

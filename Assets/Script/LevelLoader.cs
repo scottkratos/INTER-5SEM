@@ -1,25 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
     public string[] Levels;
-
+    public Canvas canvas;
+    float loadlevel, finalLoad;
+    AsyncOperation load;
     private void Start()
     {
+
         StartCoroutine(MasterLoader());
+
+    }
+    private void Update()
+    {
+        if (finalLoad < loadlevel)
+        {
+            canvas.gameObject.SetActive(true);
+            finalLoad += Time.deltaTime;
+
+
+        }
+        else
+        {
+            canvas.gameObject.SetActive(false);
+        }
+
+        Debug.Log(finalLoad);
     }
 
     private IEnumerator IndividualLoader(string level)
     {
-        AsyncOperation load = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
+        load = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
+
         while (!load.isDone)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(.01f);
+            loadlevel += load.progress / .9f;
         }
+
+
     }
+
+
+
+
+
     private IEnumerator MasterLoader()
     {
         Coroutine coroutine;
@@ -30,3 +61,9 @@ public class LevelLoader : MonoBehaviour
         }
     }
 }
+
+
+
+
+
+
