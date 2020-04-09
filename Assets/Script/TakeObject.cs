@@ -13,6 +13,7 @@ public class TakeObject : MonoBehaviour
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
     public LayerMask Grid, Ambiente;
+    
 
     private void Awake()
     {
