@@ -21,15 +21,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FogoMorrendo
-  m_Shader: {fileID: -6465566751694194690, guid: 5052268d70a74a342b62de8ce5c9f787,
+  m_Shader: {fileID: -6465566751694194690, guid: aece2f82d3869e34886bba7f2a6ad595,
     type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
+    RenderType: TransparentCutout
   disabledShaderPasses:
   - TransparentBackface
   - MOTIONVECTORS
@@ -40,6 +41,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: be95b1d4c1fa89f41adef51e72ac0f58, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_174D6326:
+        m_Texture: {fileID: 2800000, guid: 0217ab56427908445a0ea98189a1e45b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_281C8109:
         m_Texture: {fileID: 2800000, guid: 882be8b5d4c60d24ca6bc511510ed971, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -48,12 +53,28 @@ Material:
         m_Texture: {fileID: 2800000, guid: 3aca7e88bddddbf46a48209bd3e8c9b0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_7EBDCBF0:
+        m_Texture: {fileID: 2800000, guid: 3aca7e88bddddbf46a48209bd3e8c9b0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_9163156F:
         m_Texture: {fileID: 2800000, guid: 3c868710f853084488a647c2c0197373, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_B3FAD38B:
+        m_Texture: {fileID: 2800000, guid: 3c868710f853084488a647c2c0197373, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_BE97B2FD:
+        m_Texture: {fileID: 2800000, guid: be95b1d4c1fa89f41adef51e72ac0f58, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_BFFDF2CD:
         m_Texture: {fileID: 2800000, guid: 0217ab56427908445a0ea98189a1e45b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_E0DE76C0:
+        m_Texture: {fileID: 2800000, guid: 882be8b5d4c60d24ca6bc511510ed971, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -141,13 +162,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_46AECB5D: 100
+    - Vector1_5685972A: -7
+    - Vector1_66911157: 0.05
+    - Vector1_98AAEA98: 0.05
+    - Vector1_BA4705EC: 8
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
-    - _AlphaCutoffEnable: 0
+    - _AlphaCutoffEnable: 1
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
@@ -258,11 +284,12 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 3
-    - _ZTestGBuffer: 4
+    - _ZTestGBuffer: 3
     - _ZTestModeDistortion: 8
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_83777A89: {r: 0.98039216, g: 0.3254902, b: 0, a: 0}
     - Offs: {r: 0, g: 0, b: 0, a: 0}
     - Tiles: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

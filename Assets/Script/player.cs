@@ -7,13 +7,13 @@ using System.Linq;
 
 public class player : MonoBehaviour
 {
-    Vector3 input;
+    Vector3 input, velocity;
     LayerMask water, Puzzle, portal;
     [HideInInspector]
     public bool jumpBool, vision, take;
-    public float vel;
+    public float vel, Sensitivity;
     [HideInInspector]
-    public float x, y, maxX, Jump, maxJump;
+    public float x, y, maxX, Jump, maxJump, gravidade;
     [HideInInspector]
     public Rigidbody rigidbodyPlayer;
     [HideInInspector]
@@ -37,7 +37,7 @@ public class player : MonoBehaviour
     Rigidbody hitPortal;
     public Image[] cursor;
     GameObject objectsMove;
-    public Canvas load;
+    public CanvasRenderer Menu, load;
 
 
     private void Awake()
@@ -55,22 +55,39 @@ public class player : MonoBehaviour
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         handTrue = GameObject.FindGameObjectWithTag("HandTrue");
         cameraTransform = Camera.main.transform;
-        Jump = 0;
+        Jump = 3f;
         index = -1;
         animationIndex = -1;
+        gravidade = -9.81f;
         ShotIndex = -1;
         characterController.detectCollisions = false;
 
     }
     void Update()
     {
-        MouseConfi();
-        if (load.gameObject.active == false)
+
+        if (Menu.gameObject.activeInHierarchy == false && load.gameObject.activeInHierarchy == false)
+        {
+            MouseConfi();
             inputs();
-        Config();
-        interacao();
+            Config();
+            interacao();
+
+        }
 
 
+
+
+
+    }
+    private void LateUpdate()
+    {
+
+    }
+    private void FixedUpdate()
+    {
+        //if (Input.GetButtonDown("Jump"))
+        //    rigidbodyPlayer.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
     }
     //configuracao do mose
     void MouseConfi()
@@ -120,6 +137,7 @@ public class player : MonoBehaviour
         {
             objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
             take = !take;
+
         }
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
@@ -243,9 +261,9 @@ public class player : MonoBehaviour
         {
             CameraController.x = 45;
         }
-        if (CameraController.x < -45)
+        if (CameraController.x < -60)
         {
-            CameraController.x = -45;
+            CameraController.x = -60;
         }
 
     }
@@ -254,21 +272,27 @@ public class player : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
-        if (isGrounded() && Jump < 0)
+
+
+        if (isGrounded() && velocity.y < 0)
         {
-            Jump = -5;
+            velocity.y = -2f;
         }
+
+
+
+
+
+        maxX = Mathf.Clamp(CameraController.x, -60, 45);
+        CameraController += new Vector3(Input.GetAxis("Mouse Y") * Sensitivity, Input.GetAxis("Mouse X") * Sensitivity, 0);
+        input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
+        characterController.Move(input * vel * Time.deltaTime);
         if (isGrounded() && Input.GetButtonDown("Jump"))
         {
-            Jump = Mathf.Sqrt(2f * -2f * -10f);
+            velocity.y = Mathf.Sqrt(Jump * -2 * gravidade);
         }
-        Jump += -10 * Time.deltaTime;
-
-
-        maxX = Mathf.Clamp(CameraController.x, -45, 45);
-        CameraController += new Vector3(Input.GetAxis("Mouse Y") * 2, Input.GetAxis("Mouse X") * 2, 0);
-        input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
-        characterController.Move(new Vector3(input.x, Jump * Time.deltaTime, input.z));
+        velocity.y += gravidade * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
     }
