@@ -8,27 +8,35 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public string[] Levels;
-    public Canvas canvas;
+    public CanvasRenderer loadImage;
+    public Canvas Canvas;
     float loadlevel, finalLoad;
     AsyncOperation load;
     private void Start()
     {
 
+
+
+    }
+    public void starGame()
+    {
         StartCoroutine(MasterLoader());
+       
 
     }
     private void Update()
     {
         if (finalLoad < loadlevel)
         {
-            canvas.gameObject.SetActive(true);
+            loadImage.gameObject.SetActive(true);
             finalLoad += Time.deltaTime;
 
 
         }
         else
         {
-            canvas.gameObject.SetActive(false);
+            loadImage.gameObject.SetActive(false);
+           
         }
 
         Debug.Log(finalLoad);
@@ -40,7 +48,7 @@ public class LevelLoader : MonoBehaviour
 
         while (!load.isDone)
         {
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(.1f);
             loadlevel += load.progress / .9f;
         }
 

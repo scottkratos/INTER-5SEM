@@ -5,6 +5,16 @@ using System.Linq;
 
 public class TakeObject : MonoBehaviour
 {
+
+    static TakeObject _Controller;
+    public static TakeObject Controller
+    {
+        get
+        {
+            return _Controller;
+        }
+    }
+
     [HideInInspector]
     public bool take;
     [HideInInspector]
@@ -13,10 +23,11 @@ public class TakeObject : MonoBehaviour
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
     public LayerMask Grid, Ambiente;
-    
+
 
     private void Awake()
     {
+        _Controller = this;
         Hand = GameObject.FindGameObjectWithTag("HandTrue");
         player = GameObject.FindGameObjectWithTag("Player");
         vaseRigidbody = GetComponent<Rigidbody>();

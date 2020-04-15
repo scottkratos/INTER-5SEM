@@ -32,14 +32,20 @@ public class LevelController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        portao.SetBool("DoorBool", false);
-        Scene s = SceneManager.GetSceneByName(level);
-        SceneManager.MoveGameObjectToScene(other.gameObject, s);
-        GameObject[] gameObjects = s.GetRootGameObjects();
-        if (gameObjects.Any(g => g.gameObject.tag == "Player") == true && isUnload == true)
+
+
+        if (other.gameObject.tag == "Player")
         {
-            Scene unLoadScene = SceneManager.GetSceneByName(UnLoad);
-            SceneManager.UnloadSceneAsync(unLoadScene);
+            portao.SetBool("DoorBool", false);
+            Scene s = SceneManager.GetSceneByName(level);
+            SceneManager.MoveGameObjectToScene(other.gameObject, s);
+            GameObject[] gameObjects = s.GetRootGameObjects();
+            if (gameObjects.Any(g => g.gameObject.tag == "Player") == true && isUnload == true)
+            {
+                Scene unLoadScene = SceneManager.GetSceneByName(UnLoad);
+                SceneManager.UnloadSceneAsync(unLoadScene);
+
+            }
 
         }
 
