@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour
 {
     public string level, UnLoad;
     public Animator portao;
-    public bool isOper, isUnload;
+    public bool isOper, isUnload, DoorClosed;
     Scene s;
     Transform player;
 
@@ -19,7 +19,7 @@ public class LevelController : MonoBehaviour
             portao.SetBool("DoorBool", true);
         s = SceneManager.GetSceneByName(level);
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
+        DoorClosed = false;
     }
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class LevelController : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
+            DoorClosed = true;
             portao.SetBool("DoorBool", false);
             Scene s = SceneManager.GetSceneByName(level);
             SceneManager.MoveGameObjectToScene(other.gameObject, s);

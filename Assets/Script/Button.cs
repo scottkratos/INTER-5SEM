@@ -3,112 +3,163 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using System.Linq;
 public class Button : MonoBehaviour
 {
-    public Animator anim, Door;
-    public Transform vase;
-    public bool AmoutWaterVase, Restard, OperDoor;
+    [HideInInspector]
+    public Animator anim;
+    public Transform[] vase;
     public GameObject[] gramofone;
+    public GameObject[] GridEvent;
+    [HideInInspector]
+    public bool AmoutWaterVase, operDoorEvent, GridOrdem;
+    public bool Restard, OperDoor, Grid;
     public AudioSource ButtonSong, finalPuzzle;
+    bool open, closed;
 
 
-    // Start is called before the first frame update
     private void Start()
     {
-
+        anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        DistanceButton();
-        if (anim.GetComponent<Animator>().GetBool("ButtonBool") == false)
-        {
 
+        if (open == true)
+        {
+            openDoor();
+
+        }
+        if (closed == true)
+        {
+            ClosedDoor();
 
         }
 
     }
+
+
+
     void openDoor()
     {
-        if (OperDoor == true)
+
+        foreach (var item in vase)
         {
-            Door.SetBool("DoorBool", true);
-            Door.GetComponent<AudioSource>().Play();
-            finalPuzzle.Play();
-
-        }
-    }
-    void ClosedDoor()
-    {
-        if (OperDoor == true)
-            Door.SetBool("DoorBool", false);
-
-    }
-    void DistanceButton()
-    {
-
-        float distacia = Vector3.Distance(vase.transform.position, transform.position);
-
-
-        if (distacia < 1 && AmoutWaterVase == true && Door != null)
-        {
-            anim.SetBool("ButtonBool", true);
-        }
-        else
-        {
-            anim.SetBool("ButtonBool", false);
-        }
-    }
-
-
-
-
-    void restard()
-    {
-        if (Restard == true)
-        {
-            vase.GetComponent<Animator>().SetBool("WaterBool", true);
-
-            foreach (var item in gramofone)
+            if (AmoutWaterVase == true)
             {
-                item.GetComponent<Animator>().SetBool("WaterBool", false);
+
+
+                operDoorEvent = true;
 
             }
 
         }
 
+
     }
-    private void OnCollisionEnter(Collision collision)
+    void ClosedDoor()
     {
-        ButtonSong.Play();
-        if (collision.gameObject.tag == "Player")
+
+        foreach (var item in vase)
         {
-            restard();
+            if (AmoutWaterVase == true)
+            {
+
+                operDoorEvent = false;
+
+            }
+
+        }
+
+
+    }
+    void restard()
+    {
+        if (Restard == true)
+        {
+            GetComponent<Animator>().SetBool("ButtonBool", true);
+            if (ButtonSong.isPlaying == false)
+                ButtonSong.Play();
+            foreach (var item in vase)
+            {
+                item.GetComponent<Animator>().SetBool("WaterBool", true);
+            }
+            foreach (var item in gramofone)
+            {
+                item.GetComponent<Animator>().SetBool("WaterBool", false);
+            }
+
         }
     }
 
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Vaso")
+        {
+            if (OperDoor == true)
+            {
+                open = true;
+                closed = false;
+                GetComponent<Animator>().SetBool("ButtonBool", true);
+                if (ButtonSong.isPlaying == false)
+                    ButtonSong.Play();
 
 
+            }
+            if (Grid == true)
+            {
+                GetComponent<Animator>().SetBool("ButtonBool", true);
+                if (ButtonSong.isPlaying == false)
+                    ButtonSong.Play();
 
 
+                GridOrdem = !GridOrdem;
+
+            }
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            if (Restard == true)
+                restard();
+
+        }
+
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Vaso")
+        {
+
+            if (OperDoor == true)
+            {
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+                open = false;
+                closed = true;
+                if (ButtonSong.isPlaying == false)
+                    ButtonSong.Play();
 
 
+            }
+            if (Grid == true)
+            {
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+                if (ButtonSong.isPlaying == false)
+                    ButtonSong.Play();
+                GridOrdem = !GridOrdem;
 
+            }
 
-
-
-
-
-
-
-
-
-
-
-
+        }
+        if (collision.gameObject.tag == "Player")
+        {
+            GetComponent<Animator>().SetBool("ButtonBool", false);
+            if (ButtonSong.isPlaying == false)
+                ButtonSong.Play();
+        }
+    }
 
 }
 

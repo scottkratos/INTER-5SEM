@@ -8,9 +8,11 @@ public class WaterMoviment : MonoBehaviour
 
 
     public GameObject[] evetObject;
-    public Animator anim;
+    public Animator animator;
     public bool Door, Grid, Button, FullWater;
-    public int I;
+    [HideInInspector]
+    public bool DoorEvent, GridOrdem;
+    public int Level;
     public AudioSource finalPuzzle;
     private void Awake()
     {
@@ -20,11 +22,11 @@ public class WaterMoviment : MonoBehaviour
     {
         if (FullWater == true)
         {
-            anim.SetBool("WaterBool", true);
+            animator.SetBool("WaterBool", true);
         }
         else
         {
-            anim.SetBool("WaterBool", false);
+            animator.SetBool("WaterBool", false);
 
         }
     }
@@ -32,18 +34,23 @@ public class WaterMoviment : MonoBehaviour
     {
 
     }
+
+    // roda sempre com a animca de "agua cheia"
     void EventGameplaye()
     {
 
         if (Door == true)
         {
+
             foreach (var item in evetObject)
             {
-                item.GetComponent<Animator>().SetBool("DoorBool", true);
-                item.GetComponent<AudioSource>().Play();
-                finalPuzzle.Play();
+
+                DoorEvent = true;
             }
+
         }
+
+
         if (Button == true)
         {
             foreach (var item in evetObject)
@@ -52,26 +59,53 @@ public class WaterMoviment : MonoBehaviour
 
             }
         }
+
+        // tipos de movimento de grinde 0 para default
         if (Grid == true)
         {
-            foreach (var item in evetObject)
+
+
+            switch (Level)
             {
-                item.GetComponent<Grid>().GridOrdem = !item.GetComponent<Grid>().GridOrdem;
+                case 0:
+                    foreach (var item in evetObject)
+                    {
+                        GridOrdem = !GridOrdem;
 
+                    }
+                    break;
+                case 4:
+                    foreach (var item in evetObject)
+                    {
+                        GridOrdem = true;
+
+                    }
+                    break;
+                case 8:
+                    foreach (var item in evetObject)
+                    {
+                        evetObject[0].GetComponent<Grid>().GridOrdem = true;
+                        if (evetObject[1].GetComponent<Grid>().GridOrdem == true)
+                        {
+                            evetObject[1].GetComponent<Grid>().GridOrdem = false;
+                        }
+                    }
+                    break;
             }
-            if (I == 2)
-            {
-                evetObject[0].GetComponent<Grid>().GridOrdem = true;
-                if (evetObject[1].GetComponent<Grid>().GridOrdem == true)
-                {
-                    evetObject[1].GetComponent<Grid>().GridOrdem = false;
 
 
-                }
 
-            }
         }
     }
+
+
+
+
+
+
+
+
+    // animacao do modo "sem agua" ativado, avisa que nao tem agua para o botao
     void takeWater()
     {
         foreach (var item in evetObject)
@@ -84,6 +118,9 @@ public class WaterMoviment : MonoBehaviour
     }
     void Restart()
     {
+
+        DoorEvent = false;
+        GridOrdem = false;
         if (Grid == true)
         {
             foreach (var item in evetObject)

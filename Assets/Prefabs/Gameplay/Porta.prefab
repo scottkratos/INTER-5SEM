@@ -215,6 +215,7 @@ MonoBehaviour:
   portao: {fileID: 6564795910546802869}
   isOper: 0
   isUnload: 0
+  DoorClosed: 0
 --- !u!65 &1740266424806468665
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -332,6 +333,7 @@ GameObject:
   - component: {fileID: 3394076681252431565}
   - component: {fileID: 6564795910546802869}
   - component: {fileID: 5920011492774987044}
+  - component: {fileID: 1080949560630260384}
   m_Layer: 0
   m_Name: portao
   m_TagString: Untagged
@@ -470,6 +472,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1080949560630260384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516147612965628654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18d039a97835bf46aa44f0fade544a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventObjects:
+  - {fileID: 0}
+  Button: 1
+  Gramofono: 0
+  Door: {fileID: 4938551178627172313}
 --- !u!1001 &4721965301163928425
 PrefabInstance:
   m_ObjectHideFlags: 0

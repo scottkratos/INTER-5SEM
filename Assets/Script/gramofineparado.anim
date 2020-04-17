@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: 0.766, z: 0}
+        value: {x: 0.001, y: 0.583, z: -0.01}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -28,17 +28,26 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.33333334
-        value: {x: 0, y: 0.517, z: 0}
-        inSlope: {x: 0, y: -0.6674999, z: 0}
-        outSlope: {x: 0, y: -0.6674999, z: 0}
+        time: 0.25
+        value: {x: 0.001, y: 0.276, z: -0.01}
+        inSlope: {x: 0, y: -0.952, z: 0}
+        outSlope: {x: 0, y: -0.952, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 0.5
+        value: {x: 0.001, y: 0.107, z: -0.01}
+        inSlope: {x: 0, y: -0.2304, z: 0}
+        outSlope: {x: 0, y: -0.2304, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.6666667
-        value: {x: 0, y: 0.321, z: 0}
+        value: {x: 0.001, y: 0.083, z: -0.01}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -48,14 +57,14 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: gramofone/Water
+    path: Water
   m_ScaleCurves:
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.8052672, y: 1.5213025, z: 0.8339344}
+        value: {x: 0.7532026, y: 1.2105044, z: 0.58917606}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -63,17 +72,26 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.33333334
-        value: {x: 0.8052672, y: 1.08929, z: 0.813674}
-        inSlope: {x: 0, y: -1.4255887, z: -0.12156272}
-        outSlope: {x: 0, y: -1.4255887, z: -0.12156272}
+        time: 0.25
+        value: {x: 0.7532026, y: 0.7257942, z: 0.58917606}
+        inSlope: {x: 0, y: -1.6114144, z: 0}
+        outSlope: {x: 0, y: -1.6114144, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 0.5
+        value: {x: 0.4200837, y: 0.4047972, z: 0.32860118}
+        inSlope: {x: 0, y: -1.3414676, z: 0}
+        outSlope: {x: 0, y: -1.3414676, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.6666667
-        value: {x: 0.57091, y: 0.57091, z: 0.57091}
+        value: {x: 0.4200837, y: 0.16684932, z: 0.32860118}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -83,7 +101,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: gramofone/Water
+    path: Water
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
@@ -94,14 +112,14 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3938427548
+      path: 988953566
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 3938427548
+      path: 988953566
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -134,7 +152,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: 0.001
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -142,8 +160,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0
+        time: 0.25
+        value: 0.001
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.001
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -152,7 +179,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0
+        value: 0.001
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -163,7 +190,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: gramofone/Water
+    path: Water
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -171,7 +198,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.766
+        value: 0.583
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -179,17 +206,26 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.517
-        inSlope: -0.6674999
-        outSlope: -0.6674999
+        time: 0.25
+        value: 0.276
+        inSlope: -0.952
+        outSlope: -0.952
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.107
+        inSlope: -0.2304
+        outSlope: -0.2304
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.321
+        value: 0.083
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -200,7 +236,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: gramofone/Water
+    path: Water
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -208,7 +244,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
+        value: -0.01
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -216,8 +252,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0
+        time: 0.25
+        value: -0.01
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: -0.01
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -226,7 +271,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0
+        value: -0.01
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -237,7 +282,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: gramofone/Water
+    path: Water
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -245,7 +290,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.8052672
+        value: 0.7532026
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -253,8 +298,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.8052672
+        time: 0.25
+        value: 0.7532026
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.4200837
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -263,7 +317,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.57091
+        value: 0.4200837
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -274,7 +328,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: gramofone/Water
+    path: Water
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -282,7 +336,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.5213025
+        value: 1.2105044
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -290,17 +344,26 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 1.08929
-        inSlope: -1.4255887
-        outSlope: -1.4255887
+        time: 0.25
+        value: 0.7257942
+        inSlope: -1.6114144
+        outSlope: -1.6114144
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.4047972
+        inSlope: -1.3414676
+        outSlope: -1.3414676
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.57091
+        value: 0.16684932
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -311,7 +374,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: gramofone/Water
+    path: Water
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -319,7 +382,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.8339344
+        value: 0.58917606
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -327,17 +390,26 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33333334
-        value: 0.813674
-        inSlope: -0.12156272
-        outSlope: -0.12156272
+        time: 0.25
+        value: 0.58917606
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.5
+        value: 0.32860118
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.6666667
-        value: 0.57091
+        value: 0.32860118
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -348,7 +420,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: gramofone/Water
+    path: Water
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves: []

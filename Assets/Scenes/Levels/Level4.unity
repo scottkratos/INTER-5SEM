@@ -122,6 +122,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &16115887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 179702011478122789, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1787867183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &48804153 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 179702011478122789, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 304660209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &92975172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -671,6 +683,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 522305867}
     m_Modifications:
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 194649668}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: Grid
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 1301421232}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: Level
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: m_Name
@@ -823,6 +860,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5310783561955275425, guid: 5cb0722cdea81ac4993961d5999ace21,
     type: 3}
   m_PrefabInstance: {fileID: 194367148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &194649666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 191297852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &194649668 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1267417958436802978, guid: 940134926627aac4fb2c5a173e7301c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 191297852}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &200890771
 GameObject:
@@ -1239,6 +1288,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vase.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: GridEvent.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: Door
       value: 
       objectReference: {fileID: 1599565184}
@@ -1250,13 +1309,33 @@ PrefabInstance:
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: OperDoor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: finalPuzzle
       value: 
       objectReference: {fileID: 752920983}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 877706842}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[1]
+      value: 
+      objectReference: {fileID: 1132334338}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: Grid
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: GridEvent.Array.data[0]
+      value: 
+      objectReference: {fileID: 1301421232}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &304660210 stripped
@@ -1522,6 +1601,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 413096649}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &430387027 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9143886946103878247, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1132334337}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &511743825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1596,6 +1681,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vase.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: gramofone.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: Door
       value: 
       objectReference: {fileID: 1599565184}
@@ -1607,13 +1702,33 @@ PrefabInstance:
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: OperDoor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: finalPuzzle
       value: 
       objectReference: {fileID: 752920983}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: Restard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 877706842}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[1]
+      value: 
+      objectReference: {fileID: 1132334338}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: gramofone.Array.data[0]
+      value: 
+      objectReference: {fileID: 194649666}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &511743826 stripped
@@ -1736,6 +1851,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vase.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: gramofone.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: Door
       value: 
       objectReference: {fileID: 1599565184}
@@ -1747,13 +1872,33 @@ PrefabInstance:
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: OperDoor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: finalPuzzle
       value: 
       objectReference: {fileID: 752920983}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: Restard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[1]
+      value: 
+      objectReference: {fileID: 1132334338}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 877706842}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: gramofone.Array.data[0]
+      value: 
+      objectReference: {fileID: 194649666}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &531425858 stripped
@@ -2554,6 +2699,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1472226877}
     m_Modifications:
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: EventObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: EventObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1710337247}
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: EventObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 16115887}
+    - target: {fileID: 2452556726996311047, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: level
+      value: Level5
+      objectReference: {fileID: 0}
     - target: {fileID: 2510160046207790236, guid: f9e7b4bec1033104e945e55048b05262,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -3212,7 +3377,7 @@ PrefabInstance:
     - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
       propertyPath: evetObject.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
@@ -3238,6 +3403,26 @@ PrefabInstance:
         type: 3}
       propertyPath: evetObject.Array.data[0]
       value: 
+      objectReference: {fileID: 48804153}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 430387027}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 1710337247}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.data[2]
+      value: 
+      objectReference: {fileID: 16115887}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: FullWater
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3493880193740501336, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
@@ -4032,6 +4217,7 @@ GameObject:
   - component: {fileID: 1301421236}
   - component: {fileID: 1301421235}
   - component: {fileID: 1301421234}
+  - component: {fileID: 1301421237}
   m_Layer: 0
   m_Name: Cube (29)
   m_TagString: Untagged
@@ -4113,6 +4299,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301421232}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1301421237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301421232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccb2f0598a527b42b22f6df63ab1731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridOrdem: 0
+  SaveOrdem: 0
+  Plataforma: 0
+  button: 1
+  gramofono: 1
+  gramofonos:
+  - {fileID: 194649666}
+  buttons:
+  - {fileID: 48804153}
 --- !u!1 &1302541816
 GameObject:
   m_ObjectHideFlags: 0
@@ -5064,6 +5271,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1693622945}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1710337247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 179702011478122789, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767457718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1760793110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5226,6 +5439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vase.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: Door
       value: 
       objectReference: {fileID: 1599565184}
@@ -5244,6 +5462,16 @@ PrefabInstance:
       propertyPath: finalPuzzle
       value: 
       objectReference: {fileID: 752920983}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 877706842}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[1]
+      value: 
+      objectReference: {fileID: 1132334338}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1767457719 stripped
@@ -5357,7 +5585,7 @@ PrefabInstance:
     - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
       propertyPath: evetObject.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
@@ -5383,6 +5611,26 @@ PrefabInstance:
         type: 3}
       propertyPath: evetObject.Array.data[0]
       value: 
+      objectReference: {fileID: 1710337247}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 16115887}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.data[2]
+      value: 
+      objectReference: {fileID: 48804153}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1980811778}
+    - target: {fileID: 2903736458016452983, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: FullWater
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3493880193740501336, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
@@ -5585,6 +5833,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vase.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: Door
       value: 
       objectReference: {fileID: 1599565184}
@@ -5603,6 +5856,16 @@ PrefabInstance:
       propertyPath: finalPuzzle
       value: 
       objectReference: {fileID: 752920983}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 877706842}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[1]
+      value: 
+      objectReference: {fileID: 1132334338}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1787867184 stripped
@@ -6419,6 +6682,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972747791}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1980811778 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9143886946103878247, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1783004122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2039449833
 GameObject:
   m_ObjectHideFlags: 0

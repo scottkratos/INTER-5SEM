@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
         controleAudioMast(masteSlider.value);
         controleAudioMusica(MusicSlider.value);
         controleAudioSFX(SfxSlider.value);
-        Sensitivity(sensitivitySlider.value);
+       // Sensitivity(sensitivitySlider.value);
 
     }
 

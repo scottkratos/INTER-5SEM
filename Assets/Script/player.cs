@@ -68,27 +68,20 @@ public class player : MonoBehaviour
 
         if (Menu.gameObject.activeInHierarchy == false && load.gameObject.activeInHierarchy == false)
         {
-            MouseConfi();
-            inputs();
-            Config();
-            interacao();
+
 
         }
-
+        MouseConfi();
+        inputs();
+        Config();
+        interacao();
 
 
 
 
     }
-    private void LateUpdate()
-    {
 
-    }
-    private void FixedUpdate()
-    {
-        //if (Input.GetButtonDown("Jump"))
-        //    rigidbodyPlayer.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
-    }
+
     //configuracao do mose
     void MouseConfi()
     {
@@ -125,20 +118,43 @@ public class player : MonoBehaviour
             }
         }
         //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit, 2) && hit.transform.GetComponent<TakeObject>() != null)
+        if (Physics.Raycast(eyes, out hit, 2))
         {
             cursor[0].enabled = false;
-            cursor[1].enabled = true;
-            if (take == false)
-                objectsMove = hit.transform.gameObject;
+            if (hit.transform.gameObject.GetComponent<TakeObject>() != null)
+            {
+                cursor[1].enabled = true;
+            }
+            else
+            {
+                cursor[0].enabled = true;
+            }
+            objectsMove = hit.transform.gameObject;
         }
         //objetos que podem ser movidos
         if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(objectsMove.transform.position, transform.position) < 2.5f)
         {
-            objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
-            take = !take;
-
+            if (objectsMove.GetComponent<TakeObject>() != null)
+            {
+                objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
+                take = !take;
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
         {
@@ -257,13 +273,13 @@ public class player : MonoBehaviour
         {
             animationIndex = 5;
         }
-        if (CameraController.x > 45)
+        if (CameraController.x > 90)
         {
-            CameraController.x = 45;
+            CameraController.x = 90;
         }
-        if (CameraController.x < -60)
+        if (CameraController.x < -90)
         {
-            CameraController.x = -60;
+            CameraController.x = -90;
         }
 
     }
@@ -283,15 +299,15 @@ public class player : MonoBehaviour
 
 
 
-        maxX = Mathf.Clamp(CameraController.x, -60, 45);
+        maxX = Mathf.Clamp(CameraController.x, -90, 90);
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * Sensitivity, Input.GetAxis("Mouse X") * Sensitivity, 0);
-        input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
-        characterController.Move(input * vel * Time.deltaTime);
+        input = (x * cameraTransform.right + y * cameraTransform.forward);
         if (isGrounded() && Input.GetButtonDown("Jump"))
         {
             velocity.y = Mathf.Sqrt(Jump * -2 * gravidade);
         }
         velocity.y += gravidade * Time.deltaTime;
+        characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);

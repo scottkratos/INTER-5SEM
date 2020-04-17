@@ -58,7 +58,7 @@ public class TakeObject : MonoBehaviour
         {
             transform.position = Hand.transform.position;
             vaseRigidbody.isKinematic = true;
-            vasoCollider.enabled = false;
+            // vasoCollider.enabled = false;
         }
         else
         {
