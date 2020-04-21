@@ -5,11 +5,15 @@ using UnityEngine;
 public class HubEvents : MonoBehaviour
 {
     public HubEvents Instance;
-    public int ObjectiveIndex = 0;
+    public int ObjectiveIndex = -1;
     public GameObject[] LamparinasObjective;
+    public GameObject[] Estatuas;
+    public GameObject Barreira;
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
     private bool IsCutscene = false;
+    private const float MaxShader = 7;
+    private float ShaderValue;
 
     private void Awake()
     {
@@ -24,6 +28,83 @@ public class HubEvents : MonoBehaviour
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Lamparina"))
         {
             Lamparinas.Add(go);
+        }
+    }
+    public void ChangePlayerEnableStatus(bool active)
+    {
+        player.Instance.gameObject.SetActive(active);
+    }
+    public void ChagePlayerPlayabilityStatus(bool active)
+    {
+        player.Instance.CutsceneMode = active;
+    }
+    public void ChangeObjectiveIndex(int value)
+    {
+        ObjectiveIndex = value;
+    }
+    public void EnableEstatuas(int index)
+    {
+        StartCoroutine(SpawnEstatua(Estatuas[index].GetComponent<EstatuasMats>()));
+    }
+    public void Enfraquecer(int index)
+    {
+        StartCoroutine(EnfraquecerBarreira(index));
+    }
+    private IEnumerator SpawnEstatua(EstatuasMats estatua)
+    {
+        ShaderValue = 0;
+        while(ShaderValue <= MaxShader)
+        {
+            for (int i = 0; i < estatua.materials.Length; i++)
+            {
+                estatua.materials[i].SetFloat("Value", ShaderValue);
+            }
+            ShaderValue += 0.1f;
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    private IEnumerator EnfraquecerBarreira(int index)
+    {
+        Material barreiraMat = Barreira.GetComponent<Material>();
+        switch (index)
+        {
+            case 0:
+                ShaderValue = 0;
+                while (ShaderValue <= 0.25f)
+                {
+                    barreiraMat.SetFloat("Barrier", ShaderValue);
+                    ShaderValue += 0.05f;
+                    yield return new WaitForSeconds(0.2f);
+                }
+                break;
+            case 1:
+                ShaderValue = 0.25f;
+                while (ShaderValue <= 0.5f)
+                {
+                    barreiraMat.SetFloat("Barrier", ShaderValue);
+                    ShaderValue += 0.05f;
+                    yield return new WaitForSeconds(0.2f);
+                }
+                break;
+            case 2:
+                ShaderValue = 0.5f;
+                while (ShaderValue <= 0.75f)
+                {
+                    barreiraMat.SetFloat("Barrier", ShaderValue);
+                    ShaderValue += 0.05f;
+                    yield return new WaitForSeconds(0.2f);
+                }
+                break;
+            case 3:
+                ShaderValue = 0.75f;
+                while (ShaderValue <= 1)
+                {
+                    barreiraMat.SetFloat("Barrier", ShaderValue);
+                    ShaderValue += 0.05f;
+                    yield return new WaitForSeconds(0.2f);
+                }
+                Barreira.SetActive(false);
+                break;
         }
     }
     private void Update()
