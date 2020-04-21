@@ -38,10 +38,13 @@ public class player : MonoBehaviour
     public Image[] cursor;
     GameObject objectsMove;
     public CanvasRenderer Menu, load;
+    public static player Instance;
+    public bool CutsceneMode;
 
 
     private void Awake()
     {
+        Instance = this;
         rigidbodyPlayer = GetComponent<Rigidbody>();
         setAnimacao = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
@@ -65,7 +68,8 @@ public class player : MonoBehaviour
     }
     void Update()
     {
-
+        transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
+        if (CutsceneMode) return;
         if (Menu.gameObject.activeInHierarchy == false && load.gameObject.activeInHierarchy == false)
         {
             MouseConfi();
