@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7441119228963365834
+--- !u!114 &-7237657726023325028
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Filha
+  m_Name: EsferaPose10
   m_Shader: {fileID: -6465566751694194690, guid: ef6a5026a2e406d4cb23235967dbcd50,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR
@@ -38,43 +38,43 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - TextInput:
-        m_Texture: {fileID: 2800000, guid: d1e46f8318de1ad47a12aee5245ddb0c, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4b917b70c4d2f94a9bcb03b6dc35df8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_174D6326:
-        m_Texture: {fileID: 2800000, guid: ec7abbe5c3b93e644be25ef677253c37, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8956337bc0a858948a164724eef1ff94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_281C8109:
-        m_Texture: {fileID: 2800000, guid: e44d777c00586544f84020d9af6f8ebf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d2a3d4e9c4591843b6ab67a81277c98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_46AB34EE:
-        m_Texture: {fileID: 2800000, guid: 63196c38bce7fe34d92d247dedda6fdb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1869801afc855114b875d5a5d58d602d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_7EBDCBF0:
-        m_Texture: {fileID: 2800000, guid: 63196c38bce7fe34d92d247dedda6fdb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1869801afc855114b875d5a5d58d602d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_9163156F:
-        m_Texture: {fileID: 2800000, guid: a713cebffd1af8e44b1d158892dfd88d, type: 3}
+        m_Texture: {fileID: 2800000, guid: da0253fedf25ac34d9d258d0189d1beb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B3FAD38B:
-        m_Texture: {fileID: 2800000, guid: a713cebffd1af8e44b1d158892dfd88d, type: 3}
+        m_Texture: {fileID: 2800000, guid: da0253fedf25ac34d9d258d0189d1beb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_BE97B2FD:
-        m_Texture: {fileID: 2800000, guid: d1e46f8318de1ad47a12aee5245ddb0c, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4b917b70c4d2f94a9bcb03b6dc35df8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_BFFDF2CD:
-        m_Texture: {fileID: 2800000, guid: ec7abbe5c3b93e644be25ef677253c37, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8956337bc0a858948a164724eef1ff94, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_E0DE76C0:
-        m_Texture: {fileID: 2800000, guid: e44d777c00586544f84020d9af6f8ebf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d2a3d4e9c4591843b6ab67a81277c98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -162,7 +162,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_46CCC34: 0
+    - Value: -5
+    - Vector1_46CCC34: 1
     - Vector1_5685972A: -7
     - _AORemapMax: 1
     - _AORemapMin: 0

@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6718567330095410155
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: olhos
+  m_Name: Personagem Cutscenes3
   m_Shader: {fileID: -6465566751694194690, guid: ef6a5026a2e406d4cb23235967dbcd50,
     type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR
@@ -24,44 +37,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - TextInput:
-        m_Texture: {fileID: 2800000, guid: 37b4c80c0a9f0ff49b5d3de17258216e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - Texture2D_174D6326:
-        m_Texture: {fileID: 2800000, guid: ad4859873e04aa34699faf6607a2377b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_281C8109:
-        m_Texture: {fileID: 2800000, guid: f2ec23abbd3e27f48ae8b8ccdd644025, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_46AB34EE:
-        m_Texture: {fileID: 2800000, guid: 2d3de6103a2060940b8f6fa35069582e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8eed35f04ad18c44c928c692ea988263, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_7EBDCBF0:
-        m_Texture: {fileID: 2800000, guid: 2d3de6103a2060940b8f6fa35069582e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_9163156F:
-        m_Texture: {fileID: 2800000, guid: f4fed4abde7013a4fb21ec2a7642bd96, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2852f8e438d025142a54a26466a5e56c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B3FAD38B:
-        m_Texture: {fileID: 2800000, guid: f4fed4abde7013a4fb21ec2a7642bd96, type: 3}
+        m_Texture: {fileID: 2800000, guid: df2c12e18d231244ab371bb6f88345e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_BE97B2FD:
-        m_Texture: {fileID: 2800000, guid: 37b4c80c0a9f0ff49b5d3de17258216e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_BFFDF2CD:
-        m_Texture: {fileID: 2800000, guid: ad4859873e04aa34699faf6607a2377b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 57dd8fa98b16dba4688e48c48b930405, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_E0DE76C0:
-        m_Texture: {fileID: 2800000, guid: f2ec23abbd3e27f48ae8b8ccdd644025, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e6c74190fdf69b4cb2aa4f8475a76fd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -149,7 +142,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_46CCC34: 1
+    - Value: -5
+    - Vector1_46CCC34: 0
     - Vector1_5685972A: -7
     - _AORemapMax: 1
     - _AORemapMin: 0
@@ -273,9 +267,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_83777A89: {r: 0.4862745, g: 1, b: 0.9647059, a: 0}
-    - Offs: {r: 0, g: 0, b: 0, a: 0}
-    - Tiles: {r: 1, g: 1, b: 0, a: 0}
+    - Color_83777A89: {r: 0.3820755, g: 1, b: 0.90204895, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -292,16 +284,3 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
---- !u!114 &2805363497642929157
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 0

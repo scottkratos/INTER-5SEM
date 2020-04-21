@@ -59,8 +59,8 @@ public class HubEvents : MonoBehaviour
             {
                 estatua.materials[i].SetFloat("Value", ShaderValue);
             }
-            ShaderValue += 0.1f;
-            yield return new WaitForSeconds(0.5f);
+            ShaderValue += 0.05f;
+            yield return new WaitForSeconds(0.1f);
         }
     }
     private IEnumerator EnfraquecerBarreira(int index)
@@ -74,7 +74,7 @@ public class HubEvents : MonoBehaviour
                 {
                     barreiraMat.SetFloat("Barrier", ShaderValue);
                     ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.1f);
                 }
                 break;
             case 1:
