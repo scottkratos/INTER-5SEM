@@ -12,17 +12,10 @@ public class LevelLoader : MonoBehaviour
     public Canvas Canvas;
     float loadlevel, finalLoad;
     AsyncOperation load;
-    private void Start()
-    {
 
-
-
-    }
     public void starGame()
     {
         StartCoroutine(MasterLoader());
-       
-
     }
     private void Update()
     {
@@ -30,35 +23,23 @@ public class LevelLoader : MonoBehaviour
         {
             loadImage.gameObject.SetActive(true);
             finalLoad += Time.deltaTime;
-
-
         }
         else
         {
             loadImage.gameObject.SetActive(false);
-           
         }
-
         Debug.Log(finalLoad);
     }
 
     private IEnumerator IndividualLoader(string level)
     {
         load = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
-
         while (!load.isDone)
         {
             yield return new WaitForSeconds(.1f);
             loadlevel += load.progress / .9f;
         }
-
-
     }
-
-
-
-
-
     private IEnumerator MasterLoader()
     {
         Coroutine coroutine;
