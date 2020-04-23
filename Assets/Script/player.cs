@@ -61,7 +61,7 @@ public class player : MonoBehaviour
         Jump = 3f;
         index = -1;
         animationIndex = -1;
-        gravidade = -10f;
+        gravidade = -25f;
         ShotIndex = -1;
         characterController.detectCollisions = false;
 
@@ -302,8 +302,8 @@ public class player : MonoBehaviour
         {
             velocity = new Vector3(0, Mathf.Sqrt(Jump * -2 * gravidade), 0);
         }
-
-        characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
+        if (velocity.y < 0)
+            characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
