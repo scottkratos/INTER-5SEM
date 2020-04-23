@@ -1,19 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
-public class WaterMoviment : MonoBehaviour
+public class Vaso : MonoBehaviour
 {
-
-
     public GameObject[] evetObject;
     public Animator animator;
+    public GameObject checkAmbient;
     public bool Door, Grid, Button, FullWater;
     [HideInInspector]
-    public bool DoorEvent, GridOrdem;
+    public bool DoorEvent, GridOrdem, AmoutWaterVase;
     public int Level;
     public AudioSource finalPuzzle;
+    public LayerMask Ambientelayer;
     private void Awake()
     {
 
@@ -23,6 +22,7 @@ public class WaterMoviment : MonoBehaviour
         if (FullWater == true)
         {
             animator.SetBool("WaterBool", true);
+            EventGameplaye();
         }
         else
         {
@@ -33,9 +33,12 @@ public class WaterMoviment : MonoBehaviour
     private void Update()
     {
 
+
+
+
     }
 
-    // roda sempre com a animca de "agua cheia"
+    // roda sempre com a animacao de "agua cheia"
     void EventGameplaye()
     {
 
@@ -53,11 +56,10 @@ public class WaterMoviment : MonoBehaviour
 
         if (Button == true)
         {
-            foreach (var item in evetObject)
-            {
-                item.GetComponent<Button>().AmoutWaterVase = true;
+            
+               AmoutWaterVase = true;
 
-            }
+            
         }
 
         // tipos de movimento de grinde 0 para default
@@ -97,22 +99,18 @@ public class WaterMoviment : MonoBehaviour
 
         }
     }
+    public void PlayerSound()
+    {
 
-
-
-
-
-
-
-
+        GetComponent<AudioSource>().Play();
+    }
     // animacao do modo "sem agua" ativado, avisa que nao tem agua para o botao
     void takeWater()
     {
-        foreach (var item in evetObject)
-        {
-            item.GetComponent<Button>().AmoutWaterVase = false;
+      
+           AmoutWaterVase = false;
 
-        }
+        
 
 
     }
@@ -130,33 +128,13 @@ public class WaterMoviment : MonoBehaviour
             }
 
         }
+    }
+    public bool novaso()
+    {
 
+        return Physics.CheckSphere(checkAmbient.transform.position, .2f, Ambientelayer);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

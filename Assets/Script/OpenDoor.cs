@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Audio;
 
 public class OpenDoor : MonoBehaviour
 {
-    public List<GameObject> EventObjects;
+    public List<GameObject> Buutons, gramofone;
     public bool Button, Gramofono;
     public GameObject Door;
-
+    public AudioSource open, closed;
 
 
 
@@ -23,8 +24,8 @@ public class OpenDoor : MonoBehaviour
     {
 
 
-        if (Button == true && Door.GetComponent<LevelController>().DoorClosed == false)
-            if (EventObjects.All(events => events == events.GetComponent<Button>().operDoorEvent == true) && EventObjects.All(events => events == events.GetComponent<Button>().AmoutWaterVase == true))
+        if (Button == true && Gramofono == false && Door.GetComponent<LevelController>().DoorClosed == false)
+            if (Buutons.All(events => events == events.GetComponent<Button>().operDoorEvent == true))
             {
                 GetComponent<Animator>().SetBool("DoorBool", true);
 
@@ -35,10 +36,33 @@ public class OpenDoor : MonoBehaviour
             }
 
 
-        if (Gramofono == true && Door.GetComponent<LevelController>().DoorClosed == false)
-            if (EventObjects.All(events => events == EventObjects.LastOrDefault().GetComponent<WaterMoviment>().DoorEvent == true))
+        if (Gramofono == true && Button == false && Door.GetComponent<LevelController>().DoorClosed == false)
+            if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true))
                 GetComponent<Animator>().SetBool("DoorBool", true);
 
-    }
 
+        if (Gramofono == true && Button == true && Door.GetComponent<LevelController>().DoorClosed == false)
+        {
+            if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true) && Buutons.All(events => events == events.GetComponent<Button>().operDoorEvent == true))
+            {
+                GetComponent<Animator>().SetBool("DoorBool", true);
+            }
+
+
+        }
+
+    }
+    public void OpenSound()
+    {
+
+
+        open.Play();
+
+    }
+    public void closedSound()
+    {
+
+        closed.Play();
+
+    }
 }

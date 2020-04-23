@@ -45,13 +45,13 @@ public class WaterShooter : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Gramofone")
                     {
 
-                        hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", true);
-                        hit.transform.gameObject.GetComponent<WaterMoviment>().animator.speed = 1;
+                        hit.transform.gameObject.GetComponent<Gramofone>().animator.SetBool("WaterBool", true);
+                        hit.transform.gameObject.GetComponent<Gramofone>().animator.speed = 1;
 
                     }
-                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<WaterMoviment>().animator.GetBool("WaterBool") == true)
+                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
                     {
-                        hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", false);
+                        hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
 
                         Player.GetComponent<player>().ShotIndex = 0;
                         Player.GetComponent<player>().index = 4;
@@ -68,12 +68,12 @@ public class WaterShooter : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Gramofone")
                     {
 
-                        hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", true);
-                        hit.transform.gameObject.GetComponent<WaterMoviment>().animator.speed = 1;
+                        hit.transform.gameObject.GetComponent<Gramofone>().animator.SetBool("WaterBool", true);
+
                     }
-                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<WaterMoviment>().animator.GetBool("WaterBool") == true)
+                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
                     {
-                        hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", false);
+                        hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
                         Player.GetComponent<player>().ShotIndex = 0;
                         Player.GetComponent<player>().index = 4;
 
@@ -89,35 +89,34 @@ public class WaterShooter : MonoBehaviour
     void eventos()
     {
         //ativacoe dos eventos  
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
-        {
-            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == true)
-            {
-                hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", true);
-                hit.transform.gameObject.GetComponent<AudioSource>().Play();
-                if (hit.transform.gameObject.GetComponent<WaterMoviment>().animator.speed == 0)
-                    hit.transform.gameObject.GetComponent<WaterMoviment>().animator.speed = 1;
-            }
 
-            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Gramofone" && FindObjectOfType<Orbit>().InHand == true && isGrounded() == false)
-            {
-                hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", true);
-                hit.transform.gameObject.GetComponent<AudioSource>().Play();
-                if (hit.transform.gameObject.GetComponent<WaterMoviment>().animator.speed == 0)
-                    hit.transform.gameObject.GetComponent<WaterMoviment>().animator.speed = 1;
-            }
-        }
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 2))
         {
-            if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == false && hit.transform.GetComponent<WaterMoviment>().animator.GetBool("WaterBool") == true)
+            if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == false && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
             {
-                hit.transform.gameObject.GetComponent<WaterMoviment>().animator.SetBool("WaterBool", false);
+                hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
                 Player.GetComponent<player>().ShotIndex = 0;
                 Player.GetComponent<player>().index = 4;
             }
 
         }
 
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        {
+            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == true)
+            {
+                hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
+
+
+            }
+
+            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Gramofone" && FindObjectOfType<Orbit>().InHand == true && isGrounded() == false)
+            {
+                hit.transform.gameObject.GetComponent<Gramofone>().animator.SetBool("WaterBool", true);
+
+
+            }
+        }
 
     }
     bool isGrounded()

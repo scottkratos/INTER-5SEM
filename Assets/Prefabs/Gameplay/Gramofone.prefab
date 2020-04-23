@@ -64,13 +64,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   evetObject: []
-  animator: {fileID: 0}
+  animator: {fileID: 1267417958436802978}
   Door: 0
   Grid: 0
   Button: 0
   FullWater: 0
-  I: 0
+  DoorEvent: 0
+  GridOrdem: 0
+  Level: 0
   finalPuzzle: {fileID: 0}
+  Particula: {fileID: 3468281062260819985}
 --- !u!95 &1267417958436802978
 Animator:
   serializedVersion: 3
@@ -101,8 +104,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5538602219754127391, guid: 039fb02a0d7e45045a15cb8a96a95254,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: efdc46b778f824542a0d81d61606a9ac, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 9662b0313b5e72f468c4c8a3e6d8c786, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -204,6 +207,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: magia gramofone
       objectReference: {fileID: 0}
+    - target: {fileID: 3180559198200028553, guid: 3b7e83fafb118d048a1b1803cefb8b47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4923692395744087528, guid: 3b7e83fafb118d048a1b1803cefb8b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -276,6 +284,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b7e83fafb118d048a1b1803cefb8b47, type: 3}
+--- !u!1 &3468281062260819985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3180559198200028553, guid: 3b7e83fafb118d048a1b1803cefb8b47,
+    type: 3}
+  m_PrefabInstance: {fileID: 2018266830981109144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6365322234647238768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4923692395744087528, guid: 3b7e83fafb118d048a1b1803cefb8b47,

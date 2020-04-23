@@ -520,12 +520,14 @@ MonoBehaviour:
   jumpBool: 0
   vision: 0
   take: 0
-  vel: 5
+  vel: 10
+  Sensitivity: 1
   x: 0
   y: 0
   maxX: 0
   Jump: 0
   maxJump: 0
+  gravidade: 0
   rigidbodyPlayer: {fileID: 3710963521927909534}
   hand: {fileID: 3710963521261013461}
   cameraTransform: {fileID: 3710963520903768039}
@@ -554,6 +556,9 @@ MonoBehaviour:
   cursor:
   - {fileID: 3754820022445876865}
   - {fileID: 6299348727772523592}
+  Menu: {fileID: 0}
+  load: {fileID: 0}
+  CutsceneMode: 0
 --- !u!54 &3710963521927909534
 Rigidbody:
   m_ObjectHideFlags: 0

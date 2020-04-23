@@ -61,7 +61,7 @@ public class player : MonoBehaviour
         Jump = 3f;
         index = -1;
         animationIndex = -1;
-        gravidade = -9.81f;
+        gravidade = -10f;
         ShotIndex = -1;
         characterController.detectCollisions = false;
 
@@ -144,20 +144,6 @@ public class player : MonoBehaviour
                 take = !take;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
@@ -245,6 +231,7 @@ public class player : MonoBehaviour
                 StopCoroutine(ShotInHand());
                 break;
         }
+
     }
     // configuracao para Gameplayer
     void Config()
@@ -296,7 +283,7 @@ public class player : MonoBehaviour
 
         if (isGrounded() && velocity.y < 0)
         {
-            velocity.y = -2f;
+            velocity = new Vector3(0, -5f, 0);
         }
 
 
@@ -306,11 +293,16 @@ public class player : MonoBehaviour
         maxX = Mathf.Clamp(CameraController.x, -90, 90);
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * Sensitivity, Input.GetAxis("Mouse X") * Sensitivity, 0);
         input = (x * cameraTransform.right + y * cameraTransform.forward);
-        if (isGrounded() && Input.GetButtonDown("Jump"))
-        {
-            velocity.y = Mathf.Sqrt(Jump * -2 * gravidade);
-        }
         velocity.y += gravidade * Time.deltaTime;
+        if (isGrounded() && Input.GetButtonDown("Jump") && input != Vector3.zero)
+        {
+            velocity = new Vector3(Mathf.Sqrt(Jump * -2 * gravidade) * input.x + 3 * vel * Time.deltaTime, Mathf.Sqrt(Jump * -2 * gravidade), Mathf.Sqrt(Jump * -2 * gravidade) * input.z + 3 * vel * Time.deltaTime);
+        }
+        else if (isGrounded() && Input.GetButtonDown("Jump"))
+        {
+            velocity = new Vector3(0, Mathf.Sqrt(Jump * -2 * gravidade), 0);
+        }
+
         characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
@@ -319,13 +311,12 @@ public class player : MonoBehaviour
     // verifica se o personagem está no ar; 
     bool isGrounded()
     {
-        return Physics.CheckSphere(checkGround.position, .2f, JumpLayerMask);
+        return Physics.CheckSphere(checkGround.position, .3f, JumpLayerMask);
     }
     IEnumerator ShotInHand()
     {
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
     }
-
 
 }
