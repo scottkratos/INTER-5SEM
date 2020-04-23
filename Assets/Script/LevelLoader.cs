@@ -27,8 +27,6 @@ public class LevelLoader : MonoBehaviour
     }
     private IEnumerator LateStart()
     {
-        yield return new WaitForSeconds(1f);
-        player.Instance.gameObject.SetActive(false);
         yield return StartCoroutine(IndividualLoader("Externo"));
         loadImage.gameObject.SetActive(false);
     }
