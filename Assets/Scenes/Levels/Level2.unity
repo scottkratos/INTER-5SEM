@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7069547}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -9, y: 2, z: -4.7}
+  m_LocalPosition: {x: -9, y: 2, z: -4.75}
   m_LocalScale: {x: 9.5, y: 0.3, z: 0.1}
   m_Children: []
   m_Father: {fileID: 305500066}
@@ -2994,6 +2994,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Janela (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423541171117623680, guid: b60a453ceb48b7d4e9b5ce9c17b52e80,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f66e178d2afb74145898ce23df6f2117, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b60a453ceb48b7d4e9b5ce9c17b52e80, type: 3}
 --- !u!4 &654799462 stripped
