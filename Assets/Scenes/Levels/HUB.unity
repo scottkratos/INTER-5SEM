@@ -22607,6 +22607,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 31366092fda285246a1f3c036344cff5, type: 2}
     - {fileID: 11400000, guid: 3bec24cca54edbe4d93112c78517433a, type: 2}
     - {fileID: 11400000, guid: 3c71d246bf608eb4c9f511645136de22, type: 2}
+    - {fileID: 11400000, guid: 1d2c8132eeb18cf44922aab23c0d10ff, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -22737,6 +22738,19 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 917089521}
+          m_MethodName: ChagePlayerPlayabilityStatus
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
 --- !u!95 &1738480137
 Animator:
