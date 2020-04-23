@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 312.3138, g: 224.97905, b: 167.03796, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6731,6 +6731,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Janela
       objectReference: {fileID: 0}
+    - target: {fileID: 6423541171117623680, guid: b60a453ceb48b7d4e9b5ce9c17b52e80,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f66e178d2afb74145898ce23df6f2117, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b60a453ceb48b7d4e9b5ce9c17b52e80, type: 3}
 --- !u!4 &490873350 stripped
@@ -17742,6 +17747,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Janela (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6423541171117623680, guid: b60a453ceb48b7d4e9b5ce9c17b52e80,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f66e178d2afb74145898ce23df6f2117, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b60a453ceb48b7d4e9b5ce9c17b52e80, type: 3}
 --- !u!4 &1651613947 stripped
