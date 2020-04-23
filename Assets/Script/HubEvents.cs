@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class HubEvents : MonoBehaviour
 {
-    public HubEvents Instance;
+    public static HubEvents Instance;
     public int ObjectiveIndex = -1;
     public GameObject[] LamparinasObjective;
     public GameObject[] Estatuas;
+    public LevelController[] Portas;
+    public LevelController PortaPrincipal;
     public GameObject Barreira;
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
     private bool IsCutscene = false;
-    private const float MaxShader = 7;
+    private const float MaxShader = -5;
     private float ShaderValue;
 
     private void Awake()
@@ -41,6 +43,14 @@ public class HubEvents : MonoBehaviour
     public void ChangeObjectiveIndex(int value)
     {
         ObjectiveIndex = value;
+        if (value != -1 && value != 4)
+        {
+            Portas[value].Open(true);
+        }
+    }
+    public void OpenMainDoor(bool value)
+    {
+        PortaPrincipal.Open(value);
     }
     public void EnableEstatuas(int index)
     {
@@ -53,13 +63,13 @@ public class HubEvents : MonoBehaviour
     private IEnumerator SpawnEstatua(EstatuasMats estatua)
     {
         ShaderValue = 0;
-        while(ShaderValue <= MaxShader)
+        while(ShaderValue > MaxShader)
         {
             for (int i = 0; i < estatua.materials.Length; i++)
             {
                 estatua.materials[i].SetFloat("Value", ShaderValue);
             }
-            ShaderValue += 0.05f;
+            ShaderValue -= 0.05f;
             yield return new WaitForSeconds(0.1f);
         }
     }

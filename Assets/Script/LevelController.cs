@@ -21,6 +21,10 @@ public class LevelController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         DoorClosed = false;
     }
+    public void Open(bool value)
+    {
+        portao.SetBool("DoorBool", value);
+    }
 
     // Update is called once per frame
     void Update()
