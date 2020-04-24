@@ -128,9 +128,9 @@ public class player : MonoBehaviour
             objectsMove = hit.transform.gameObject;
         }
         //objetos que podem ser movidos
-        if (Input.GetKeyDown(KeyCode.E) && Vector3.Distance(objectsMove.transform.position, transform.position) < 2.5f)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (objectsMove.GetComponent<TakeObject>() != null)
+            if (objectsMove.GetComponent<TakeObject>() == null)
             {
                 objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
                 take = !take;

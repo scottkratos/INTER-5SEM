@@ -38,7 +38,7 @@ public class OpenDoor : MonoBehaviour
             }
             else
             {
-                    animator.SetBool("DoorBool", false);
+                animator.SetBool("DoorBool", false);
             }
 
 
@@ -49,9 +49,13 @@ public class OpenDoor : MonoBehaviour
 
         if (Gramofono == true && Button == true && Door.GetComponent<LevelController>().DoorClosed == false)
         {
-            if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true) && Buutons.All(events => events == events.GetComponent<Button>().operDoorEvent == true))
+            if (gramofone.All(events => events.GetComponent<Gramofone>().DoorEvent == true) && Buutons.All(events => events.GetComponent<Button>().operDoorEvent == true))
             {
                 animator.SetBool("DoorBool", true);
+            }
+            else
+            {
+                animator.SetBool("DoorBool", false);
             }
 
 
