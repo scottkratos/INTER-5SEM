@@ -28,7 +28,8 @@ public class PuzzleComplete : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+
+        if (other.tag == "Player" && PlayerCheck != null)
         {
             StopCoroutine(PlayerCheck);
         }

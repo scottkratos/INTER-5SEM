@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 51.363365, g: 73.251945, b: 80.346664, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4769,6 +4769,11 @@ PrefabInstance:
       propertyPath: ShotWater.Array.data[4]
       value: 
       objectReference: {fileID: 498620164}
+    - target: {fileID: 3710963521261013461, guid: 1386c075ac705a2469fd50ea70a4ef10,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.136
+      objectReference: {fileID: 0}
     - target: {fileID: 3710963521927909521, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
       propertyPath: m_Radius
@@ -4960,6 +4965,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8552839353379776636, guid: 1386c075ac705a2469fd50ea70a4ef10,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1386c075ac705a2469fd50ea70a4ef10, type: 3}

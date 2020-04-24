@@ -40,11 +40,10 @@ public class TakeObject : MonoBehaviour
 
     private void LateUpdate()
     {
-
-
         if (isGrounded() && take == true)
         {
             take = false;
+
             Player.take = false;
         }
         if (NoAmbiente() && take == true)
@@ -58,14 +57,24 @@ public class TakeObject : MonoBehaviour
         if (take == true)
         {
             transform.position = Hand.transform.position;
-            vasoCollider.enabled = false;
+            // vasoCollider.enabled = false;
             vaseRigidbody.isKinematic = true;
         }
-        if (take == false)
+        else
         {
+
             vasoCollider.enabled = true;
             vaseRigidbody.isKinematic = false;
         }
+
+
+
+
+
+
+
+
+
     }
     bool isGrounded()
     {
