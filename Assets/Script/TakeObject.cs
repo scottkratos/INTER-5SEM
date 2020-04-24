@@ -61,7 +61,7 @@ public class TakeObject : MonoBehaviour
             vasoCollider.enabled = false;
             vaseRigidbody.isKinematic = true;
         }
-        else
+        if (take == false)
         {
             vasoCollider.enabled = true;
             vaseRigidbody.isKinematic = false;
