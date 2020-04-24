@@ -82,7 +82,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4483031116882427707
 Transform:
@@ -213,7 +213,7 @@ MonoBehaviour:
   level: Level1
   UnLoad: 
   portao: {fileID: 6564795910546802869}
-  isOper: 0
+  CutsceneDoor: 0
   isUnload: 0
   DoorClosed: 0
 --- !u!65 &1740266424806468665
@@ -386,10 +386,11 @@ AudioSource:
   m_GameObject: {fileID: 6516147612965628654}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5538602219754127391, guid: 039fb02a0d7e45045a15cb8a96a95254,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f45be94a75b22be488abed9835eb1b02, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -398,7 +399,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 4
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -433,7 +434,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -485,8 +486,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18d039a97835bf46aa44f0fade544a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventObjects:
-  - {fileID: 0}
+  Buutons: []
+  gramofone: []
   Button: 1
   Gramofono: 0
   Door: {fileID: 4938551178627172313}
@@ -505,7 +506,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: eb856b313a3511247a00498177ac8898, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -514,7 +515,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 4
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -549,7 +550,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -816,7 +817,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 5897a350121819e438cc8f75f68427a1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5897a350121819e438cc8f75f68427a1, type: 3}

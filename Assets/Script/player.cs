@@ -13,7 +13,7 @@ public class player : MonoBehaviour
     public bool jumpBool, vision, take;
     public float vel, Sensitivity;
     [HideInInspector]
-    public float x, y, maxX, Jump, maxJump, gravidade;
+    public float x, y, maxX, Jump, maxJump, gravidade, Speed;
     [HideInInspector]
     public Rigidbody rigidbodyPlayer;
     [HideInInspector]
@@ -40,6 +40,7 @@ public class player : MonoBehaviour
     public CanvasRenderer Menu, load;
     public static player Instance;
     public bool CutsceneMode;
+    private AudioListener audioSource;
 
 
     private void Awake()
@@ -58,34 +59,24 @@ public class player : MonoBehaviour
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         handTrue = GameObject.FindGameObjectWithTag("HandTrue");
         cameraTransform = Camera.main.transform;
-        Jump = 2f;
+        Jump = 2;
         index = -1;
         animationIndex = -1;
         gravidade = -50f;
         ShotIndex = -1;
         characterController.detectCollisions = false;
-
+        audioSource = GetComponentInChildren<AudioListener>();
     }
     void Update()
     {
         transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
+        audioSource.enabled = !CutsceneMode;
         if (CutsceneMode) return;
-        if (Menu.gameObject.activeInHierarchy == false && load.gameObject.activeInHierarchy == false)
-        {
-
-
-        }
         MouseConfi();
         inputs();
         Config();
         interacao();
-
-
-
-
     }
-
-
     //configuracao do mose
     void MouseConfi()
     {
@@ -279,30 +270,22 @@ public class player : MonoBehaviour
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
-
-
         if (isGrounded() && velocity.y < 0)
         {
             velocity = new Vector3(0, -5f, 0);
         }
-
-
-
-
-
         maxX = Mathf.Clamp(CameraController.x, -90, 90);
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * Sensitivity, Input.GetAxis("Mouse X") * Sensitivity, 0);
         input = (x * cameraTransform.right + y * cameraTransform.forward);
         velocity.y += gravidade * Time.deltaTime;
         if (isGrounded() && Input.GetButtonDown("Jump") && input != Vector3.zero)
         {
-            velocity = new Vector3(Mathf.Sqrt(Jump * -2 * gravidade) * input.x + 3 * vel * Time.deltaTime, Mathf.Sqrt(Jump * -2 * gravidade), Mathf.Sqrt(Jump * -2 * gravidade) * input.z + 3 * vel * Time.deltaTime);
+            velocity = new Vector3(Mathf.Sqrt(Jump * -2 * gravidade) * input.x + vel * Time.deltaTime, Mathf.Sqrt(Jump * -2 * gravidade), Mathf.Sqrt(Jump * -2 * gravidade) * input.z + vel * Time.deltaTime);
         }
         else if (isGrounded() && Input.GetButtonDown("Jump"))
         {
             velocity = new Vector3(0, Mathf.Sqrt(Jump * -2 * gravidade), 0);
         }
-
         characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
@@ -318,5 +301,4 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
     }
-
 }

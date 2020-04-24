@@ -53,8 +53,8 @@ public class LevelLoader : MonoBehaviour
             coroutine = StartCoroutine(IndividualLoader(Levels[i]));
             yield return coroutine;
         }
-
         loadImage.gameObject.SetActive(false);
+        MainMenuCamera.gameObject.SetActive(false);
         Timeline.Play(Clips[0]);
     }
 }

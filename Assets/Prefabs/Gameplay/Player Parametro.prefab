@@ -528,6 +528,7 @@ MonoBehaviour:
   Jump: 0
   maxJump: 0
   gravidade: 0
+  Speed: 0
   rigidbodyPlayer: {fileID: 3710963521927909534}
   hand: {fileID: 3710963521261013461}
   cameraTransform: {fileID: 3710963520903768039}
@@ -582,7 +583,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3710963521927909528}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 582ffcce44a13c64b8c9abf91b0414c2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.422369
@@ -598,7 +599,7 @@ CharacterController:
   m_GameObject: {fileID: 3710963521927909528}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 1.15
   m_Radius: 0.47

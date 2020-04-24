@@ -11,6 +11,7 @@ public class HubEvents : MonoBehaviour
     public LevelController[] Portas;
     public LevelController PortaPrincipal;
     public GameObject Barreira;
+    private AudioSource audioSource;
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
     private bool IsCutscene = false;
@@ -31,6 +32,7 @@ public class HubEvents : MonoBehaviour
         {
             Lamparinas.Add(go);
         }
+        audioSource = GetComponent<AudioSource>();
     }
     public void ChangePlayerEnableStatus(bool active)
     {
@@ -46,6 +48,7 @@ public class HubEvents : MonoBehaviour
         if (value != -1 && value != 4)
         {
             Portas[value].Open(true);
+            audioSource.Play();
         }
     }
     public void OpenMainDoor(bool value)

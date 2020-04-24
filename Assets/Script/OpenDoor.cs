@@ -10,42 +10,46 @@ public class OpenDoor : MonoBehaviour
     public bool Button, Gramofono;
     public GameObject Door;
     public AudioSource open, closed;
+    private Animator animator;
+    private bool Cutscene;
+    private bool Lock = true;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = GetComponent<Animator>();
+        Cutscene = GetComponentInParent<LevelController>().CutsceneDoor;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (Cutscene) return;
 
         if (Button == true && Gramofono == false && Door.GetComponent<LevelController>().DoorClosed == false)
             if (Buutons.All(events => events == events.GetComponent<Button>().operDoorEvent == true))
             {
-                GetComponent<Animator>().SetBool("DoorBool", true);
+                animator.SetBool("DoorBool", true);
 
             }
             else
             {
-                GetComponent<Animator>().SetBool("DoorBool", false);
+                    animator.SetBool("DoorBool", false);
             }
 
 
         if (Gramofono == true && Button == false && Door.GetComponent<LevelController>().DoorClosed == false)
             if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true))
-                GetComponent<Animator>().SetBool("DoorBool", true);
+                animator.SetBool("DoorBool", true);
 
 
         if (Gramofono == true && Button == true && Door.GetComponent<LevelController>().DoorClosed == false)
         {
             if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true) && Buutons.All(events => events == events.GetComponent<Button>().operDoorEvent == true))
             {
-                GetComponent<Animator>().SetBool("DoorBool", true);
+                animator.SetBool("DoorBool", true);
             }
 
 
@@ -61,8 +65,11 @@ public class OpenDoor : MonoBehaviour
     }
     public void closedSound()
     {
-
+        if (Lock)
+        {
+            Lock = false;
+            return;
+        }
         closed.Play();
-
     }
 }

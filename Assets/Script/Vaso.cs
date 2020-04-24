@@ -13,6 +13,7 @@ public class Vaso : MonoBehaviour
     public int Level;
     public AudioSource finalPuzzle;
     public LayerMask Ambientelayer;
+    public AudioSource place, remove;
     private void Awake()
     {
 
@@ -102,17 +103,13 @@ public class Vaso : MonoBehaviour
     public void PlayerSound()
     {
 
-        GetComponent<AudioSource>().Play();
+        place.Play();
     }
     // animacao do modo "sem agua" ativado, avisa que nao tem agua para o botao
     void takeWater()
     {
-      
-           AmoutWaterVase = false;
-
-        
-
-
+        AmoutWaterVase = false;
+        remove.Play();
     }
     void Restart()
     {

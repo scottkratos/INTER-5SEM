@@ -7,16 +7,15 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     public string level, UnLoad;
-    public Animator portao;
-    public bool isOper, isUnload, DoorClosed;
+    [SerializeField]
+    private Animator portao;
+    public bool CutsceneDoor, isUnload, DoorClosed;
     Scene s;
     Transform player;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (isOper == true)
-            portao.SetBool("DoorBool", true);
         s = SceneManager.GetSceneByName(level);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         DoorClosed = false;
@@ -26,14 +25,6 @@ public class LevelController : MonoBehaviour
         portao.SetBool("DoorBool", value);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-
-
-    }
     private void OnTriggerEnter(Collider other)
     {
 
