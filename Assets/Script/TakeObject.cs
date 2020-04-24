@@ -18,7 +18,8 @@ public class TakeObject : MonoBehaviour
     [HideInInspector]
     public bool take;
     [HideInInspector]
-    public GameObject Hand, player;
+    public GameObject Hand;
+    public player Player;
     public GameObject checkAmbiente;
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
@@ -28,8 +29,8 @@ public class TakeObject : MonoBehaviour
     private void Awake()
     {
         _Controller = this;
-        Hand = GameObject.FindGameObjectWithTag("HandTrue");
-        player = GameObject.FindGameObjectWithTag("Player");
+        Hand = player.Instance.gameObject.transform.GetChild(0).transform.GetChild(1).gameObject;
+        Player = player.Instance;
         vaseRigidbody = GetComponent<Rigidbody>();
         vasoCollider = GetComponent<BoxCollider>();
     }
@@ -44,26 +45,26 @@ public class TakeObject : MonoBehaviour
         if (isGrounded() && take == true)
         {
             take = false;
-            player.GetComponent<player>().take = false;
+            Player.take = false;
         }
         if (NoAmbiente() && take == true)
         {
 
             take = false;
-            player.GetComponent<player>().take = false;
+            Player.take = false;
 
 
         }
         if (take == true)
         {
             transform.position = Hand.transform.position;
-            vaseRigidbody.isKinematic = true;
             vasoCollider.enabled = false;
+            vaseRigidbody.isKinematic = true;
         }
         else
         {
-            vaseRigidbody.isKinematic = false;
             vasoCollider.enabled = true;
+            vaseRigidbody.isKinematic = false;
         }
     }
     bool isGrounded()

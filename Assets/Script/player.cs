@@ -69,6 +69,7 @@ public class player : MonoBehaviour
     }
     void Update()
     {
+        transform.GetChild(0).transform.gameObject.SetActive(!CutsceneMode);
         transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
         audioSource.enabled = !CutsceneMode;
         if (CutsceneMode) return;
@@ -280,7 +281,7 @@ public class player : MonoBehaviour
         velocity.y += gravidade * Time.deltaTime;
         if (isGrounded() && Input.GetButtonDown("Jump") && input != Vector3.zero)
         {
-            velocity = new Vector3(Mathf.Sqrt(Jump * -2 * gravidade) * input.x + vel * Time.deltaTime, Mathf.Sqrt(Jump * -2 * gravidade), Mathf.Sqrt(Jump * -2 * gravidade) * input.z + vel * Time.deltaTime);
+            velocity = new Vector3(input.x + vel * Time.deltaTime, Mathf.Sqrt(Jump * -2 * gravidade), input.z + vel * Time.deltaTime);
         }
         else if (isGrounded() && Input.GetButtonDown("Jump"))
         {

@@ -20,13 +20,10 @@ public class Button : MonoBehaviour
     public GameObject checkAmbient;
     public LayerMask vasolayer;
     public AudioSource reset;
-    public Material RefMaterial;
-    private Material NormalMaterial;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
-        NormalMaterial = GetComponent<MeshRenderer>().material;
     }
 
     private void Update()
@@ -253,12 +250,11 @@ public class Button : MonoBehaviour
             }
 
         }
-        //if (RefMaterial != NormalMaterial) reset.Play();
     }
     public void PlayerSound()
     {
-
-        GetComponent<AudioSource>().Play();
+        ButtonSong.Play();
+        reset.Play();
     }
     private void OnCollisionEnter(Collision collision)
     {

@@ -13,6 +13,7 @@ public class OpenDoor : MonoBehaviour
     private Animator animator;
     private bool Cutscene;
     private bool Lock = true;
+    private PuzzleComplete CompleteRef;
 
 
 
@@ -21,6 +22,7 @@ public class OpenDoor : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Cutscene = GetComponentInParent<LevelController>().CutsceneDoor;
+        CompleteRef = transform.parent.transform.GetChild(3).GetComponent<PuzzleComplete>();
     }
 
     // Update is called once per frame
@@ -58,10 +60,8 @@ public class OpenDoor : MonoBehaviour
     }
     public void OpenSound()
     {
-
-
         open.Play();
-
+        CompleteRef.IsDoorOpen(true);
     }
     public void closedSound()
     {
@@ -71,5 +71,6 @@ public class OpenDoor : MonoBehaviour
             return;
         }
         closed.Play();
+        CompleteRef.IsDoorOpen(true);
     }
 }

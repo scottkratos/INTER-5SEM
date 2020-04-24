@@ -34,7 +34,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -123,7 +123,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 1427a45c62e41d74e88cc63895471bca, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -131,7 +131,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 256
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3
   MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
@@ -256,7 +256,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   reset: {fileID: 7375494736925562598}
-  RefMaterial: {fileID: 2100000, guid: 76935220cfe9ac64dbec08460e11fb0a, type: 2}
 --- !u!1 &1239335093286057457
 GameObject:
   m_ObjectHideFlags: 0
