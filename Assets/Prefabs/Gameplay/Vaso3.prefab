@@ -358,7 +358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5174497063099523895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.233, z: 0}
+  m_LocalPosition: {x: 0, y: 0.196, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7329965249374079131}
@@ -461,6 +461,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water
       objectReference: {fileID: 0}
+    - target: {fileID: 6406448442610956648, guid: aba041b63335da64e80df7d4e8c761ba,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aba041b63335da64e80df7d4e8c761ba, type: 3}
 --- !u!4 &7589250046323016236 stripped
@@ -535,6 +540,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: vaso3
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c771eaa56043cdb4c88ac17e77e82a80,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c771eaa56043cdb4c88ac17e77e82a80, type: 3}

@@ -114,7 +114,7 @@ public class player : MonoBehaviour
             }
         }
         //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit, 2))
+        if (Physics.Raycast(eyes, out hit, 5))
         {
             cursor[0].enabled = false;
             if (hit.transform.gameObject.GetComponent<TakeObject>() != null)
@@ -126,16 +126,18 @@ public class player : MonoBehaviour
                 cursor[0].enabled = true;
             }
             objectsMove = hit.transform.gameObject;
+
+
         }
         //objetos que podem ser movidos
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && objectsMove.GetComponent<TakeObject>() != null)
         {
-            if (objectsMove.GetComponent<TakeObject>() == null)
-            {
-                objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
-                take = !take;
-            }
+            objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
+            take = !take;
         }
+
+
+
 
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
@@ -302,4 +304,5 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
     }
+
 }

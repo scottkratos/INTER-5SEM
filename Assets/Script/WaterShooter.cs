@@ -90,7 +90,7 @@ public class WaterShooter : MonoBehaviour
     {
         //ativacoe dos eventos  
 
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 2))
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 4))
         {
             if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == false && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
             {
