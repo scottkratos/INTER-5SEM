@@ -58,10 +58,10 @@ public class player : MonoBehaviour
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         handTrue = GameObject.FindGameObjectWithTag("HandTrue");
         cameraTransform = Camera.main.transform;
-        Jump = 3f;
+        Jump = 2f;
         index = -1;
         animationIndex = -1;
-        gravidade = -25f;
+        gravidade = -50f;
         ShotIndex = -1;
         characterController.detectCollisions = false;
 
@@ -110,7 +110,7 @@ public class player : MonoBehaviour
             index = -1;
         }
         //interacao com a agua
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 1.5f, water))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 3f, water))
         {
             cursor[0].enabled = false;
             cursor[1].enabled = true;
@@ -302,8 +302,8 @@ public class player : MonoBehaviour
         {
             velocity = new Vector3(0, Mathf.Sqrt(Jump * -2 * gravidade), 0);
         }
-        if (velocity.y < 0)
-            characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
+
+        characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
