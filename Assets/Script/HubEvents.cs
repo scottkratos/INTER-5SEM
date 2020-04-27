@@ -200,6 +200,7 @@ public class HubEvents : MonoBehaviour
                 }
                 foreach (GameObject go in Lamparinas)
                 {
+                    go.GetComponent<CapsuleCollider>().enabled = true;
                     go.GetComponent<Rigidbody>().isKinematic = false;
                     go.transform.GetChild(2).gameObject.SetActive(false);
                 }
