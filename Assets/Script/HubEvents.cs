@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HubEvents : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class HubEvents : MonoBehaviour
     private bool IsCutscene = false;
     private const float MaxShader = -5;
     private float ShaderValue;
+
 
     private void Awake()
     {
