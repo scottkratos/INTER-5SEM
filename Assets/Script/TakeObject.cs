@@ -24,7 +24,7 @@ public class TakeObject : MonoBehaviour
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
     public LayerMask Grid, Ambiente;
-
+    public Quaternion rotationOrigin;
 
     private void Awake()
     {
@@ -33,6 +33,7 @@ public class TakeObject : MonoBehaviour
         Player = player.Instance;
         vaseRigidbody = GetComponent<Rigidbody>();
         vasoCollider = GetComponent<BoxCollider>();
+        rotationOrigin = transform.rotation;
     }
 
 
@@ -42,8 +43,8 @@ public class TakeObject : MonoBehaviour
     {
         if (isGrounded() && take == true)
         {
-            take = false;
 
+            take = false;
             Player.take = false;
         }
         if (NoAmbiente() && take == true)
@@ -56,15 +57,19 @@ public class TakeObject : MonoBehaviour
         }
         if (take == true)
         {
+            transform.SetParent(Hand.transform, false);
             transform.position = Hand.transform.position;
-            // vasoCollider.enabled = false;
+            transform.rotation = Player.cameraTransform.rotation;
             vaseRigidbody.isKinematic = true;
+
+
         }
         else
         {
-
-            vasoCollider.enabled = true;
+            transform.parent = null;
+            transform.rotation = rotationOrigin;
             vaseRigidbody.isKinematic = false;
+
         }
 
 

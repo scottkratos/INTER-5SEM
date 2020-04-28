@@ -38,6 +38,7 @@ public class player : MonoBehaviour
     public Image[] cursor;
     GameObject objectsMove;
     public CanvasRenderer Menu, load;
+    public GameObject Pausa;
     public static player Instance;
     public bool CutsceneMode;
     private AudioListener audioSource;
@@ -73,10 +74,14 @@ public class player : MonoBehaviour
         transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
         audioSource.enabled = !CutsceneMode;
         if (CutsceneMode) return;
-        MouseConfi();
-        inputs();
-        Config();
-        interacao();
+        if (Pausa.activeInHierarchy == false)
+        {
+            MouseConfi();
+            inputs();
+            Config();
+            interacao();
+        }
+
     }
     //configuracao do mose
     void MouseConfi()
@@ -90,6 +95,7 @@ public class player : MonoBehaviour
     {
         //direcao da ray de visao
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         //atira 
         if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true)
         {
@@ -109,26 +115,30 @@ public class player : MonoBehaviour
             if (Input.GetMouseButtonDown(1) && take == false)
             {
                 ShotIndex = 0;
-                power.transform.position = transform.position * 2;
+                power.transform.parent = hand;
                 index = 4;
             }
         }
         //Ray para indentificar objetos que podem ser movidos
         if (Physics.Raycast(eyes, out hit, 5))
         {
-            cursor[0].enabled = false;
             if (hit.transform.gameObject.GetComponent<TakeObject>() != null)
             {
                 cursor[1].enabled = true;
+                objectsMove = hit.transform.gameObject;
             }
             else
             {
                 cursor[0].enabled = true;
             }
-            objectsMove = hit.transform.gameObject;
-
-
         }
+
+
+
+
+
+
+
         //objetos que podem ser movidos
         if (Input.GetKeyDown(KeyCode.E) && objectsMove.GetComponent<TakeObject>() != null)
         {
@@ -230,6 +240,7 @@ public class player : MonoBehaviour
     // configuracao para Gameplayer
     void Config()
     {
+
         // numero maximo de bolhas d'agua
         if (index >= 4)
         {
@@ -293,6 +304,10 @@ public class player : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pausa.SetActive(true);
+        }
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
