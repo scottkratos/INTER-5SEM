@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8797826856829084530
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Buraco Espinhos
+  m_Name: Chao32
   m_Shader: {fileID: -6465566751694194690, guid: 5052268d70a74a342b62de8ce5c9f787,
     type: 3}
   m_ShaderKeywords: 
@@ -24,23 +37,23 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - TextInput:
-        m_Texture: {fileID: 2800000, guid: 41922e1be7e001f468346843d81ba621, type: 3}
+        m_Texture: {fileID: 2800000, guid: c485670f9a09dde4da30f569d3ff6622, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_281C8109:
-        m_Texture: {fileID: 2800000, guid: e4942d8a39f082643952fcfccf6c460a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 68dd35e29d3c6b747b9ab6958bb33b17, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_46AB34EE:
-        m_Texture: {fileID: 2800000, guid: e9f6d040e7019664b80d9bd68d0fe955, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5eaf00cdc1bcd344994102d7decc9668, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_9163156F:
-        m_Texture: {fileID: 2800000, guid: 129d08500a279a14283f82f64c7b0e87, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8e14b3c105f5d504198996eab594f834, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_BFFDF2CD:
-        m_Texture: {fileID: 2800000, guid: 7ae750914de768841aa5e586f2a23020, type: 3}
+        m_Texture: {fileID: 2800000, guid: e23d34c2a0e45b1479ce45b2b1b72319, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -251,8 +264,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Offs: {r: 0.01, g: 0.39, b: 0, a: 0}
-    - Tiles: {r: 0.25, g: 0.25, b: 0, a: 0}
+    - Offs: {r: 0.3, g: 0.3, b: 0, a: 0}
+    - Tiles: {r: 3.2, g: 12.5, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -269,16 +282,3 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
---- !u!114 &668922711220485836
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 0
