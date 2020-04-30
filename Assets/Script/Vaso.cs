@@ -57,10 +57,10 @@ public class Vaso : MonoBehaviour
 
         if (Button == true)
         {
-            
-               AmoutWaterVase = true;
 
-            
+            AmoutWaterVase = true;
+
+
         }
 
         // tipos de movimento de grinde 0 para default
@@ -100,6 +100,7 @@ public class Vaso : MonoBehaviour
 
         }
     }
+    //Sons do vaso
     public void PlayerSound()
     {
 

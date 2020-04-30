@@ -67,6 +67,7 @@ public class player : MonoBehaviour
         ShotIndex = -1;
         characterController.detectCollisions = false;
         audioSource = GetComponentInChildren<AudioListener>();
+        take = false;
     }
     void Update()
     {
@@ -74,12 +75,21 @@ public class player : MonoBehaviour
         transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
         audioSource.enabled = !CutsceneMode;
         if (CutsceneMode) return;
-        if (Pausa.activeInHierarchy == false)
+        if (Pausa.activeInHierarchy == true)
         {
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+
+
+        }
+        else
+        {
+
             MouseConfi();
             inputs();
             Config();
             interacao();
+            Time.timeScale = 1;
         }
 
     }
@@ -97,7 +107,7 @@ public class player : MonoBehaviour
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         //atira 
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 10, water) == false && power.GetComponent<Orbit>().InHand == true)
+        if (Input.GetMouseButtonDown(0) && power.GetComponent<Orbit>().InHand == true)
         {
             ShotIndex = 4;
             if (ShotIndex < 5)
@@ -108,11 +118,11 @@ public class player : MonoBehaviour
             index = -1;
         }
         //interacao com a agua
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 3f, water))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 3f, water) && take == false)
         {
             cursor[0].enabled = false;
             cursor[1].enabled = true;
-            if (Input.GetMouseButtonDown(1) && take == false)
+            if (Input.GetMouseButtonDown(1))
             {
                 ShotIndex = 0;
                 power.transform.parent = hand;
@@ -120,7 +130,7 @@ public class player : MonoBehaviour
             }
         }
         //Ray para indentificar objetos que podem ser movidos
-        if (Physics.Raycast(eyes, out hit, 5))
+        if (Physics.Raycast(eyes, out hit, 5) && hit.transform.gameObject.GetComponent<TakeObject>() != null && power.GetComponent<Orbit>().InHand == false)
         {
             if (hit.transform.gameObject.GetComponent<TakeObject>() != null)
             {
@@ -131,24 +141,13 @@ public class player : MonoBehaviour
             {
                 cursor[0].enabled = true;
             }
+            //objetos que podem ser movidos
+            if (Input.GetKeyDown(KeyCode.E) && objectsMove.GetComponent<TakeObject>() != null)
+            {
+                objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
+                take = !take;
+            }
         }
-
-
-
-
-
-
-
-        //objetos que podem ser movidos
-        if (Input.GetKeyDown(KeyCode.E) && objectsMove.GetComponent<TakeObject>() != null)
-        {
-            objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
-            take = !take;
-        }
-
-
-
-
         //intercao com os portais
         if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
         {
@@ -235,7 +234,6 @@ public class player : MonoBehaviour
                 StopCoroutine(ShotInHand());
                 break;
         }
-
     }
     // configuracao para Gameplayer
     void Config()
@@ -290,7 +288,24 @@ public class player : MonoBehaviour
         }
         maxX = Mathf.Clamp(CameraController.x, -90, 90);
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * Sensitivity, Input.GetAxis("Mouse X") * Sensitivity, 0);
-        input = (x * cameraTransform.right + y * cameraTransform.forward);
+
+        if (CameraController.x >= 60)
+        {
+            input = (x * cameraTransform.right + y * -cameraTransform.up) * vel * Time.deltaTime;
+        }
+        else if (CameraController.x <= -60 && CameraController.x <= -45)
+        {
+            input = (x * cameraTransform.right + y * cameraTransform.up) * vel * Time.deltaTime;
+        }
+        else
+        {
+            input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
+
+        }
+
+
+
+
         velocity.y += gravidade * Time.deltaTime;
         if (isGrounded() && Input.GetButtonDown("Jump") && input != Vector3.zero)
         {
@@ -300,7 +315,7 @@ public class player : MonoBehaviour
         {
             velocity = new Vector3(0, Mathf.Sqrt(Jump * -2 * gravidade), 0);
         }
-        characterController.Move(new Vector3(input.x, 0, input.z) * vel * Time.deltaTime);
+        characterController.Move(new Vector3(input.x, 0, input.z));
         characterController.Move(velocity * Time.deltaTime);
         cameraTransform.transform.localRotation = Quaternion.Euler(-maxX, CameraController.y, 0);
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
@@ -318,6 +333,6 @@ public class player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
-    }
 
+    }
 }

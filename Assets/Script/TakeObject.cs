@@ -62,7 +62,6 @@ public class TakeObject : MonoBehaviour
             transform.rotation = Player.cameraTransform.rotation;
             vaseRigidbody.isKinematic = true;
 
-
         }
         else
         {

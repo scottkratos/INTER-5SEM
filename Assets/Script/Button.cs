@@ -16,10 +16,10 @@ public class Button : MonoBehaviour
     public bool operDoorEvent, GridOrdem;
     public bool Restard, OperDoor, Grid;
     public AudioSource ButtonSong, finalPuzzle;
-    bool open, closed;
     public GameObject checkAmbient;
-    public LayerMask vasolayer;
+    public LayerMask vasolayer, PlayerLayer;
     public AudioSource reset;
+
 
     private void Start()
     {
@@ -28,131 +28,222 @@ public class Button : MonoBehaviour
 
     private void Update()
     {
-        switch (Level)
+        // tipos de verificacao com vaso 
+        if (noButton())
         {
 
-            case 0:
-                if (noButton() == true && vase.Any(vas => vas.GetComponent<Vaso>().AmoutWaterVase == true))
-                {
-                    if (OperDoor == true)
-                    {
-                        openDoor();
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                    }
-                    if (Grid == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                        GridOrdem = true;
-                    }
-                    if (Restard == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
 
-                    }
-                }
-                break;
-            case 4:
-                if (noButton() == true && vase.Any(vas => vas.GetComponent<Vaso>().AmoutWaterVase == true))
-                {
-                    if (OperDoor == true)
-                    {
-                        openDoor();
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                    }
-                    if (Grid == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                        GridOrdem = true;
-                    }
-                    if (Restard == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
+            // tipos de verificacao dos vaso cheios
+            switch (Level)
+            {
 
-                    }
-                }
-                break;
+                case 0:
+                    if (vase.Any(vas => vas.GetComponent<Vaso>().AmoutWaterVase == true))
+                    {
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
 
+                        }
+                    }
+                    break;
+                case 4:
+                    if (vase.Any(vas => vas.GetComponent<Vaso>().AmoutWaterVase == true))
+                    {
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
 
+                        }
+                    }
+                    break;
+                case 5:
+                    if (vase[0].GetComponent<Vaso>().AmoutWaterVase == true)
+                    {
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
 
-            case 5:
-                if (noButton() == true && vase[0].GetComponent<Vaso>().AmoutWaterVase == true)
-                {
-                    if (OperDoor == true)
-                    {
-                        openDoor();
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
+                        }
                     }
-                    if (Grid == true)
+                    if (vase[1].GetComponent<Vaso>().AmoutWaterVase == true)
                     {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                        GridOrdem = true;
-                    }
-                    if (Restard == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
 
+                        }
                     }
-                }
-                if (noButton() == true && vase[1].GetComponent<Vaso>().AmoutWaterVase == true)
-                {
-                    if (OperDoor == true)
+                    if (vase[2].GetComponent<Vaso>().AmoutWaterVase == true)
                     {
-                        openDoor();
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                    }
-                    if (Grid == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                        GridOrdem = true;
-                    }
-                    if (Restard == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
 
+                        }
                     }
-                }
-                if (noButton() == true && vase[2].GetComponent<Vaso>().AmoutWaterVase == true)
-                {
-                    if (OperDoor == true)
-                    {
-                        openDoor();
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                    }
-                    if (Grid == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
-                        GridOrdem = true;
-                    }
-                    if (Restard == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", true);
+                    break;
+            }
 
+            // tipos de verificacao dos vaso vazios
+            switch (Level)
+            {
+
+                case 0:
+                    if (vase.Any(vas => vas.GetComponent<Vaso>().AmoutWaterVase == false))
+                    {
+                        if (OperDoor == true)
+                        {
+
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            ClosedDoor();
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            ClosedDoor();
+
+                            GridOrdem = false;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+
+                        }
                     }
-                }
-                break;
+                    break;
+                case 4:
+                    if (vase[0].GetComponent<Vaso>().AmoutWaterVase == false)
+                    {
+                        if (OperDoor == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            ClosedDoor();
+
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            ClosedDoor();
+                            GridOrdem = false;
+                        }
+                    }
+                    break;
+                case 5:
+                    if (vase[0].GetComponent<Vaso>().AmoutWaterVase == false)
+                    {
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+
+                        }
+                    }
+                    if (vase[1].GetComponent<Vaso>().AmoutWaterVase == false)
+                    {
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+
+                        }
+                    }
+                    if (vase[2].GetComponent<Vaso>().AmoutWaterVase == false)
+                    {
+                        if (OperDoor == true)
+                        {
+                            openDoor();
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                        }
+                        if (Grid == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+                            GridOrdem = true;
+                        }
+                        if (Restard == true)
+                        {
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
+
+                        }
+                    }
+                    break;
+            }
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // tipos de verificacao sem vaso 
         if (noButton() == false)
         {
 
             if (OperDoor == true)
             {
-
                 GetComponent<Animator>().SetBool("ButtonBool", false);
                 ClosedDoor();
             }
@@ -161,69 +252,24 @@ public class Button : MonoBehaviour
                 GetComponent<Animator>().SetBool("ButtonBool", false);
                 ClosedDoor();
                 GridOrdem = false;
-
             }
             if (Restard == true)
             {
                 GetComponent<Animator>().SetBool("ButtonBool", false);
-
             }
-
         }
-        // tipos de verificacao dos vaso vazios
-        switch (Level)
+        //contado do jogador
+        if (PlayerDown())
         {
-
-            case 0:
-                if (noButton() == true && vase.Any(vas => vas.GetComponent<Vaso>().AmoutWaterVase == false))
-                {
-                    if (OperDoor == true)
-                    {
-
-                        GetComponent<Animator>().SetBool("ButtonBool", false);
-                        ClosedDoor();
-                    }
-                    if (Grid == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", false);
-                        ClosedDoor();
-
-                        GridOrdem = false;
-                    }
-                    if (Restard == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", false);
-
-                    }
-                }
-                break;
-            case 4:
-                if (noButton() == true && vase[0].GetComponent<Vaso>().AmoutWaterVase == false)
-                {
-                    if (OperDoor == true)
-                    {
-
-                        GetComponent<Animator>().SetBool("ButtonBool", false);
-                        ClosedDoor();
-                    }
-                    if (Grid == true)
-                    {
-                        GetComponent<Animator>().SetBool("ButtonBool", false);
-                        ClosedDoor();
-
-                        GridOrdem = false;
-                    }
-                }
-                break;
-
-
-
-
-
-
+            GetComponent<Animator>().SetBool("ButtonBool", true);
+            if (Restard == true)
+                restard();
+            if (OperDoor == true)
+                openDoor();
+            if (Grid == true)
+                GridOrdem = true;
+            Debug.Log("vai");
         }
-
-
     }
     void openDoor()
     {
@@ -256,43 +302,33 @@ public class Button : MonoBehaviour
         ButtonSong.Play();
         reset.Play();
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Vaso")
-        {
-
-        }
-        if (collision.gameObject.tag == "Player")
-        {
-            if (Restard == true)
-                restard();
-
-        }
-
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Vaso")
-        {
-
-
-
-        }
-        if (collision.gameObject.tag == "Player")
-        {
-            GetComponent<Animator>().SetBool("ButtonBool", false);
-
-        }
-    }
     public bool noButton()
     {
 
         return Physics.CheckSphere(checkAmbient.transform.position, .8f, vasolayer);
 
     }
+    public bool PlayerDown()
+    {
 
+        return Physics.CheckSphere(checkAmbient.transform.position, .8f, PlayerLayer);
+
+    }
+   
+   
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
