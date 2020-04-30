@@ -63,6 +63,7 @@ MonoBehaviour:
   Ambiente:
     serializedVersion: 2
     m_Bits: 1
+  rotationOrigin: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &8106485682034361618
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74,8 +75,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7163384, y: 0.81251156, z: 0.7574044}
-  m_Center: {x: -0.006990552, y: -0.11899263, z: -0.01736316}
+  m_Size: {x: 0.7163384, y: 0.9977095, z: 0.7574044}
+  m_Center: {x: -0.006990552, y: -0.026393652, z: -0.01736316}
 --- !u!54 &4611783662447533962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91,7 +92,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 1
 --- !u!95 &9143886946103878247
 Animator:
   serializedVersion: 3

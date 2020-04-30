@@ -47,4 +47,5 @@ public class MainMenu : MonoBehaviour
         FindObjectOfType<player>().Sensitivity = sensitivity;
 
     }
+    
 }

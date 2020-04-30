@@ -11,6 +11,7 @@ public class WaterShooter : MonoBehaviour
     public RaycastHit hit, hitGrade;
     public GameObject[] ShotWater;
     public Camera fpsCam;
+    Ray oring;
     public LayerMask Grade;
     float distance;
     Transform Player;
@@ -19,16 +20,18 @@ public class WaterShooter : MonoBehaviour
     private void Awake()
     {
         Player = FindObjectOfType<player>().transform;
+
     }
 
     void Update()
     {
         RayGrid();
         eventos();
+        oring = Camera.main.ScreenPointToRay(Input.mousePosition);
         //direcao do disparo 
         foreach (GameObject shot in ShotWater)
         {
-            shot.transform.position += Camera.main.transform.forward;
+            shot.transform.position += Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
         }
     }
@@ -49,7 +52,7 @@ public class WaterShooter : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Gramofone>().animator.speed = 1;
 
                     }
-                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
+                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true && Player.GetComponent<player>().take == false)
                     {
                         hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
 
@@ -59,7 +62,7 @@ public class WaterShooter : MonoBehaviour
                     }
                 }
             }
-            if (hit.transform.rotation.eulerAngles.y == 0)
+            else
             {
                 Debug.DrawRay(new Vector3(hit.point.x, hit.point.y, hit.transform.position.z), fpsCam.transform.forward, Color.red);
                 if (Physics.Raycast(new Vector3(hit.point.x, hit.point.y, hit.transform.position.z), fpsCam.transform.forward, out hit))
@@ -71,7 +74,7 @@ public class WaterShooter : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Gramofone>().animator.SetBool("WaterBool", true);
 
                     }
-                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
+                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true && Player.GetComponent<player>().take == false)
                     {
                         hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
                         Player.GetComponent<player>().ShotIndex = 0;
@@ -90,9 +93,9 @@ public class WaterShooter : MonoBehaviour
     {
         //ativacoe dos eventos  
 
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 4))
+        if (Physics.Raycast(oring, out hit, 4))
         {
-            if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == false && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
+            if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == false && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true && Player.GetComponent<player>().take == false)
             {
                 hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
                 Player.GetComponent<player>().ShotIndex = 0;
@@ -101,7 +104,7 @@ public class WaterShooter : MonoBehaviour
 
         }
 
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
+        if (Physics.Raycast(oring, out hit))
         {
             if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == true)
             {
