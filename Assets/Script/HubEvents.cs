@@ -68,55 +68,63 @@ public class HubEvents : MonoBehaviour
     private IEnumerator SpawnEstatua(EstatuasMats estatua)
     {
         ShaderValue = 0;
-        while(ShaderValue > MaxShader)
+        float timer = 0;
+        float rate = 1 / MaxShader;
+        while(timer < 1)
         {
+            timer += Time.deltaTime;
             for (int i = 0; i < estatua.materials.Length; i++)
             {
                 estatua.materials[i].SetFloat("Value", ShaderValue);
             }
-            ShaderValue -= 0.05f;
-            yield return new WaitForSeconds(0.1f);
+            ShaderValue -= rate;
+            yield return null;
         }
     }
     private IEnumerator EnfraquecerBarreira(int index)
     {
         Material barreiraMat = Barreira.GetComponent<Material>();
+        float timer = 0;
         switch (index)
         {
             case 0:
                 ShaderValue = 0;
-                while (ShaderValue <= 0.25f)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.1f);
+                    ShaderValue = (timer / 200);
+                    yield return null;
                 }
                 break;
             case 1:
                 ShaderValue = 0.25f;
-                while (ShaderValue <= 0.5f)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    ShaderValue = (timer / 200) + 0.25f;
+                    yield return null;
                 }
                 break;
             case 2:
                 ShaderValue = 0.5f;
-                while (ShaderValue <= 0.75f)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    ShaderValue = (timer / 200) + 0.5f;
+                    yield return null;
                 }
                 break;
             case 3:
                 ShaderValue = 0.75f;
-                while (ShaderValue <= 1)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    ShaderValue = (timer / 200) + 0.75f;
+                    yield return null;
                 }
                 Barreira.SetActive(false);
                 break;
