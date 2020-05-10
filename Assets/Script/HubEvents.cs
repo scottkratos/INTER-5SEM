@@ -12,13 +12,15 @@ public class HubEvents : MonoBehaviour
     public LevelController[] Portas;
     public LevelController PortaPrincipal;
     public GameObject Barreira;
+    public GameObject Credits;
     private AudioSource audioSource;
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
     private bool IsCutscene = false;
     private const float MaxShader = -5;
     private float ShaderValue;
-
+    private bool IsHaunted;
+    public static int CutsceneIndex;
 
     private void Awake()
     {
@@ -53,6 +55,68 @@ public class HubEvents : MonoBehaviour
             audioSource.Play();
         }
     }
+    public void OffLights()
+    {
+        for (int i = 0; i < LamparinasObjective.Length; i++)
+        {
+            LamparinasObjective[i].transform.GetChild(0).transform.gameObject.SetActive(false);
+        }
+    }
+    public void FlickLights()
+    {
+        IsHaunted = !IsHaunted;
+        if (IsHaunted == false)
+        {
+            for (int i = 0; i < LamparinasObjective.Length; i++)
+            {
+                LamparinasObjective[i].transform.GetChild(0).transform.gameObject.SetActive(true);
+            }
+            StopAllCoroutines();
+        }
+        else
+        {
+            StartCoroutine(Flashing());
+        }
+    }
+    public void FadeOut()
+    {
+        Credits.SetActive(true);
+        StartCoroutine(Fade());
+    }
+    public void Creditos()
+    {
+        StartCoroutine(StartCredits());
+    }
+    private IEnumerator Fade()
+    {
+        float timer = 2;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Credits.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, OneMinus(timer / 2));
+            yield return null;
+        }
+    }
+    private float OneMinus(float value)
+    {
+        value = (value * -1) - 1;
+        return value;
+    }
+    private IEnumerator StartCredits()
+    {
+        yield return null;
+    }
+    public IEnumerator Flashing()
+    {
+        while (IsHaunted)
+        {
+            for (int i = 0; i < LamparinasObjective.Length; i++)
+            {
+                LamparinasObjective[i].transform.GetChild(0).transform.gameObject.SetActive(!LamparinasObjective[i].transform.GetChild(0).transform.gameObject.activeSelf);
+            }
+            yield return null;
+        }
+    }
     public void OpenMainDoor(bool value)
     {
         PortaPrincipal.Open(value);
@@ -77,13 +141,13 @@ public class HubEvents : MonoBehaviour
             {
                 estatua.materials[i].SetFloat("Value", ShaderValue);
             }
-            ShaderValue -= rate;
+            ShaderValue += rate;
             yield return null;
         }
     }
     private IEnumerator EnfraquecerBarreira(int index)
     {
-        Material barreiraMat = Barreira.GetComponent<Material>();
+        Material barreiraMat = Barreira.GetComponent<MeshRenderer>().material;
         float timer = 0;
         switch (index)
         {
@@ -93,7 +157,7 @@ public class HubEvents : MonoBehaviour
                 {
                     timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue = (timer / 200);
+                    ShaderValue = (timer / 20);
                     yield return null;
                 }
                 break;
@@ -103,7 +167,7 @@ public class HubEvents : MonoBehaviour
                 {
                     timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue = (timer / 200) + 0.25f;
+                    ShaderValue = (timer / 20) + 0.25f;
                     yield return null;
                 }
                 break;
@@ -113,7 +177,7 @@ public class HubEvents : MonoBehaviour
                 {
                     timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue = (timer / 200) + 0.5f;
+                    ShaderValue = (timer / 20) + 0.5f;
                     yield return null;
                 }
                 break;
@@ -123,7 +187,7 @@ public class HubEvents : MonoBehaviour
                 {
                     timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue = (timer / 200) + 0.75f;
+                    ShaderValue = (timer / 20) + 0.75f;
                     yield return null;
                 }
                 Barreira.SetActive(false);
