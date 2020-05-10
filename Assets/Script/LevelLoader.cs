@@ -71,10 +71,12 @@ public class LevelLoader : MonoBehaviour
         }
         loadImage.gameObject.SetActive(false);
         MainMenuCamera.gameObject.SetActive(false);
+        MusicControl.Instance.ChangeMusic(2);
         Timeline.Play(Clips[0]);
     }
     public void Cutscene(int index)
     {
+        MusicControl.Instance.ChangeMusic(index);
         Timeline.Play(Clips[index]);
     }
 }
