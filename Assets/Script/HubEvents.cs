@@ -12,13 +12,15 @@ public class HubEvents : MonoBehaviour
     public LevelController[] Portas;
     public LevelController PortaPrincipal;
     public GameObject Barreira;
+    public GameObject Credits;
     private AudioSource audioSource;
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
     private bool IsCutscene = false;
     private const float MaxShader = -5;
     private float ShaderValue;
-
+    private bool IsHaunted;
+    public static int CutsceneIndex;
 
     private void Awake()
     {
@@ -53,6 +55,68 @@ public class HubEvents : MonoBehaviour
             audioSource.Play();
         }
     }
+    public void OffLights()
+    {
+        for (int i = 0; i < LamparinasObjective.Length; i++)
+        {
+            LamparinasObjective[i].transform.GetChild(0).transform.gameObject.SetActive(false);
+        }
+    }
+    public void FlickLights()
+    {
+        IsHaunted = !IsHaunted;
+        if (IsHaunted == false)
+        {
+            for (int i = 0; i < LamparinasObjective.Length; i++)
+            {
+                LamparinasObjective[i].transform.GetChild(0).transform.gameObject.SetActive(true);
+            }
+            StopAllCoroutines();
+        }
+        else
+        {
+            StartCoroutine(Flashing());
+        }
+    }
+    public void FadeOut()
+    {
+        Credits.SetActive(true);
+        StartCoroutine(Fade());
+    }
+    public void Creditos()
+    {
+        StartCoroutine(StartCredits());
+    }
+    private IEnumerator Fade()
+    {
+        float timer = 2;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            Credits.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, OneMinus(timer / 2));
+            yield return null;
+        }
+    }
+    private float OneMinus(float value)
+    {
+        value = (value * -1) - 1;
+        return value;
+    }
+    private IEnumerator StartCredits()
+    {
+        yield return null;
+    }
+    public IEnumerator Flashing()
+    {
+        while (IsHaunted)
+        {
+            for (int i = 0; i < LamparinasObjective.Length; i++)
+            {
+                LamparinasObjective[i].transform.GetChild(0).transform.gameObject.SetActive(!LamparinasObjective[i].transform.GetChild(0).transform.gameObject.activeSelf);
+            }
+            yield return null;
+        }
+    }
     public void OpenMainDoor(bool value)
     {
         PortaPrincipal.Open(value);
@@ -68,55 +132,63 @@ public class HubEvents : MonoBehaviour
     private IEnumerator SpawnEstatua(EstatuasMats estatua)
     {
         ShaderValue = 0;
-        while(ShaderValue > MaxShader)
+        float timer = 0;
+        float rate = 1 / MaxShader;
+        while(timer < 1)
         {
+            timer += Time.deltaTime;
             for (int i = 0; i < estatua.materials.Length; i++)
             {
                 estatua.materials[i].SetFloat("Value", ShaderValue);
             }
-            ShaderValue -= 0.05f;
-            yield return new WaitForSeconds(0.1f);
+            ShaderValue += rate;
+            yield return null;
         }
     }
     private IEnumerator EnfraquecerBarreira(int index)
     {
-        Material barreiraMat = Barreira.GetComponent<Material>();
+        Material barreiraMat = Barreira.GetComponent<MeshRenderer>().material;
+        float timer = 0;
         switch (index)
         {
             case 0:
                 ShaderValue = 0;
-                while (ShaderValue <= 0.25f)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.1f);
+                    ShaderValue = (timer / 20);
+                    yield return null;
                 }
                 break;
             case 1:
                 ShaderValue = 0.25f;
-                while (ShaderValue <= 0.5f)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    ShaderValue = (timer / 20) + 0.25f;
+                    yield return null;
                 }
                 break;
             case 2:
                 ShaderValue = 0.5f;
-                while (ShaderValue <= 0.75f)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    ShaderValue = (timer / 20) + 0.5f;
+                    yield return null;
                 }
                 break;
             case 3:
                 ShaderValue = 0.75f;
-                while (ShaderValue <= 1)
+                while (timer < 2)
                 {
+                    timer += Time.deltaTime;
                     barreiraMat.SetFloat("Barrier", ShaderValue);
-                    ShaderValue += 0.05f;
-                    yield return new WaitForSeconds(0.2f);
+                    ShaderValue = (timer / 20) + 0.75f;
+                    yield return null;
                 }
                 Barreira.SetActive(false);
                 break;

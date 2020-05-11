@@ -15,10 +15,19 @@ public class LevelLoader : MonoBehaviour
     public PlayableDirector Timeline;
     public TimelineAsset[] Clips;
     public Camera MainMenuCamera;
+    public static LevelLoader Instance;
     AsyncOperation load;
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         loadImage.gameObject.SetActive(true);
     }
     private void Start()
@@ -32,6 +41,13 @@ public class LevelLoader : MonoBehaviour
     }
     public void starGame()
     {
+        foreach (GameObject go in HubEvents.Instance.Estatuas)
+        {
+            foreach (Material mat in go.GetComponent<EstatuasMats>().materials)
+            {
+                mat.SetFloat("Value", 0);
+            }
+        }
         StartCoroutine(MasterLoader());
     }
 
@@ -40,7 +56,7 @@ public class LevelLoader : MonoBehaviour
         load = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
         while (!load.isDone)
         {
-            yield return new WaitForSeconds(.1f);
+            yield return null;
         }
     }
     private IEnumerator MasterLoader()
@@ -55,6 +71,12 @@ public class LevelLoader : MonoBehaviour
         }
         loadImage.gameObject.SetActive(false);
         MainMenuCamera.gameObject.SetActive(false);
+        MusicControl.Instance.ChangeMusic(2);
         Timeline.Play(Clips[0]);
+    }
+    public void Cutscene(int index)
+    {
+        MusicControl.Instance.ChangeMusic(index);
+        Timeline.Play(Clips[index]);
     }
 }
