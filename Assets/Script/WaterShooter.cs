@@ -31,7 +31,7 @@ public class WaterShooter : MonoBehaviour
         //direcao do disparo 
         foreach (GameObject shot in ShotWater)
         {
-            shot.transform.position += Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            shot.transform.position += Player.GetComponent<player>().eyes.direction;
 
         }
     }
