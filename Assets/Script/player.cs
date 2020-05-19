@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Timeline;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.Playables;
 
 public class player : MonoBehaviour
 {
@@ -42,6 +44,9 @@ public class player : MonoBehaviour
     public static player Instance;
     public bool CutsceneMode;
     private AudioListener audioSource;
+    Transform handOring;
+    public PlayableDirector Timeline;
+    bool isContinue;
 
 
     private void Awake()
@@ -59,6 +64,7 @@ public class player : MonoBehaviour
         portal = LayerMask.GetMask("Portal");
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         handTrue = GameObject.FindGameObjectWithTag("HandTrue");
+        isContinue = false;
         cameraTransform = Camera.main.transform;
         Jump = 2;
         index = -1;
@@ -69,12 +75,28 @@ public class player : MonoBehaviour
         audioSource = GetComponentInChildren<AudioListener>();
         take = false;
     }
+    private void Start()
+    {
+        handOring = GameObject.FindGameObjectWithTag("HandTrue").transform;
+    }
     void Update()
     {
-        transform.GetChild(0).transform.gameObject.SetActive(!CutsceneMode);
-        transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
-        audioSource.enabled = !CutsceneMode;
+
         if (CutsceneMode) return;
+        if (isContinue == false)
+        {
+            transform.GetChild(0).transform.gameObject.SetActive(!CutsceneMode);
+            transform.GetChild(2).transform.gameObject.SetActive(!CutsceneMode);
+            audioSource.enabled = !CutsceneMode;
+
+        }
+        else
+        {
+            transform.GetChild(0).transform.gameObject.SetActive(true);
+            transform.GetChild(2).transform.gameObject.SetActive(true);
+            audioSource.enabled = true;
+
+        }
         if (Pausa.activeInHierarchy == true)
         {
             Time.timeScale = 0;
@@ -84,16 +106,16 @@ public class player : MonoBehaviour
         }
         else
         {
-
             MouseConfi();
             inputs();
             Config();
             interacao();
             Time.timeScale = 1;
         }
+        Debug.Log(this.gameObject.scene.buildIndex);
 
     }
-    //configuracao do mose
+    //configuracao do mouse
     void MouseConfi()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -145,6 +167,7 @@ public class player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && objectsMove.GetComponent<TakeObject>() != null)
             {
                 objectsMove.GetComponent<TakeObject>().take = !objectsMove.GetComponent<TakeObject>().take;
+
                 take = !take;
             }
         }
@@ -280,6 +303,7 @@ public class player : MonoBehaviour
     //Inputs de comandos da Gameplay
     void inputs()
     {
+        //handTrue.transform.position = handOring.position;
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
         if (isGrounded() && velocity.y < 0)
@@ -288,7 +312,6 @@ public class player : MonoBehaviour
         }
         maxX = Mathf.Clamp(CameraController.x, -90, 90);
         CameraController += new Vector3(Input.GetAxis("Mouse Y") * Sensitivity, Input.GetAxis("Mouse X") * Sensitivity, 0);
-
         if (CameraController.x >= 60)
         {
             input = (x * cameraTransform.right + y * -cameraTransform.up) * vel * Time.deltaTime;
@@ -302,10 +325,6 @@ public class player : MonoBehaviour
             input = (x * cameraTransform.right + y * cameraTransform.forward) * vel * Time.deltaTime;
 
         }
-
-
-
-
         velocity.y += gravidade * Time.deltaTime;
         if (isGrounded() && Input.GetButtonDown("Jump") && input != Vector3.zero)
         {
@@ -323,6 +342,31 @@ public class player : MonoBehaviour
         {
             Pausa.SetActive(true);
         }
+
+    }
+    //atualiza jogador apos load 
+    public void LoadPlayer()
+    {
+        isContinue = true;
+        PlayerData data = LoadGame.LoadPlayer();
+
+        Vector3 position;
+        position.x = data.position[0] - 3;
+        position.y = data.position[1];
+        position.z = data.position[2] - 3;
+        Vector3 rotation;
+        rotation.x = data.rotation[0];
+        rotation.y = data.rotation[1];
+        rotation.z = data.rotation[2];
+
+        CameraController = rotation;
+        transform.position = position;
+        Timeline.initialTime = 38;
+
+
+
+
+        Debug.Log("load...");
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()

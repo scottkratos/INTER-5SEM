@@ -34,6 +34,15 @@ public class LevelLoader : MonoBehaviour
     {
         StartCoroutine(LateStart());
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            Timeline.time = 2200;
+
+        }
+    }
     private IEnumerator LateStart()
     {
         yield return StartCoroutine(IndividualLoader("Externo"));
@@ -71,8 +80,9 @@ public class LevelLoader : MonoBehaviour
         }
         loadImage.gameObject.SetActive(false);
         MainMenuCamera.gameObject.SetActive(false);
-        MusicControl.Instance.ChangeMusic(2);
         Timeline.Play(Clips[0]);
+        MusicControl.Instance.ChangeMusic(2);
+
     }
     public void Cutscene(int index)
     {
