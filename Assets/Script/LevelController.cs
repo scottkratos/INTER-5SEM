@@ -42,7 +42,7 @@ public class LevelController : MonoBehaviour
                 SceneManager.UnloadSceneAsync(unLoadScene);
 
             }
-
+            LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
         }
 
     }
