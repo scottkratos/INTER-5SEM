@@ -21,8 +21,10 @@ public class TakeObject : MonoBehaviour
     public GameObject Hand;
     public player Player;
     public GameObject checkAmbiente;
+    Vector3 HandOring;
     Rigidbody vaseRigidbody;
     BoxCollider vasoCollider;
+    bool toque;
     public LayerMask Grid, Ambiente;
     public Quaternion rotationOrigin;
 
@@ -34,29 +36,47 @@ public class TakeObject : MonoBehaviour
         vaseRigidbody = GetComponent<Rigidbody>();
         vasoCollider = GetComponent<BoxCollider>();
         rotationOrigin = transform.rotation;
+
+
     }
+    private void Start()
+    {
 
-
+    }
 
 
     private void LateUpdate()
     {
+        HandOring = player.Instance.gameObject.transform.GetChild(0).transform.GetChild(2).gameObject.transform.position;
         if (isGrounded() && take == true)
         {
 
-            take = false;
-            Player.take = false;
+            Hand.transform.position = Vector3.Lerp(Hand.transform.position, Player.transform.position, .1f);
+            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < .8f)
+            {
+
+                Player.take = false;
+                take = false;
+
+            }
+
         }
+
         if (NoAmbiente() && take == true)
         {
 
-            take = false;
-            Player.take = false;
+            Hand.transform.position = Vector3.Lerp(Hand.transform.position, Player.transform.position, .1f);
+            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < .8f)
+            {
 
+                Player.take = false;
+                take = false;
 
+            }
         }
         if (take == true)
         {
+
             transform.SetParent(Hand.transform, false);
             transform.position = Hand.transform.position;
             transform.rotation = Player.cameraTransform.rotation;
@@ -65,20 +85,15 @@ public class TakeObject : MonoBehaviour
         }
         else
         {
+
             transform.parent = null;
             transform.rotation = rotationOrigin;
             vaseRigidbody.isKinematic = false;
+            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < .8f)
+                Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandOring, 1);
+
 
         }
-
-
-
-
-
-
-
-
-
     }
     bool isGrounded()
     {
