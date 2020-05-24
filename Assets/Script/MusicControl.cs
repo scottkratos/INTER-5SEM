@@ -37,6 +37,14 @@ public class MusicControl : MonoBehaviour
                 Sources[1].clip = Musics[3];
                 Sources[1].Play();
                 break;
+            case 9:
+                for (int i = 0; i < Sources.Length; i++)
+                {
+                    Sources[i].Stop();
+                }
+                Sources[1].clip = Musics[9];
+                Sources[1].Play();
+                break;
             case -1:
                 StopCoroutine(Introducao);
                 for (int i = 0; i < Sources.Length; i++)

@@ -13,6 +13,7 @@ public class HubEvents : MonoBehaviour
     public LevelController PortaPrincipal;
     public GameObject Barreira;
     public GameObject Credits;
+    public Sprite RPGLogo;
     private AudioSource audioSource;
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
@@ -104,7 +105,209 @@ public class HubEvents : MonoBehaviour
     }
     private IEnumerator StartCredits()
     {
-        yield return null;
+        MusicControl.Instance.ChangeMusic(9);
+        LevelLoader.Instance.Timeline.Play(LevelLoader.Instance.Clips[6]);
+        Image bg, logo;
+        Text title, subtitle, finalText;
+        Coroutine coroutine;
+        bg = Credits.transform.GetChild(0).GetComponent<Image>();
+        logo = Credits.transform.GetChild(1).GetComponent<Image>();
+        title = Credits.transform.GetChild(2).GetComponent<Text>();
+        subtitle = Credits.transform.GetChild(3).GetComponent<Text>();
+        finalText = Credits.transform.GetChild(4).GetComponent<Text>();
+        logo.gameObject.SetActive(true);
+        yield return new WaitForSeconds(10);
+        StartCoroutine(ChangeAlpha(bg.gameObject, true, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(logo.gameObject, true, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        logo.sprite = RPGLogo;
+        coroutine = StartCoroutine(ChangeAlpha(logo.gameObject, true, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        coroutine = StartCoroutine(ChangeAlpha(logo.gameObject, true, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Equipe:";
+        subtitle.text = "Álvaro Barros – 21142585 \n Gabriel Rego dos Santos Caldeira – 20840852 \n Giuglia Tubini Ehlke – 21122736 \n Lucas Silva da Cruz – 21146351 \n Marcelo Rangel Figueiredo – 21057406 \n Paula Fernandes Mussi – 21068984 \n Rafael Pedro Cianelli – 21085972";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Produtor:";
+        subtitle.text = "Gabriel Rego dos Santos Caldeira";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Diretora de Arte:";
+        subtitle.text = "Giuglia Tubini Ehlke";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Equipe de Arte:";
+        subtitle.text = "Giuglia Tubini Ehlke \n Paula Fernandes Mussi";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Lead de Programação:";
+        subtitle.text = "Lucas Silva da Cruz";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Equipe de Programação:";
+        subtitle.text = "Lucas Silva da Cruz \n Gabriel Rego dos Santos Caldeira";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Lead de 3D:";
+        subtitle.text = "Rafael Pedro Cianelli";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Equipe de 3D:";
+        subtitle.text = "Rafael Pedro Cianelli \n Álvaro Barros \n Paula Fernandes Mussi";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Lead de Rigging:";
+        subtitle.text = "Álvaro Barros";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Lead de Sound Design:";
+        subtitle.text = "Gabriel Rego dos Santos Caldeira";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Artista VFX:";
+        subtitle.text = "Paula Fernandes Mussi";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Playtesters de Desenvolvimento:";
+        subtitle.text = "Eliel Calebi \n Henrique Andrade Pancote \n Amanda Fernandes Mussi \n Leonardo Coradi \n Arames Zaccarias \n Gabriel Alves Cianelli";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        title.text = "Agradecimentos Especiais:";
+        subtitle.text = "";
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
+        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, true));
+        yield return coroutine;
+        yield return new WaitForSeconds(5);
+        coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, false));
+        yield return coroutine;
+        yield return new WaitForSeconds(1);
+        //173 secs total
+        //23 secs p/ sala
+        //colocar load do menu
+    }
+    private IEnumerator ChangeAlpha(GameObject go, bool IsImage, float timer, bool IsFadingIn)
+    {
+        float compareTimer = timer;
+        Image image = null;
+        Text text = null;
+        if (IsImage)
+        {
+            image = go.GetComponent<Image>();
+        }
+        else
+        {
+            text = go.GetComponent<Text>();
+        }
+        while (timer > 0)
+        {
+            if (IsFadingIn)
+            {
+                if (IsImage)
+                {
+                    image.color = new Color(1, 1, 1, OneMinus(timer / compareTimer));
+                }
+                else
+                {
+                    text.color = new Color(1, 1, 1, OneMinus(timer / compareTimer));
+                }
+            }
+            else
+            {
+                if (IsImage)
+                {
+                    image.color = new Color(1, 1, 1, timer / compareTimer);
+                }
+                else
+                {
+                    text.color = new Color(1, 1, 1, timer / compareTimer);
+                }
+            }
+            timer -= Time.deltaTime;
+            yield return null;
+        }
     }
     public IEnumerator Flashing()
     {
