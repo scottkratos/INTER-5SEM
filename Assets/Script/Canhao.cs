@@ -4,29 +4,72 @@ using UnityEngine;
 
 public class Canhao : MonoBehaviour
 {
-    public GameObject posicao_inicial, posicao_final, canhao;
-    public float AnguloX, anguloY, anguloZ, TempoDePausa;
-    float velX, velY, velZ;
+    public GameObject posicao_inicial, posicao_final, canhao, agua;
+    public float Angulo, TempoDePausa;
+    float vel, velY, velZ;
     float posFinal, pos;
-    Vector3 tragetoriaInicial, tragetoriaFinal;
-    bool Destino, rotation;
-    public bool RotacaoEmX, RotacaoEmY, RotacaoEmZ;
+    Vector3 tragetoriaInicial, tragetoriaFinal, aguaInicial;
+    Quaternion rotationOring;
+    public bool DestinoInicial, rotation, rotationR, DestinoFinal;
+    public bool RotacaoEmX, RotacaoEmY, RotacaoEmZ, movimentoOn, disparo;
+    RaycastHit hit;
+    Vector3 RayOring;
     // Start is called before the first frame update
     void Start()
     {
-
+        rotationOring = transform.rotation;
+        aguaInicial = agua.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        movimento();
-        if (RotacaoEmX)
-            rotacaoX();
-        if (RotacaoEmY)
-            rotacaoy();
-        if (RotacaoEmZ)
-            rotacaoZ();
+        if (rotation)
+        {
+            vel = Angulo;
+
+        }
+        if (rotationR)
+        {
+            vel = -Angulo;
+
+        }
+        if (rotation == false && rotationR == false)
+        {
+            vel = rotationOring.x;
+
+        }
+        if (disparo)
+        {
+            agua.SetActive(true);
+
+            agua.transform.Translate(-.8f, 0, 0);
+            if (Physics.Raycast(transform.GetChild(0).transform.position, transform.GetChild(0).transform.up, out hit))
+            {
+                if (hit.collider.tag == "Canhao")
+                {
+                    hit.collider.GetComponent<Canhao>().disparo = true;
+                }
+                if (hit.transform.tag == "Vaso")
+                {
+                    hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
+                }
+                if (hit.transform.tag == "Gramofone")
+                {
+                    hit.transform.gameObject.GetComponent<Gramofone>().animator.SetBool("WaterBool", true);
+                }
+            }
+            Invoke("disparoR", .1f);
+        }
+        rotacao();
+        rotacaoR();
+        if (movimentoOn)
+            movimento();
+        Debug.DrawRay(transform.GetChild(0).transform.position, transform.GetChild(0).transform.up, Color.blue, 5);
+
+
+
+
     }
     private void OnDrawGizmos()
     {
@@ -37,108 +80,93 @@ public class Canhao : MonoBehaviour
     void movimento()
     {
 
-        if (Destino == false)
+        if (DestinoFinal == true)
         {
             tragetoriaInicial = Vector3.Lerp(canhao.transform.position, posicao_final.transform.position, .1f);
             canhao.transform.position = tragetoriaInicial;
-            if (Vector3.Distance(canhao.transform.position, posicao_final.transform.position) < 0.1f)
-                Invoke("Destinoinical", TempoDePausa);
+
         }
-        if (Destino == true)
+        if (DestinoInicial == true)
         {
             tragetoriaFinal = Vector3.Lerp(canhao.transform.position, posicao_inicial.transform.position, .1f);
             canhao.transform.position = tragetoriaFinal;
-            if (Vector3.Distance(canhao.transform.position, posicao_inicial.transform.position) < 0.1f)
-                Invoke("Destinofinal", TempoDePausa);
+
         }
+
     }
-    void rotacaoX()
-    {
-        StartCoroutine(RotacaoX());
-        canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.x + velX, canhao.transform.rotation.eulerAngles.y, canhao.transform.rotation.eulerAngles.z);
-    }
-    void rotacaoy()
-    {
-        StartCoroutine(RotacaoY());
-        canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.eulerAngles.x, canhao.transform.rotation.y + velY, canhao.transform.rotation.eulerAngles.z);
-    }
-    void rotacaoZ()
-    {
-        StartCoroutine(RotacaoZ());
-        canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.eulerAngles.x, canhao.transform.rotation.eulerAngles.y, canhao.transform.rotation.z + velZ);
-    }
-    IEnumerator RotacaoX()
+    void rotacao()
     {
 
-        yield return new WaitForSeconds(0.1f);
-        if (rotation == false)
+        if (RotacaoEmX == true)
         {
-            yield return new WaitForSeconds(0.1f);
-            velX -= 1;
-            if (velX <= -AnguloX)
-                rotation = true;
-        }
-        yield return new WaitForSeconds(0.1f);
-        if (rotation == true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            velX += 1;
-            if (velX >= AnguloX)
-                rotation = false;
-        }
 
+            canhao.transform.rotation = Quaternion.Euler(vel, canhao.transform.rotation.eulerAngles.y, canhao.transform.rotation.eulerAngles.z);
+
+        }
+        if (RotacaoEmY == true)
+        {
+
+            canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.eulerAngles.x, vel, canhao.transform.rotation.z);
+
+        }
+        if (RotacaoEmZ == true)
+        {
+
+            canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.eulerAngles.x, canhao.transform.rotation.eulerAngles.y, vel);
+
+        }
     }
-    IEnumerator RotacaoY()
+    void rotacaoR()
+    {
+        if (RotacaoEmX == true)
+        {
+
+            canhao.transform.rotation = Quaternion.Euler(vel, canhao.transform.rotation.eulerAngles.y, canhao.transform.rotation.eulerAngles.z);
+
+        }
+        if (RotacaoEmY == true)
+        {
+
+            canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.eulerAngles.x, vel, canhao.transform.rotation.z);
+
+        }
+        if (RotacaoEmZ == true)
+        {
+
+            canhao.transform.rotation = Quaternion.Euler(canhao.transform.rotation.eulerAngles.x, canhao.transform.rotation.eulerAngles.y, vel);
+
+        }
+    }
+    IEnumerator Rotacao(float angulo)
     {
 
-        yield return new WaitForSeconds(0.1f);
-        if (rotation == false)
-        {
-            yield return new WaitForSeconds(0.1f);
-            velY -= 1;
-            if (velY <= -anguloY)
-                rotation = true;
-        }
-        yield return new WaitForSeconds(0.1f);
-        if (rotation == true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            velY += 1;
-            if (velY >= anguloY)
-                rotation = false;
-        }
+
+
+        yield return new WaitForSeconds(0.5f);
+        if (vel <= angulo)
+            vel += 3;
+        StopCoroutine(Rotacao(angulo));
+
 
     }
-    IEnumerator RotacaoZ()
+    IEnumerator RotacaoR(float angulo)
     {
 
-        yield return new WaitForSeconds(0.1f);
-        if (rotation == false)
-        {
-            yield return new WaitForSeconds(0.1f);
-            velZ -= 1;
-            if (velZ <= -anguloZ)
-                rotation = true;
-        }
-        yield return new WaitForSeconds(0.1f);
-        if (rotation == true)
-        {
-            yield return new WaitForSeconds(0.1f);
-            velZ += 1;
-            if (velZ >= anguloZ)
-                rotation = false;
-        }
+
+
+        yield return new WaitForSeconds(0.5f);
+        if (vel >= angulo)
+            vel -= 3;
+        StopCoroutine(RotacaoR(angulo));
+
 
     }
-    void Destinoinical()
+    void disparoR()
     {
-        Destino = true;
+        disparo = false;
+        agua.SetActive(false);
+        agua.transform.position = canhao.transform.position;
     }
-    void Destinofinal()
-    {
-        Destino = false;
-    }
-
 
 
 

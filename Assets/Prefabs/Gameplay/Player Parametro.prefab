@@ -465,6 +465,7 @@ GameObject:
   - component: {fileID: 3710963521927909534}
   - component: {fileID: 3710963521927909521}
   - component: {fileID: 3710963521927909531}
+  - component: {fileID: 3679750493038853430}
   m_Layer: 11
   m_Name: Player Parametro
   m_TagString: Player
@@ -569,7 +570,6 @@ MonoBehaviour:
     m_Bits: 1
   power: {fileID: 0}
   handTrue: {fileID: 2530330505399653980}
-  Ice: {fileID: 5622324764027148770, guid: b25ac168f11ff7947bec897bd475bb88, type: 3}
   CameraController: {x: 0, y: 0, z: 0}
   index: 0
   portalIndex: 0
@@ -641,6 +641,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3679750493038853430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3710963521927909528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40236263ac86a924b8b9b45440cb3911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmountWater: 0
+  Gelo: {fileID: 0}
+  player: {fileID: 0}
+  take: 0
+  inHand: 0
 --- !u!1 &3710963522252651218
 GameObject:
   m_ObjectHideFlags: 0

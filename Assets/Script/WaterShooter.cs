@@ -119,6 +119,12 @@ public class WaterShooter : MonoBehaviour
 
 
             }
+            if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Canhao" && FindObjectOfType<Orbit>().InHand == true)
+            {
+                hit.transform.gameObject.GetComponent<Canhao>().disparo = true;
+
+
+            }
         }
 
     }

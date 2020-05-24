@@ -377,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: vase.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
@@ -388,7 +388,7 @@ PrefabInstance:
         type: 3}
       propertyPath: vase.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 654403320}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: vase.Array.data[1]
@@ -407,7 +407,7 @@ PrefabInstance:
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: Level
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
@@ -5092,6 +5092,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 625679279}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &625679281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375736648462667259, guid: c536f5d8865cd7e419cd24fe45f6aaee,
+    type: 3}
+  m_PrefabInstance: {fileID: 625679279}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &646687042
 GameObject:
   m_ObjectHideFlags: 0
@@ -7950,12 +7956,12 @@ PrefabInstance:
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: vase.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: gramofone.Array.size
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
@@ -7964,9 +7970,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vasoFixo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: vase.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 654403320}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
       propertyPath: vase.Array.data[1]
@@ -8027,6 +8038,16 @@ PrefabInstance:
       propertyPath: gramofone.Array.data[5]
       value: 
       objectReference: {fileID: 1101970867}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.data[0]
+      value: 
+      objectReference: {fileID: 1329300927}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.data[1]
+      value: 
+      objectReference: {fileID: 625679281}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1014873018 stripped
@@ -11237,6 +11258,12 @@ PrefabInstance:
 --- !u!4 &1329300926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 784440612606738408, guid: c536f5d8865cd7e419cd24fe45f6aaee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1329300925}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1329300927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375736648462667259, guid: c536f5d8865cd7e419cd24fe45f6aaee,
     type: 3}
   m_PrefabInstance: {fileID: 1329300925}
   m_PrefabAsset: {fileID: 0}

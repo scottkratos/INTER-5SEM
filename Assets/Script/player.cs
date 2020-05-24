@@ -10,7 +10,7 @@ using UnityEngine.Playables;
 public class player : MonoBehaviour
 {
     Vector3 input, velocity;
-    LayerMask water, Puzzle, portal;
+    LayerMask water, Puzzle, portal, Ice;
     [HideInInspector]
     public bool jumpBool, vision, take;
     public float vel, Sensitivity;
@@ -24,8 +24,8 @@ public class player : MonoBehaviour
     public LayerMask JumpLayerMask;
     public GameObject power, handTrue;
     [HideInInspector]
-    public GameObject Ice;
-    [HideInInspector]
+    //public GameObject Ice;
+    // [HideInInspector]
     public Vector3 CameraController;
     [HideInInspector]
     public int index, portalIndex, ShotIndex, animationIndex;
@@ -57,11 +57,12 @@ public class player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         inHand = power.GetComponent<Orbit>().InHand;
         power = GameObject.FindGameObjectWithTag("Power");
-        Ice = GameObject.FindGameObjectWithTag("Ice");
+        // Ice = GameObject.FindGameObjectWithTag("Ice");
         checkGround = GameObject.FindGameObjectWithTag("CheckGraound").transform;
         water = LayerMask.GetMask("Water");
         Puzzle = LayerMask.GetMask("Puzzle");
         portal = LayerMask.GetMask("Portal");
+        Ice = LayerMask.GetMask("Ice");
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
         handTrue = GameObject.FindGameObjectWithTag("HandTrue");
         isContinue = false;
@@ -201,6 +202,13 @@ public class player : MonoBehaviour
                     portais[1].transform.rotation = hit.rigidbody.rotation;
                 }
             }
+
+        }
+        //intercao com o gelo
+        if (Physics.Raycast(eyes, out hit, 5) && Input.GetKeyDown(KeyCode.E) && hit.collider.transform.tag != null)
+        {
+            if (hit.collider.transform.tag == "Ice")
+                hit.collider.GetComponent<IceTranform>().take = !hit.collider.GetComponent<IceTranform>().take;
 
         }
         // Ativacao da orbis 

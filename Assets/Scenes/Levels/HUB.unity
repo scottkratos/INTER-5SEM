@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 51.381756, g: 73.26971, b: 80.35406, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5085,6 +5085,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 3679750493038853430, guid: 1386c075ac705a2469fd50ea70a4ef10,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679750493038853430, guid: 1386c075ac705a2469fd50ea70a4ef10,
+        type: 3}
+      propertyPath: Gelo
+      value: 
+      objectReference: {fileID: 279848748}
     - target: {fileID: 3710963520903768036, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
       propertyPath: m_IsActive
@@ -8153,6 +8163,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272424104}
   m_CullTransparentMesh: 0
+--- !u!1 &279848748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2058673246974969106, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1899543231277500997}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &297898705
 GameObject:
   m_ObjectHideFlags: 0
@@ -35823,6 +35839,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2058673246974969106, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2911122616911981632, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
         type: 3}
       propertyPath: hand
@@ -35933,6 +35954,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6998164845189205478, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1649078085}
     - target: {fileID: 8453127254538795437, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -3237,6 +3237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
         type: 3}
+      propertyPath: vasoFixo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
       propertyPath: Door
       value: 
       objectReference: {fileID: 1599565184}
@@ -3280,6 +3285,11 @@ PrefabInstance:
       propertyPath: GridEvent.Array.data[0]
       value: 
       objectReference: {fileID: 1871907045}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.data[0]
+      value: 
+      objectReference: {fileID: 2109188245}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &511743826 stripped
@@ -15764,6 +15774,12 @@ PrefabInstance:
 --- !u!4 &2109188244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 784440612606738408, guid: c536f5d8865cd7e419cd24fe45f6aaee,
+    type: 3}
+  m_PrefabInstance: {fileID: 2109188243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2109188245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375736648462667259, guid: c536f5d8865cd7e419cd24fe45f6aaee,
     type: 3}
   m_PrefabInstance: {fileID: 2109188243}
   m_PrefabAsset: {fileID: 0}

@@ -11,10 +11,13 @@ public class Button : MonoBehaviour
     public Animator anim;
     public Transform[] vase;
     public GameObject[] gramofone;
+    public GameObject[] vasoFixo;
     public GameObject[] GridEvent;
+    public GameObject[] espinhos;
+    public GameObject canhao;
     [HideInInspector]
     public bool operDoorEvent, GridOrdem;
-    public bool Restard, OperDoor, Grid;
+    public bool Restard, OperDoor, Grid, rotaoHorario, rotaoAntehoraria, DestinoInicial, DestinoFinal, espinho;
     public AudioSource ButtonSong, finalPuzzle;
     public GameObject checkAmbient;
     public LayerMask vasolayer, PlayerLayer;
@@ -257,6 +260,26 @@ public class Button : MonoBehaviour
             {
                 GetComponent<Animator>().SetBool("ButtonBool", false);
             }
+            if (rotaoHorario == true)
+            {
+                canhao.GetComponent<Canhao>().rotation = false;
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+            }
+            if (rotaoAntehoraria == true)
+            {
+                canhao.GetComponent<Canhao>().rotationR = false;
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+            }
+            if (DestinoInicial == true)
+            {
+                canhao.GetComponent<Canhao>().DestinoInicial = false;
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+            }
+            if (DestinoFinal == true)
+            {
+                canhao.GetComponent<Canhao>().DestinoFinal = false;
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+            }
         }
         //contado do jogador
         if (PlayerDown())
@@ -268,7 +291,25 @@ public class Button : MonoBehaviour
                 openDoor();
             if (Grid == true)
                 GridOrdem = true;
-            Debug.Log("vai");
+            if (rotaoHorario == true)
+                canhao.GetComponent<Canhao>().rotation = true;
+            if (rotaoAntehoraria == true)
+                canhao.GetComponent<Canhao>().rotationR = true;
+            if (DestinoInicial == true)
+                canhao.GetComponent<Canhao>().DestinoInicial = true;
+            if (DestinoFinal == true)
+                canhao.GetComponent<Canhao>().DestinoFinal = true;
+            if (espinho == true)
+            {
+                foreach (var item in espinhos)
+                {
+                    item.GetComponent<Espinho>().ButtonAct = true;
+
+                }
+            }
+
+
+
         }
     }
     void openDoor()
@@ -294,6 +335,10 @@ public class Button : MonoBehaviour
             {
                 item.GetComponent<Animator>().SetBool("WaterBool", false);
             }
+            foreach (var item in vasoFixo)
+            {
+                item.GetComponent<Animator>().SetBool("Water", true);
+            }
 
         }
     }
@@ -314,8 +359,8 @@ public class Button : MonoBehaviour
         return Physics.CheckSphere(checkAmbient.transform.position, .8f, PlayerLayer);
 
     }
-   
-   
+
+
 
 }
 
