@@ -219,7 +219,7 @@ public class HubEvents : MonoBehaviour
         yield return coroutine;
         yield return new WaitForSeconds(1);
         title.text = "Lead de Sound Design:";
-        subtitle.text = "Gabriel Rego dos Santos Caldeira";
+        subtitle.text = "Marcelo Rangel Figueiredo";
         StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
         coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
         yield return coroutine;
@@ -248,24 +248,14 @@ public class HubEvents : MonoBehaviour
         coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
         yield return coroutine;
         yield return new WaitForSeconds(1);
-        title.text = "Agradecimentos Especiais:";
-        subtitle.text = "";
-        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, true));
-        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, true));
-        yield return coroutine;
-        yield return new WaitForSeconds(5);
-        StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
-        coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
-        yield return coroutine;
-        yield return new WaitForSeconds(1);
         coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, true));
         yield return coroutine;
         yield return new WaitForSeconds(5);
         coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, false));
         yield return coroutine;
         yield return new WaitForSeconds(1);
-        //173 secs total
-        //23 secs p/ sala
+        //163 secs total
+        //21 secs p/ sala
         //colocar load do menu
     }
     private IEnumerator ChangeAlpha(GameObject go, bool IsImage, float timer, bool IsFadingIn)
