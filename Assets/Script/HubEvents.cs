@@ -106,8 +106,8 @@ public class HubEvents : MonoBehaviour
     private IEnumerator StartCredits()
     {
         MusicControl.Instance.ChangeMusic(9);
+        LevelLoader.Instance.Timeline.initialTime = 0;
         LevelLoader.Instance.Timeline.Play(LevelLoader.Instance.Clips[6]);
-        LevelLoader.Instance.Timeline.time = 0;
         Image bg, logo;
         Text title, subtitle, finalText;
         Coroutine coroutine;
