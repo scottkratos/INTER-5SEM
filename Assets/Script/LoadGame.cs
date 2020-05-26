@@ -15,8 +15,25 @@ public static class LoadGame
         string path = Application.persistentDataPath + "/Player.fun";
         FileStream stream = new FileStream(path, FileMode.Create);
         PlayerData data = new PlayerData(player);
+
         formatter.Serialize(stream, data);
         stream.Close();
+
+    }
+    public static void Savecutscene(CutscenePrepare cutsceneControl)
+    {
+
+
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/cutscene.fun";
+        FileStream stream = new FileStream(path, FileMode.Create);
+        CutSceneData data = new CutSceneData(cutsceneControl);
+        formatter.Serialize(stream, data);
+        stream.Close();
+
+
+
     }
     public static PlayerData LoadPlayer()
     {
@@ -28,7 +45,7 @@ public static class LoadGame
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
             stream.Close();
             return data;
-                
+
         }
         else
         {
@@ -40,7 +57,29 @@ public static class LoadGame
 
 
     }
+    public static CutSceneData LoadCutscene()
+    {
+        string path = Application.persistentDataPath + "/cutscene.fun";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
 
+            CutSceneData data = formatter.Deserialize(stream) as CutSceneData;
+            stream.Close();
+            return data;
+
+        }
+        else
+        {
+
+            Debug.LogError("Save file not found is" + path);
+            return null;
+        }
+
+
+
+    }
 
 
 

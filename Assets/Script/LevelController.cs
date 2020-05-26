@@ -34,15 +34,20 @@ public class LevelController : MonoBehaviour
             DoorClosed = true;
             portao.SetBool("DoorBool", false);
             Scene s = SceneManager.GetSceneByName(level);
-            SceneManager.MoveGameObjectToScene(other.gameObject, s);
-            GameObject[] gameObjects = s.GetRootGameObjects();
-            if (gameObjects.Any(g => g.gameObject.tag == "Player") == true && isUnload == true)
-            {
-                Scene unLoadScene = SceneManager.GetSceneByName(UnLoad);
-                SceneManager.UnloadSceneAsync(unLoadScene);
-
-            }
+            // SceneManager.MoveGameObjectToScene(other.gameObject, s);
+            //GameObject[] gameObjects = s.GetRootGameObjects();
+            //if (gameObjects.Any(g => g.gameObject.tag == "Player") == true && isUnload == true)
+            //{
+            //    Scene unLoadScene = SceneManager.GetSceneByName(UnLoad);
+            //    SceneManager.UnloadSceneAsync(unLoadScene);
+            //
+            //}
             LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
+
+
+
+
+
         }
 
     }
