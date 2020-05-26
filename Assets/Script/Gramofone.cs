@@ -7,7 +7,7 @@ public class Gramofone : MonoBehaviour
 {
     public GameObject[] evetObject;
     public Animator animator;
-    public bool Door, Grid, Button, FullWater;
+    public bool Door, Grid, Button, FullWater, espinho;
     [HideInInspector]
     public bool DoorEvent, GridOrdem;
     public int Level;
@@ -57,6 +57,14 @@ public class Gramofone : MonoBehaviour
         {
             GridOrdem = true;
         }
+        if (espinho == true)
+        {
+            foreach (var item in evetObject)
+            {
+                item.GetComponent<Espinho>().ButtonAct = !item.GetComponent<Espinho>().ButtonAct;
+            }
+
+        }
     }
 
 
@@ -83,7 +91,17 @@ public class Gramofone : MonoBehaviour
 
         DoorEvent = false;
         GridOrdem = false;
+        if (espinho == true)
+        {
+            foreach (var item in evetObject)
+            {
+                if (item.GetComponent<Espinho>().ButtonAct == false)
+                    item.GetComponent<Espinho>().ButtonAct = false;
+                if (item.GetComponent<Espinho>().ButtonAct == true)
+                    item.GetComponent<Espinho>().ButtonAct = true;
+            }
 
+        }
     }
 
 }

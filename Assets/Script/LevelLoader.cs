@@ -16,7 +16,9 @@ public class LevelLoader : MonoBehaviour
     public TimelineAsset[] Clips;
     public Camera MainMenuCamera;
     public static LevelLoader Instance;
-    AsyncOperation load;
+    bool starGameOn;
+    public AsyncOperation load;
+    public float timelevel;
 
     private void Awake()
     {
@@ -39,9 +41,10 @@ public class LevelLoader : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
-            Timeline.time = 2200;
+            Timeline.time = Timeline.duration;
 
         }
+
     }
     private IEnumerator LateStart()
     {
@@ -57,14 +60,28 @@ public class LevelLoader : MonoBehaviour
                 mat.SetFloat("Value", 0);
             }
         }
+        starGameOn = true;
+        StartCoroutine(MasterLoader());
+
+    }
+    public void LoadGameScene()
+    {
+        foreach (GameObject go in HubEvents.Instance.Estatuas)
+        {
+            foreach (Material mat in go.GetComponent<EstatuasMats>().materials)
+            {
+                mat.SetFloat("Value", 0);
+            }
+        }
+
         StartCoroutine(MasterLoader());
     }
-
     private IEnumerator IndividualLoader(string level)
     {
         load = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
         while (!load.isDone)
         {
+
             yield return null;
         }
     }
@@ -77,12 +94,25 @@ public class LevelLoader : MonoBehaviour
             if (Levels[i] == "Externo" || Levels[i] == "HUB") continue;
             coroutine = StartCoroutine(IndividualLoader(Levels[i]));
             yield return coroutine;
+
         }
         loadImage.gameObject.SetActive(false);
+
         MainMenuCamera.gameObject.SetActive(false);
         Timeline.initialTime = 0;
-        Timeline.Play(Clips[0]);
+        if (starGameOn)
+            Timeline.Play(Clips[0]);
+        if (starGameOn == false)
+        {
+            player.Instance.CutsceneMode = false;
+            CutSceneData dataCut = LoadGame.LoadCutscene();
+            Debug.Log(dataCut.level);
+
+            if (dataCut.level == 9)
+                Invoke("CutsceneLoad", .5f);
+        }
         MusicControl.Instance.ChangeMusic(2);
+
     }
     public void Cutscene(int index)
     {
@@ -90,4 +120,15 @@ public class LevelLoader : MonoBehaviour
         Timeline.initialTime = 0;
         Timeline.Play(Clips[index]);
     }
+    public void CutsceneLoad()
+    {
+        CutSceneData dataCut = LoadGame.LoadCutscene();
+        Timeline.Play(Clips[dataCut.index]);
+    }
+
+
+
+
+
+
 }

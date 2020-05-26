@@ -6632,7 +6632,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 917089520}
-        m_MethodName: starGame
+        m_MethodName: LoadGameScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14790,6 +14790,11 @@ PrefabInstance:
       propertyPath: CutsceneDoor
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2452556726996311047, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4483031116882427707, guid: f9e7b4bec1033104e945e55048b05262,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14875,7 +14880,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 793743042}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04bbac960b996484e8477f4415349345, type: 3}
   m_Name: 
@@ -16530,6 +16535,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 242c3328ce9c54a4f8ad4f5d483c2b6d, type: 2}
   - {fileID: 11400000, guid: d690a0b2b1500354bb9c63d62ee5725a, type: 2}
   MainMenuCamera: {fileID: 741862516}
+  timelevel: 0
 --- !u!114 &917089521
 MonoBehaviour:
   m_ObjectHideFlags: 0

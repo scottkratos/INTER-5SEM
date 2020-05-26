@@ -8,6 +8,7 @@ public class PlayerData
     public float[] position;
     public float[] indexLevel;
     public float[] rotation;
+    public float index;
 
     public PlayerData(player player)
     {
@@ -17,9 +18,13 @@ public class PlayerData
         position[1] = player.transform.position.y;
         position[2] = player.transform.position.z;
         indexLevel = new float[3];
-        indexLevel[0] = player.gameObject.scene.buildIndex;
-        indexLevel[1] = player.gameObject.scene.buildIndex + 1;
-        indexLevel[2] = player.gameObject.scene.buildIndex - 1;
+        if (player.gameObject.scene.buildIndex != 0)
+        {
+            indexLevel[0] = player.gameObject.scene.buildIndex;
+            indexLevel[1] = player.gameObject.scene.buildIndex + 1;
+            indexLevel[2] = player.gameObject.scene.buildIndex - 1;
+
+        }
         rotation = new float[3];
         rotation[0] = player.transform.rotation.eulerAngles.x;
         rotation[1] = player.transform.rotation.eulerAngles.y;

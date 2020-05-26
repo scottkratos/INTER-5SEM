@@ -47,7 +47,7 @@ public class player : MonoBehaviour
     Transform handOring;
     public PlayableDirector Timeline;
     bool isContinue;
-
+    float loadtime;
 
     private void Awake()
     {
@@ -113,7 +113,8 @@ public class player : MonoBehaviour
             interacao();
             Time.timeScale = 1;
         }
-        Debug.Log(this.gameObject.scene.buildIndex);
+
+
 
     }
     //configuracao do mouse
@@ -355,26 +356,31 @@ public class player : MonoBehaviour
     //atualiza jogador apos load 
     public void LoadPlayer()
     {
+
         isContinue = true;
         PlayerData data = LoadGame.LoadPlayer();
-
         Vector3 position;
-        position.x = data.position[0] - 3;
+        position.x = data.position[0];
         position.y = data.position[1];
-        position.z = data.position[2] - 3;
+        position.z = data.position[2];
         Vector3 rotation;
         rotation.x = data.rotation[0];
         rotation.y = data.rotation[1];
         rotation.z = data.rotation[2];
-
         CameraController = rotation;
         transform.position = position;
-        Timeline.initialTime = 38;
-
-
-
-
         Debug.Log("load...");
+
+
+
+
+
+
+
+
+
+
+
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
@@ -385,6 +391,21 @@ public class player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
+
+    }
+    void cutsceneFalse()
+    {
+
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "Cutscene")
+        {
+            LoadGame.Savecutscene(other.gameObject.GetComponent<CutscenePrepare>());
+            Debug.Log("save");
+        }
 
     }
 }

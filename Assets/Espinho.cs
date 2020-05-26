@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Espinho : MonoBehaviour
 {
-    public bool button, tempo, anguloX, anguloY, Positivo, ButtonAct;
+    public bool button, tempo, anguloX, anguloY, anguloZ, Positivo, ButtonAct;
     Vector3 posicao;
     float tempoDuracao, tempoFinal;
-    bool vaila;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class Espinho : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(tempoDuracao);
+       
         tempoFinal += Time.deltaTime;
         if (tempo == true)
         {
@@ -81,8 +81,36 @@ public class Espinho : MonoBehaviour
             }
 
         }
+        if (tempo && anguloZ && Positivo == false)
+        {
+            if (tempoDuracao >= tempoFinal)
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z), 0.5f);
 
+            }
+            else
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z - 2f), .5f);
+                if (tempoDuracao + 1.5f <= tempoFinal)
+                    tempoFinal = 0;
+            }
 
+        }
+        if (tempo && anguloZ && Positivo == true)
+        {
+            if (tempoDuracao >= tempoFinal)
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z), 0.5f);
+
+            }
+            else
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z + 2f), .5f);
+                if (tempoDuracao + 1.5f <= tempoFinal)
+                    tempoFinal = 0;
+            }
+
+        }
 
     }
     void espinhoButton()
