@@ -262,22 +262,38 @@ public class Button : MonoBehaviour
             }
             if (rotaoHorario == true)
             {
-                canhao.GetComponent<Canhao>().rotation = false;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().rotation = false;
+                }
+
                 GetComponent<Animator>().SetBool("ButtonBool", false);
             }
             if (rotaoAntehoraria == true)
             {
-                canhao.GetComponent<Canhao>().rotationR = false;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().rotationR = false;
+                }
+
                 GetComponent<Animator>().SetBool("ButtonBool", false);
             }
             if (DestinoInicial == true)
             {
-                canhao.GetComponent<Canhao>().DestinoInicial = false;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().DestinoInicial = false;
+                }
+
                 GetComponent<Animator>().SetBool("ButtonBool", false);
             }
             if (DestinoFinal == true)
             {
-                canhao.GetComponent<Canhao>().DestinoFinal = false;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().DestinoFinal = false;
+                }
+
                 GetComponent<Animator>().SetBool("ButtonBool", false);
             }
         }
