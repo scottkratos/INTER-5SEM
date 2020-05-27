@@ -103,6 +103,38 @@ public class HubEvents : MonoBehaviour
         value = (value * -1) - 1;
         return value;
     }
+    private IEnumerator Transicao(Image img)
+    {
+        Coroutine coroutine;
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+        yield return new WaitForSeconds(21);
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
+    }
     private IEnumerator StartCredits()
     {
         MusicControl.Instance.ChangeMusic(9);
@@ -118,6 +150,7 @@ public class HubEvents : MonoBehaviour
         finalText = Credits.transform.GetChild(4).GetComponent<Text>();
         logo.gameObject.SetActive(true);
         yield return new WaitForSeconds(10);
+        StartCoroutine(Transicao(bg));
         StartCoroutine(ChangeAlpha(bg.gameObject, true, 2, false));
         coroutine = StartCoroutine(ChangeAlpha(logo.gameObject, true, 2, false));
         yield return coroutine;
@@ -256,7 +289,7 @@ public class HubEvents : MonoBehaviour
         yield return coroutine;
         yield return new WaitForSeconds(1);
         //163 secs total
-        //21 secs p/ sala
+        //22 secs p/ sala
         //colocar load do menu
     }
     private IEnumerator ChangeAlpha(GameObject go, bool IsImage, float timer, bool IsFadingIn)
