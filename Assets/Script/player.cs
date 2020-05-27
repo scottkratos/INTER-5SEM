@@ -129,7 +129,6 @@ public class player : MonoBehaviour
     {
         //direcao da ray de visao
         eyes = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         //atira 
         if (Input.GetMouseButtonDown(0) && power.GetComponent<Orbit>().InHand == true)
         {
@@ -212,6 +211,12 @@ public class player : MonoBehaviour
                 hit.collider.GetComponent<IceTranform>().take = !hit.collider.GetComponent<IceTranform>().take;
 
         }
+        //interacao com vaso fixo
+        if (Physics.Raycast(eyes, out hit) && hit.collider.transform.tag == "VasoFixo" && Input.GetMouseButtonDown(0))
+        {
+            hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", true);
+            hit.transform.gameObject.GetComponent<VasoFixo>().NotWater = false;
+        }
         // Ativacao da orbis 
         switch (index)
         {
@@ -266,6 +271,7 @@ public class player : MonoBehaviour
                 StopCoroutine(ShotInHand());
                 break;
         }
+
     }
     // configuracao para Gameplayer
     void Config()
@@ -356,7 +362,6 @@ public class player : MonoBehaviour
     //atualiza jogador apos load 
     public void LoadPlayer()
     {
-
         isContinue = true;
         PlayerData data = LoadGame.LoadPlayer();
         Vector3 position;
@@ -370,17 +375,6 @@ public class player : MonoBehaviour
         CameraController = rotation;
         transform.position = position;
         Debug.Log("load...");
-
-
-
-
-
-
-
-
-
-
-
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
@@ -391,11 +385,6 @@ public class player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         power.GetComponent<Orbit>().InHand = false;
-
-    }
-    void cutsceneFalse()
-    {
-
 
     }
     private void OnTriggerEnter(Collider other)

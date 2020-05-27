@@ -7,7 +7,7 @@ public class VasoFixo : MonoBehaviour
     Ray oring;
     public RaycastHit hit;
     Transform Player;
-
+    public bool NotWater;
 
     private void Awake()
     {
@@ -34,6 +34,11 @@ public class VasoFixo : MonoBehaviour
                 Player.GetComponent<player>().ShotIndex = 0;
                 Player.GetComponent<player>().index = 4;
             }
+
+        }
+        if (NotWater == true)
+        {
+            gameObject.GetComponent<Animator>().SetBool("Water", false);
 
         }
     }
