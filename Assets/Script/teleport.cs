@@ -4,30 +4,52 @@ using UnityEngine;
 
 public class teleport : MonoBehaviour
 {
-    public GameObject player;
-    public Transform reciever;
+    public GameObject player, agua, aguaRespaw;
+    public GameObject reciever;
     float anglePortalZ, anglePortalX;
     float RorationPortalZ, RotationPortalX;
     public bool playerIsOverLapping = false;
+    public bool disparo;
+    public Ray rayDirecion;
+    RaycastHit hit;
+    public static teleport instace;
 
+
+    private void Awake()
+    {
+        instace = this;
+    }
+    private void Start()
+    {
+        rayDirecion.origin = transform.position;
+        rayDirecion.direction = transform.forward;
+    }
 
     void Update()
     {
         AnglePortal();
-        if (playerIsOverLapping == true)
+        aguaRespaw.transform.position = rayDirecion.origin;
+        Debug.DrawRay(rayDirecion.origin, rayDirecion.direction);
+        if (Physics.Raycast(rayDirecion, out hit))
         {
+            if (disparo == true)
+            {
+                Instantiate(agua,aguaRespaw.transform).SetActive(true);
+                // agua.transform.position = hit.transform.position;
+                agua.transform.Translate(hit.transform.right);
+            }
 
-            player.transform.position = new Vector3(reciever.position.x + anglePortalX, reciever.position.y, reciever.position.z + anglePortalZ);
+
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            playerIsOverLapping = true;
             FindObjectOfType<player>().CameraController.y = 0;
             FindObjectOfType<player>().CameraController.y += FindObjectOfType<player>().transform.rotation.y + RotationPortalX;
-            playerIsOverLapping = true;
-
+            player.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y, reciever.transform.position.z + anglePortalZ);
 
 
         }

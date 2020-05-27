@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour
     public string level, UnLoad;
     [SerializeField]
     private Animator portao;
-    public bool CutsceneDoor, isUnload, DoorClosed;
+    public bool CutsceneDoor, isUnload, DoorClosed, cutSceneLoad;
     Scene s;
     Transform player;
 
@@ -42,7 +42,7 @@ public class LevelController : MonoBehaviour
             //    SceneManager.UnloadSceneAsync(unLoadScene);
             //
             //}
-            LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
+           //LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
 
 
 

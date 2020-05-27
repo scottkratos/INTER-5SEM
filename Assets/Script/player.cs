@@ -42,7 +42,7 @@ public class player : MonoBehaviour
     public CanvasRenderer Menu, load;
     public GameObject Pausa;
     public static player Instance;
-    public bool CutsceneMode;
+    public bool CutsceneMode, CutSceneLoad;
     private AudioListener audioSource;
     Transform handOring;
     public PlayableDirector Timeline;
@@ -194,8 +194,8 @@ public class player : MonoBehaviour
                 }
                 if (portalIndex == 1)
                 {
-                    portais[0].transform.position = hit.rigidbody.position;
-                    portais[0].transform.rotation = hit.rigidbody.rotation;
+                    portais[0].transform.position = hit.collider.gameObject.transform.position;
+                    portais[0].transform.rotation = hit.collider.gameObject.transform.rotation;
                 }
                 if (portalIndex == 2)
                 {
@@ -406,6 +406,20 @@ public class player : MonoBehaviour
             LoadGame.Savecutscene(other.gameObject.GetComponent<CutscenePrepare>());
             Debug.Log("save");
         }
-
+        if (other.gameObject.tag == "Porta")
+        {
+            if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == true)
+            {
+                CutSceneLoad = true;
+                LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
+                Debug.Log("save");
+            }
+            if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == false)
+            {
+                CutSceneLoad = false;
+                LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
+                Debug.Log("save");
+            }
+        }
     }
 }

@@ -106,10 +106,30 @@ public class LevelLoader : MonoBehaviour
         {
             player.Instance.CutsceneMode = false;
             CutSceneData dataCut = LoadGame.LoadCutscene();
+            PlayerData data = LoadGame.LoadPlayer();
             Debug.Log(dataCut.level);
+            if (data.cutSceneLoad == true)
+                switch (dataCut.level)
+                {
+                    case 9:
+                        Invoke("CutsceneLoad", .5f);
+                        break;
+                    case 7:
+                        Invoke("CutsceneLoad", .5f);
+                        break;
+                    case 8:
+                        Invoke("CutsceneLoad", .5f);
+                        break;
+                    case 95:
+                        Invoke("CutsceneLoad", .5f);
+                        break;
 
-            if (dataCut.level == 9)
-                Invoke("CutsceneLoad", .5f);
+
+                }
+
+
+
+
         }
         MusicControl.Instance.ChangeMusic(2);
 
