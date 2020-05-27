@@ -34,9 +34,9 @@ public class teleport : MonoBehaviour
         {
             if (disparo == true)
             {
-                Instantiate(agua,aguaRespaw.transform).SetActive(true);
-                // agua.transform.position = hit.transform.position;
-                agua.transform.Translate(hit.transform.right);
+                agua.SetActive(true);
+                agua.transform.Translate(0, 0, 1);
+
             }
 
 

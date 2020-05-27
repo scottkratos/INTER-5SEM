@@ -62,6 +62,11 @@ public class Canhao : MonoBehaviour
                 {
                     hit.transform.gameObject.GetComponent<Gramofone>().animator.SetBool("WaterBool", true);
                 }
+                if (hit.transform.tag == "VasoFixo")
+                {
+                    hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", true);
+                    hit.transform.gameObject.GetComponent<VasoFixo>().NotWater = false;
+                }
             }
             Invoke("disparoR", .1f);
         }
@@ -76,7 +81,7 @@ public class Canhao : MonoBehaviour
                     if (hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.eulerAngles.y == 90 || hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.eulerAngles.y == -90)
                     {
                         GameObject outherPortal = hit.collider.gameObject.GetComponent<teleport>().reciever;
-                        outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin = new Vector3(outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.x, hit.point.y, hit.point.z);
+                        outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin = new Vector3(outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.x, hit.point.y, hit.point.x + hit.collider.gameObject.transform.position.x);
 
                     }
                     else
@@ -85,7 +90,7 @@ public class Canhao : MonoBehaviour
 
                     }
 
-                    
+
                 }
 
 
