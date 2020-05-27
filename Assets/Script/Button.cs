@@ -14,7 +14,7 @@ public class Button : MonoBehaviour
     public GameObject[] vasoFixo;
     public GameObject[] GridEvent;
     public GameObject[] espinhos;
-    public GameObject canhao;
+    public GameObject[] canhao;
     [HideInInspector]
     public bool operDoorEvent, GridOrdem;
     public bool Restard, OperDoor, Grid, rotaoHorario, rotaoAntehoraria, DestinoInicial, DestinoFinal, espinho;
@@ -292,13 +292,28 @@ public class Button : MonoBehaviour
             if (Grid == true)
                 GridOrdem = true;
             if (rotaoHorario == true)
-                canhao.GetComponent<Canhao>().rotation = true;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().rotation = true;
+                }
             if (rotaoAntehoraria == true)
-                canhao.GetComponent<Canhao>().rotationR = true;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().rotationR = true;
+                }
+
             if (DestinoInicial == true)
-                canhao.GetComponent<Canhao>().DestinoInicial = true;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().DestinoInicial = true;
+                }
+
             if (DestinoFinal == true)
-                canhao.GetComponent<Canhao>().DestinoFinal = true;
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().DestinoFinal = true;
+                }
+
             if (espinho == true)
             {
                 foreach (var item in espinhos)
@@ -307,6 +322,7 @@ public class Button : MonoBehaviour
 
                 }
             }
+
 
 
 

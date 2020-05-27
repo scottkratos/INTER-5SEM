@@ -8,7 +8,7 @@ public class PlayerData
     public float[] position;
     public float[] indexLevel;
     public float[] rotation;
-    public float index;
+    public bool cutSceneLoad;
 
     public PlayerData(player player)
     {
@@ -29,7 +29,7 @@ public class PlayerData
         rotation[0] = player.transform.rotation.eulerAngles.x;
         rotation[1] = player.transform.rotation.eulerAngles.y;
         rotation[2] = player.transform.rotation.eulerAngles.z;
-
+        cutSceneLoad = player.CutSceneLoad;
 
 
     }

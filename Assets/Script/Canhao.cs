@@ -44,6 +44,10 @@ public class Canhao : MonoBehaviour
             agua.SetActive(true);
 
             agua.transform.Translate(-.8f, 0, 0);
+
+
+
+
             if (Physics.Raycast(transform.GetChild(0).transform.position, transform.GetChild(0).transform.up, out hit))
             {
                 if (hit.collider.tag == "Canhao")
@@ -60,6 +64,39 @@ public class Canhao : MonoBehaviour
                 }
             }
             Invoke("disparoR", .1f);
+        }
+        if (Physics.Raycast(transform.GetChild(0).transform.position, transform.GetChild(0).transform.up, out hit))
+        {
+            if (hit.collider.tag == "Portal")
+            {
+                Debug.Log("portal");
+                if (hit.collider.gameObject.GetComponent<teleport>().reciever != null)
+                {
+
+                    if (hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.eulerAngles.y == 90 || hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.eulerAngles.y == -90)
+                    {
+                        GameObject outherPortal = hit.collider.gameObject.GetComponent<teleport>().reciever;
+                        outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin = new Vector3(outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.x, hit.point.y, hit.point.z);
+
+                    }
+                    else
+                    {
+                        // hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.GetComponent<teleport>().rayDirecion.origin = new Vector3(hit.point.x, hit.point.y, hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.GetComponent<teleport>().rayDirecion.origin.z);
+
+                    }
+
+                    
+                }
+
+
+
+
+
+
+            }
+
+
+
         }
         rotacao();
         rotacaoR();
