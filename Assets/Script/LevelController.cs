@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
-    public string level, UnLoad;
+    public int index;
+    public static Transform[] transforms = new Transform[32];
     [SerializeField]
     private Animator portao;
     public bool CutsceneDoor, isUnload, DoorClosed, cutSceneLoad;
@@ -16,9 +17,11 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        s = SceneManager.GetSceneByName(level);
+        //s = SceneManager.GetSceneByName(level);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         DoorClosed = false;
+        if (index == -1) return;
+        transforms.SetValue(transform, index);
     }
     public void Open(bool value)
     {
@@ -27,28 +30,18 @@ public class LevelController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
-
         if (other.gameObject.tag == "Player")
         {
             DoorClosed = true;
             portao.SetBool("DoorBool", false);
-            Scene s = SceneManager.GetSceneByName(level);
-            // SceneManager.MoveGameObjectToScene(other.gameObject, s);
-            //GameObject[] gameObjects = s.GetRootGameObjects();
-            //if (gameObjects.Any(g => g.gameObject.tag == "Player") == true && isUnload == true)
-            //{
-            //    Scene unLoadScene = SceneManager.GetSceneByName(UnLoad);
-            //    SceneManager.UnloadSceneAsync(unLoadScene);
-            //
-            //}
-           //LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
-
-
-
-
-
+            for (int i = 0; i < HubEvents.Instance.levels[index].LevelLoad.Length; i++)
+            {
+                SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
+            }
+            for (int i = 0; i < HubEvents.Instance.levels[index].LevelUnload.Length; i++)
+            {
+                SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[index].LevelUnload[i]);
+            }
         }
-
     }
 }

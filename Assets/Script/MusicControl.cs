@@ -37,6 +37,13 @@ public class MusicControl : MonoBehaviour
                 Sources[1].clip = Musics[3];
                 Sources[1].Play();
                 break;
+            case 8:
+                for (int i = 0; i < Sources.Length; i++)
+                {
+                    Sources[i].Stop();
+                }
+                StartCoroutine(ForcePlay());
+                break;
             case 9:
                 for (int i = 0; i < Sources.Length; i++)
                 {
@@ -57,6 +64,15 @@ public class MusicControl : MonoBehaviour
                 break;
         }
     }
+    private IEnumerator ForcePlay()
+    {
+        while (!Sources[1].isPlaying)
+        {
+            Sources[1].clip = Musics[8];
+            Sources[1].Play();
+            yield return null;
+        }
+    }
     private IEnumerator Intro()
     {
         Sources[0].clip = Musics[0];
@@ -70,12 +86,13 @@ public class MusicControl : MonoBehaviour
     }
     private IEnumerator Cutscene(int value)
     {
-        Sources[1].clip = Musics[3 + value];
+        Sources[1].clip = Musics[value];
         Sources[1].Play();
         while (Sources[1].isPlaying)
         {
             yield return null;
         }
         Sources[1].clip = Musics[2];
+        Sources[1].Play();
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HubEvents : MonoBehaviour
 {
@@ -18,9 +19,10 @@ public class HubEvents : MonoBehaviour
     private List<GameObject> Lamparinas = new List<GameObject>();
     private bool LockUpdate = false;
     private bool IsCutscene = false;
-    private const float MaxShader = -5;
+    private const float MaxShader = -3;
     private float ShaderValue;
     private bool IsHaunted;
+    public LevelLoadManager[] levels;
     public static int CutsceneIndex;
 
     private void Awake()
@@ -94,45 +96,43 @@ public class HubEvents : MonoBehaviour
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            Credits.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, OneMinus(timer / 2));
+            Credits.transform.GetChild(0).GetComponent<Image>().color = new Color(Credits.transform.GetChild(0).GetComponent<Image>().color.r, Credits.transform.GetChild(0).GetComponent<Image>().color.g, Credits.transform.GetChild(0).GetComponent<Image>().color.b, OneMinus(timer / 2));
             yield return null;
         }
     }
     private float OneMinus(float value)
     {
-        value = (value * -1) - 1;
+        value = (value * -1) + 1;
         return value;
     }
     private IEnumerator Transicao(Image img)
     {
         Coroutine coroutine;
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
-        yield return coroutine;
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
         yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
         yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
         yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
         yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
         yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
-        yield return new WaitForSeconds(21);
-        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
         yield return coroutine;
+        coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, false));
+        yield return new WaitForSeconds(20);
         coroutine = StartCoroutine(ChangeAlpha(img.gameObject, true, 1, true));
     }
     private IEnumerator StartCredits()
@@ -281,16 +281,17 @@ public class HubEvents : MonoBehaviour
         StartCoroutine(ChangeAlpha(title.gameObject, false, 2, false));
         coroutine = StartCoroutine(ChangeAlpha(subtitle.gameObject, false, 2, false));
         yield return coroutine;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
         coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, true));
         yield return coroutine;
-        yield return new WaitForSeconds(5);
+        coroutine = StartCoroutine(ChangeAlpha(bg.gameObject, true, 5, true));
+        yield return coroutine;
         coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, false));
         yield return coroutine;
         yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("HUB", LoadSceneMode.Single);
         //163 secs total
         //22 secs p/ sala
-        //colocar load do menu
     }
     private IEnumerator ChangeAlpha(GameObject go, bool IsImage, float timer, bool IsFadingIn)
     {
@@ -311,26 +312,48 @@ public class HubEvents : MonoBehaviour
             {
                 if (IsImage)
                 {
-                    image.color = new Color(1, 1, 1, OneMinus(timer / compareTimer));
+                    image.color = new Color(image.color.r, image.color.g, image.color.b, OneMinus(timer / compareTimer));
                 }
                 else
                 {
-                    text.color = new Color(1, 1, 1, OneMinus(timer / compareTimer));
+                    text.color = new Color(text.color.r, text.color.g, text.color.b, OneMinus(timer / compareTimer));
                 }
             }
             else
             {
                 if (IsImage)
                 {
-                    image.color = new Color(1, 1, 1, timer / compareTimer);
+                    image.color = new Color(image.color.r, image.color.g, image.color.b, timer / compareTimer);
                 }
                 else
                 {
-                    text.color = new Color(1, 1, 1, timer / compareTimer);
+                    text.color = new Color(text.color.r, text.color.g, text.color.b, timer / compareTimer);
                 }
             }
             timer -= Time.deltaTime;
             yield return null;
+        }
+        if (IsFadingIn)
+        {
+            if (IsImage)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
+            }
+            else
+            {
+                text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+            }
+        }
+        else
+        {
+            if (IsImage)
+            {
+                image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+            }
+            else
+            {
+                text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
+            }
         }
     }
     public IEnumerator Flashing()
@@ -509,4 +532,9 @@ public class HubEvents : MonoBehaviour
                 break;
         }
     }
+}
+[System.Serializable]
+public class LevelLoadManager
+{
+    public string[] LevelLoad, LevelUnload;
 }
