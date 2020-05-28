@@ -95,10 +95,9 @@ public class Gramofone : MonoBehaviour
         {
             foreach (var item in evetObject)
             {
-                if (item.GetComponent<Espinho>().ButtonAct == false)
-                    item.GetComponent<Espinho>().ButtonAct = false;
-                if (item.GetComponent<Espinho>().ButtonAct == true)
-                    item.GetComponent<Espinho>().ButtonAct = true;
+
+
+                item.GetComponent<Espinho>().ButtonAct = !item.GetComponent<Espinho>().ButtonAct;
             }
 
         }

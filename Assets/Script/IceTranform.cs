@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceTranform : MonoBehaviour
 {
-    float y = 0.1f;
+    float y = .3f;
     float yEvaporation;
     [HideInInspector]
     public float AmountWater;
@@ -20,7 +20,7 @@ public class IceTranform : MonoBehaviour
         player = FindObjectOfType<player>().gameObject;
         transform.position = player.transform.GetChild(0).transform.GetChild(1).transform.position;
         take = false;
-        transform.localScale = new Vector3(0.3f, y, 0.3f);
+        transform.localScale = new Vector3(1.5f, y, 1.5f);
         StartCoroutine("size");
     }
 
@@ -29,12 +29,16 @@ public class IceTranform : MonoBehaviour
     {
         if (take == false)
         {
-            transform.position = player.transform.GetChild(0).transform.GetChild(1).transform.position;
+            transform.parent = player.transform.GetChild(0).transform.GetChild(3).transform;
+            transform.position = player.transform.GetChild(0).transform.GetChild(3).transform.position;
             GetComponent<Rigidbody>().isKinematic = true;
+
         }
         if (take == true)
         {
+            transform.parent = null;
             GetComponent<Rigidbody>().isKinematic = false;
+
         }
 
     }
@@ -46,12 +50,12 @@ public class IceTranform : MonoBehaviour
             player.GetComponent<player>().index = -1;
             player.GetComponent<player>().ShotIndex = 4;
             yield return new WaitForSeconds(0.1f);
-            if (transform.localScale.y < .5f)
+            if (transform.localScale.y < 1.5f)
             {
                 y += 0.1f;
             }
-            transform.localScale = new Vector3(0.3f, y, 0.3f);
-            if (transform.localScale.y >= .5f)
+            transform.localScale = new Vector3(1.5f, y, 1.5f);
+            if (transform.localScale.y >= 1.5f)
             {
                 StopCoroutine("size");
             }
@@ -67,12 +71,20 @@ public class IceTranform : MonoBehaviour
             {
                 y -= 0.1f;
             }
-            transform.localScale = new Vector3(0.3f, y, 0.3f);
+            transform.localScale = new Vector3(1.5f, y, 1.5f);
             if (transform.localScale.y <= .1f)
             {
                 StopCoroutine("evaporation");
                 Destroy(gameObject);
             }
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }

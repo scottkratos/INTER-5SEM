@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &1819346204157854360
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689137707952960826}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6704134, y: 0.89872795, z: 0.6704132}
+  m_Center: {x: 0.0000076293945, y: 0, z: 0}
 --- !u!1 &2968925856434002787
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,7 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2968925856541821123}
   - component: {fileID: 2968925856541821120}
-  - component: {fileID: 1578723658554442268}
   m_Layer: 0
   m_Name: Canhao_GamePlayer
   m_TagString: Canhao
@@ -81,31 +93,20 @@ MonoBehaviour:
   posicao_final: {fileID: 2968925856434002787}
   canhao: {fileID: 689137707952960826}
   agua: {fileID: 7391109011698666179}
-  AnguloX: 45
-  anguloY: 45
-  anguloZ: 45
+  Angulo: 0
   TempoDePausa: 1
-  Destino: 0
+  DestinoInicial: 0
   rotation: 0
   rotationR: 0
+  DestinoFinal: 0
   RotacaoEmX: 0
   RotacaoEmY: 0
   RotacaoEmZ: 0
   movimentoOn: 0
   disparo: 0
---- !u!65 &1578723658554442268
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2968925856541821121}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  portal:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!1 &2968925857100233911
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +200,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4707713640640383289, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707713640640383289, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6265245442099075094, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -218,6 +229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: canhao
+      objectReference: {fileID: 0}
+    - target: {fileID: 8578918885535218474, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canhao
       objectReference: {fileID: 0}
     - target: {fileID: 9034084764262498038, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
         type: 3}

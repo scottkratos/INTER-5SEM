@@ -60,6 +60,33 @@ public class WaterShooter : MonoBehaviour
                         Player.GetComponent<player>().index = 4;
 
                     }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso")
+                    {
+                        hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
+
+
+
+                    }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Canhao")
+                    {
+                        hit.transform.gameObject.GetComponent<Canhao>().disparo = true;
+
+
+
+                    }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "VasoFixo")
+                    {
+                        hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", true);
+                        hit.transform.gameObject.GetComponent<VasoFixo>().NotWater = false;
+
+                    }
+                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "VasoFixo")
+                    {
+                        hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", false);
+                        Player.GetComponent<player>().ShotIndex = 0;
+                        Player.GetComponent<player>().index = 4;
+
+                    }
                 }
             }
             else
@@ -82,6 +109,32 @@ public class WaterShooter : MonoBehaviour
 
 
                     }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Canhao")
+                    {
+                        hit.collider.transform.parent.gameObject.GetComponent<Canhao>().disparo = true;
+
+
+
+                    }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "VasoFixo")
+                    {
+                        hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", true);
+                        hit.transform.gameObject.GetComponent<VasoFixo>().NotWater = false;
+                    }
+                    if (Input.GetMouseButtonDown(1) && hit.transform.tag == "VasoFixo")
+                    {
+                        hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", false);
+                        Player.GetComponent<player>().ShotIndex = 0;
+                        Player.GetComponent<player>().index = 4;
+
+                    }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso")
+                    {
+                        hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
+
+
+
+                    }
                 }
             }
 
@@ -97,9 +150,13 @@ public class WaterShooter : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == false && hit.transform.GetComponent<Vaso>().animator.GetBool("WaterBool") == true && Player.GetComponent<player>().take == false)
             {
-                hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
-                Player.GetComponent<player>().ShotIndex = 0;
-                Player.GetComponent<player>().index = 4;
+                if (hit.collider.gameObject.GetComponent<Vaso>().congelado == false)
+                {
+                    hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
+                    Player.GetComponent<player>().ShotIndex = 0;
+                    Player.GetComponent<player>().index = 4;
+
+                }
             }
 
         }
@@ -108,7 +165,8 @@ public class WaterShooter : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Vaso" && FindObjectOfType<Orbit>().InHand == true)
             {
-                hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
+                if (hit.collider.gameObject.GetComponent<Vaso>().congelado == false)
+                    hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
 
 
             }
@@ -121,7 +179,7 @@ public class WaterShooter : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && hit.transform.tag == "Canhao" && FindObjectOfType<Orbit>().InHand == true)
             {
-                hit.transform.gameObject.GetComponent<Canhao>().disparo = true;
+                hit.transform.parent.gameObject.GetComponent<Canhao>().disparo = true;
 
 
             }

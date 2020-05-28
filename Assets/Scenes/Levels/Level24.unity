@@ -10392,6 +10392,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843398469}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &851496788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 179702011478122789, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1319579758}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &860882312
 GameObject:
   m_ObjectHideFlags: 0
@@ -10753,6 +10759,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 271796286}
     m_Modifications:
+    - target: {fileID: 1250218227135691827, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250218227135691827, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: Button
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250218227135691827, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 851496788}
     - target: {fileID: 4913568153607031794, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
       propertyPath: m_Name
@@ -15908,6 +15929,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 261650847}
     m_Modifications:
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: Buutons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: Buutons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1951810799}
     - target: {fileID: 4483031116882427707, guid: f9e7b4bec1033104e945e55048b05262,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16594,6 +16625,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Botao (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: GridEvent.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: Grid
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 883700085}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: GridEvent.Array.data[0]
+      value: 
+      objectReference: {fileID: 1506803303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1319579759 stripped
@@ -16679,6 +16735,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Botao
       objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: OperDoor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vase.Array.data[0]
+      value: 
+      objectReference: {fileID: 1838015722}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1328337378 stripped
@@ -18515,6 +18586,7 @@ GameObject:
   - component: {fileID: 1506803307}
   - component: {fileID: 1506803306}
   - component: {fileID: 1506803305}
+  - component: {fileID: 1506803308}
   m_Layer: 0
   m_Name: Cube (51)
   m_TagString: Untagged
@@ -18596,6 +18668,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506803303}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1506803308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506803303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccb2f0598a527b42b22f6df63ab1731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridOrdem: 0
+  SaveOrdem: 0
+  Plataforma: 0
+  button: 1
+  gramofono: 0
+  gramofonos: []
+  buttons:
+  - {fileID: 851496788}
+  level: 0
 --- !u!1001 &1507867988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22599,6 +22692,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 271796286}
     m_Modifications:
+    - target: {fileID: 1250218227135691827, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1250218227135691827, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 1951810799}
+    - target: {fileID: 1250218227135691827, guid: b66db9ab777f86d44a5f77bd3be2f01e,
+        type: 3}
+      propertyPath: Button
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4913568153607031794, guid: b66db9ab777f86d44a5f77bd3be2f01e,
         type: 3}
       propertyPath: m_Name
@@ -24267,6 +24375,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1951810799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 179702011478122789, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1328337377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1954306463
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Espinho : MonoBehaviour
     public bool button, tempo, anguloX, anguloY, anguloZ, Positivo, ButtonAct;
     Vector3 posicao;
     float tempoDuracao, tempoFinal;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class Espinho : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         tempoFinal += Time.deltaTime;
         if (tempo == true)
         {
@@ -125,8 +125,7 @@ public class Espinho : MonoBehaviour
             if (ButtonAct == true)
             {
                 transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 2f, posicao.z), .5f);
-                if (tempoDuracao + 1.5f <= tempoFinal)
-                    tempoFinal = 0;
+
             }
 
         }
@@ -160,8 +159,34 @@ public class Espinho : MonoBehaviour
             }
 
         }
+        if (anguloZ && Positivo == false)
+        {
+            if (ButtonAct == false)
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z), 0.5f);
 
+            }
+            if (ButtonAct == true)
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z - 2f), .5f);
 
+            }
+
+        }
+        if (anguloZ && Positivo == true)
+        {
+            if (ButtonAct == false)
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z), 0.5f);
+
+            }
+            if (ButtonAct == true)
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z + 2f), .5f);
+
+            }
+
+        }
 
     }
 }

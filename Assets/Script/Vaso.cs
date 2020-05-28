@@ -9,7 +9,7 @@ public class Vaso : MonoBehaviour
     public GameObject checkAmbient;
     public bool Door, Grid, Button, FullWater;
     [HideInInspector]
-    public bool DoorEvent, GridOrdem, AmoutWaterVase;
+    public bool DoorEvent, GridOrdem, AmoutWaterVase, congelado;
     public int Level;
     public AudioSource finalPuzzle;
     public LayerMask Ambientelayer;
@@ -28,46 +28,33 @@ public class Vaso : MonoBehaviour
         else
         {
             animator.SetBool("WaterBool", false);
-
         }
     }
     private void Update()
     {
-
-
-
+        if (congelado == true)
+        {
+            AmoutWaterVase = true;
+        }
 
     }
-
     // roda sempre com a animacao de "agua cheia"
     void EventGameplaye()
     {
-
         if (Door == true)
         {
-
             foreach (var item in evetObject)
             {
-
                 DoorEvent = true;
             }
-
         }
-
-
         if (Button == true)
         {
-
             AmoutWaterVase = true;
-
-
         }
-
         // tipos de movimento de grinde 0 para default
         if (Grid == true)
         {
-
-
             switch (Level)
             {
                 case 0:
@@ -95,15 +82,11 @@ public class Vaso : MonoBehaviour
                     }
                     break;
             }
-
-
-
         }
     }
     //Sons do vaso
     public void PlayerSound()
     {
-
         place.Play();
     }
     // animacao do modo "sem agua" ativado, avisa que nao tem agua para o botao
@@ -114,7 +97,6 @@ public class Vaso : MonoBehaviour
     }
     void Restart()
     {
-
         DoorEvent = false;
         GridOrdem = false;
         if (Grid == true)
@@ -122,16 +104,12 @@ public class Vaso : MonoBehaviour
             foreach (var item in evetObject)
             {
                 item.GetComponent<Grid>().GridOrdem = item.GetComponent<Grid>().SaveOrdem;
-
             }
-
         }
     }
     public bool novaso()
     {
-
         return Physics.CheckSphere(checkAmbient.transform.position, .2f, Ambientelayer);
-
     }
 
 

@@ -30,6 +30,36 @@ Transform:
   m_Father: {fileID: 3710963520903768039}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &847117137078662856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3703743198674062934}
+  m_Layer: 0
+  m_Name: handIce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3703743198674062934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847117137078662856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3710963520903768039}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2158323843593079447
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +269,7 @@ Transform:
   - {fileID: 3710963521261013461}
   - {fileID: 8552839353379776636}
   - {fileID: 3621092143327071144}
+  - {fileID: 3703743198674062934}
   m_Father: {fileID: 3710963521927909532}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -567,7 +598,7 @@ MonoBehaviour:
   checkGround: {fileID: 3710963522252651221}
   JumpLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 16385
   power: {fileID: 0}
   handTrue: {fileID: 2530330505399653980}
   CameraController: {x: 0, y: 0, z: 0}
@@ -592,6 +623,7 @@ MonoBehaviour:
   load: {fileID: 0}
   Pausa: {fileID: 0}
   CutsceneMode: 0
+  CutSceneLoad: 0
   Timeline: {fileID: 0}
 --- !u!54 &3710963521927909534
 Rigidbody:

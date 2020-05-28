@@ -76,7 +76,16 @@ public class Orbit : MonoBehaviour
             Orbis[4].transform.LookAt(center.transform);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
 
+        if (other.gameObject.tag == "ZonaDeCalor")
+        {
+            gameObject.SetActive(false);
+
+        }
+
+    }
 
 
 

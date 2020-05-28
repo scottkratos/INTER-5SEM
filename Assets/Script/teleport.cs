@@ -21,6 +21,7 @@ public class teleport : MonoBehaviour
     }
     private void Start()
     {
+        player = FindObjectOfType<player>().gameObject;
         rayDirecion.origin = transform.position;
         rayDirecion.direction = transform.forward;
     }
@@ -28,19 +29,30 @@ public class teleport : MonoBehaviour
     void Update()
     {
         AnglePortal();
+
         aguaRespaw.transform.position = rayDirecion.origin;
         Debug.DrawRay(rayDirecion.origin, rayDirecion.direction);
         if (Physics.Raycast(rayDirecion, out hit))
         {
+
+
             if (disparo == true)
             {
+                if (hit.transform.tag == "Vaso")
+                {
+                    hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
+                }
                 agua.SetActive(true);
-                agua.transform.Translate(0, 0, 1);
+                agua.transform.Translate(0, 0, 1.5f);
+                Invoke("disparoR", .1f);
+
+
 
             }
 
 
         }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -59,13 +71,13 @@ public class teleport : MonoBehaviour
         if (other.tag == "Player")
         {
             playerIsOverLapping = false;
-
+            Debug.Log(reciever.transform.localRotation.eulerAngles.y);
         }
     }
     // calculo dos angulos de teleporte 
     void AnglePortal()
     {
-        if (reciever.transform.localRotation.eulerAngles.y == 270)
+        if (reciever.transform.localRotation.eulerAngles.y == -180)
         {
             anglePortalX = -1.6f;
             RotationPortalX = -90;
@@ -79,7 +91,7 @@ public class teleport : MonoBehaviour
         if (reciever.transform.localRotation.eulerAngles.y == 180)
         {
             anglePortalZ = -1.6f;
-            RotationPortalX = 180;
+            RotationPortalX = 90;
         }
         if (reciever.transform.localRotation.eulerAngles.y == 0)
         {
@@ -90,7 +102,12 @@ public class teleport : MonoBehaviour
 
 
     }
-
+    void disparoR()
+    {
+        disparo = false;
+        agua.SetActive(false);
+        agua.transform.position = aguaRespaw.transform.position;
+    }
 
 
 

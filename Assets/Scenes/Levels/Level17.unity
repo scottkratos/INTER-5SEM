@@ -1336,6 +1336,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385542799}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &398579768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6516147612965628654, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262577216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &450528557
 GameObject:
   m_ObjectHideFlags: 0
@@ -4386,6 +4392,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 271796286}
     m_Modifications:
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: Door
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 398579768}
     - target: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: m_Name

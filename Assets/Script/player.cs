@@ -10,7 +10,7 @@ using UnityEngine.Playables;
 public class player : MonoBehaviour
 {
     Vector3 input, velocity;
-    LayerMask water, Puzzle, portal, Ice;
+    public LayerMask water, Puzzle, portal, Ice;
     [HideInInspector]
     public bool jumpBool, vision, take;
     public float vel, Sensitivity;
@@ -173,9 +173,9 @@ public class player : MonoBehaviour
             }
         }
         //intercao com os portais
-        if (Physics.Raycast(hand.position, hand.transform.forward, 20, portal))
+        if (Physics.Raycast(hand.position, hand.transform.forward, portal))
         {
-            if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0) && FindObjectOfType<Orbit>().InHand == true)
+            if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0) && FindObjectOfType<Orbit>().InHand == true && hit.collider.tag == "ParedePortal")
             {
                 portalIndex++;
                 switch (portalIndex)
@@ -193,8 +193,8 @@ public class player : MonoBehaviour
                 }
                 if (portalIndex == 1)
                 {
-                    portais[0].transform.position = hit.collider.gameObject.transform.position;
-                    portais[0].transform.rotation = hit.collider.gameObject.transform.rotation;
+                    portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                    portais[0].transform.rotation = hit.rigidbody.rotation;
                 }
                 if (portalIndex == 2)
                 {
@@ -374,7 +374,7 @@ public class player : MonoBehaviour
         rotation.z = data.rotation[2];
         CameraController = rotation;
         transform.position = position;
-        Debug.Log("load...");
+
     }
     // verifica se o personagem está no ar; 
     bool isGrounded()
@@ -407,7 +407,7 @@ public class player : MonoBehaviour
             {
                 CutSceneLoad = false;
                 LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
-                Debug.Log("save");
+
             }
         }
     }
