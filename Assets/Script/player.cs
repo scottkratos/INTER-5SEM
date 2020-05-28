@@ -9,6 +9,7 @@ using UnityEngine.Playables;
 
 public class player : MonoBehaviour
 {
+    public GameObject CheatMenu;
     Vector3 input, velocity;
     public LayerMask water, Puzzle, portal, Ice;
     [HideInInspector]
@@ -82,7 +83,8 @@ public class player : MonoBehaviour
     }
     void Update()
     {
-
+        transform.GetChild(0).gameObject.SetActive(!CutsceneMode);
+        transform.GetChild(2).gameObject.SetActive(!CutsceneMode);
         if (CutsceneMode) return;
         if (isContinue == false)
         {
@@ -98,12 +100,13 @@ public class player : MonoBehaviour
             audioSource.enabled = true;
 
         }
-        if (Pausa.activeInHierarchy == true)
+        if (Pausa.activeInHierarchy == true || CheatMenu.activeInHierarchy)
         {
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-
-
+            if (Pausa.activeInHierarchy == true)
+            {
+                Time.timeScale = 0;
+            }
+            Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
@@ -355,7 +358,22 @@ public class player : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, CameraController.y, 0);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pausa.SetActive(true);
+            if (CheatMenu.activeSelf)
+            {
+                CheatMenu.SetActive(false);
+            }
+            else
+            {
+                Pausa.SetActive(true);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (Pausa.activeSelf) return;
+            CheatMenu.SetActive(!CheatMenu.activeSelf);
+            CheatMenu.transform.GetChild(0).gameObject.SetActive(true);
+            CheatMenu.transform.GetChild(1).gameObject.SetActive(false);
+            CheatMenu.transform.GetChild(2).gameObject.SetActive(false);
         }
 
     }

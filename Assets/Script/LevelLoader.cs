@@ -49,6 +49,7 @@ public class LevelLoader : MonoBehaviour
     private IEnumerator LateStart()
     {
         yield return StartCoroutine(IndividualLoader("Externo"));
+        yield return StartCoroutine(IndividualLoader("Level16"));
         loadImage.gameObject.SetActive(false);
     }
     public void starGame()
@@ -136,7 +137,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void Cutscene(int index)
     {
-        MusicControl.Instance.ChangeMusic(index);
+        MusicControl.Instance.ChangeMusic(index + 3);
         Timeline.initialTime = 0;
         Timeline.Play(Clips[index]);
     }
