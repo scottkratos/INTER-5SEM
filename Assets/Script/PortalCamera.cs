@@ -6,6 +6,10 @@ public class PortalCamera : MonoBehaviour
 {
     public Transform playerCamera, portal, otherPortal;
     Vector3 newCameraDirection;
+    private void Start()
+    {
+        playerCamera = FindObjectOfType<player>().transform.GetChild(0).transform;
+    }
     void Update()
     {
         // transform.position = otherPortal.position;

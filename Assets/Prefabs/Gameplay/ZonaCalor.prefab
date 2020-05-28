@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6786767464706786911}
   - component: {fileID: 7926962805684341413}
-  - component: {fileID: 8619378074119459822}
-  m_Layer: 0
+  - component: {fileID: 199359036064102509}
+  - component: {fileID: 6147395596954066087}
+  m_Layer: 2
   m_Name: ZonaCalor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,9 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49256640f213ef248b60655efd190278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gelo: {fileID: 0}
---- !u!135 &8619378074119459822
-SphereCollider:
+--- !u!136 &199359036064102509
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -62,9 +62,26 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  m_Radius: 3.8308077
+  m_Height: 16.820797
+  m_Direction: 1
+  m_Center: {x: 0.11676785, y: 5.125, z: 0.13065907}
+--- !u!54 &6147395596954066087
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842860702993887631}
   serializedVersion: 2
-  m_Radius: 3.722237
-  m_Center: {x: -0.33203173, y: 0, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1824704518035251894
 PrefabInstance:
   m_ObjectHideFlags: 0

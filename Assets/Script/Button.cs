@@ -17,7 +17,7 @@ public class Button : MonoBehaviour
     public GameObject[] canhao;
     [HideInInspector]
     public bool operDoorEvent, GridOrdem;
-    public bool Restard, OperDoor, Grid, rotaoHorario, rotaoAntehoraria, DestinoInicial, DestinoFinal, espinho;
+    public bool Restard, OperDoor, Grid, rotaoHorario, rotaoAntehoraria, DestinoInicial, DestinoFinal, espinho, otherOrdeGrid;
     public AudioSource ButtonSong, finalPuzzle;
     public GameObject checkAmbient;
     public LayerMask vasolayer, PlayerLayer;
@@ -50,13 +50,32 @@ public class Button : MonoBehaviour
                         }
                         if (Grid == true)
                         {
-                            GetComponent<Animator>().SetBool("ButtonBool", true);
-                            GridOrdem = true;
+                            if (otherOrdeGrid == false)
+                            {
+                                GetComponent<Animator>().SetBool("ButtonBool", true);
+                                GridOrdem = true;
+
+                            }
+                            if (otherOrdeGrid == true)
+                            {
+                                GetComponent<Animator>().SetBool("ButtonBool", true);
+                                GridOrdem = false;
+
+                            }
                         }
                         if (Restard == true)
                         {
                             GetComponent<Animator>().SetBool("ButtonBool", true);
 
+                        }
+                        if (espinho == true)
+                        {
+                            foreach (var item in espinhos)
+                            {
+                                item.GetComponent<Espinho>().ButtonAct = true;
+
+                            }
+                            GetComponent<Animator>().SetBool("ButtonBool", true);
                         }
                     }
                     break;
@@ -153,15 +172,35 @@ public class Button : MonoBehaviour
                         }
                         if (Grid == true)
                         {
-                            GetComponent<Animator>().SetBool("ButtonBool", false);
-                            ClosedDoor();
+                            if (otherOrdeGrid == false)
+                            {
+                                GetComponent<Animator>().SetBool("ButtonBool", false);
+                                ClosedDoor();
+                                GridOrdem = false;
+                            }
+                            if (otherOrdeGrid == true)
+                            {
+                                GetComponent<Animator>().SetBool("ButtonBool", false);
+                                ClosedDoor();
+                                GridOrdem = true;
+                            }
 
-                            GridOrdem = false;
+
+
                         }
                         if (Restard == true)
                         {
                             GetComponent<Animator>().SetBool("ButtonBool", false);
 
+                        }
+                        if (espinho == true)
+                        {
+                            foreach (var item in espinhos)
+                            {
+                                item.GetComponent<Espinho>().ButtonAct = false;
+
+                            }
+                            GetComponent<Animator>().SetBool("ButtonBool", false);
                         }
                     }
                     break;
@@ -252,9 +291,20 @@ public class Button : MonoBehaviour
             }
             if (Grid == true)
             {
-                GetComponent<Animator>().SetBool("ButtonBool", false);
-                ClosedDoor();
-                GridOrdem = false;
+                if (otherOrdeGrid == false)
+                {
+                    GetComponent<Animator>().SetBool("ButtonBool", false);
+                    ClosedDoor();
+                    GridOrdem = false;
+
+                }
+                if (otherOrdeGrid == true)
+                {
+                    GetComponent<Animator>().SetBool("ButtonBool", false);
+                    ClosedDoor();
+                    GridOrdem = true;
+
+                }
             }
             if (Restard == true)
             {
@@ -265,6 +315,7 @@ public class Button : MonoBehaviour
                 foreach (var item in canhao)
                 {
                     item.GetComponent<Canhao>().rotation = false;
+
                 }
 
                 GetComponent<Animator>().SetBool("ButtonBool", false);
@@ -274,6 +325,7 @@ public class Button : MonoBehaviour
                 foreach (var item in canhao)
                 {
                     item.GetComponent<Canhao>().rotationR = false;
+
                 }
 
                 GetComponent<Animator>().SetBool("ButtonBool", false);
@@ -283,6 +335,7 @@ public class Button : MonoBehaviour
                 foreach (var item in canhao)
                 {
                     item.GetComponent<Canhao>().DestinoInicial = false;
+
                 }
 
                 GetComponent<Animator>().SetBool("ButtonBool", false);
@@ -292,8 +345,18 @@ public class Button : MonoBehaviour
                 foreach (var item in canhao)
                 {
                     item.GetComponent<Canhao>().DestinoFinal = false;
+
                 }
 
+                GetComponent<Animator>().SetBool("ButtonBool", false);
+            }
+            if (espinho == true)
+            {
+                foreach (var item in espinhos)
+                {
+                    item.GetComponent<Espinho>().ButtonAct = false;
+
+                }
                 GetComponent<Animator>().SetBool("ButtonBool", false);
             }
         }
@@ -306,7 +369,30 @@ public class Button : MonoBehaviour
             if (OperDoor == true)
                 openDoor();
             if (Grid == true)
-                GridOrdem = true;
+            {
+                if (otherOrdeGrid == false)
+                {
+                    GridOrdem = true;
+
+                }
+                if (otherOrdeGrid == true)
+                {
+                    GridOrdem = true;
+
+                }
+            }
+            if (DestinoInicial == true)
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().DestinoInicial = true;
+
+                }
+            if (DestinoFinal == true)
+                foreach (var item in canhao)
+                {
+                    item.GetComponent<Canhao>().DestinoFinal = true;
+
+                }
             if (rotaoHorario == true)
                 foreach (var item in canhao)
                 {
@@ -318,17 +404,7 @@ public class Button : MonoBehaviour
                     item.GetComponent<Canhao>().rotationR = true;
                 }
 
-            if (DestinoInicial == true)
-                foreach (var item in canhao)
-                {
-                    item.GetComponent<Canhao>().DestinoInicial = true;
-                }
 
-            if (DestinoFinal == true)
-                foreach (var item in canhao)
-                {
-                    item.GetComponent<Canhao>().DestinoFinal = true;
-                }
 
             if (espinho == true)
             {
@@ -355,24 +431,23 @@ public class Button : MonoBehaviour
     }
     void restard()
     {
-        if (Restard == true)
+
+        GetComponent<Animator>().SetBool("ButtonBool", true);
+
+        foreach (var item in vase)
         {
-            GetComponent<Animator>().SetBool("ButtonBool", true);
-
-            foreach (var item in vase)
-            {
-                item.GetComponent<Animator>().SetBool("WaterBool", true);
-            }
-            foreach (var item in gramofone)
-            {
-                item.GetComponent<Animator>().SetBool("WaterBool", false);
-            }
-            foreach (var item in vasoFixo)
-            {
-                item.GetComponent<Animator>().SetBool("Water", true);
-            }
-
+            item.GetComponent<Animator>().SetBool("WaterBool", true);
         }
+        foreach (var item in gramofone)
+        {
+            item.GetComponent<Animator>().SetBool("WaterBool", false);
+        }
+        foreach (var item in vasoFixo)
+        {
+            item.GetComponent<Animator>().SetBool("Water", true);
+        }
+
+
     }
     public void PlayerSound()
     {

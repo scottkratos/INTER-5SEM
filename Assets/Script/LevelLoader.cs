@@ -104,29 +104,29 @@ public class LevelLoader : MonoBehaviour
             Timeline.Play(Clips[0]);
         if (starGameOn == false)
         {
-            player.Instance.CutsceneMode = false;
-            CutSceneData dataCut = LoadGame.LoadCutscene();
-            PlayerData data = LoadGame.LoadPlayer();
-            Debug.Log(dataCut.level);
-            if (data.cutSceneLoad == true)
-                switch (dataCut.level)
-                {
-                    case 9:
-                        Invoke("CutsceneLoad", .5f);
-                        break;
-                    case 7:
-                        Invoke("CutsceneLoad", .5f);
-                        break;
-                    case 8:
-                        Invoke("CutsceneLoad", .5f);
-                        break;
-                    case 95:
-                        Invoke("CutsceneLoad", .5f);
-                        break;
-
-
-                }
-
+           player.Instance.CutsceneMode = false;
+          // CutSceneData dataCut = LoadGame.LoadCutscene();
+          // PlayerData data = LoadGame.LoadPlayer();
+          // Debug.Log(dataCut.level);
+          // if (data.cutSceneLoad == true)
+          //     switch (dataCut.level)
+          //     {
+          //         case 9:
+          //             Invoke("CutsceneLoad", .5f);
+          //             break;
+          //         case 7:
+          //             Invoke("CutsceneLoad", .5f);
+          //             break;
+          //         case 8:
+          //             Invoke("CutsceneLoad", .5f);
+          //             break;
+          //         case 95:
+          //             Invoke("CutsceneLoad", .5f);
+          //             break;
+          //
+          //
+          //     }
+          //
 
 
 

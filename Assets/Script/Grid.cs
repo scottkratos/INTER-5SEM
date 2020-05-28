@@ -57,7 +57,7 @@ public class Grid : MonoBehaviour
                     }
                     if (Plataforma == false && gramofonos.All(gramofone => gramofone == gramofone.GetComponent<Gramofone>().GridOrdem == false))
                     {
-                        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y-16, posicao.z), .05f);
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 16, posicao.z), .05f);
                     }
                     break;
 
