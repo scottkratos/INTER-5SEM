@@ -133,7 +133,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void CutsceneLoad()
     {
-        CutSceneData dataCut = LoadGame.LoadCutscene();
-        Timeline.Play(Clips[dataCut.index]);
+        //CutSceneData dataCut = LoadGame.LoadCutscene();
+        //Timeline.Play(Clips[dataCut.index]);
     }
 }
