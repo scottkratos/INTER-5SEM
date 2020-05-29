@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Canhao : MonoBehaviour
 {
-    public GameObject posicao_inicial, posicao_final, canhao, agua;
+    public GameObject posicao_inicial, posicao_final, canhao, agua, player;
     public float Angulo, TempoDePausa;
     float vel, velY, velZ;
     float posFinal, pos;
@@ -22,6 +22,7 @@ public class Canhao : MonoBehaviour
         rotationOring = canhao.transform.localRotation;
         rotationOff = canhao.transform.localRotation;
         aguaInicial = agua.transform.position;
+        player = FindObjectOfType<player>().gameObject;
     }
 
     // Update is called once per frame
@@ -70,6 +71,34 @@ public class Canhao : MonoBehaviour
                 {
                     GameObject outherPortal = hit.collider.gameObject.GetComponent<teleport>().reciever;
                     outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().disparo = true;
+                }
+                if (hit.transform.tag == "ParedePortal")
+                {
+                    Debug.Log("portal");
+                    player.GetComponent<player>().portalIndex++;
+                    switch (player.GetComponent<player>().portalIndex)
+                    {
+                        case 1:
+                            player.GetComponent<player>().portais[0].SetActive(true);
+                            break;
+                        case 2:
+                            player.GetComponent<player>().portais[1].SetActive(true);
+                            break;
+                        case 3:
+                            player.GetComponent<player>().portais[0].SetActive(true);
+                            player.GetComponent<player>().portalIndex = 1;
+                            break;
+                    }
+                    if (player.GetComponent<player>().portalIndex == 1)
+                    {
+                        player.GetComponent<player>().portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                        player.GetComponent<player>().portais[0].transform.rotation = hit.rigidbody.rotation;
+                    }
+                    if (player.GetComponent<player>().portalIndex == 2)
+                    {
+                        player.GetComponent<player>().portais[1].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                        player.GetComponent<player>().portais[1].transform.rotation = hit.rigidbody.rotation;
+                    }
                 }
             }
             Invoke("disparoR", .1f);

@@ -52,7 +52,7 @@ public class TakeObject : MonoBehaviour
         {
 
             Hand.transform.position = Vector3.Lerp(Hand.transform.position, Player.transform.position, .1f);
-            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < .8f)
+            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < 1.2f)
             {
 
                 Player.take = false;
@@ -66,7 +66,7 @@ public class TakeObject : MonoBehaviour
         {
 
             Hand.transform.position = Vector3.Lerp(Hand.transform.position, Player.transform.position, .1f);
-            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < .8f)
+            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < 1.2f)
             {
 
                 Player.take = false;
@@ -89,7 +89,7 @@ public class TakeObject : MonoBehaviour
             transform.parent = null;
             transform.rotation = rotationOrigin;
             vaseRigidbody.isKinematic = false;
-            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < .8f)
+            if (Vector3.Distance(Hand.transform.position, Player.transform.position) < 1.2f)
                 Hand.transform.position = Vector3.Lerp(Hand.transform.position, HandOring, 1);
 
 
