@@ -24,6 +24,8 @@ public class HubEvents : MonoBehaviour
     private bool IsHaunted;
     public LevelLoadManager[] levels;
     public static int CutsceneIndex;
+    public static Vector3[] transforms = new Vector3[36];
+    public static Vector3[] transformsParents = new Vector3[36];
 
     private void Awake()
     {
@@ -289,9 +291,13 @@ public class HubEvents : MonoBehaviour
         coroutine = StartCoroutine(ChangeAlpha(finalText.gameObject, false, 2, false));
         yield return coroutine;
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("HUB", LoadSceneMode.Single);
+        RestartGame();
         //163 secs total
         //22 secs p/ sala
+    }
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("HUB", LoadSceneMode.Single);
     }
     private IEnumerator ChangeAlpha(GameObject go, bool IsImage, float timer, bool IsFadingIn)
     {

@@ -38,14 +38,18 @@ public class PuzzleComplete : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForEndOfFrame();
-            if (!Ready) continue;
+            if (!Ready)
+            {
+                yield return new WaitForSeconds(0.5f);
+                continue;
+            }
             if (other.tag == "Player" && !Lock)
             {
                 audioRef.Play();
                 Lock = true;
                 break;
             }
+            yield return null;
         }
     }
 }

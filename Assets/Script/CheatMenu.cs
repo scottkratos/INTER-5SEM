@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CheatMenu : MonoBehaviour
 {
     public GameObject loading;
+    public static CheatMenu Instance;
     private string[] Levels = new string[] 
     {
         "Level1",
@@ -43,6 +44,10 @@ public class CheatMenu : MonoBehaviour
     };
     private int Cutscene;
 
+    private void Start()
+    {
+        Instance = this;
+    }
     public void ChangeLevel(string level)
     {
         player.Instance.CheatMenu.SetActive(false);
@@ -51,19 +56,36 @@ public class CheatMenu : MonoBehaviour
     private IEnumerator Reload(string level)
     {
         SetupLoading(true);
+        SaturationControl.lastIndex = System.Array.IndexOf(Levels, level);
+        List<string> listUnload = new List<string>();
+        bool haveExterno = false;
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
-            if (SceneManager.GetSceneAt(i).name != "HUB")
+            if (SceneManager.GetSceneAt(i).name == "Externo")
             {
-                yield return SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i).name);
+                haveExterno = true;
+            }
+            else
+            {
+                if (SceneManager.GetSceneAt(i).name != "HUB")
+                {
+                    listUnload.Add(SceneManager.GetSceneAt(i).name);
+                }
             }
         }
-        SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
+        if (haveExterno) yield return SceneManager.UnloadSceneAsync("Externo");
+        while (listUnload.Count > 0)
+        {
+            yield return SceneManager.UnloadSceneAsync(Levels[System.Array.IndexOf(Levels, listUnload[0])]);
+            listUnload.RemoveAt(0);
+        }
+        yield return SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
         for (int i = 0; i < HubEvents.Instance.levels[System.Array.IndexOf(Levels, level)].LevelLoad.Length; i++)
         {
             yield return SceneManager.LoadSceneAsync(HubEvents.Instance.levels[System.Array.IndexOf(Levels, level)].LevelLoad[i], LoadSceneMode.Additive);
         }
-        player.Instance.transform.position = new Vector3 (LevelController.transforms[System.Array.IndexOf(Levels, level)].transform.position.x - 3, LevelController.transforms[System.Array.IndexOf(Levels, level)].transform.position.y, LevelController.transforms[System.Array.IndexOf(Levels, level)].transform.position.z) ;
+        yield return new WaitForEndOfFrame();
+        //player.Instance.transform.position = new Vector3 (HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.x - 3, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.y, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.z) ;
         SetupLoading(false);
     }
     public void ChangeCutscene(int index)
@@ -74,22 +96,28 @@ public class CheatMenu : MonoBehaviour
     private IEnumerator CutsceneOverride(int index)
     {
         SetupLoading(true);
+        List<string> listUnload = new List<string>();
+        bool haveExterno = false;
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
             if (SceneManager.GetSceneAt(i).name == "Externo")
             {
-                yield return SceneManager.UnloadSceneAsync("Externo");
+                haveExterno = true;
             }
             else
             {
                 if (SceneManager.GetSceneAt(i).name != "HUB")
                 {
-                    yield return SceneManager.UnloadSceneAsync(Levels[System.Array.IndexOf(Levels, SceneManager.GetSceneAt(i).name)]);
+                    listUnload.Add(SceneManager.GetSceneAt(i).name);
                 }
             }
         }
-        //yield return new WaitForSeconds(5);
-        //yield return SceneManager.LoadSceneAsync("HUB", LoadSceneMode.Single);
+        if (haveExterno) yield return SceneManager.UnloadSceneAsync("Externo");
+        while (listUnload.Count > 0)
+        {
+            yield return SceneManager.UnloadSceneAsync(Levels[System.Array.IndexOf(Levels, listUnload[0])]);
+            listUnload.RemoveAt(0);
+        }
         yield return SceneManager.LoadSceneAsync("Level1", LoadSceneMode.Additive);
         yield return SceneManager.LoadSceneAsync("Level8", LoadSceneMode.Additive);
         yield return SceneManager.LoadSceneAsync("Level9", LoadSceneMode.Additive);
@@ -103,7 +131,11 @@ public class CheatMenu : MonoBehaviour
         player.Instance.gameObject.transform.position = new Vector3(-10, 1.64f, 0);
         SetupLoading(false);
         if (index != 6) LevelLoader.Instance.Cutscene(index);
-        else HubEvents.Instance.Creditos();
+        else
+        {
+            HubEvents.Instance.FadeOut();
+            HubEvents.Instance.Creditos();
+        }
     }
     private void SetupLoading(bool value)
     {

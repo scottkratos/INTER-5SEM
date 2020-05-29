@@ -16,7 +16,6 @@ public class LevelLoader : MonoBehaviour
     public TimelineAsset[] Clips;
     public Camera MainMenuCamera;
     public static LevelLoader Instance;
-    bool starGameOn;
     public AsyncOperation load;
     public float timelevel;
 
@@ -61,28 +60,38 @@ public class LevelLoader : MonoBehaviour
                 mat.SetFloat("Value", 0);
             }
         }
-        starGameOn = true;
         StartCoroutine(MasterLoader());
 
     }
     public void LoadGameScene()
     {
-        foreach (GameObject go in HubEvents.Instance.Estatuas)
-        {
-            foreach (Material mat in go.GetComponent<EstatuasMats>().materials)
+        player.Instance.CutsceneMode = false;
+        CutSceneData dataCut = LoadGame.LoadCutscene();
+        PlayerData data = LoadGame.LoadPlayer();
+        //Debug.Log(dataCut.level);
+        if (data.cutSceneLoad == true)
+            switch (dataCut.level)
             {
-                mat.SetFloat("Value", 0);
+                case 9:
+                    Invoke("CutsceneLoad", .5f);
+                    break;
+                case 17:
+                    Invoke("CutsceneLoad", .5f);
+                    break;
+                case 25:
+                    Invoke("CutsceneLoad", .5f);
+                    break;
+                case 33:
+                    Invoke("CutsceneLoad", .5f);
+                    break;
             }
-        }
-
-        StartCoroutine(MasterLoader());
+        CheatMenu.Instance.ChangeLevel("Level" + (dataCut.index - 1).ToString());
     }
     private IEnumerator IndividualLoader(string level)
     {
         load = SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
         while (!load.isDone)
         {
-
             yield return null;
         }
     }
@@ -101,37 +110,7 @@ public class LevelLoader : MonoBehaviour
 
         MainMenuCamera.gameObject.SetActive(false);
         Timeline.initialTime = 0;
-        if (starGameOn)
-            Timeline.Play(Clips[0]);
-        if (starGameOn == false)
-        {
-           player.Instance.CutsceneMode = false;
-          // CutSceneData dataCut = LoadGame.LoadCutscene();
-          // PlayerData data = LoadGame.LoadPlayer();
-          // Debug.Log(dataCut.level);
-          // if (data.cutSceneLoad == true)
-          //     switch (dataCut.level)
-          //     {
-          //         case 9:
-          //             Invoke("CutsceneLoad", .5f);
-          //             break;
-          //         case 7:
-          //             Invoke("CutsceneLoad", .5f);
-          //             break;
-          //         case 8:
-          //             Invoke("CutsceneLoad", .5f);
-          //             break;
-          //         case 95:
-          //             Invoke("CutsceneLoad", .5f);
-          //             break;
-          //
-          //
-          //     }
-          //
-
-
-
-        }
+        Timeline.Play(Clips[0]);
         MusicControl.Instance.ChangeMusic(2);
 
     }
@@ -146,10 +125,4 @@ public class LevelLoader : MonoBehaviour
         CutSceneData dataCut = LoadGame.LoadCutscene();
         Timeline.Play(Clips[dataCut.index]);
     }
-
-
-
-
-
-
 }

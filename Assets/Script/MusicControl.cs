@@ -42,15 +42,10 @@ public class MusicControl : MonoBehaviour
                 {
                     Sources[i].Stop();
                 }
-                StartCoroutine(ForcePlay());
+                StartCoroutine(ForcePlay(8));
                 break;
             case 9:
-                for (int i = 0; i < Sources.Length; i++)
-                {
-                    Sources[i].Stop();
-                }
-                Sources[1].clip = Musics[9];
-                Sources[1].Play();
+                StartCoroutine(ForcePlay(9));
                 break;
             case -1:
                 StopCoroutine(Introducao);
@@ -64,11 +59,11 @@ public class MusicControl : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator ForcePlay()
+    private IEnumerator ForcePlay(int index)
     {
         while (!Sources[1].isPlaying)
         {
-            Sources[1].clip = Musics[8];
+            Sources[1].clip = Musics[index];
             Sources[1].Play();
             yield return null;
         }
