@@ -65,7 +65,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void LoadGameScene()
     {
-        player.Instance.CutsceneMode = false;
+        player.Instance.CutsceneMode = true;
         CutSceneData dataCut = LoadGame.LoadCutscene();
         //PlayerData data = LoadGame.LoadPlayer();
         //print(dataCut.index);

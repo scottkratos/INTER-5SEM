@@ -60,6 +60,7 @@ public class CheatMenu : MonoBehaviour
     }
     private IEnumerator Reload(string level, bool makeConversion)
     {
+        player.Instance.CutsceneMode = true;
         if (makeConversion)
         {
             int transformIndex;
@@ -71,21 +72,21 @@ public class CheatMenu : MonoBehaviour
             {
                 transformIndex = int.Parse(level[5].ToString());
             }
-            if (transformIndex >= 0 & transformIndex <= 7)
+            if (transformIndex >= 0 && transformIndex <= 7)
             {
                 transformIndex += 1;
             }
-            else if (transformIndex >= 8 & transformIndex <= 15)
+            else if (transformIndex >= 8 && transformIndex <= 15)
             {
-                transformIndex += 2;
+                //transformIndex += 2;
             }
-            else if (transformIndex >= 16 & transformIndex <= 23)
+            else if (transformIndex >= 16 && transformIndex <= 23)
             {
-                transformIndex += 3;
+                transformIndex -= 1;
             }
-            else if (transformIndex >= 24 & transformIndex <= 31)
+            else if (transformIndex >= 24 && transformIndex <= 31)
             {
-                transformIndex += 4;
+                transformIndex -= 2;
             }
             level = "Level" + transformIndex.ToString();
         }
@@ -118,21 +119,21 @@ public class CheatMenu : MonoBehaviour
             yield return SceneManager.LoadSceneAsync(LevelLoader.Instance.Levels[i], LoadSceneMode.Additive);
         }
         int indexToStop = System.Array.IndexOf(Levels, level);
-        if (indexToStop >= 0 & indexToStop <= 7)
+        if (indexToStop >= 0 && indexToStop <= 7)
         {
             indexToStop += 1;
         }
-        else if (indexToStop >= 8 & indexToStop <= 15)
+        else if (indexToStop >= 8 && indexToStop <= 15)
         {
             indexToStop+= 2;
         }
-        else if (indexToStop >= 16 & indexToStop <= 23)
+        else if (indexToStop >= 16 && indexToStop <= 23)
+        {
+            indexToStop += 2;
+        }
+        else if (indexToStop >= 24 && indexToStop <= 31)
         {
             indexToStop += 3;
-        }
-        else if (indexToStop >= 24 & indexToStop <= 31)
-        {
-            indexToStop += 4;
         }
         for (int r = 0; r < indexToStop; r++)
         {
@@ -152,8 +153,9 @@ public class CheatMenu : MonoBehaviour
             }
         }
         yield return new WaitForEndOfFrame();
-        player.Instance.transform.position = HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.forward.normalized * -3 + new Vector3(HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.x, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.y + 2, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.z);
+        player.Instance.transform.position = HubEvents.transforms[indexToStop].transform.forward.normalized * -3 + new Vector3(HubEvents.transforms[indexToStop].transform.position.x, HubEvents.transforms[indexToStop].transform.position.y + 2, HubEvents.transforms[indexToStop].transform.position.z);
         SetupLoading(false);
+        player.Instance.CutsceneMode = false;
     }
     public void ChangeCutscene(int index)
     {
@@ -207,13 +209,6 @@ public class CheatMenu : MonoBehaviour
     private void SetupLoading(bool value)
     {
         player.Instance.CutsceneMode = value;
-        loading.SetActive(value);
-        if (value)
-        {
-            for(int i = 0; i < loading.transform.childCount; i++)
-            {
-                loading.transform.GetChild(i).gameObject.SetActive(i == 1);
-            }
-        }
+        loading.transform.GetChild(1).gameObject.SetActive(value);
     }
 }

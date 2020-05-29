@@ -36,6 +36,7 @@ public class LevelController : MonoBehaviour
         {
             if (portao.GetBool("DoorBool"))
             {
+                print("save");
                 LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
                 CutscenePrepare cut;
                 cut = new CutscenePrepare();
