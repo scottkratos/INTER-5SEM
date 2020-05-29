@@ -80,12 +80,13 @@ public class CheatMenu : MonoBehaviour
             listUnload.RemoveAt(0);
         }
         yield return SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
+        yield return SceneManager.LoadSceneAsync("Level" + (System.Array.IndexOf(Levels, level)), LoadSceneMode.Additive);
         for (int i = 0; i < HubEvents.Instance.levels[System.Array.IndexOf(Levels, level)].LevelLoad.Length; i++)
         {
             yield return SceneManager.LoadSceneAsync(HubEvents.Instance.levels[System.Array.IndexOf(Levels, level)].LevelLoad[i], LoadSceneMode.Additive);
         }
         yield return new WaitForEndOfFrame();
-        //player.Instance.transform.position = new Vector3 (HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.x - 3, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.y, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.z) ;
+        player.Instance.transform.position = HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.forward.normalized * -3 + new Vector3(HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.x, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.y + 2, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.z);
         SetupLoading(false);
     }
     public void ChangeCutscene(int index)

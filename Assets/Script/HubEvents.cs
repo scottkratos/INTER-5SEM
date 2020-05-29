@@ -24,8 +24,7 @@ public class HubEvents : MonoBehaviour
     private bool IsHaunted;
     public LevelLoadManager[] levels;
     public static int CutsceneIndex;
-    public static Vector3[] transforms = new Vector3[36];
-    public static Vector3[] transformsParents = new Vector3[36];
+    public static GameObject[] transforms = new GameObject[36];
 
     private void Awake()
     {
@@ -42,6 +41,18 @@ public class HubEvents : MonoBehaviour
             Lamparinas.Add(go);
         }
         audioSource = GetComponent<AudioSource>();
+    }
+    public void CreteTransform(Vector3 valvect, Quaternion valquat, int index)
+    {
+        if (transforms[index] != null) return;
+        GameObject go = new GameObject();
+        Vector3 pos;
+        pos = new Vector3(valvect.x, valvect.y, valvect.z);
+        Quaternion rot = new Quaternion(valquat.x, valquat.y, valquat.z, valquat.w);
+        go.transform.position = pos;
+        go.transform.rotation = rot;
+        go.name = "Transform Porta " + index;
+        transforms.SetValue(go, index);
     }
     public void ChangePlayerEnableStatus(bool active)
     {

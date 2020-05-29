@@ -13,12 +13,6 @@ public class LevelController : MonoBehaviour
     Scene s;
     Transform player;
 
-    private void Awake()
-    {
-        Vector3 pos;
-        pos = new Vector3(transform.position.x, transform.position.y , transform.position.z);
-        HubEvents.transforms.SetValue(pos, index);
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +20,10 @@ public class LevelController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         DoorClosed = false;
         if (index == -1) return;
+        Vector3 pos;
+        pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Quaternion rot = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        HubEvents.Instance.CreteTransform(pos, rot, index);
     }
     public void Open(bool value)
     {
@@ -36,15 +34,17 @@ public class LevelController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            if (DoorClosed) return;
             DoorClosed = true;
             portao.SetBool("DoorBool", false);
             SaturationControl.lastIndex = index;
             for (int i = 0; i < HubEvents.Instance.levels[index].LevelLoad.Length; i++)
             {
-                SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
+                if (SceneManager.GetSceneByName(HubEvents.Instance.levels[index].LevelUnload[i]) == null) SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
             }
             for (int i = 0; i < HubEvents.Instance.levels[index].LevelUnload.Length; i++)
             {
+                if (SceneManager.GetSceneByName(HubEvents.Instance.levels[index].LevelUnload[i]) == null) continue;
                 SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[index].LevelUnload[i]);
             }
         }
