@@ -87,6 +87,34 @@ public class WaterShooter : MonoBehaviour
                         Player.GetComponent<player>().index = 4;
 
                     }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "ParedePortal")
+                    {
+                        Player.GetComponent<player>().portalIndex++;
+                        switch (Player.GetComponent<player>().portalIndex)
+                        {
+                            case 1:
+                                Player.GetComponent<player>().portais[0].SetActive(true);
+                                break;
+                            case 2:
+                                Player.GetComponent<player>().portais[1].SetActive(true);
+                                break;
+                            case 3:
+                                Player.GetComponent<player>().portais[0].SetActive(true);
+                                Player.GetComponent<player>().portalIndex = 1;
+                                break;
+                        }
+                        if (Player.GetComponent<player>().portalIndex == 1)
+                        {
+                            Player.GetComponent<player>().portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                            Player.GetComponent<player>().portais[0].transform.rotation = hit.rigidbody.rotation;
+                        }
+                        if (Player.GetComponent<player>().portalIndex == 2)
+                        {
+                            Player.GetComponent<player>().portais[1].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                            Player.GetComponent<player>().portais[1].transform.rotation = hit.rigidbody.rotation;
+                        }
+
+                    }
                 }
             }
             else
@@ -133,6 +161,34 @@ public class WaterShooter : MonoBehaviour
                         hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
 
 
+
+                    }
+                    if (Input.GetMouseButtonDown(0) && hit.transform.tag == "ParedePortal")
+                    {
+                        Player.GetComponent<player>().portalIndex++;
+                        switch (Player.GetComponent<player>().portalIndex)
+                        {
+                            case 1:
+                                Player.GetComponent<player>().portais[0].SetActive(true);
+                                break;
+                            case 2:
+                                Player.GetComponent<player>().portais[1].SetActive(true);
+                                break;
+                            case 3:
+                                Player.GetComponent<player>().portais[0].SetActive(true);
+                                Player.GetComponent<player>().portalIndex = 1;
+                                break;
+                        }
+                        if (Player.GetComponent<player>().portalIndex == 1)
+                        {
+                            Player.GetComponent<player>().portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                            Player.GetComponent<player>().portais[0].transform.rotation = hit.rigidbody.rotation;
+                        }
+                        if (Player.GetComponent<player>().portalIndex == 2)
+                        {
+                            Player.GetComponent<player>().portais[1].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
+                            Player.GetComponent<player>().portais[1].transform.rotation = hit.rigidbody.rotation;
+                        }
 
                     }
                 }

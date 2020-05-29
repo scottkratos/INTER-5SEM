@@ -249,7 +249,7 @@ public class player : MonoBehaviour
                 }
                 if (portalIndex == 2)
                 {
-                    portais[1].transform.position = hit.rigidbody.position;
+                    portais[1].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
                     portais[1].transform.rotation = hit.rigidbody.rotation;
                 }
             }

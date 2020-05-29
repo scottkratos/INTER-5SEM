@@ -6,8 +6,8 @@ public class teleport : MonoBehaviour
 {
     public GameObject player, agua, aguaRespaw;
     public GameObject reciever;
-    float anglePortalZ, anglePortalX;
-    float RorationPortalZ, RotationPortalX;
+    public float anglePortalZ, anglePortalX;
+    public float RorationPortalZ, RotationPortalX;
     public bool playerIsOverLapping = false;
     public bool disparo;
     public Ray rayDirecion;
@@ -65,6 +65,14 @@ public class teleport : MonoBehaviour
 
 
         }
+        if (other.tag == "Ice")
+        {
+            other.gameObject.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y, reciever.transform.position.z + anglePortalZ);
+        }
+        if (other.tag == "Vaso")
+        {
+            other.gameObject.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y, reciever.transform.position.z + anglePortalZ);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -72,17 +80,23 @@ public class teleport : MonoBehaviour
         {
             playerIsOverLapping = false;
             Debug.Log(reciever.transform.localRotation.eulerAngles.y);
+
+        }
+        if (other.tag == "Vaso")
+        {
+            // other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
     // calculo dos angulos de teleporte 
     void AnglePortal()
     {
-        if (reciever.transform.localRotation.eulerAngles.y == -180)
+        if (reciever.transform.localRotation.eulerAngles.y == 270)
         {
             anglePortalX = -1.6f;
-            RotationPortalX = -90;
+            RotationPortalX = 140;
 
         }
+
         if (reciever.transform.localRotation.eulerAngles.y == 90)
         {
             anglePortalX = 1.6f;

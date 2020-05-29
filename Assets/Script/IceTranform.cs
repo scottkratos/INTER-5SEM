@@ -81,10 +81,30 @@ public class IceTranform : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.transform.gameObject.tag == "Portal" && this.gameObject.tag != "Player")
+        {
 
+            transform.position = other.GetComponent<teleport>().reciever.gameObject.transform.GetChild(0).transform.position;
+            take = true;
+            GetComponent<BoxCollider>().enabled = false;
+            Invoke("Kinematic", .6f);
+
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+
+    }
+    void KinematicOn()
+    {
+
+        GetComponent<Rigidbody>().isKinematic = true;
+        GetComponent<BoxCollider>().enabled = false;
+    }
+    void Kinematic()
+    {
+
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<BoxCollider>().enabled = true;
     }
 }
