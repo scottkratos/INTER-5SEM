@@ -409,18 +409,18 @@ public class player : MonoBehaviour
     //atualiza jogador apos load 
     public void LoadPlayer()
     {
-        isContinue = true;
-        PlayerData data = LoadGame.LoadPlayer();
-        Vector3 position;
-        position.x = data.position[0];
-        position.y = data.position[1];
-        position.z = data.position[2];
-        Vector3 rotation;
-        rotation.x = data.rotation[0];
-        rotation.y = data.rotation[1];
-        rotation.z = data.rotation[2];
-        CameraController = rotation;
-        transform.position = position;
+        //isContinue = true;
+        //PlayerData data = LoadGame.LoadPlayer();
+        //Vector3 position;
+        //position.x = data.position[0];
+        //position.y = data.position[1];
+        //position.z = data.position[2];
+        //Vector3 rotation;
+        //rotation.x = data.rotation[0];
+        //rotation.y = data.rotation[1];
+        //rotation.z = data.rotation[2];
+        //CameraController = rotation;
+        //transform.position = position;
 
     }
     // verifica se o personagem está no ar; 
@@ -437,25 +437,25 @@ public class player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.tag == "Cutscene")
-        {
-            LoadGame.Savecutscene(other.gameObject.GetComponent<CutscenePrepare>());
-            Debug.Log("save");
-        }
-        if (other.gameObject.tag == "Porta")
-        {
-            if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == true)
-            {
-                CutSceneLoad = true;
-                LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
-                Debug.Log("save");
-            }
-            if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == false)
-            {
-                CutSceneLoad = false;
-                LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
+        //if (other.gameObject.tag == "Cutscene")
+        //{
+        //    LoadGame.Savecutscene(other.gameObject.GetComponent<CutscenePrepare>());
+        //    Debug.Log("save");
+        //}
+        //if (other.gameObject.tag == "Porta")
+        //{
+        //    if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == true)
+        //    {
+        //        CutSceneLoad = true;
+        //        LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
+        //        Debug.Log("save");
+        //    }
+        //    if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == false)
+        //    {
+        //        CutSceneLoad = false;
+        //        LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
 
-            }
-        }
+        //    }
+        //}
     }
 }

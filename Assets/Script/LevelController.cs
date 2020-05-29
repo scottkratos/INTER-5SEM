@@ -34,18 +34,39 @@ public class LevelController : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            if (portao.GetBool("DoorBool"))
+            {
+                LoadGame.SavePlayer(other.gameObject.GetComponent<player>());
+                CutscenePrepare cut;
+                cut = new CutscenePrepare();
+                cut.index = index;
+                LoadGame.Savecutscene(cut);
+            }
             if (DoorClosed) return;
             DoorClosed = true;
             portao.SetBool("DoorBool", false);
             SaturationControl.lastIndex = index;
             for (int i = 0; i < HubEvents.Instance.levels[index].LevelLoad.Length; i++)
             {
-                if (SceneManager.GetSceneByName(HubEvents.Instance.levels[index].LevelUnload[i]) == null) SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
+                bool haveLoaded = false;
+                for (int r = 0; r < SceneManager.sceneCount; r++)
+                {
+                    if (SceneManager.GetSceneAt(r).name == HubEvents.Instance.levels[index].LevelLoad[i])
+                    {
+                        haveLoaded = true;
+                    }
+                }
+                if (!haveLoaded) SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
             }
             for (int i = 0; i < HubEvents.Instance.levels[index].LevelUnload.Length; i++)
             {
-                if (SceneManager.GetSceneByName(HubEvents.Instance.levels[index].LevelUnload[i]) == null) continue;
-                SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[index].LevelUnload[i]);
+                for (int r = 0; r < SceneManager.sceneCount; r++)
+                {
+                    if (SceneManager.GetSceneAt(r).name == HubEvents.Instance.levels[index].LevelUnload[i])
+                    {
+                        SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[index].LevelUnload[i]);
+                    }
+                }
             }
         }
     }

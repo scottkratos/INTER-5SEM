@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 51.33156, g: 73.23816, b: 80.332886, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -21211,11 +21211,11 @@ MonoBehaviour:
     - Level3
   - LevelLoad:
     - Level7
-    LevelUnload:
-    - Level4
+    LevelUnload: []
   - LevelLoad:
     - Level8
     LevelUnload:
+    - Level4
     - Level5
   - LevelLoad:
     - Level1

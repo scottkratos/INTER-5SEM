@@ -5,18 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class CutSceneData
 {
-    public int index, level;
+    public int index;
 
 
     public CutSceneData(CutscenePrepare cutsceneControl)
     {
         index = cutsceneControl.index;
-        level = cutsceneControl.gameObject.scene.buildIndex;
+        //level = cutsceneControl.gameObject.scene.buildIndex;
     }
-
-
-
-
-
-
 }

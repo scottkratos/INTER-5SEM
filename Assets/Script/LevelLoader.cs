@@ -67,25 +67,36 @@ public class LevelLoader : MonoBehaviour
     {
         player.Instance.CutsceneMode = false;
         CutSceneData dataCut = LoadGame.LoadCutscene();
-        PlayerData data = LoadGame.LoadPlayer();
+        //PlayerData data = LoadGame.LoadPlayer();
+        //print(dataCut.index);
         //Debug.Log(dataCut.level);
-        if (data.cutSceneLoad == true)
-            switch (dataCut.level)
+        if (dataCut != null)
+            switch (dataCut.index)
             {
-                case 9:
+                case 8:
                     Invoke("CutsceneLoad", .5f);
                     break;
                 case 17:
                     Invoke("CutsceneLoad", .5f);
                     break;
-                case 25:
+                case 26:
                     Invoke("CutsceneLoad", .5f);
                     break;
-                case 33:
+                case 35:
                     Invoke("CutsceneLoad", .5f);
                     break;
             }
-        CheatMenu.Instance.ChangeLevel("Level" + (dataCut.index - 1).ToString());
+        if (dataCut == null)
+        {
+            starGame();
+            return;
+        }
+        else if (dataCut.index == -1)
+        {
+            starGame();
+            return;
+        }
+        CheatMenu.Instance.ChangeInRuntime("Level" + dataCut.index.ToString());
     }
     private IEnumerator IndividualLoader(string level)
     {

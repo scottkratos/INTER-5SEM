@@ -51,10 +51,44 @@ public class CheatMenu : MonoBehaviour
     public void ChangeLevel(string level)
     {
         player.Instance.CheatMenu.SetActive(false);
-        StartCoroutine(Reload(level));
+        StartCoroutine(Reload(level, false));
     }
-    private IEnumerator Reload(string level)
+    public void ChangeInRuntime(string level)
     {
+        player.Instance.CheatMenu.SetActive(false);
+        StartCoroutine(Reload(level, true));
+    }
+    private IEnumerator Reload(string level, bool makeConversion)
+    {
+        if (makeConversion)
+        {
+            int transformIndex;
+            if (level.Length == 7)
+            {
+                transformIndex = int.Parse(level[5].ToString() + level[6].ToString());
+            }
+            else
+            {
+                transformIndex = int.Parse(level[5].ToString());
+            }
+            if (transformIndex >= 0 & transformIndex <= 7)
+            {
+                transformIndex += 1;
+            }
+            else if (transformIndex >= 8 & transformIndex <= 15)
+            {
+                transformIndex += 2;
+            }
+            else if (transformIndex >= 16 & transformIndex <= 23)
+            {
+                transformIndex += 3;
+            }
+            else if (transformIndex >= 24 & transformIndex <= 31)
+            {
+                transformIndex += 4;
+            }
+            level = "Level" + transformIndex.ToString();
+        }
         SetupLoading(true);
         SaturationControl.lastIndex = System.Array.IndexOf(Levels, level);
         List<string> listUnload = new List<string>();
@@ -79,11 +113,43 @@ public class CheatMenu : MonoBehaviour
             yield return SceneManager.UnloadSceneAsync(Levels[System.Array.IndexOf(Levels, listUnload[0])]);
             listUnload.RemoveAt(0);
         }
-        yield return SceneManager.LoadSceneAsync(level, LoadSceneMode.Additive);
-        yield return SceneManager.LoadSceneAsync("Level" + (System.Array.IndexOf(Levels, level)), LoadSceneMode.Additive);
-        for (int i = 0; i < HubEvents.Instance.levels[System.Array.IndexOf(Levels, level)].LevelLoad.Length; i++)
+        for (int i = 0;  i < LevelLoader.Instance.Levels.Length; i++)
         {
-            yield return SceneManager.LoadSceneAsync(HubEvents.Instance.levels[System.Array.IndexOf(Levels, level)].LevelLoad[i], LoadSceneMode.Additive);
+            yield return SceneManager.LoadSceneAsync(LevelLoader.Instance.Levels[i], LoadSceneMode.Additive);
+        }
+        int indexToStop = System.Array.IndexOf(Levels, level);
+        if (indexToStop >= 0 & indexToStop <= 7)
+        {
+            indexToStop += 1;
+        }
+        else if (indexToStop >= 8 & indexToStop <= 15)
+        {
+            indexToStop+= 2;
+        }
+        else if (indexToStop >= 16 & indexToStop <= 23)
+        {
+            indexToStop += 3;
+        }
+        else if (indexToStop >= 24 & indexToStop <= 31)
+        {
+            indexToStop += 4;
+        }
+        for (int r = 0; r < indexToStop; r++)
+        {
+            for (int i = 0; i < HubEvents.Instance.levels[r].LevelLoad.Length; i++)
+            {
+                yield return SceneManager.LoadSceneAsync(HubEvents.Instance.levels[r].LevelLoad[i], LoadSceneMode.Additive);
+            }
+            for (int i = 0; i < HubEvents.Instance.levels[r].LevelUnload.Length; i++)
+            {
+                for (int p = 0; p < SceneManager.sceneCount; p++)
+                {
+                    if (SceneManager.GetSceneAt(p).name == HubEvents.Instance.levels[r].LevelUnload[i])
+                    {
+                        SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[r].LevelUnload[i]);
+                    }
+                }
+            }
         }
         yield return new WaitForEndOfFrame();
         player.Instance.transform.position = HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.forward.normalized * -3 + new Vector3(HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.x, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.y + 2, HubEvents.transforms[System.Array.IndexOf(Levels, level)].transform.position.z);
