@@ -14,6 +14,7 @@ public class Vaso : MonoBehaviour
     public AudioSource finalPuzzle;
     public LayerMask Ambientelayer;
     public AudioSource place, remove;
+    public bool defaultWater;
     private void Awake()
     {
 
@@ -29,6 +30,7 @@ public class Vaso : MonoBehaviour
         {
             animator.SetBool("WaterBool", false);
         }
+        defaultWater = FullWater;
     }
     private void Update()
     {

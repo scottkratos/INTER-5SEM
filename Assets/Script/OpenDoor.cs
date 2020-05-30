@@ -30,7 +30,7 @@ public class OpenDoor : MonoBehaviour
     {
         if (Cutscene) return;
 
-        if (Button == true && Gramofono == false && Door.GetComponent<LevelController>().DoorClosed == false)
+        if (Button == true && Gramofono == false)
             if (Buutons.All(events => events == events.GetComponent<Button>().operDoorEvent == true))
             {
                 animator.SetBool("DoorBool", true);
@@ -42,12 +42,13 @@ public class OpenDoor : MonoBehaviour
             }
 
 
-        if (Gramofono == true && Button == false && Door.GetComponent<LevelController>().DoorClosed == false)
+        if (Gramofono == true && Button == false)
             if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true))
                 animator.SetBool("DoorBool", true);
+        else
+                animator.SetBool("DoorBool", false);
 
-
-        if (Gramofono == true && Button == true && Door.GetComponent<LevelController>().DoorClosed == false)
+        if (Gramofono == true && Button == true)
         {
             if (gramofone.All(events => events.GetComponent<Gramofone>().DoorEvent == true) && Buutons.All(events => events.GetComponent<Button>().operDoorEvent == true))
             {
