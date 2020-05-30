@@ -61,6 +61,7 @@ public class CheatMenu : MonoBehaviour
     private IEnumerator Reload(string level, bool makeConversion)
     {
         player.Instance.CutsceneMode = true;
+        MusicControl.Instance.ChangeMusic(1);
         if (makeConversion)
         {
             int transformIndex;
@@ -119,23 +120,73 @@ public class CheatMenu : MonoBehaviour
             yield return SceneManager.LoadSceneAsync(LevelLoader.Instance.Levels[i], LoadSceneMode.Additive);
         }
         int indexToStop = System.Array.IndexOf(Levels, level);
+        int startPoint = 0;
         if (indexToStop >= 0 && indexToStop <= 7)
         {
             indexToStop += 0;
+            startPoint = 0;
         }
         else if (indexToStop >= 8 && indexToStop <= 15)
         {
             indexToStop+= 1;
+            startPoint = 7;
+            yield return SceneManager.UnloadSceneAsync("Level2");
+            yield return SceneManager.UnloadSceneAsync("Level3");
+            yield return SceneManager.UnloadSceneAsync("Level4");
+            yield return SceneManager.UnloadSceneAsync("Level8");
+            yield return SceneManager.UnloadSceneAsync("Level9");
+            yield return SceneManager.UnloadSceneAsync("Level17");
+            yield return SceneManager.UnloadSceneAsync("Level23");
+            yield return SceneManager.UnloadSceneAsync("Level24");
+            yield return SceneManager.UnloadSceneAsync("Level26");
+            yield return SceneManager.UnloadSceneAsync("Level27");
+            yield return SceneManager.UnloadSceneAsync("Level28");
+            yield return SceneManager.UnloadSceneAsync("Level29");
+            yield return SceneManager.UnloadSceneAsync("Level30");
+            yield return SceneManager.UnloadSceneAsync("Level31");
+            yield return SceneManager.UnloadSceneAsync("Level32");
         }
         else if (indexToStop >= 16 && indexToStop <= 23)
         {
             indexToStop += 2;
+            startPoint = 15;
+            yield return SceneManager.UnloadSceneAsync("Level2");
+            yield return SceneManager.UnloadSceneAsync("Level3");
+            yield return SceneManager.UnloadSceneAsync("Level4");
+            yield return SceneManager.UnloadSceneAsync("Level8");
+            yield return SceneManager.UnloadSceneAsync("Level9");
+            yield return SceneManager.UnloadSceneAsync("Level17");
+            yield return SceneManager.UnloadSceneAsync("Level23");
+            yield return SceneManager.UnloadSceneAsync("Level24");
+            yield return SceneManager.UnloadSceneAsync("Level26");
+            yield return SceneManager.UnloadSceneAsync("Level27");
+            yield return SceneManager.UnloadSceneAsync("Level28");
+            yield return SceneManager.UnloadSceneAsync("Level29");
+            yield return SceneManager.UnloadSceneAsync("Level30");
+            yield return SceneManager.UnloadSceneAsync("Level31");
+            yield return SceneManager.UnloadSceneAsync("Level32");
         }
         else if (indexToStop >= 24 && indexToStop <= 31)
         {
             indexToStop += 3;
+            startPoint = 23;
+            yield return SceneManager.UnloadSceneAsync("Level2");
+            yield return SceneManager.UnloadSceneAsync("Level3");
+            yield return SceneManager.UnloadSceneAsync("Level4");
+            yield return SceneManager.UnloadSceneAsync("Level8");
+            yield return SceneManager.UnloadSceneAsync("Level9");
+            yield return SceneManager.UnloadSceneAsync("Level17");
+            yield return SceneManager.UnloadSceneAsync("Level23");
+            yield return SceneManager.UnloadSceneAsync("Level24");
+            yield return SceneManager.UnloadSceneAsync("Level26");
+            yield return SceneManager.UnloadSceneAsync("Level27");
+            yield return SceneManager.UnloadSceneAsync("Level28");
+            yield return SceneManager.UnloadSceneAsync("Level29");
+            yield return SceneManager.UnloadSceneAsync("Level30");
+            yield return SceneManager.UnloadSceneAsync("Level31");
+            yield return SceneManager.UnloadSceneAsync("Level32");
         }
-        for (int r = 0; r < indexToStop; r++)
+        for (int r = startPoint; r < indexToStop; r++)
         {
             for (int i = 0; i < HubEvents.Instance.levels[r].LevelLoad.Length; i++)
             {
@@ -153,7 +204,7 @@ public class CheatMenu : MonoBehaviour
             }
         }
         yield return new WaitForEndOfFrame();
-        player.Instance.transform.position = HubEvents.transforms[indexToStop].transform.forward.normalized * -2 + new Vector3(HubEvents.transforms[indexToStop].transform.position.x, HubEvents.transforms[indexToStop].transform.position.y + 2, HubEvents.transforms[indexToStop].transform.position.z);
+        player.Instance.transform.position = HubEvents.transforms[indexToStop].transform.forward.normalized * -0.5f + new Vector3(HubEvents.transforms[indexToStop].transform.position.x, HubEvents.transforms[indexToStop].transform.position.y + 2, HubEvents.transforms[indexToStop].transform.position.z);
         SetupLoading(false);
         player.Instance.CutsceneMode = false;
     }

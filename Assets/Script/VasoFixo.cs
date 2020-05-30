@@ -8,11 +8,12 @@ public class VasoFixo : MonoBehaviour
     public RaycastHit hit;
     Transform Player;
     public bool NotWater;
+    public bool defaultWater;
 
     private void Awake()
     {
         Player = FindObjectOfType<player>().transform;
-
+        defaultWater = NotWater;
     }
 
     // Start is called before the first frame update

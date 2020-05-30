@@ -436,15 +436,15 @@ public class Button : MonoBehaviour
 
         foreach (var item in vase)
         {
-            item.GetComponent<Animator>().SetBool("WaterBool", true);
+            item.GetComponent<Animator>().SetBool("WaterBool", item.GetComponent<Vaso>().defaultWater);
         }
         foreach (var item in gramofone)
         {
-            item.GetComponent<Animator>().SetBool("WaterBool", false);
+            item.GetComponent<Animator>().SetBool("WaterBool", item.GetComponent<Gramofone>().defaultWater);
         }
         foreach (var item in vasoFixo)
         {
-            item.GetComponent<Animator>().SetBool("Water", true);
+            item.GetComponent<Animator>().SetBool("Water", !item.GetComponent<VasoFixo>().defaultWater);
         }
 
 

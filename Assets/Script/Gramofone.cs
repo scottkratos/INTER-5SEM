@@ -13,6 +13,7 @@ public class Gramofone : MonoBehaviour
     public int Level;
     public AudioSource finalPuzzle;
     public GameObject Particula;
+    public bool defaultWater;
     private void Awake()
     {
 
@@ -28,6 +29,7 @@ public class Gramofone : MonoBehaviour
             animator.SetBool("WaterBool", false);
 
         }
+        defaultWater = FullWater;
     }
     private void Update()
     {

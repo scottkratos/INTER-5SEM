@@ -16,6 +16,7 @@ public class Canhao : MonoBehaviour
     Vector3 RayOring;
     float angulo;
     public LayerMask portal;
+    private AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class Canhao : MonoBehaviour
         rotationOff = canhao.transform.localRotation;
         aguaInicial = agua.transform.position;
         player = FindObjectOfType<player>().gameObject;
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +50,7 @@ public class Canhao : MonoBehaviour
         {
             agua.SetActive(true);
             agua.transform.Translate(-.8f, 0, 0);
+            audio.Play();
             if (Physics.Raycast(transform.GetChild(0).transform.position, transform.GetChild(0).transform.up, out hit))
             {
                 if (hit.collider.tag == "Canhao")
@@ -92,13 +95,13 @@ public class Canhao : MonoBehaviour
                     }
                     if (player.GetComponent<player>().portalIndex == 1)
                     {
-                        player.GetComponent<player>().portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
-                        player.GetComponent<player>().portais[0].transform.rotation = hit.rigidbody.rotation;
+                        player.GetComponent<player>().portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z) + hit.rigidbody.transform.forward.normalized * .2f;
+                        player.GetComponent<player>().portais[0].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
                     }
                     if (player.GetComponent<player>().portalIndex == 2)
                     {
-                        player.GetComponent<player>().portais[1].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z + .1f);
-                        player.GetComponent<player>().portais[1].transform.rotation = hit.rigidbody.rotation;
+                        player.GetComponent<player>().portais[1].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z) + hit.rigidbody.transform.forward.normalized * .2f;
+                        player.GetComponent<player>().portais[1].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
                     }
                 }
                 if (hit.transform.tag == "ZonaDeFrio")
