@@ -58,7 +58,7 @@ public class teleport : MonoBehaviour
         }
         if (other.tag == "Ice")
         {
-            other.gameObject.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y, reciever.transform.position.z + anglePortalZ);
+            other.gameObject.transform.position = new Vector3(reciever.transform.position.x, reciever.transform.position.y - 3, reciever.transform.position.z);
         }
         if (other.tag == "Vaso")
         {
@@ -88,24 +88,24 @@ public class teleport : MonoBehaviour
 
         }
 
-        if (reciever.transform.localRotation.eulerAngles.y == 90 && reciever.transform.localRotation.eulerAngles.z != 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 90 && reciever.transform.localRotation.eulerAngles.z != 90)
         {
             anglePortalX = 1.6f;
             RotationPortalX = 90;
         }
-        if (reciever.transform.localRotation.eulerAngles.y == 180 && reciever.transform.localRotation.eulerAngles.z != 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 180 && reciever.transform.localRotation.eulerAngles.z != 90)
         {
             anglePortalZ = -1.6f;
             RotationPortalX = 90;
         }
-        if (reciever.transform.localRotation.eulerAngles.y == 0 && reciever.transform.localRotation.eulerAngles.z != 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 0 && reciever.transform.localRotation.eulerAngles.z != 90)
         {
             anglePortalZ = 1.6f;
             RotationPortalX = 0;
         }
-        if (reciever.transform.localRotation.eulerAngles.z == 180)
+        if (reciever.transform.localRotation.eulerAngles.z == 90)
         {
-            RotationPortalXY = 3f;
+            RotationPortalXY = -3f;
 
 
 

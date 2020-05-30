@@ -84,7 +84,7 @@ public class IceTranform : MonoBehaviour
         if (other.transform.gameObject.tag == "Portal" && this.gameObject.tag != "Player")
         {
 
-            transform.position = other.GetComponent<teleport>().reciever.gameObject.transform.GetChild(0).transform.position;
+           // transform.position = other.GetComponent<teleport>().reciever.gameObject.transform.GetChild(0).transform.position;
             take = true;
             GetComponent<BoxCollider>().enabled = false;
             Invoke("Kinematic", .6f);
