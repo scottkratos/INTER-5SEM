@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3691036828204169076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912161224541554088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2a7ab59ae47c8449fc55da3d81b320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmountWater: 0
+  Gelo: {fileID: 0}
+  player: {fileID: 0}
+  take: 0
+  inHand: 0
 --- !u!1 &4842860702993887631
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +27,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6786767464706786911}
   - component: {fileID: 7570258280127396138}
-  - component: {fileID: 1303375336182166909}
+  - component: {fileID: 921019386764936095}
   m_Layer: 2
   m_Name: ZonaFrio
   m_TagString: ZonaDeFrio
@@ -37,6 +54,7 @@ Transform:
   - {fileID: 6893144739164919276}
   - {fileID: 8526777980859430267}
   - {fileID: 3355119578598159359}
+  - {fileID: 5717540568225697125}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,9 +70,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58be1931b01cd54dac0125341706d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gelo: {fileID: 0}
---- !u!135 &1303375336182166909
-SphereCollider:
+  gelo: {fileID: 3912161224541554088}
+--- !u!136 &921019386764936095
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -63,9 +81,40 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.8058696
-  m_Center: {x: 0.07228446, y: 0, z: -0.07167673}
+  m_Radius: 3.64149
+  m_Height: 11.432616
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.7009587, z: 0.0737953}
+--- !u!1 &8305592009176513715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5717540568225697125}
+  m_Layer: 0
+  m_Name: Respawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5717540568225697125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8305592009176513715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6786767464706786911}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &92092511780040174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -256,17 +305,17 @@ PrefabInstance:
     - target: {fileID: 3042579000257448902, guid: 69edeea694f44c44a8bf95be89ee41e3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 128.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3042579000257448902, guid: 69edeea694f44c44a8bf95be89ee41e3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3042579000257448902, guid: 69edeea694f44c44a8bf95be89ee41e3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.79001
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3042579000257448902, guid: 69edeea694f44c44a8bf95be89ee41e3,
         type: 3}
@@ -345,6 +394,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69edeea694f44c44a8bf95be89ee41e3, type: 3}
+--- !u!1 &3912161224541554088 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3673925633684995473, guid: 69edeea694f44c44a8bf95be89ee41e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 339650145428027449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3355119578598159359 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3042579000257448902, guid: 69edeea694f44c44a8bf95be89ee41e3,

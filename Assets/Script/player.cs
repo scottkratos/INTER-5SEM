@@ -184,13 +184,14 @@ public class player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && power.GetComponent<Orbit>().InHand == true)
         {
             ShotIndex = 4;
-            if (ShotIndex < 5)
+            foreach (var item in shotWater)
             {
-                shotWater[ShotIndex].transform.position = hand.transform.position;
-                shotWater[ShotIndex].SetActive(true);
+                item.transform.position = hand.transform.position;
+                item.gameObject.SetActive(true);
             }
             index = -1;
         }
+
         //interacao com a agua
         if (Physics.Raycast(cameraTransform.position, cameraTransform.transform.forward, 3f, water) && take == false)
         {
@@ -259,7 +260,34 @@ public class player : MonoBehaviour
         if (Physics.Raycast(eyes, out hit, 5) && Input.GetKeyDown(KeyCode.E) && hit.collider.transform.tag != null)
         {
             if (hit.collider.transform.tag == "Ice")
-                hit.collider.GetComponent<IceTranform>().take = !hit.collider.GetComponent<IceTranform>().take;
+            {
+                if (hit.collider.GetComponent<IceTranform>() != null)
+                    hit.collider.GetComponent<IceTranform>().take = !hit.collider.GetComponent<IceTranform>().take;
+                if (hit.collider.GetComponent<iceZona>() != null)
+                    hit.collider.GetComponent<iceZona>().take = !hit.collider.GetComponent<iceZona>().take;
+            }
+
+
+        }
+        //intercao com o zona de gelo
+        if (Physics.Raycast(eyes, out hit) && Input.GetMouseButtonDown(0))
+        {
+            if (hit.collider.transform.tag == "ZonaDeFrio")
+            {
+                Instantiate(hit.collider.GetComponent<IceArea>().gelo, hit.collider.GetComponent<IceArea>().transform.GetChild(8).transform).SetActive(true);
+                foreach (var item in shotWater)
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }
+            if (hit.collider.transform.tag == "ZonaDeCalor")
+            {
+                hit.collider.GetComponent<FireArea>().transform.GetChild(7).GetComponent<ParticleSystem>().Play();
+                foreach (var item in shotWater)
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }
 
         }
         //interacao com vaso fixo
@@ -267,6 +295,14 @@ public class player : MonoBehaviour
         {
             hit.transform.gameObject.GetComponent<VasoFixo>().gameObject.GetComponent<Animator>().SetBool("Water", true);
             hit.transform.gameObject.GetComponent<VasoFixo>().NotWater = false;
+        }
+
+        if (Physics.Raycast(eyes, out hit) && hit.collider.transform.tag == "Canhao" && Input.GetMouseButtonDown(0))
+        {
+            foreach (var item in shotWater)
+            {
+                item.SetActive(false);
+            }
         }
         // Ativacao da orbis 
         switch (index)

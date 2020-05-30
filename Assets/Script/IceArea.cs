@@ -8,16 +8,21 @@ public class IceArea : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Player" && other.gameObject.GetComponent<player>().power.GetComponent<Orbit>().InHand == true)
+        if (other.tag == "Player")
         {
             gameObject.layer = 2;
-            Instantiate(FindObjectOfType<player>().GetComponent<IceTranform>().Gelo).SetActive(true);
+            if (other.gameObject.GetComponent<player>().power.GetComponent<Orbit>().InHand == true)
+                Instantiate(FindObjectOfType<player>().GetComponent<IceTranform>().Gelo).SetActive(true);
         }
-        if (other.tag == "Vaso" && other.gameObject.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
+        if (other.tag == "Vaso")
         {
-            other.gameObject.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(true);
-            other.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
-            other.gameObject.GetComponent<Vaso>().congelado = true;
+            gameObject.layer = 2;
+            if (other.gameObject.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
+            {
+                other.gameObject.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(true);
+                other.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
+                other.gameObject.GetComponent<Vaso>().congelado = true;
+            }
         }
 
     }
@@ -27,7 +32,11 @@ public class IceArea : MonoBehaviour
         {
             gameObject.layer = 0;
         }
+        if (other.tag == "Vaso")
+        {
+            gameObject.layer = 0;
 
+        }
 
     }
 }

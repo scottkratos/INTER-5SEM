@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7482765699636338451}
   - component: {fileID: 8224740540627602386}
   - component: {fileID: 5963532787070170087}
+  - component: {fileID: 5338412598667936030}
   m_Layer: 0
   m_Name: aguaShot
   m_TagString: Power
@@ -94,6 +95,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.50000006
   m_Center: {x: 0, y: 0, z: 0.0000019073486}
+--- !u!54 &5338412598667936030
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569408483298694023}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &365469642989022374
 PrefabInstance:
   m_ObjectHideFlags: 0

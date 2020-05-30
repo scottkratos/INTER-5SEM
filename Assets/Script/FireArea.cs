@@ -27,16 +27,14 @@ public class FireArea : MonoBehaviour
         }
         if (other.tag == "Vaso")
         {
+            gameObject.layer = 2;
             if (other.gameObject.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
             {
                 other.gameObject.GetComponent<Vaso>().transform.GetChild(5).GetComponent<ParticleSystem>().Play();
                 other.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
             }
         }
-        if (other.tag == "Power")
-        {
-            other.gameObject.GetComponent<Vaso>().transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-        }
+
 
 
     }
@@ -46,7 +44,11 @@ public class FireArea : MonoBehaviour
         {
             gameObject.layer = 0;
         }
-       
+        if (other.tag == "Vaso")
+        {
+            gameObject.layer = 0;
+
+        }
 
     }
 }

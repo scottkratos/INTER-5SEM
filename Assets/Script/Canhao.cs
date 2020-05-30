@@ -72,6 +72,7 @@ public class Canhao : MonoBehaviour
                     GameObject outherPortal = hit.collider.gameObject.GetComponent<teleport>().reciever;
                     outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().disparo = true;
                 }
+
                 if (hit.transform.tag == "ParedePortal")
                 {
                     Debug.Log("portal");
@@ -103,7 +104,7 @@ public class Canhao : MonoBehaviour
                 if (hit.transform.tag == "ZonaDeFrio")
                 {
                     Debug.Log("gelo");
-                    hit.collider.GetComponent<IceArea>().gelo.SetActive(true);
+                    Instantiate(hit.collider.GetComponent<IceArea>().gelo, hit.collider.transform).SetActive(true);
                 }
             }
             Invoke("disparoR", .1f);
