@@ -7,7 +7,7 @@ public class teleport : MonoBehaviour
     public GameObject player, agua, aguaRespaw;
     public GameObject reciever;
     public float anglePortalZ, anglePortalX;
-    public float RorationPortalZ, RotationPortalX;
+    public float RorationPortalZ, RotationPortalX, RotationPortalXY;
     public bool playerIsOverLapping = false;
     public bool disparo;
     public Ray rayDirecion;
@@ -29,13 +29,10 @@ public class teleport : MonoBehaviour
     void Update()
     {
         AnglePortal();
-
         aguaRespaw.transform.position = rayDirecion.origin;
         Debug.DrawRay(rayDirecion.origin, rayDirecion.direction);
         if (Physics.Raycast(rayDirecion, out hit))
         {
-
-
             if (disparo == true)
             {
                 if (hit.transform.tag == "Vaso")
@@ -45,24 +42,18 @@ public class teleport : MonoBehaviour
                 agua.SetActive(true);
                 agua.transform.Translate(0, 0, 1.5f);
                 Invoke("disparoR", .1f);
-
-
-
             }
-
-
         }
-
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             playerIsOverLapping = true;
-            FindObjectOfType<player>().CameraController.y = 0;
-            FindObjectOfType<player>().CameraController.y += FindObjectOfType<player>().transform.rotation.y + RotationPortalX;
-            player.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y, reciever.transform.position.z + anglePortalZ);
-
+            player.GetComponent<player>().CameraController.y = 0;
+            player.GetComponent<player>().CameraController.y += FindObjectOfType<player>().transform.rotation.y + RotationPortalX;
+            player.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y + RotationPortalXY, reciever.transform.position.z + anglePortalZ);
+            // player.transform.position = new Vector3(reciever.transform.position.x, reciever.transform.position.y + RotationPortalXY, reciever.transform.position.z);
 
         }
         if (other.tag == "Ice")
@@ -97,22 +88,29 @@ public class teleport : MonoBehaviour
 
         }
 
-        if (reciever.transform.localRotation.eulerAngles.y == 90)
+        if (reciever.transform.localRotation.eulerAngles.y == 90 && reciever.transform.localRotation.eulerAngles.z != 180)
         {
             anglePortalX = 1.6f;
             RotationPortalX = 90;
         }
-        if (reciever.transform.localRotation.eulerAngles.y == 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 180 && reciever.transform.localRotation.eulerAngles.z != 180)
         {
             anglePortalZ = -1.6f;
             RotationPortalX = 90;
         }
-        if (reciever.transform.localRotation.eulerAngles.y == 0)
+        if (reciever.transform.localRotation.eulerAngles.y == 0 && reciever.transform.localRotation.eulerAngles.z != 180)
         {
             anglePortalZ = 1.6f;
             RotationPortalX = 0;
         }
+        if (reciever.transform.localRotation.eulerAngles.z == 180)
+        {
+            RotationPortalXY = 3f;
 
+
+
+
+        }
 
 
     }
@@ -122,72 +120,5 @@ public class teleport : MonoBehaviour
         agua.SetActive(false);
         agua.transform.position = aguaRespaw.transform.position;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

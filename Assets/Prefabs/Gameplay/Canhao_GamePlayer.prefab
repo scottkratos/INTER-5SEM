@@ -93,6 +93,7 @@ MonoBehaviour:
   posicao_final: {fileID: 2968925856434002787}
   canhao: {fileID: 689137707952960826}
   agua: {fileID: 7391109011698666179}
+  player: {fileID: 0}
   Angulo: 0
   TempoDePausa: 1
   DestinoInicial: 0
@@ -173,6 +174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1732830468729423059, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Power
       objectReference: {fileID: 0}
     - target: {fileID: 4596202118801913276, guid: f4ec1dc33fcc44947b3eabd59dd9702a,
         type: 3}

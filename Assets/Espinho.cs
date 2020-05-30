@@ -124,7 +124,7 @@ public class Espinho : MonoBehaviour
             }
             if (ButtonAct == true)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 2f, posicao.z), .5f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 2.3f, posicao.z), .5f);
 
             }
 
@@ -138,7 +138,7 @@ public class Espinho : MonoBehaviour
             }
             if (ButtonAct == true)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x - 2f, posicao.y, posicao.z), .5f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x - 2.3f, posicao.y, posicao.z), .5f);
                 if (tempoDuracao + 1.5f <= tempoFinal)
                     tempoFinal = 0;
             }
@@ -153,7 +153,7 @@ public class Espinho : MonoBehaviour
             }
             if (ButtonAct == true)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x + 2f, posicao.y, posicao.z), .5f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x + 2.3f, posicao.y, posicao.z), .5f);
                 if (tempoDuracao + 1.5f <= tempoFinal)
                     tempoFinal = 0;
             }
@@ -168,7 +168,7 @@ public class Espinho : MonoBehaviour
             }
             if (ButtonAct == true)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z - 2f), .5f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z - 2.3f), .5f);
 
             }
 
@@ -182,11 +182,19 @@ public class Espinho : MonoBehaviour
             }
             if (ButtonAct == true)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z + 2f), .5f);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z + 2.3f), .5f);
 
             }
 
         }
 
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Morre");
+           // LevelLoader.Instance.LoadGameScene();
+        }
     }
 }

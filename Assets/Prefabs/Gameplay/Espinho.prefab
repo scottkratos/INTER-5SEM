@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 165228586237269250}
   - component: {fileID: 5870314490828057083}
   - component: {fileID: 529287319500663414}
+  - component: {fileID: 6970996351979624316}
   m_Layer: 0
   m_Name: Espinho
   m_TagString: 'Espinho '
@@ -91,5 +92,24 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.48101267, y: 1.9999584, z: 0.40305662}
-  m_Center: {x: -0.010367706, y: -0.00002104044, z: 0.0034024715}
+  m_Size: {x: 0.99353755, y: 2.0283675, z: 1.0088285}
+  m_Center: {x: -0.0022414327, y: 0.014183462, z: 0.011240423}
+--- !u!114 &6970996351979624316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281418212933655847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de2896ec202dc84aae685bf54478453, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: 0
+  tempo: 0
+  anguloX: 0
+  anguloY: 0
+  anguloZ: 0
+  Positivo: 0
+  ButtonAct: 0

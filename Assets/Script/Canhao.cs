@@ -100,6 +100,11 @@ public class Canhao : MonoBehaviour
                         player.GetComponent<player>().portais[1].transform.rotation = hit.rigidbody.rotation;
                     }
                 }
+                if (hit.transform.tag == "ZonaDeFrio")
+                {
+                    Debug.Log("gelo");
+                    hit.collider.GetComponent<IceArea>().gelo.SetActive(true);
+                }
             }
             Invoke("disparoR", .1f);
         }

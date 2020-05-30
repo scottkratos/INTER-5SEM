@@ -292,6 +292,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 27081268}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &27081270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375736648462667259, guid: c536f5d8865cd7e419cd24fe45f6aaee,
+    type: 3}
+  m_PrefabInstance: {fileID: 27081268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &31439931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2654,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 271796286}
     m_Modifications:
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: evetObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 1254472407}
+    - target: {fileID: 8708333172169547312, guid: 940134926627aac4fb2c5a173e7301c2,
+        type: 3}
+      propertyPath: Door
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
         type: 3}
       propertyPath: m_Name
@@ -2713,6 +2734,12 @@ PrefabInstance:
 --- !u!4 &294123077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8872433053623979731, guid: 940134926627aac4fb2c5a173e7301c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 294123076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &294123078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8872433053623979730, guid: 940134926627aac4fb2c5a173e7301c2,
     type: 3}
   m_PrefabInstance: {fileID: 294123076}
   m_PrefabAsset: {fileID: 0}
@@ -6790,6 +6817,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 872421205}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &872421207 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375736648462667259, guid: c536f5d8865cd7e419cd24fe45f6aaee,
+    type: 3}
+  m_PrefabInstance: {fileID: 872421205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &876690639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8395,6 +8428,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Botao
       objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: Restard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.data[0]
+      value: 
+      objectReference: {fileID: 1431397686}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.data[1]
+      value: 
+      objectReference: {fileID: 27081270}
+    - target: {fileID: 7799513267687275973, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b,
+        type: 3}
+      propertyPath: vasoFixo.Array.data[2]
+      value: 
+      objectReference: {fileID: 872421207}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5ec8aaadf4c0b42b0a9af3d9905d0b, type: 3}
 --- !u!4 &1095322792 stripped
@@ -9566,6 +9624,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: gramofone.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: Gramofono
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: Button
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080949560630260384, guid: f9e7b4bec1033104e945e55048b05262,
+        type: 3}
+      propertyPath: gramofone.Array.data[0]
+      value: 
+      objectReference: {fileID: 294123078}
     - target: {fileID: 2452556726996311047, guid: f9e7b4bec1033104e945e55048b05262,
         type: 3}
       propertyPath: index
@@ -9648,6 +9726,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e7b4bec1033104e945e55048b05262, type: 3}
+--- !u!1 &1254472407 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6516147612965628654, guid: f9e7b4bec1033104e945e55048b05262,
+    type: 3}
+  m_PrefabInstance: {fileID: 1254472406}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1260252868
 GameObject:
   m_ObjectHideFlags: 0
@@ -12258,6 +12342,12 @@ PrefabInstance:
 --- !u!4 &1431397685 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 784440612606738408, guid: c536f5d8865cd7e419cd24fe45f6aaee,
+    type: 3}
+  m_PrefabInstance: {fileID: 1431397684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1431397686 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4375736648462667259, guid: c536f5d8865cd7e419cd24fe45f6aaee,
     type: 3}
   m_PrefabInstance: {fileID: 1431397684}
   m_PrefabAsset: {fileID: 0}

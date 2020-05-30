@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class IceArea : MonoBehaviour
 {
-
+    public GameObject gelo;
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.tag == "Player" && other.gameObject.GetComponent<player>().power.GetComponent<Orbit>().InHand == true)
         {
+            gameObject.layer = 2;
             Instantiate(FindObjectOfType<player>().GetComponent<IceTranform>().Gelo).SetActive(true);
         }
         if (other.tag == "Vaso" && other.gameObject.GetComponent<Vaso>().animator.GetBool("WaterBool") == true)
@@ -18,5 +19,15 @@ public class IceArea : MonoBehaviour
             other.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", false);
             other.gameObject.GetComponent<Vaso>().congelado = true;
         }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            gameObject.layer = 0;
+        }
+
+
     }
 }

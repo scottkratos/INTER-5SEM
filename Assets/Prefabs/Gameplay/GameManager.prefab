@@ -1109,12 +1109,17 @@ PrefabInstance:
     - target: {fileID: 7994531701695726588, guid: 0a6bac891e6534140bcaced2fd159f90,
         type: 3}
       propertyPath: m_Center.x
-      value: -1.6452126e-17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7994531701695726588, guid: 0a6bac891e6534140bcaced2fd159f90,
         type: 3}
       propertyPath: m_Size.z
-      value: 7.834932
+      value: 19.2814
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994531701695726588, guid: 0a6bac891e6534140bcaced2fd159f90,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 5.7232347
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a6bac891e6534140bcaced2fd159f90, type: 3}
@@ -1151,12 +1156,17 @@ PrefabInstance:
     - target: {fileID: 5866543904584183795, guid: b55cfcc3318a06c4b9aa84c4525c400b,
         type: 3}
       propertyPath: m_Center.x
-      value: -1.6452126e-17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866543904584183795, guid: b55cfcc3318a06c4b9aa84c4525c400b,
         type: 3}
       propertyPath: m_Size.z
-      value: 7.834932
+      value: 22.221727
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866543904584183795, guid: b55cfcc3318a06c4b9aa84c4525c400b,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 7.1933966
       objectReference: {fileID: 0}
     - target: {fileID: 6952852551945393584, guid: b55cfcc3318a06c4b9aa84c4525c400b,
         type: 3}
@@ -1370,7 +1380,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8442808044140220051, guid: 69edeea694f44c44a8bf95be89ee41e3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 69edeea694f44c44a8bf95be89ee41e3, type: 3}
 --- !u!1 &2058673246974969106 stripped
 GameObject:
