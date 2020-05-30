@@ -121,11 +121,11 @@ public class CheatMenu : MonoBehaviour
         int indexToStop = System.Array.IndexOf(Levels, level);
         if (indexToStop >= 0 && indexToStop <= 7)
         {
-            indexToStop += 1;
+            indexToStop += 0;
         }
         else if (indexToStop >= 8 && indexToStop <= 15)
         {
-            indexToStop+= 2;
+            indexToStop+= 1;
         }
         else if (indexToStop >= 16 && indexToStop <= 23)
         {
@@ -153,7 +153,7 @@ public class CheatMenu : MonoBehaviour
             }
         }
         yield return new WaitForEndOfFrame();
-        player.Instance.transform.position = HubEvents.transforms[indexToStop].transform.forward.normalized * -3 + new Vector3(HubEvents.transforms[indexToStop].transform.position.x, HubEvents.transforms[indexToStop].transform.position.y + 2, HubEvents.transforms[indexToStop].transform.position.z);
+        player.Instance.transform.position = HubEvents.transforms[indexToStop].transform.forward.normalized * -2 + new Vector3(HubEvents.transforms[indexToStop].transform.position.x, HubEvents.transforms[indexToStop].transform.position.y + 2, HubEvents.transforms[indexToStop].transform.position.z);
         SetupLoading(false);
         player.Instance.CutsceneMode = false;
     }
