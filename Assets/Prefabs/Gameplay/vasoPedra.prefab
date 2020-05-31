@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b3256a8d2c391429018a52c5d5a70b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NotWater: 0
+  defaultWater: 0
 --- !u!65 &2131083992622278342
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,8 +108,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0553747, y: 0.8004941, z: 1.0553747}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0553747, y: 0.95823985, z: 1.0553747}
+  m_Center: {x: 0, y: 0.07887289, z: 0}
 --- !u!95 &2795892921525295862
 Animator:
   serializedVersion: 3
@@ -138,6 +140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: agua
+      objectReference: {fileID: 0}
+    - target: {fileID: 584896040113208436, guid: aacab73ec38ef1d49861f14e7d81c65c,
+        type: 3}
+      propertyPath: m_TagString
+      value: VasoFixo
       objectReference: {fileID: 0}
     - target: {fileID: 7103030493620762054, guid: aacab73ec38ef1d49861f14e7d81c65c,
         type: 3}
@@ -209,7 +216,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.020843448
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7942611100647630482, guid: aacab73ec38ef1d49861f14e7d81c65c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aacab73ec38ef1d49861f14e7d81c65c, type: 3}
 --- !u!4 &2639984735176383161 stripped
 Transform:

@@ -197,11 +197,24 @@ public class player : MonoBehaviour
         {
             cursor[0].enabled = false;
             cursor[1].enabled = true;
+
             if (Input.GetMouseButtonDown(1))
             {
                 ShotIndex = 0;
                 power.transform.parent = hand;
                 index = 4;
+            }
+        }
+        if (Physics.Raycast(eyes, out hit, 5) && take == false && hit.transform.tag == "VasoFixo" && power.GetComponent<Orbit>().InHand == false && hit.transform.GetComponent<VasoFixo>().GetComponent<Animator>().GetBool("Water") == true)
+        {
+            cursor[0].enabled = false;
+            cursor[1].enabled = true;
+            if (Input.GetMouseButtonDown(1))
+            {
+                hit.transform.gameObject.GetComponent<VasoFixo>().GetComponent<Animator>().SetBool("Water", false);
+                ShotIndex = 0;
+                index = 4;
+
             }
         }
         //Ray para indentificar objetos que podem ser movidos
@@ -251,6 +264,7 @@ public class player : MonoBehaviour
                     {
                         portais[0].transform.position = newPosition;
                         portais[0].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
+
                         portalCreated = true;
                     }
                 }
@@ -260,6 +274,7 @@ public class player : MonoBehaviour
                     {
                         portais[1].transform.position = newPosition;
                         portais[1].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
+
                         portalCreated = true;
                     }
                 }

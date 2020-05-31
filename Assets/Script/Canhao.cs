@@ -124,18 +124,8 @@ public class Canhao : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<teleport>().reciever != null)
                 {
 
-                    if (hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.eulerAngles.y == 90 || hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.eulerAngles.y == -90)
-                    {
-                        GameObject outherPortal = hit.collider.gameObject.GetComponent<teleport>().reciever;
-                        outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin = new Vector3(outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.x, hit.point.y - .45f, hit.point.z);
+                    hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin = new Vector3(hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.x, hit.point.y - .7f, hit.collider.gameObject.GetComponent<teleport>().reciever.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.z);
 
-                    }
-                    else
-                    {
-                        GameObject outherPortal = hit.collider.gameObject.GetComponent<teleport>().reciever;
-                        outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin = new Vector3(outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.x, hit.point.y - .45f, outherPortal.gameObject.transform.GetChild(1).GetComponent<teleport>().rayDirecion.origin.z);
-
-                    }
                 }
 
             }
