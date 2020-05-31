@@ -20,18 +20,14 @@ public class FireArea : MonoBehaviour
             gameObject.layer = 2;
             if (other.gameObject.GetComponent<player>().power.GetComponent<Orbit>().InHand == true)
             {
-                // other.gameObject.GetComponent<player>().index = -1;
-                //  other.gameObject.GetComponent<player>().ShotIndex = 4;
-                other.gameObject.GetComponent<player>().power.transform.GetChild(0).transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                other.gameObject.GetComponent<player>().power.transform.GetChild(1).transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                other.gameObject.GetComponent<player>().power.transform.GetChild(2).transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                other.gameObject.GetComponent<player>().power.transform.GetChild(3).transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                other.gameObject.GetComponent<player>().power.transform.GetChild(4).transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                if (other.gameObject.GetComponent<player>().power.transform.GetChild(0).transform.GetChild(0).GetComponent<ParticleSystem>().isPlaying)
-                {
-                    other.gameObject.GetComponent<player>().index = -1;
-                    other.gameObject.GetComponent<player>().ShotIndex = 4;
-                }
+
+
+                other.gameObject.GetComponent<player>().transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<ParticleSystem>().Play();
+                other.gameObject.GetComponent<player>().index = -1;
+                other.gameObject.GetComponent<player>().ShotIndex = 4;
+
+
+
             }
 
         }
