@@ -403,9 +403,6 @@ public class Button : MonoBehaviour
                 {
                     item.GetComponent<Canhao>().rotationR = true;
                 }
-
-
-
             if (espinho == true)
             {
                 foreach (var item in espinhos)
@@ -414,6 +411,9 @@ public class Button : MonoBehaviour
 
                 }
             }
+
+
+
 
 
 

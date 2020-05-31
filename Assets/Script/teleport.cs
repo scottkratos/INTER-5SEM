@@ -58,7 +58,7 @@ public class teleport : MonoBehaviour
         }
         if (other.tag == "Ice")
         {
-            other.gameObject.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y, reciever.transform.position.z + anglePortalZ);
+            other.gameObject.transform.position = new Vector3(reciever.transform.position.x, reciever.transform.position.y - 3, reciever.transform.position.z);
         }
         if (other.tag == "Vaso")
         {
@@ -70,7 +70,7 @@ public class teleport : MonoBehaviour
         if (other.tag == "Player")
         {
             playerIsOverLapping = false;
-            Debug.Log(reciever.transform.localRotation.eulerAngles.y);
+            Debug.Log(reciever.transform.localRotation.eulerAngles.x);
 
         }
         if (other.tag == "Vaso")
@@ -81,36 +81,39 @@ public class teleport : MonoBehaviour
     // calculo dos angulos de teleporte 
     void AnglePortal()
     {
-        if (reciever.transform.localRotation.eulerAngles.y == 270)
+        if (reciever.transform.localRotation.eulerAngles.y == 270 && reciever.transform.localRotation.eulerAngles.x != 90)
         {
             anglePortalX = -1.6f;
             RotationPortalX = 140;
-
+            RotationPortalXY = 0;
         }
 
-        if (reciever.transform.localRotation.eulerAngles.y == 90 && reciever.transform.localRotation.eulerAngles.z != 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 90 && reciever.transform.localRotation.eulerAngles.x != 90)
         {
             anglePortalX = 1.6f;
             RotationPortalX = 90;
+            RotationPortalXY = 0;
         }
-        if (reciever.transform.localRotation.eulerAngles.y == 180 && reciever.transform.localRotation.eulerAngles.z != 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 180 && reciever.transform.localRotation.eulerAngles.x != 90)
         {
             anglePortalZ = -1.6f;
             RotationPortalX = 90;
+            RotationPortalXY = 0;
         }
-        if (reciever.transform.localRotation.eulerAngles.y == 0 && reciever.transform.localRotation.eulerAngles.z != 180)
+        if (reciever.transform.localRotation.eulerAngles.y == 0 && reciever.transform.localRotation.eulerAngles.x != 90)
         {
             anglePortalZ = 1.6f;
             RotationPortalX = 0;
+            RotationPortalXY = 0;
         }
-        if (reciever.transform.localRotation.eulerAngles.z == 180)
+        if (reciever.transform.localRotation.eulerAngles.x == 90)
         {
-            RotationPortalXY = 3f;
-
-
-
-
+            RotationPortalXY = -3f;
         }
+
+
+
+
 
 
     }
