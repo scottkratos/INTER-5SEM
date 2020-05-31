@@ -115,76 +115,31 @@ public class CheatMenu : MonoBehaviour
             yield return SceneManager.UnloadSceneAsync(Levels[System.Array.IndexOf(Levels, listUnload[0])]);
             listUnload.RemoveAt(0);
         }
-        for (int i = 0;  i < LevelLoader.Instance.Levels.Length; i++)
-        {
-            yield return SceneManager.LoadSceneAsync(LevelLoader.Instance.Levels[i], LoadSceneMode.Additive);
-        }
         int indexToStop = System.Array.IndexOf(Levels, level);
         int startPoint = 0;
         if (indexToStop >= 0 && indexToStop <= 7)
         {
             indexToStop += 0;
             startPoint = 0;
+            for (int i = 0; i < LevelLoader.Instance.Levels.Length; i++)
+            {
+                yield return SceneManager.LoadSceneAsync(LevelLoader.Instance.Levels[i], LoadSceneMode.Additive);
+            }
         }
         else if (indexToStop >= 8 && indexToStop <= 15)
         {
             indexToStop+= 1;
             startPoint = 7;
-            yield return SceneManager.UnloadSceneAsync("Level2");
-            yield return SceneManager.UnloadSceneAsync("Level3");
-            yield return SceneManager.UnloadSceneAsync("Level4");
-            yield return SceneManager.UnloadSceneAsync("Level8");
-            yield return SceneManager.UnloadSceneAsync("Level9");
-            yield return SceneManager.UnloadSceneAsync("Level17");
-            yield return SceneManager.UnloadSceneAsync("Level23");
-            yield return SceneManager.UnloadSceneAsync("Level24");
-            yield return SceneManager.UnloadSceneAsync("Level26");
-            yield return SceneManager.UnloadSceneAsync("Level27");
-            yield return SceneManager.UnloadSceneAsync("Level28");
-            yield return SceneManager.UnloadSceneAsync("Level29");
-            yield return SceneManager.UnloadSceneAsync("Level30");
-            yield return SceneManager.UnloadSceneAsync("Level31");
-            yield return SceneManager.UnloadSceneAsync("Level32");
         }
         else if (indexToStop >= 16 && indexToStop <= 23)
         {
             indexToStop += 2;
             startPoint = 15;
-            yield return SceneManager.UnloadSceneAsync("Level2");
-            yield return SceneManager.UnloadSceneAsync("Level3");
-            yield return SceneManager.UnloadSceneAsync("Level4");
-            yield return SceneManager.UnloadSceneAsync("Level8");
-            yield return SceneManager.UnloadSceneAsync("Level9");
-            yield return SceneManager.UnloadSceneAsync("Level17");
-            yield return SceneManager.UnloadSceneAsync("Level23");
-            yield return SceneManager.UnloadSceneAsync("Level24");
-            yield return SceneManager.UnloadSceneAsync("Level26");
-            yield return SceneManager.UnloadSceneAsync("Level27");
-            yield return SceneManager.UnloadSceneAsync("Level28");
-            yield return SceneManager.UnloadSceneAsync("Level29");
-            yield return SceneManager.UnloadSceneAsync("Level30");
-            yield return SceneManager.UnloadSceneAsync("Level31");
-            yield return SceneManager.UnloadSceneAsync("Level32");
         }
         else if (indexToStop >= 24 && indexToStop <= 31)
         {
             indexToStop += 3;
             startPoint = 23;
-            yield return SceneManager.UnloadSceneAsync("Level2");
-            yield return SceneManager.UnloadSceneAsync("Level3");
-            yield return SceneManager.UnloadSceneAsync("Level4");
-            yield return SceneManager.UnloadSceneAsync("Level8");
-            yield return SceneManager.UnloadSceneAsync("Level9");
-            yield return SceneManager.UnloadSceneAsync("Level17");
-            yield return SceneManager.UnloadSceneAsync("Level23");
-            yield return SceneManager.UnloadSceneAsync("Level24");
-            yield return SceneManager.UnloadSceneAsync("Level26");
-            yield return SceneManager.UnloadSceneAsync("Level27");
-            yield return SceneManager.UnloadSceneAsync("Level28");
-            yield return SceneManager.UnloadSceneAsync("Level29");
-            yield return SceneManager.UnloadSceneAsync("Level30");
-            yield return SceneManager.UnloadSceneAsync("Level31");
-            yield return SceneManager.UnloadSceneAsync("Level32");
         }
         for (int r = startPoint; r < indexToStop; r++)
         {

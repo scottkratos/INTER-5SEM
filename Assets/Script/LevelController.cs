@@ -47,28 +47,30 @@ public class LevelController : MonoBehaviour
             DoorClosed = true;
             portao.SetBool("DoorBool", false);
             SaturationControl.lastIndex = index;
-            for (int i = 0; i < HubEvents.Instance.levels[index].LevelLoad.Length; i++)
+            StartCoroutine(LoadStuff());
+        }
+    }
+    private IEnumerator LoadStuff()
+    {
+        List<string> listUnload = new List<string>();
+        for (int i = 0; i < HubEvents.Instance.levels[index].LevelUnload.Length; i++)
+        {
+            listUnload.Add(HubEvents.Instance.levels[index].LevelUnload[i]);
+        }
+        for (int i = 0; i < listUnload.Count; i++)
+        {
+            for (int r = 0; r < SceneManager.sceneCount; r++)
             {
-                bool haveLoaded = false;
-                for (int r = 0; r < SceneManager.sceneCount; r++)
+                if (SceneManager.GetSceneAt(r).name == listUnload[i])
                 {
-                    if (SceneManager.GetSceneAt(r).name == HubEvents.Instance.levels[index].LevelLoad[i])
-                    {
-                        haveLoaded = true;
-                    }
-                }
-                if (!haveLoaded) SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
-            }
-            for (int i = 0; i < HubEvents.Instance.levels[index].LevelUnload.Length; i++)
-            {
-                for (int r = 0; r < SceneManager.sceneCount; r++)
-                {
-                    if (SceneManager.GetSceneAt(r).name == HubEvents.Instance.levels[index].LevelUnload[i])
-                    {
-                        SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[index].LevelUnload[i]);
-                    }
+                    yield return SceneManager.UnloadSceneAsync(listUnload[i]);
+                    break;
                 }
             }
+        }
+        for (int i = 0; i < HubEvents.Instance.levels[index].LevelLoad.Length; i++)
+        {
+            yield return SceneManager.LoadSceneAsync(HubEvents.Instance.levels[index].LevelLoad[i], LoadSceneMode.Additive);
         }
     }
 }
