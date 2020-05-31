@@ -60,6 +60,16 @@ public class Grid : MonoBehaviour
                         transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 16, posicao.z), .05f);
                     }
                     break;
+                case 16:
+                    if (Plataforma == false && gramofonos.All(gramofone => gramofone == gramofone.GetComponent<Gramofone>().GridOrdem == true))
+                    {
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y - 7, posicao.z), .05f);
+                    }
+                    if (Plataforma == false && gramofonos.All(gramofone => gramofone == gramofone.GetComponent<Gramofone>().GridOrdem == false))
+                    {
+                        transform.localPosition = Vector3.Lerp(transform.localPosition, new Vector3(posicao.x, posicao.y, posicao.z), .05f);
+                    }
+                    break;
 
 
 

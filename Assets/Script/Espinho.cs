@@ -193,8 +193,8 @@ public class Espinho : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Morre");
-           // LevelLoader.Instance.LoadGameScene();
+            //Debug.Log("Morre");
+            LevelLoader.Instance.LoadGameScene();
         }
     }
 }

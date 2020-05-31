@@ -24,7 +24,7 @@ public class player : MonoBehaviour
     Animator setAnimacao;
     public LayerMask JumpLayerMask;
     public GameObject power, handTrue;
-    [HideInInspector]
+    //[HideInInspector]
     //public GameObject Ice;
     // [HideInInspector]
     public Vector3 CameraController;
@@ -243,15 +243,29 @@ public class player : MonoBehaviour
                         portalIndex = 1;
                         break;
                 }
+                Vector3 newPosition = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z) + hit.rigidbody.transform.forward.normalized * .2f;
+                bool portalCreated = false;
                 if (portalIndex == 1)
                 {
-                    portais[0].transform.position = new Vector3(hit.rigidbody.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z) + hit.rigidbody.transform.forward.normalized * .2f;
-                    portais[0].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
+                    if (newPosition != portais[1].transform.position)
+                    {
+                        portais[0].transform.position = newPosition;
+                        portais[0].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
+                        portalCreated = true;
+                    }
                 }
                 if (portalIndex == 2)
                 {
-                    portais[1].transform.position = new Vector3(hit.rigidbody.transform.parent.position.x, hit.rigidbody.position.y, hit.rigidbody.position.z) + hit.rigidbody.transform.forward.normalized * .2f;
-                    portais[1].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
+                    if (newPosition != portais[0].transform.position)
+                    {
+                        portais[1].transform.position = newPosition;
+                        portais[1].transform.rotation = hit.rigidbody.transform.parent.transform.rotation;
+                        portalCreated = true;
+                    }
+                }
+                if (!portalCreated)
+                {
+                    portalIndex--;
                 }
             }
 

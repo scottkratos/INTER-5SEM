@@ -70,7 +70,7 @@ public class teleport : MonoBehaviour
         if (other.tag == "Player")
         {
             playerIsOverLapping = false;
-            Debug.Log(reciever.transform.localRotation.eulerAngles.x);
+            //Debug.Log(reciever.transform.localRotation.eulerAngles.x);
 
         }
         if (other.tag == "Vaso")
