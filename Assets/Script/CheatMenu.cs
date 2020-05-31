@@ -160,6 +160,7 @@ public class CheatMenu : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         player.Instance.transform.position = HubEvents.transforms[indexToStop].transform.forward.normalized * -0.5f + new Vector3(HubEvents.transforms[indexToStop].transform.position.x, HubEvents.transforms[indexToStop].transform.position.y + 2, HubEvents.transforms[indexToStop].transform.position.z);
+        player.Instance.transform.rotation = Quaternion.Euler(HubEvents.transforms[indexToStop].transform.rotation.eulerAngles.x, HubEvents.transforms[indexToStop].transform.rotation.eulerAngles.y, HubEvents.transforms[indexToStop].transform.rotation.eulerAngles.z);
         SetupLoading(false);
         player.Instance.CutsceneMode = false;
     }
