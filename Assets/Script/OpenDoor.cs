@@ -45,7 +45,7 @@ public class OpenDoor : MonoBehaviour
         if (Gramofono == true && Button == false)
             if (gramofone.All(events => events == events.GetComponent<Gramofone>().DoorEvent == true))
                 animator.SetBool("DoorBool", true);
-        else
+            else
                 animator.SetBool("DoorBool", false);
 
         if (Gramofono == true && Button == true)

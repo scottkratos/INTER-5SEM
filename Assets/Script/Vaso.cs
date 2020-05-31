@@ -45,11 +45,10 @@ public class Vaso : MonoBehaviour
     {
         if (Door == true)
         {
-            foreach (var item in evetObject)
-            {
-                DoorEvent = true;
-            }
+            DoorEvent = true;
         }
+
+
         if (Button == true)
         {
             AmoutWaterVase = true;
