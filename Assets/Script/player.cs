@@ -473,25 +473,24 @@ public class player : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        //if (other.gameObject.tag == "Cutscene")
-        //{
-        //    LoadGame.Savecutscene(other.gameObject.GetComponent<CutscenePrepare>());
-        //    Debug.Log("save");
-        //}
-        //if (other.gameObject.tag == "Porta")
-        //{
-        //    if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == true)
-        //    {
-        //        CutSceneLoad = true;
-        //        LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
-        //        Debug.Log("save");
-        //    }
-        //    if (other.gameObject.GetComponent<LevelController>().cutSceneLoad == false)
-        //    {
-        //        CutSceneLoad = false;
-        //        LoadGame.SavePlayer(this.gameObject.GetComponent<player>());
 
-        //    }
-        //}
+        if (other.gameObject.tag == "Porta")
+        {
+
+            index = -1;
+            ShotIndex = -1;
+            foreach (var item in portais)
+            {
+                item.SetActive(false);
+            }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Morte")
+        {
+            LevelLoader.Instance.LoadGameScene();
+
+        }
     }
 }

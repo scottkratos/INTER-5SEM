@@ -56,6 +56,7 @@ public class Canhao : MonoBehaviour
                 if (hit.collider.tag == "Canhao")
                 {
                     hit.collider.transform.parent.GetComponent<Canhao>().disparo = true;
+                    hit.transform.parent.gameObject.GetComponent<Canhao>().transform.GetChild(0).transform.GetChild(1).GetComponent<ParticleSystem>().Play();
                 }
                 if (hit.transform.tag == "Vaso")
                 {

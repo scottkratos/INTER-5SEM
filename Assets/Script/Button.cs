@@ -66,7 +66,7 @@ public class Button : MonoBehaviour
                         if (Restard == true)
                         {
                             GetComponent<Animator>().SetBool("ButtonBool", true);
-
+                            restard();
                         }
                         if (espinho == true)
                         {

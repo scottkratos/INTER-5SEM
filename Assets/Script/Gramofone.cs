@@ -33,7 +33,7 @@ public class Gramofone : MonoBehaviour
     }
     private void Update()
     {
-
+       
     }
 
     // roda sempre com a animacao de "agua cheia"
