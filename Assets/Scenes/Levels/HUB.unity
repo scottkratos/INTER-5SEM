@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 51.25463, g: 73.191765, b: 80.340256, a: 1}
+  m_IndirectSpecularColor: {r: 312.52902, g: 225.12321, b: 167.10071, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6109,7 +6109,7 @@ PrefabInstance:
     - target: {fileID: 3710963521927909521, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
       propertyPath: m_Radius
-      value: 0.22449133
+      value: 0.43688858
       objectReference: {fileID: 0}
     - target: {fileID: 3710963521927909521, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
@@ -6124,7 +6124,7 @@ PrefabInstance:
     - target: {fileID: 3710963521927909521, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
       propertyPath: m_Center.y
-      value: 0.17690581
+      value: 0.17690575
       objectReference: {fileID: 0}
     - target: {fileID: 3710963521927909521, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
@@ -6135,6 +6135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Direction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710963521927909521, guid: 1386c075ac705a2469fd50ea70a4ef10,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.00665313
       objectReference: {fileID: 0}
     - target: {fileID: 3710963521927909528, guid: 1386c075ac705a2469fd50ea70a4ef10,
         type: 3}
@@ -46428,6 +46433,11 @@ PrefabInstance:
       propertyPath: otherPortal
       value: 
       objectReference: {fileID: 747899196}
+    - target: {fileID: 4583774664299030343, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1649078085}
     - target: {fileID: 4709465428643436475, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -46573,6 +46583,11 @@ PrefabInstance:
       propertyPath: otherPortal
       value: 
       objectReference: {fileID: 1090141715}
+    - target: {fileID: 8800585693440212817, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1649078085}
     - target: {fileID: 9192627532695237856, guid: 19c51d75f947ada48a36de1d5ff7f5f9,
         type: 3}
       propertyPath: m_AllowMSAA

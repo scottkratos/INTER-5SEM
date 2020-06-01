@@ -66,7 +66,7 @@ public class OpenDoor : MonoBehaviour
     public void OpenSound()
     {
         open.Play();
-        CompleteRef.IsDoorOpen(true);
+        //CompleteRef.IsDoorOpen(true);
     }
     public void closedSound()
     {
@@ -76,6 +76,6 @@ public class OpenDoor : MonoBehaviour
             return;
         }
         closed.Play();
-        CompleteRef.IsDoorOpen(true);
+       // CompleteRef.IsDoorOpen(true);
     }
 }

@@ -28,6 +28,12 @@ public class teleport : MonoBehaviour
 
     void Update()
     {
+
+
+
+        rayDirecion.origin = new Vector3(transform.position.x, transform.position.y - .7f, transform.position.z);
+        rayDirecion.direction = transform.forward;
+
         AnglePortal();
         aguaRespaw.transform.position = rayDirecion.origin;
         Debug.DrawRay(rayDirecion.origin, rayDirecion.direction);
@@ -35,6 +41,7 @@ public class teleport : MonoBehaviour
         {
             if (disparo == true)
             {
+                Debug.Log(hit.point);
                 if (hit.transform.tag == "Vaso")
                 {
                     hit.transform.gameObject.GetComponent<Vaso>().animator.SetBool("WaterBool", true);
@@ -117,6 +124,7 @@ public class teleport : MonoBehaviour
 
 
     }
+
     void disparoR()
     {
         disparo = false;
