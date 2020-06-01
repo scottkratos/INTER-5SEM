@@ -28,15 +28,11 @@ public class IceArea : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.tag == "Vaso")
         {
             gameObject.layer = 0;
         }
-        if (other.tag == "Vaso")
-        {
-            gameObject.layer = 0;
-
-        }
+       
 
     }
 }
