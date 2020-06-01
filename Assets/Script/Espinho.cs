@@ -13,7 +13,6 @@ public class Espinho : MonoBehaviour
     {
         posicao = transform.localPosition;
         tempoDuracao = 3;
-
     }
 
     // Update is called once per frame

@@ -6,7 +6,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class SaturationControl : MonoBehaviour
 {
-    public static int lastIndex = 0;
+    public static float lastIndex = 0;
     private Volume vol;
     private ColorAdjustments ca;
 
@@ -24,7 +24,7 @@ public class SaturationControl : MonoBehaviour
         //ca.saturation.value = Mathf.Lerp(10, -30, lastIndex / 32);
         if (vol.profile.TryGet<ColorAdjustments>(out ca))
         {
-            ca.saturation.value = Mathf.Lerp(10, -30, lastIndex / 32);
+            ca.saturation.value = Mathf.Lerp(10, -30, lastIndex / 32f);
         }
     }
 }

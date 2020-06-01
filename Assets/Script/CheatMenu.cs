@@ -51,46 +51,12 @@ public class CheatMenu : MonoBehaviour
     public void ChangeLevel(string level)
     {
         player.Instance.CheatMenu.SetActive(false);
-        StartCoroutine(Reload(level, false));
+        StartCoroutine(Reload(level));
     }
-    public void ChangeInRuntime(string level)
-    {
-        player.Instance.CheatMenu.SetActive(false);
-        StartCoroutine(Reload(level, true));
-    }
-    private IEnumerator Reload(string level, bool makeConversion)
+    public IEnumerator Reload(string level)
     {
         player.Instance.CutsceneMode = true;
         MusicControl.Instance.ChangeMusic(1);
-        if (makeConversion)
-        {
-            int transformIndex;
-            if (level.Length == 7)
-            {
-                transformIndex = int.Parse(level[5].ToString() + level[6].ToString());
-            }
-            else
-            {
-                transformIndex = int.Parse(level[5].ToString());
-            }
-            if (transformIndex >= 0 && transformIndex <= 7)
-            {
-                transformIndex += 1;
-            }
-            else if (transformIndex >= 8 && transformIndex <= 15)
-            {
-                //transformIndex += 2;
-            }
-            else if (transformIndex >= 16 && transformIndex <= 23)
-            {
-                transformIndex -= 1;
-            }
-            else if (transformIndex >= 24 && transformIndex <= 31)
-            {
-                transformIndex -= 2;
-            }
-            level = "Level" + transformIndex.ToString();
-        }
         SetupLoading(true);
         SaturationControl.lastIndex = System.Array.IndexOf(Levels, level);
         List<string> listUnload = new List<string>();
@@ -101,19 +67,17 @@ public class CheatMenu : MonoBehaviour
             {
                 haveExterno = true;
             }
-            else
+            if (SceneManager.GetSceneAt(i).name != "HUB" && SceneManager.GetSceneAt(i).name != "Externo")
             {
-                if (SceneManager.GetSceneAt(i).name != "HUB")
-                {
-                    listUnload.Add(SceneManager.GetSceneAt(i).name);
-                }
+                listUnload.Add(SceneManager.GetSceneAt(i).name);
             }
         }
         if (haveExterno) yield return SceneManager.UnloadSceneAsync("Externo");
         while (listUnload.Count > 0)
         {
-            yield return SceneManager.UnloadSceneAsync(Levels[System.Array.IndexOf(Levels, listUnload[0])]);
+            yield return SceneManager.UnloadSceneAsync(listUnload[0]);
             listUnload.RemoveAt(0);
+            yield return new WaitForSeconds(0.2f);
         }
         int indexToStop = System.Array.IndexOf(Levels, level);
         int startPoint = 0;
@@ -124,6 +88,7 @@ public class CheatMenu : MonoBehaviour
             for (int i = 0; i < LevelLoader.Instance.Levels.Length; i++)
             {
                 yield return SceneManager.LoadSceneAsync(LevelLoader.Instance.Levels[i], LoadSceneMode.Additive);
+                yield return new WaitForSeconds(0.2f);
             }
         }
         else if (indexToStop >= 8 && indexToStop <= 15)
@@ -146,6 +111,7 @@ public class CheatMenu : MonoBehaviour
             for (int i = 0; i < HubEvents.Instance.levels[r].LevelLoad.Length; i++)
             {
                 yield return SceneManager.LoadSceneAsync(HubEvents.Instance.levels[r].LevelLoad[i], LoadSceneMode.Additive);
+                yield return new WaitForSeconds(0.2f);
             }
             for (int i = 0; i < HubEvents.Instance.levels[r].LevelUnload.Length; i++)
             {
@@ -154,6 +120,7 @@ public class CheatMenu : MonoBehaviour
                     if (SceneManager.GetSceneAt(p).name == HubEvents.Instance.levels[r].LevelUnload[i])
                     {
                         SceneManager.UnloadSceneAsync(HubEvents.Instance.levels[r].LevelUnload[i]);
+                        yield return new WaitForSeconds(0.2f);
                     }
                 }
             }
@@ -163,6 +130,24 @@ public class CheatMenu : MonoBehaviour
         player.Instance.transform.rotation = Quaternion.Euler(HubEvents.transforms[indexToStop].transform.rotation.eulerAngles.x, HubEvents.transforms[indexToStop].transform.rotation.eulerAngles.y, HubEvents.transforms[indexToStop].transform.rotation.eulerAngles.z);
         SetupLoading(false);
         player.Instance.CutsceneMode = false;
+        CutscenePrepare cp = new CutscenePrepare();
+        int indexToSave = 0;
+        char A, B;
+        string final;
+        if (level.Length > 6)
+        {
+            A = level[5];
+            B = level[6];
+            final = A.ToString() + B.ToString();
+        }
+        else
+        {
+            A = level[5];
+            final = A.ToString();
+        }
+        indexToSave = int.Parse(final);
+        cp.index = indexToSave;
+        LoadGame.Savecutscene(cp);
     }
     public void ChangeCutscene(int index)
     {

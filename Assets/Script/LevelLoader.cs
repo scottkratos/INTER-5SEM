@@ -18,6 +18,7 @@ public class LevelLoader : MonoBehaviour
     public static LevelLoader Instance;
     public AsyncOperation load;
     public float timelevel;
+    public static Coroutine coroutine = null;
 
     private void Awake()
     {
@@ -63,7 +64,7 @@ public class LevelLoader : MonoBehaviour
         StartCoroutine(MasterLoader());
 
     }
-    public void LoadGameScene()
+    private IEnumerator Reload()
     {
         player.Instance.CutsceneMode = true;
         CutSceneData dataCut = LoadGame.LoadCutscene();
@@ -89,14 +90,23 @@ public class LevelLoader : MonoBehaviour
         if (dataCut == null)
         {
             starGame();
-            return;
         }
         else if (dataCut.index == -1)
         {
             starGame();
-            return;
         }
-        CheatMenu.Instance.ChangeInRuntime("Level" + dataCut.index.ToString());
+        else
+        {
+            player.Instance.CheatMenu.SetActive(false);
+            // "Level" + dataCut.index.ToString()
+            yield return StartCoroutine(CheatMenu.Instance.Reload("Level" + dataCut.index.ToString()));
+        }
+        yield return null;
+        coroutine = null;
+    }
+    public void LoadGameScene()
+    {
+        if (coroutine == null) coroutine = StartCoroutine(Reload());
     }
     private IEnumerator IndividualLoader(string level)
     {
