@@ -28,12 +28,15 @@ public class teleport : MonoBehaviour
 
     void Update()
     {
+        if(playerIsOverLapping == true)
+        {
+            player.GetComponent<player>().CameraController.y = 0;
+            player.GetComponent<player>().CameraController.y += FindObjectOfType<player>().transform.rotation.y + RotationPortalX;
+            player.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y + RotationPortalXY, reciever.transform.position.z + anglePortalZ); 
 
-
-
+        }
         rayDirecion.origin = new Vector3(transform.position.x, transform.position.y - .7f, transform.position.z);
         rayDirecion.direction = transform.forward;
-
         AnglePortal();
         aguaRespaw.transform.position = rayDirecion.origin;
         Debug.DrawRay(rayDirecion.origin, rayDirecion.direction);
@@ -57,9 +60,7 @@ public class teleport : MonoBehaviour
         if (other.tag == "Player")
         {
             playerIsOverLapping = true;
-            player.GetComponent<player>().CameraController.y = 0;
-            player.GetComponent<player>().CameraController.y += FindObjectOfType<player>().transform.rotation.y + RotationPortalX;
-            player.transform.position = new Vector3(reciever.transform.position.x + anglePortalX, reciever.transform.position.y + RotationPortalXY, reciever.transform.position.z + anglePortalZ);
+          
             // player.transform.position = new Vector3(reciever.transform.position.x, reciever.transform.position.y + RotationPortalXY, reciever.transform.position.z);
 
         }
@@ -124,7 +125,6 @@ public class teleport : MonoBehaviour
 
 
     }
-
     void disparoR()
     {
         disparo = false;

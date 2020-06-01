@@ -188,7 +188,7 @@ MonoBehaviour:
     m_Bits: 512
   Ambiente:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 5
   rotationOrigin: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &8106485682034361618
 BoxCollider:
@@ -365,6 +365,7 @@ MonoBehaviour:
     m_Bits: 4096
   place: {fileID: 8579907564251201498}
   remove: {fileID: 4279932713057441420}
+  defaultWater: 0
 --- !u!82 &4279932713057441420
 AudioSource:
   m_ObjectHideFlags: 0
