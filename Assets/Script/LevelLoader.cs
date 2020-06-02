@@ -66,7 +66,26 @@ public class LevelLoader : MonoBehaviour
     }
     private IEnumerator Reload()
     {
+
         player.Instance.CutsceneMode = true;
+        if (player.Instance.transform.GetChild(0).transform.GetChild(1).transform.childCount > 0)
+        {
+            if (player.Instance.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).GetComponent<Vaso>() != null)
+            {
+                Destroy(player.Instance.transform.GetChild(0).transform.GetChild(1).transform.GetChild(0).GetComponent<Vaso>().gameObject);
+
+            }
+
+        }
+        if (player.Instance.transform.GetChild(0).transform.GetChild(3).transform.childCount > 0)
+        {
+            if (player.Instance.transform.GetChild(0).transform.GetChild(3).transform.GetChild(0).GetComponent<IceTranform>() != null)
+            {
+                Destroy(player.Instance.transform.GetChild(0).transform.GetChild(3).transform.GetChild(0).GetComponent<IceTranform>().gameObject);
+
+            }
+
+        }
         CutSceneData dataCut = LoadGame.LoadCutscene();
         //PlayerData data = LoadGame.LoadPlayer();
         //print(dataCut.index);
